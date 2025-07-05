@@ -54,7 +54,51 @@ const languages = {
         export: 'Export',
         import: 'Import',
         backup: 'Backup',
-        restore: 'Restore'
+        restore: 'Restore',
+        invoice: 'Invoice',
+        receipt: 'Receipt',
+        printInvoice: 'Print Invoice',
+        lowStockReport: 'Low Stock Report',
+        expiredItems: 'Expired Items',
+        printLowStock: 'Print Low Stock',
+        printExpired: 'Print Expired',
+        productImage: 'Product Image',
+        uploadImage: 'Upload Image',
+        changeImage: 'Change Image',
+        removeImage: 'Remove Image',
+        expiryDate: 'Expiry Date',
+        expired: 'Expired',
+        nearExpiry: 'Near Expiry',
+        supplier: 'Supplier',
+        cost: 'Cost',
+        profit: 'Profit',
+        margin: 'Margin',
+        todaysSales: 'Today\'s Sales',
+        thisWeek: 'This Week',
+        thisMonth: 'This Month',
+        totalProducts: 'Total Products',
+        transactions: 'Transactions',
+        averageTransaction: 'Average Transaction',
+        topSellingProducts: 'Top Selling Products',
+        cashierPerformance: 'Cashier Performance',
+        recentSales: 'Recent Sales',
+        dailyReport: 'Daily Report',
+        weeklyReport: 'Weekly Report',
+        monthlyReport: 'Monthly Report',
+        salesReport: 'Sales Report',
+        inventoryReport: 'Inventory Report',
+        profitReport: 'Profit Report',
+        taxReport: 'Tax Report',
+        customerReceipt: 'Customer Receipt',
+        businessInvoice: 'Business Invoice',
+        companyInfo: 'Company Information',
+        customerInfo: 'Customer Information',
+        itemsNeedRestocking: 'items need restocking',
+        activeProducts: 'active products',
+        outOfStock: 'Out of Stock',
+        inStock: 'In Stock',
+        lowStock: 'Low Stock',
+        goodStock: 'Good Stock'
     },
     ar: {
         welcome: 'مرحباً بنظام نقاط البيع',
@@ -106,7 +150,51 @@ const languages = {
         import: 'استيراد',
         backup: 'نسخ احتياطي',
         restore: 'استعادة',
-        dinar: 'دينار جزائري'
+        dinar: 'دينار جزائري',
+        invoice: 'فاتورة',
+        receipt: 'إيصال',
+        printInvoice: 'طباعة فاتورة',
+        lowStockReport: 'تقرير المخزون المنخفض',
+        expiredItems: 'المواد المنتهية الصلاحية',
+        printLowStock: 'طباعة المخزون المنخفض',
+        printExpired: 'طباعة المنتهية الصلاحية',
+        productImage: 'صورة المنتج',
+        uploadImage: 'رفع صورة',
+        changeImage: 'تغيير الصورة',
+        removeImage: 'إزالة الصورة',
+        expiryDate: 'تاريخ انتهاء الصلاحية',
+        expired: 'منتهي الصلاحية',
+        nearExpiry: 'قريب من انتهاء الصلاحية',
+        supplier: 'المورد',
+        cost: 'التكلفة',
+        profit: 'الربح',
+        margin: 'هامش الربح',
+        todaysSales: 'مبيعات اليوم',
+        thisWeek: 'هذا الأسبوع',
+        thisMonth: 'هذا الشهر',
+        totalProducts: 'إجمالي المنتجات',
+        transactions: 'المعاملات',
+        averageTransaction: 'متوسط المعاملة',
+        topSellingProducts: 'المنتجات الأكثر مبيعاً',
+        cashierPerformance: 'أداء أمناء الصندوق',
+        recentSales: 'المبيعات الأخيرة',
+        dailyReport: 'التقرير اليومي',
+        weeklyReport: 'التقرير الأسبوعي',
+        monthlyReport: 'التقرير الشهري',
+        salesReport: 'تقرير المبيعات',
+        inventoryReport: 'تقرير المخزون',
+        profitReport: 'تقرير الأرباح',
+        taxReport: 'تقرير الضرائب',
+        customerReceipt: 'إيصال العميل',
+        businessInvoice: 'فاتورة تجارية',
+        companyInfo: 'معلومات الشركة',
+        customerInfo: 'معلومات العميل',
+        itemsNeedRestocking: 'عناصر تحتاج إعادة تخزين',
+        activeProducts: 'منتجات نشطة',
+        outOfStock: 'نفد من المخزون',
+        inStock: 'متوفر في المخزون',
+        lowStock: 'مخزون منخفض',
+        goodStock: 'مخزون جيد'
     },
     fr: {
         welcome: 'Bienvenue dans Mon Système POS',
@@ -157,7 +245,51 @@ const languages = {
         export: 'Exporter',
         import: 'Importer',
         backup: 'Sauvegarde',
-        restore: 'Restaurer'
+        restore: 'Restaurer',
+        invoice: 'Facture',
+        receipt: 'Reçu',
+        printInvoice: 'Imprimer Facture',
+        lowStockReport: 'Rapport Stock Faible',
+        expiredItems: 'Articles Expirés',
+        printLowStock: 'Imprimer Stock Faible',
+        printExpired: 'Imprimer Expirés',
+        productImage: 'Image Produit',
+        uploadImage: 'Télécharger Image',
+        changeImage: 'Changer Image',
+        removeImage: 'Supprimer Image',
+        expiryDate: 'Date d\'Expiration',
+        expired: 'Expiré',
+        nearExpiry: 'Proche Expiration',
+        supplier: 'Fournisseur',
+        cost: 'Coût',
+        profit: 'Profit',
+        margin: 'Marge',
+        todaysSales: 'Ventes d\'Aujourd\'hui',
+        thisWeek: 'Cette Semaine',
+        thisMonth: 'Ce Mois',
+        totalProducts: 'Total Produits',
+        transactions: 'Transactions',
+        averageTransaction: 'Transaction Moyenne',
+        topSellingProducts: 'Produits les Plus Vendus',
+        cashierPerformance: 'Performance Caissiers',
+        recentSales: 'Ventes Récentes',
+        dailyReport: 'Rapport Quotidien',
+        weeklyReport: 'Rapport Hebdomadaire',
+        monthlyReport: 'Rapport Mensuel',
+        salesReport: 'Rapport des Ventes',
+        inventoryReport: 'Rapport d\'Inventaire',
+        profitReport: 'Rapport de Profit',
+        taxReport: 'Rapport de Taxes',
+        customerReceipt: 'Reçu Client',
+        businessInvoice: 'Facture Commerciale',
+        companyInfo: 'Informations Société',
+        customerInfo: 'Informations Client',
+        itemsNeedRestocking: 'articles nécessitent réapprovisionnement',
+        activeProducts: 'produits actifs',
+        outOfStock: 'Rupture de Stock',
+        inStock: 'En Stock',
+        lowStock: 'Stock Faible',
+        goodStock: 'Bon Stock'
     },
     es: {
         welcome: 'Bienvenido a Mi Sistema POS',
@@ -208,20 +340,136 @@ const languages = {
         export: 'Exportar',
         import: 'Importar',
         backup: 'Respaldo',
-        restore: 'Restaurar'
+        restore: 'Restaurar',
+        invoice: 'Factura',
+        receipt: 'Recibo',
+        printInvoice: 'Imprimir Factura',
+        lowStockReport: 'Reporte Stock Bajo',
+        expiredItems: 'Artículos Vencidos',
+        printLowStock: 'Imprimir Stock Bajo',
+        printExpired: 'Imprimir Vencidos',
+        productImage: 'Imagen Producto',
+        uploadImage: 'Subir Imagen',
+        changeImage: 'Cambiar Imagen',
+        removeImage: 'Quitar Imagen',
+        expiryDate: 'Fecha de Vencimiento',
+        expired: 'Vencido',
+        nearExpiry: 'Próximo a Vencer',
+        supplier: 'Proveedor',
+        cost: 'Costo',
+        profit: 'Ganancia',
+        margin: 'Margen',
+        todaysSales: 'Ventas de Hoy',
+        thisWeek: 'Esta Semana',
+        thisMonth: 'Este Mes',
+        totalProducts: 'Total Productos',
+        transactions: 'Transacciones',
+        averageTransaction: 'Transacción Promedio',
+        topSellingProducts: 'Productos Más Vendidos',
+        cashierPerformance: 'Rendimiento Cajeros',
+        recentSales: 'Ventas Recientes',
+        dailyReport: 'Reporte Diario',
+        weeklyReport: 'Reporte Semanal',
+        monthlyReport: 'Reporte Mensual',
+        salesReport: 'Reporte de Ventas',
+        inventoryReport: 'Reporte de Inventario',
+        profitReport: 'Reporte de Ganancias',
+        taxReport: 'Reporte de Impuestos',
+        customerReceipt: 'Recibo Cliente',
+        businessInvoice: 'Factura Comercial',
+        companyInfo: 'Información Empresa',
+        customerInfo: 'Información Cliente',
+        itemsNeedRestocking: 'artículos necesitan reabastecimiento',
+        activeProducts: 'productos activos',
+        outOfStock: 'Sin Stock',
+        inStock: 'En Stock',
+        lowStock: 'Stock Bajo',
+        goodStock: 'Buen Stock'
     }
 };
 
-// Multi-currency support including Algerian Dinar
+// Multi-currency support including Algerian Dinar with language-specific names
 const currencies = {
-    USD: { symbol: '$', rate: 1.0, name: 'US Dollar' },
-    EUR: { symbol: '€', rate: 0.85, name: 'Euro' },
-    AED: { symbol: 'د.إ', rate: 3.67, name: 'UAE Dirham' },
-    SAR: { symbol: 'ر.س', rate: 3.75, name: 'Saudi Riyal' },
-    DZD: { symbol: 'د.ج', rate: 134.5, name: 'Algerian Dinar' },
-    GBP: { symbol: '£', rate: 0.73, name: 'British Pound' },
-    MAD: { symbol: 'د.م', rate: 10.2, name: 'Moroccan Dirham' },
-    TND: { symbol: 'د.ت', rate: 3.1, name: 'Tunisian Dinar' }
+    USD: {
+        symbol: '$',
+        rate: 1.0,
+        names: {
+            en: 'US Dollar',
+            ar: 'دولار أمريكي',
+            fr: 'Dollar Américain',
+            es: 'Dólar Estadounidense'
+        }
+    },
+    EUR: {
+        symbol: '€',
+        rate: 0.85,
+        names: {
+            en: 'Euro',
+            ar: 'يورو',
+            fr: 'Euro',
+            es: 'Euro'
+        }
+    },
+    AED: {
+        symbol: 'د.إ',
+        rate: 3.67,
+        names: {
+            en: 'UAE Dirham',
+            ar: 'درهم إماراتي',
+            fr: 'Dirham des EAU',
+            es: 'Dirham de EAU'
+        }
+    },
+    SAR: {
+        symbol: 'ر.س',
+        rate: 3.75,
+        names: {
+            en: 'Saudi Riyal',
+            ar: 'ريال سعودي',
+            fr: 'Riyal Saoudien',
+            es: 'Riyal Saudí'
+        }
+    },
+    DZD: {
+        symbol: { en: 'د.ج', ar: 'د.ج', fr: 'DA', es: 'DA' },
+        rate: 134.5,
+        names: {
+            en: 'Algerian Dinar',
+            ar: 'دينار جزائري',
+            fr: 'Dinar Algérien',
+            es: 'Dinar Argelino'
+        }
+    },
+    GBP: {
+        symbol: '£',
+        rate: 0.73,
+        names: {
+            en: 'British Pound',
+            ar: 'جنيه إسترليني',
+            fr: 'Livre Sterling',
+            es: 'Libra Esterlina'
+        }
+    },
+    MAD: {
+        symbol: 'د.م',
+        rate: 10.2,
+        names: {
+            en: 'Moroccan Dirham',
+            ar: 'درهم مغربي',
+            fr: 'Dirham Marocain',
+            es: 'Dirham Marroquí'
+        }
+    },
+    TND: {
+        symbol: 'د.ت',
+        rate: 3.1,
+        names: {
+            en: 'Tunisian Dinar',
+            ar: 'دينار تونسي',
+            fr: 'Dinar Tunisien',
+            es: 'Dinar Tunecino'
+        }
+    }
 };
 
 // User roles and permissions
@@ -249,20 +497,92 @@ const users = [
     { id: 5, username: 'cashier3', password: 'cashier123', role: 'cashier', name: 'Omar Benali', active: true }
 ];
 
-// Enhanced product data with full inventory management
+// Enhanced product data with full inventory management, images, and expiry dates
 const products = [
-    { id: 1, name: 'Hamburger', nameAr: 'همبرغر', price: 8.99, category: 'food', stock: 25, minStock: 5, maxStock: 100, barcode: '1234567890123', supplier: 'Food Corp', cost: 5.50, active: true },
-    { id: 2, name: 'Cheeseburger', nameAr: 'تشيز برغر', price: 9.99, category: 'food', stock: 20, minStock: 5, maxStock: 80, barcode: '1234567890124', supplier: 'Food Corp', cost: 6.20, active: true },
-    { id: 3, name: 'French Fries', nameAr: 'بطاطس مقلية', price: 3.99, category: 'food', stock: 50, minStock: 10, maxStock: 200, barcode: '1234567890125', supplier: 'Food Corp', cost: 1.80, active: true },
-    { id: 4, name: 'Chicken Wings', nameAr: 'أجنحة دجاج', price: 12.99, category: 'food', stock: 15, minStock: 5, maxStock: 60, barcode: '1234567890126', supplier: 'Poultry Plus', cost: 8.50, active: true },
-    { id: 5, name: 'Caesar Salad', nameAr: 'سلطة قيصر', price: 7.99, category: 'food', stock: 12, minStock: 5, maxStock: 40, barcode: '1234567890127', supplier: 'Fresh Greens', cost: 4.20, active: true },
-    { id: 6, name: 'Coca Cola', nameAr: 'كوكا كولا', price: 2.99, category: 'drinks', stock: 100, minStock: 20, maxStock: 500, barcode: '1234567890128', supplier: 'Beverage Co', cost: 1.50, active: true },
-    { id: 7, name: 'Orange Juice', nameAr: 'عصير برتقال', price: 3.49, category: 'drinks', stock: 30, minStock: 10, maxStock: 150, barcode: '1234567890129', supplier: 'Juice Factory', cost: 2.10, active: true },
-    { id: 8, name: 'Coffee', nameAr: 'قهوة', price: 2.49, category: 'drinks', stock: 80, minStock: 15, maxStock: 300, barcode: '1234567890130', supplier: 'Coffee Roasters', cost: 1.20, active: true },
-    { id: 9, name: 'Water Bottle', nameAr: 'زجاجة ماء', price: 1.99, category: 'drinks', stock: 200, minStock: 50, maxStock: 1000, barcode: '1234567890131', supplier: 'Pure Water', cost: 0.80, active: true },
-    { id: 10, name: 'Potato Chips', nameAr: 'رقائق البطاطس', price: 2.99, category: 'snacks', stock: 3, minStock: 10, maxStock: 200, barcode: '1234567890132', supplier: 'Snack Foods', cost: 1.50, active: true }, // Low stock
-    { id: 11, name: 'Chocolate Bar', nameAr: 'لوح شوكولاتة', price: 1.99, category: 'snacks', stock: 45, minStock: 15, maxStock: 150, barcode: '1234567890133', supplier: 'Sweet Treats', cost: 1.10, active: true },
-    { id: 12, name: 'Cookies', nameAr: 'كوكيز', price: 3.49, category: 'snacks', stock: 2, minStock: 8, maxStock: 100, barcode: '1234567890134', supplier: 'Bakery Plus', cost: 2.00, active: true } // Low stock
+    {
+        id: 1, name: 'Hamburger', nameAr: 'همبرغر', nameFr: 'Hamburger', nameEs: 'Hamburguesa',
+        price: 8.99, category: 'food', stock: 25, minStock: 5, maxStock: 100,
+        barcode: '1234567890123', supplier: 'Food Corp', cost: 5.50, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkY2QjM1Ii8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🍔</dGV4dD4KPC9zdmc+',
+        expiryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 7 days from now
+    },
+    {
+        id: 2, name: 'Cheeseburger', nameAr: 'تشيز برغر', nameFr: 'Cheeseburger', nameEs: 'Hamburguesa con Queso',
+        price: 9.99, category: 'food', stock: 20, minStock: 5, maxStock: 80,
+        barcode: '1234567890124', supplier: 'Food Corp', cost: 6.20, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkZENzAwIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🧀🍔</dGV4dD4KPC9zdmc+',
+        expiryDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 5 days from now
+    },
+    {
+        id: 3, name: 'French Fries', nameAr: 'بطاطس مقلية', nameFr: 'Frites', nameEs: 'Papas Fritas',
+        price: 3.99, category: 'food', stock: 50, minStock: 10, maxStock: 200,
+        barcode: '1234567890125', supplier: 'Food Corp', cost: 1.80, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkZBNTAwIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🍟</dGV4dD4KPC9zdmc+',
+        expiryDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 3 days from now
+    },
+    {
+        id: 4, name: 'Chicken Wings', nameAr: 'أجنحة دجاج', nameFr: 'Ailes de Poulet', nameEs: 'Alitas de Pollo',
+        price: 12.99, category: 'food', stock: 15, minStock: 5, maxStock: 60,
+        barcode: '1234567890126', supplier: 'Poultry Plus', cost: 8.50, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjOEI0NTEzIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🍗</dGV4dD4KPC9zdmc+',
+        expiryDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 2 days from now (near expiry)
+    },
+    {
+        id: 5, name: 'Caesar Salad', nameAr: 'سلطة قيصر', nameFr: 'Salade César', nameEs: 'Ensalada César',
+        price: 7.99, category: 'food', stock: 12, minStock: 5, maxStock: 40,
+        barcode: '1234567890127', supplier: 'Fresh Greens', cost: 4.20, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMzJDRDMyIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🥗</dGV4dD4KPC9zdmc+',
+        expiryDate: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 1 day from now (near expiry)
+    },
+    {
+        id: 6, name: 'Coca Cola', nameAr: 'كوكا كولا', nameFr: 'Coca Cola', nameEs: 'Coca Cola',
+        price: 2.99, category: 'drinks', stock: 100, minStock: 20, maxStock: 500,
+        barcode: '1234567890128', supplier: 'Beverage Co', cost: 1.50, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjREMyNjI2Ii8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🥤</dGV4dD4KPC9zdmc+',
+        expiryDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 1 year from now
+    },
+    {
+        id: 7, name: 'Orange Juice', nameAr: 'عصير برتقال', nameFr: 'Jus d\'Orange', nameEs: 'Jugo de Naranja',
+        price: 3.49, category: 'drinks', stock: 30, minStock: 10, maxStock: 150,
+        barcode: '1234567890129', supplier: 'Juice Factory', cost: 2.10, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkZBNTAwIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🍊</dGV4dD4KPC9zdmc+',
+        expiryDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 14 days from now
+    },
+    {
+        id: 8, name: 'Coffee', nameAr: 'قهوة', nameFr: 'Café', nameEs: 'Café',
+        price: 2.49, category: 'drinks', stock: 80, minStock: 15, maxStock: 300,
+        barcode: '1234567890130', supplier: 'Coffee Roasters', cost: 1.20, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNkY0RTM3Ii8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+☕</dGV4dD4KPC9zdmc+',
+        expiryDate: new Date(Date.now() + 180 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 6 months from now
+    },
+    {
+        id: 9, name: 'Water Bottle', nameAr: 'زجاجة ماء', nameFr: 'Bouteille d\'Eau', nameEs: 'Botella de Agua',
+        price: 1.99, category: 'drinks', stock: 200, minStock: 50, maxStock: 1000,
+        barcode: '1234567890131', supplier: 'Pure Water', cost: 0.80, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMDA5NkZGIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+💧</dGV4dD4KPC9zdmc+',
+        expiryDate: new Date(Date.now() + 730 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 2 years from now
+    },
+    {
+        id: 10, name: 'Potato Chips', nameAr: 'رقائق البطاطس', nameFr: 'Chips de Pomme de Terre', nameEs: 'Papas Fritas',
+        price: 2.99, category: 'snacks', stock: 3, minStock: 10, maxStock: 200,
+        barcode: '1234567890132', supplier: 'Snack Foods', cost: 1.50, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkZENzAwIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🥔</dGV4dD4KPC9zdmc+',
+        expiryDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 3 months from now
+    },
+    {
+        id: 11, name: 'Chocolate Bar', nameAr: 'لوح شوكولاتة', nameFr: 'Barre de Chocolat', nameEs: 'Barra de Chocolate',
+        price: 1.99, category: 'snacks', stock: 45, minStock: 15, maxStock: 150,
+        barcode: '1234567890133', supplier: 'Sweet Treats', cost: 1.10, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjOEI0NTEzIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🍫</dGV4dD4KPC9zdmc+',
+        expiryDate: new Date(Date.now() + 120 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 4 months from now
+    },
+    {
+        id: 12, name: 'Cookies', nameAr: 'كوكيز', nameFr: 'Biscuits', nameEs: 'Galletas',
+        price: 3.49, category: 'snacks', stock: 2, minStock: 8, maxStock: 100,
+        barcode: '1234567890134', supplier: 'Bakery Plus', cost: 2.00, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRDI2OTFFIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🍪</dGV4dD4KPC9zdmc+',
+        expiryDate: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 1 day ago (expired)
+    }
 ];
 
 // ===== GLOBAL STATE =====
@@ -295,11 +615,41 @@ function t(key) {
     return languages[currentLanguage][key] || key;
 }
 
-// Format currency
+// Get product name in current language
+function getProductName(product) {
+    switch(currentLanguage) {
+        case 'ar': return product.nameAr || product.name;
+        case 'fr': return product.nameFr || product.name;
+        case 'es': return product.nameEs || product.name;
+        default: return product.name;
+    }
+}
+
+// Format currency with language-specific symbols
 function formatCurrency(amount) {
     const currency = currencies[currentCurrency];
     const convertedAmount = amount * currency.rate;
-    return `${currency.symbol}${convertedAmount.toFixed(2)}`;
+
+    // Get language-specific symbol
+    let symbol;
+    if (typeof currency.symbol === 'object') {
+        symbol = currency.symbol[currentLanguage] || currency.symbol.en;
+    } else {
+        symbol = currency.symbol;
+    }
+
+    // Format based on language
+    if (currentLanguage === 'ar') {
+        return `${convertedAmount.toFixed(2)} ${symbol}`;
+    } else {
+        return `${symbol}${convertedAmount.toFixed(2)}`;
+    }
+}
+
+// Get currency name in current language
+function getCurrencyName(currencyCode) {
+    const currency = currencies[currencyCode];
+    return currency.names[currentLanguage] || currency.names.en;
 }
 
 // Convert price to current currency
@@ -516,11 +866,33 @@ function checkLoginStatus() {
 function changeLanguage(lang) {
     currentLanguage = lang;
     localStorage.setItem('posLanguage', lang);
-    
+
     if (isLoggedIn) {
         updateLanguage();
         displayProducts();
         updateCartDisplay();
+
+        // Refresh current view content
+        switch(currentView) {
+            case 'inventory':
+                loadInventoryView();
+                break;
+            case 'reports':
+                loadReportsView();
+                break;
+            case 'users':
+                loadUsersView();
+                break;
+            case 'settings':
+                loadSettingsView();
+                break;
+        }
+
+        // Update currency selector
+        updateCurrencySelector();
+
+        // Update low stock alerts
+        checkLowStock();
     } else {
         // Just update the login screen
         showLoginScreen();
@@ -532,6 +904,22 @@ function changeCurrency(currency) {
     localStorage.setItem('posCurrency', currency);
     displayProducts();
     updateCartDisplay();
+
+    // Refresh current view if it contains currency data
+    if (currentView === 'reports') {
+        loadReportsView();
+    }
+}
+
+function updateCurrencySelector() {
+    const currencySelector = document.getElementById('currency-selector');
+    if (currencySelector) {
+        currencySelector.innerHTML = Object.entries(currencies).map(([code, curr]) => {
+            const symbol = typeof curr.symbol === 'object' ? curr.symbol[currentLanguage] || curr.symbol.en : curr.symbol;
+            const name = curr.names[currentLanguage] || curr.names.en;
+            return `<option value="${code}" ${currentCurrency === code ? 'selected' : ''}>${symbol} ${name}</option>`;
+        }).join('');
+    }
 }
 
 function updateLanguage() {
@@ -1401,6 +1789,392 @@ function generateDailyReport() {
     reportWindow.print();
 }
 
+// ===== INVOICE SYSTEM =====
+
+function printInvoice(sale = null) {
+    if (!sale && cart.length === 0) {
+        alert(t('emptyCart'));
+        return;
+    }
+
+    let invoiceData;
+    if (sale) {
+        invoiceData = sale;
+    } else {
+        // Create temporary invoice data for current cart
+        const subtotal = cart.reduce((sum, item) => sum + (convertPrice(item.price) * item.quantity), 0);
+        const tax = subtotal * settings.taxRate;
+        const total = subtotal + tax;
+
+        invoiceData = {
+            id: 'INV-' + Date.now(),
+            date: new Date().toISOString(),
+            cashier: currentUser.name,
+            items: [...cart],
+            subtotal: subtotal / currencies[currentCurrency].rate,
+            tax: tax / currencies[currentCurrency].rate,
+            total: total / currencies[currentCurrency].rate,
+            paymentMethod: 'N/A',
+            currency: currentCurrency
+        };
+    }
+
+    const invoiceWindow = window.open('', '_blank');
+    const invoiceHTML = generateInvoiceHTML(invoiceData);
+
+    invoiceWindow.document.write(invoiceHTML);
+    invoiceWindow.document.close();
+    invoiceWindow.focus();
+    invoiceWindow.print();
+}
+
+function generateInvoiceHTML(sale) {
+    const date = new Date(sale.date);
+    const formattedDate = date.toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : currentLanguage === 'fr' ? 'fr-FR' : currentLanguage === 'es' ? 'es-ES' : 'en-US');
+    const formattedTime = date.toLocaleTimeString(currentLanguage === 'ar' ? 'ar-DZ' : currentLanguage === 'fr' ? 'fr-FR' : currentLanguage === 'es' ? 'es-ES' : 'en-US');
+
+    return `
+        <!DOCTYPE html>
+        <html dir="${currentLanguage === 'ar' ? 'rtl' : 'ltr'}" lang="${currentLanguage}">
+        <head>
+            <meta charset="UTF-8">
+            <title>${t('businessInvoice')} - ${sale.id}</title>
+            <style>
+                body {
+                    font-family: 'Arial', sans-serif;
+                    max-width: 800px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    font-size: 14px;
+                    line-height: 1.6;
+                    color: #333;
+                }
+                .invoice-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    margin-bottom: 40px;
+                    border-bottom: 3px solid #667eea;
+                    padding-bottom: 20px;
+                }
+                .company-info h1 {
+                    color: #667eea;
+                    margin: 0 0 10px 0;
+                    font-size: 28px;
+                }
+                .invoice-details {
+                    text-align: right;
+                    background: #f8f9fa;
+                    padding: 15px;
+                    border-radius: 8px;
+                }
+                .invoice-title {
+                    font-size: 24px;
+                    color: #667eea;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+                .customer-section {
+                    margin: 30px 0;
+                    background: #f8f9fa;
+                    padding: 20px;
+                    border-radius: 8px;
+                }
+                .items-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 30px 0;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+                .items-table th, .items-table td {
+                    border: 1px solid #ddd;
+                    padding: 12px;
+                    text-align: left;
+                }
+                .items-table th {
+                    background: #667eea;
+                    color: white;
+                    font-weight: bold;
+                }
+                .items-table tr:nth-child(even) {
+                    background: #f8f9fa;
+                }
+                .totals-section {
+                    margin-top: 30px;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+                .totals-table {
+                    width: 300px;
+                    border-collapse: collapse;
+                }
+                .totals-table td {
+                    padding: 8px 15px;
+                    border: 1px solid #ddd;
+                }
+                .total-row {
+                    font-weight: bold;
+                    background: #667eea;
+                    color: white;
+                    font-size: 16px;
+                }
+                .footer {
+                    text-align: center;
+                    margin-top: 40px;
+                    padding-top: 20px;
+                    border-top: 1px solid #ddd;
+                    color: #666;
+                }
+                [dir="rtl"] .invoice-details {
+                    text-align: left;
+                }
+                [dir="rtl"] .items-table th, [dir="rtl"] .items-table td {
+                    text-align: right;
+                }
+                @media print {
+                    body { margin: 0; padding: 10px; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="invoice-header">
+                <div class="company-info">
+                    <h1>${settings.companyName}</h1>
+                    <div>${settings.companyAddress}</div>
+                    <div>${settings.companyPhone}</div>
+                </div>
+                <div class="invoice-details">
+                    <div class="invoice-title">${t('businessInvoice')}</div>
+                    <div><strong>${t('invoice')} #:</strong> ${sale.id}</div>
+                    <div><strong>${t('date')}:</strong> ${formattedDate}</div>
+                    <div><strong>${t('time')}:</strong> ${formattedTime}</div>
+                    <div><strong>${t('cashier')}:</strong> ${sale.cashier}</div>
+                </div>
+            </div>
+
+            <div class="customer-section">
+                <h3>${t('customerInfo')}</h3>
+                <div><strong>${t('currency')}:</strong> ${getCurrencyName(sale.currency)}</div>
+                <div><strong>${t('paymentMethod')}:</strong> ${sale.paymentMethod}</div>
+            </div>
+
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th>${t('description')}</th>
+                        <th>${t('quantity')}</th>
+                        <th>${t('price')}</th>
+                        <th>${t('total')}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${sale.items.map(item => {
+                        const itemName = getProductName(item);
+                        const itemTotal = item.price * item.quantity;
+                        return `
+                            <tr>
+                                <td>${itemName}</td>
+                                <td>${item.quantity}</td>
+                                <td>${formatCurrency(item.price)}</td>
+                                <td>${formatCurrency(itemTotal)}</td>
+                            </tr>
+                        `;
+                    }).join('')}
+                </tbody>
+            </table>
+
+            <div class="totals-section">
+                <table class="totals-table">
+                    <tr>
+                        <td>${t('subtotal')}:</td>
+                        <td>${formatCurrency(sale.subtotal)}</td>
+                    </tr>
+                    <tr>
+                        <td>${t('tax')} (${(settings.taxRate * 100).toFixed(0)}%):</td>
+                        <td>${formatCurrency(sale.tax)}</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td>${t('total')}:</td>
+                        <td>${formatCurrency(sale.total)}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="footer">
+                <div>${settings.receiptFooter}</div>
+                <div style="margin-top: 10px; font-size: 12px;">
+                    ${t('businessInvoice')} - ${settings.companyName}
+                </div>
+            </div>
+        </body>
+        </html>
+    `;
+}
+
+// ===== LOW STOCK & EXPIRED ITEMS PRINTING =====
+
+function printLowStockReport() {
+    const lowStockProducts = products.filter(product =>
+        product.active && product.stock <= product.minStock
+    );
+
+    if (lowStockProducts.length === 0) {
+        alert(t('noLowStockItems'));
+        return;
+    }
+
+    const reportWindow = window.open('', '_blank');
+    const reportHTML = generateLowStockReportHTML(lowStockProducts);
+
+    reportWindow.document.write(reportHTML);
+    reportWindow.document.close();
+    reportWindow.focus();
+    reportWindow.print();
+}
+
+function printExpiredItemsReport() {
+    const expiredProducts = products.filter(product =>
+        product.active && product.expiryDate && new Date(product.expiryDate) < new Date()
+    );
+
+    const nearExpiryProducts = products.filter(product =>
+        product.active && product.expiryDate &&
+        new Date(product.expiryDate) <= new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) &&
+        new Date(product.expiryDate) >= new Date()
+    );
+
+    if (expiredProducts.length === 0 && nearExpiryProducts.length === 0) {
+        alert(t('noExpiredItems'));
+        return;
+    }
+
+    const reportWindow = window.open('', '_blank');
+    const reportHTML = generateExpiredItemsReportHTML(expiredProducts, nearExpiryProducts);
+
+    reportWindow.document.write(reportHTML);
+    reportWindow.document.close();
+    reportWindow.focus();
+    reportWindow.print();
+}
+
+function generateLowStockReportHTML(lowStockProducts) {
+    const currentDate = new Date().toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : currentLanguage === 'fr' ? 'fr-FR' : currentLanguage === 'es' ? 'es-ES' : 'en-US');
+
+    return `
+        <!DOCTYPE html>
+        <html dir="${currentLanguage === 'ar' ? 'rtl' : 'ltr'}" lang="${currentLanguage}">
+        <head>
+            <meta charset="UTF-8">
+            <title>${t('lowStockReport')} - ${currentDate}</title>
+            <style>
+                body {
+                    font-family: 'Arial', sans-serif;
+                    max-width: 800px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    font-size: 14px;
+                    line-height: 1.6;
+                }
+                .header {
+                    text-align: center;
+                    margin-bottom: 30px;
+                    border-bottom: 2px solid #dc3545;
+                    padding-bottom: 20px;
+                }
+                .header h1 {
+                    color: #dc3545;
+                    margin-bottom: 10px;
+                }
+                .summary {
+                    background: #f8d7da;
+                    padding: 20px;
+                    margin-bottom: 20px;
+                    border-radius: 8px;
+                    border-left: 4px solid #dc3545;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-bottom: 20px;
+                }
+                th, td {
+                    border: 1px solid #ddd;
+                    padding: 12px;
+                    text-align: left;
+                }
+                th {
+                    background: #dc3545;
+                    color: white;
+                    font-weight: bold;
+                }
+                tr:nth-child(even) {
+                    background: #f8f9fa;
+                }
+                .urgent {
+                    background: #f8d7da !important;
+                    font-weight: bold;
+                }
+                .footer {
+                    text-align: center;
+                    margin-top: 30px;
+                    color: #666;
+                }
+                [dir="rtl"] th, [dir="rtl"] td {
+                    text-align: right;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>${settings.companyName}</h1>
+                <h2>${t('lowStockReport')}</h2>
+                <p>${t('date')}: ${currentDate}</p>
+            </div>
+
+            <div class="summary">
+                <h3>${t('summary')}</h3>
+                <p><strong>${t('totalProducts')}:</strong> ${lowStockProducts.length} ${t('itemsNeedRestocking')}</p>
+                <p><strong>${t('urgentAction')}:</strong> ${t('restockImmediately')}</p>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>${t('productName')}</th>
+                        <th>${t('category')}</th>
+                        <th>${t('currentStock')}</th>
+                        <th>${t('minimumStock')}</th>
+                        <th>${t('supplier')}</th>
+                        <th>${t('status')}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${lowStockProducts.map(product => {
+                        const productName = getProductName(product);
+                        const isUrgent = product.stock === 0;
+                        return `
+                            <tr class="${isUrgent ? 'urgent' : ''}">
+                                <td>${productName}</td>
+                                <td>${t(product.category)}</td>
+                                <td>${product.stock}</td>
+                                <td>${product.minStock}</td>
+                                <td>${product.supplier || 'N/A'}</td>
+                                <td>${isUrgent ? t('outOfStock') : t('lowStock')}</td>
+                            </tr>
+                        `;
+                    }).join('')}
+                </tbody>
+            </table>
+
+            <div class="footer">
+                <p>${t('generatedBy')}: ${settings.companyName} POS System</p>
+                <p>${t('printedOn')}: ${new Date().toLocaleString(currentLanguage === 'ar' ? 'ar-DZ' : currentLanguage === 'fr' ? 'fr-FR' : currentLanguage === 'es' ? 'es-ES' : 'en-US')}</p>
+            </div>
+        </body>
+        </html>
+    `;
+}
+
 // ===== USERS MANAGEMENT =====
 
 function loadUsersView() {
@@ -1830,24 +2604,49 @@ function displayProducts() {
     productsGrid.innerHTML = '';
 
     filteredProducts.forEach(product => {
-        const productName = currentLanguage === 'ar' && product.nameAr ? product.nameAr : product.name;
+        const productName = getProductName(product);
         const isLowStock = product.stock <= product.minStock;
+        const isExpired = product.expiryDate && new Date(product.expiryDate) < new Date();
+        const isNearExpiry = product.expiryDate && new Date(product.expiryDate) <= new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+
+        let statusClass = '';
+        let statusBadge = '';
+
+        if (isExpired) {
+            statusClass = 'expired';
+            statusBadge = `<span class="expired-badge">⚠️ ${t('expired')}</span>`;
+        } else if (isNearExpiry) {
+            statusClass = 'near-expiry';
+            statusBadge = `<span class="near-expiry-badge">⏰ ${t('nearExpiry')}</span>`;
+        } else if (isLowStock) {
+            statusClass = 'low-stock';
+            statusBadge = `<span class="low-stock-badge">📦 ${t('lowStock')}</span>`;
+        }
 
         const productCard = document.createElement('div');
-        productCard.className = `product-card ${isLowStock ? 'low-stock' : ''}`;
+        productCard.className = `product-card ${statusClass}`;
         productCard.innerHTML = `
+            ${product.image ? `<div class="product-image"><img src="${product.image}" alt="${productName}" /></div>` : ''}
             <div class="product-info">
                 <h3>${productName}</h3>
                 <div class="price">${formatCurrency(product.price)}</div>
                 <div class="stock-info">
                     <span class="stock-count">${t('stock')}: ${product.stock}</span>
-                    ${isLowStock ? '<span class="low-stock-badge">⚠️ Low</span>' : ''}
+                    ${statusBadge}
                 </div>
+                ${product.expiryDate ? `<div class="expiry-date">${t('expiryDate')}: ${new Date(product.expiryDate).toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : currentLanguage === 'fr' ? 'fr-FR' : currentLanguage === 'es' ? 'es-ES' : 'en-US')}</div>` : ''}
                 ${settings.showBarcode ? `<div class="barcode">${product.barcode}</div>` : ''}
             </div>
         `;
 
-        productCard.addEventListener('click', () => addToCart(product));
+        // Don't allow adding expired products to cart
+        if (!isExpired) {
+            productCard.addEventListener('click', () => addToCart(product));
+        } else {
+            productCard.style.cursor = 'not-allowed';
+            productCard.style.opacity = '0.6';
+        }
+
         productsGrid.appendChild(productCard);
     });
 }
