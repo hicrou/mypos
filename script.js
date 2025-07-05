@@ -1,24 +1,194 @@
-// Sample product data
-const products = [
-    { id: 1, name: 'Hamburger', price: 8.99, category: 'food' },
-    { id: 2, name: 'Cheeseburger', price: 9.99, category: 'food' },
-    { id: 3, name: 'French Fries', price: 3.99, category: 'food' },
-    { id: 4, name: 'Chicken Wings', price: 12.99, category: 'food' },
-    { id: 5, name: 'Caesar Salad', price: 7.99, category: 'food' },
-    { id: 6, name: 'Coca Cola', price: 2.99, category: 'drinks' },
-    { id: 7, name: 'Orange Juice', price: 3.49, category: 'drinks' },
-    { id: 8, name: 'Coffee', price: 2.49, category: 'drinks' },
-    { id: 9, name: 'Water Bottle', price: 1.99, category: 'drinks' },
-    { id: 10, name: 'Potato Chips', price: 2.99, category: 'snacks' },
-    { id: 11, name: 'Chocolate Bar', price: 1.99, category: 'snacks' },
-    { id: 12, name: 'Cookies', price: 3.49, category: 'snacks' },
+// ===== CONFIGURATION & DATA =====
+
+// Multi-language support
+const languages = {
+    en: {
+        welcome: 'Welcome to My POS System',
+        categories: 'Categories',
+        products: 'Products',
+        currentOrder: 'Current Order',
+        subtotal: 'Subtotal',
+        tax: 'Tax',
+        total: 'Total',
+        clearCart: 'Clear Cart',
+        checkout: 'Checkout',
+        emptyCart: 'No items in cart',
+        allItems: 'All Items',
+        food: 'Food',
+        drinks: 'Drinks',
+        snacks: 'Snacks',
+        cashier: 'Cashier',
+        admin: 'Admin',
+        manager: 'Manager',
+        login: 'Login',
+        logout: 'Logout',
+        username: 'Username',
+        password: 'Password',
+        lowStock: 'Low Stock Alert',
+        printReceipt: 'Print Receipt',
+        reports: 'Reports',
+        inventory: 'Inventory',
+        settings: 'Settings'
+    },
+    ar: {
+        welcome: 'مرحباً بنظام نقاط البيع',
+        categories: 'الفئات',
+        products: 'المنتجات',
+        currentOrder: 'الطلب الحالي',
+        subtotal: 'المجموع الفرعي',
+        tax: 'الضريبة',
+        total: 'المجموع',
+        clearCart: 'مسح السلة',
+        checkout: 'الدفع',
+        emptyCart: 'لا توجد عناصر في السلة',
+        allItems: 'جميع العناصر',
+        food: 'طعام',
+        drinks: 'مشروبات',
+        snacks: 'وجبات خفيفة',
+        cashier: 'أمين الصندوق',
+        admin: 'مدير',
+        manager: 'مدير',
+        login: 'تسجيل الدخول',
+        logout: 'تسجيل الخروج',
+        username: 'اسم المستخدم',
+        password: 'كلمة المرور',
+        lowStock: 'تنبيه مخزون منخفض',
+        printReceipt: 'طباعة الإيصال',
+        reports: 'التقارير',
+        inventory: 'المخزون',
+        settings: 'الإعدادات',
+        currency: 'العملة',
+        language: 'اللغة',
+        dinar: 'دينار جزائري'
+    },
+    fr: {
+        welcome: 'Bienvenue dans Mon Système POS',
+        categories: 'Catégories',
+        products: 'Produits',
+        currentOrder: 'Commande Actuelle',
+        subtotal: 'Sous-total',
+        tax: 'Taxe',
+        total: 'Total',
+        clearCart: 'Vider le Panier',
+        checkout: 'Paiement',
+        emptyCart: 'Aucun article dans le panier',
+        allItems: 'Tous les Articles',
+        food: 'Nourriture',
+        drinks: 'Boissons',
+        snacks: 'Collations',
+        cashier: 'Caissier',
+        admin: 'Administrateur',
+        manager: 'Gestionnaire',
+        login: 'Connexion',
+        logout: 'Déconnexion',
+        username: 'Nom d\'utilisateur',
+        password: 'Mot de passe',
+        lowStock: 'Alerte Stock Faible',
+        printReceipt: 'Imprimer Reçu',
+        reports: 'Rapports',
+        inventory: 'Inventaire',
+        settings: 'Paramètres'
+    },
+    es: {
+        welcome: 'Bienvenido a Mi Sistema POS',
+        categories: 'Categorías',
+        products: 'Productos',
+        currentOrder: 'Pedido Actual',
+        subtotal: 'Subtotal',
+        tax: 'Impuesto',
+        total: 'Total',
+        clearCart: 'Limpiar Carrito',
+        checkout: 'Pagar',
+        emptyCart: 'No hay artículos en el carrito',
+        allItems: 'Todos los Artículos',
+        food: 'Comida',
+        drinks: 'Bebidas',
+        snacks: 'Aperitivos',
+        cashier: 'Cajero',
+        admin: 'Administrador',
+        manager: 'Gerente',
+        login: 'Iniciar Sesión',
+        logout: 'Cerrar Sesión',
+        username: 'Usuario',
+        password: 'Contraseña',
+        lowStock: 'Alerta Stock Bajo',
+        printReceipt: 'Imprimir Recibo',
+        reports: 'Informes',
+        inventory: 'Inventario',
+        settings: 'Configuración'
+    }
+};
+
+// Multi-currency support
+const currencies = {
+    USD: { symbol: '$', rate: 1.0, name: 'US Dollar' },
+    EUR: { symbol: '€', rate: 0.85, name: 'Euro' },
+    AED: { symbol: 'د.إ', rate: 3.67, name: 'UAE Dirham' },
+    SAR: { symbol: 'ر.س', rate: 3.75, name: 'Saudi Riyal' },
+    DZD: { symbol: 'د.ج', rate: 134.5, name: 'Algerian Dinar' },
+    GBP: { symbol: '£', rate: 0.73, name: 'British Pound' }
+};
+
+// User roles and permissions
+const userRoles = {
+    admin: {
+        name: 'Admin',
+        permissions: ['all']
+    },
+    manager: {
+        name: 'Manager',
+        permissions: ['sales', 'inventory', 'reports', 'users']
+    },
+    cashier: {
+        name: 'Cashier',
+        permissions: ['sales']
+    }
+};
+
+// Sample users (in real app, this would be in a database)
+const users = [
+    { id: 1, username: 'admin', password: 'admin123', role: 'admin', name: 'Administrator' },
+    { id: 2, username: 'manager', password: 'manager123', role: 'manager', name: 'Store Manager' },
+    { id: 3, username: 'cashier1', password: 'cashier123', role: 'cashier', name: 'John Doe' },
+    { id: 4, username: 'cashier2', password: 'cashier123', role: 'cashier', name: 'Jane Smith' }
 ];
 
-// Cart state
+// Enhanced product data with inventory
+const products = [
+    { id: 1, name: 'Hamburger', price: 8.99, category: 'food', stock: 25, minStock: 5, barcode: '1234567890123' },
+    { id: 2, name: 'Cheeseburger', price: 9.99, category: 'food', stock: 20, minStock: 5, barcode: '1234567890124' },
+    { id: 3, name: 'French Fries', price: 3.99, category: 'food', stock: 50, minStock: 10, barcode: '1234567890125' },
+    { id: 4, name: 'Chicken Wings', price: 12.99, category: 'food', stock: 15, minStock: 5, barcode: '1234567890126' },
+    { id: 5, name: 'Caesar Salad', price: 7.99, category: 'food', stock: 12, minStock: 5, barcode: '1234567890127' },
+    { id: 6, name: 'Coca Cola', price: 2.99, category: 'drinks', stock: 100, minStock: 20, barcode: '1234567890128' },
+    { id: 7, name: 'Orange Juice', price: 3.49, category: 'drinks', stock: 30, minStock: 10, barcode: '1234567890129' },
+    { id: 8, name: 'Coffee', price: 2.49, category: 'drinks', stock: 80, minStock: 15, barcode: '1234567890130' },
+    { id: 9, name: 'Water Bottle', price: 1.99, category: 'drinks', stock: 200, minStock: 50, barcode: '1234567890131' },
+    { id: 10, name: 'Potato Chips', price: 2.99, category: 'snacks', stock: 3, minStock: 10, barcode: '1234567890132' }, // Low stock
+    { id: 11, name: 'Chocolate Bar', price: 1.99, category: 'snacks', stock: 45, minStock: 15, barcode: '1234567890133' },
+    { id: 12, name: 'Cookies', price: 3.49, category: 'snacks', stock: 2, minStock: 8, barcode: '1234567890134' } // Low stock
+];
+
+// ===== GLOBAL STATE =====
 let cart = [];
 let currentCategory = 'all';
+let currentUser = null;
+let currentLanguage = 'en';
+let currentCurrency = 'USD';
+let salesHistory = [];
+let isLoggedIn = false;
 
-// DOM elements
+// System settings
+const settings = {
+    taxRate: 0.08, // 8% tax
+    companyName: 'My POS System',
+    companyAddress: '123 Business Street, City, Country',
+    companyPhone: '+1 (555) 123-4567',
+    receiptFooter: 'Thank you for your business!',
+    lowStockThreshold: 10
+};
+
+// ===== DOM ELEMENTS =====
 const productsGrid = document.getElementById('products-grid');
 const cartItems = document.getElementById('cart-items');
 const subtotalEl = document.getElementById('subtotal');
@@ -27,16 +197,37 @@ const totalEl = document.getElementById('total');
 const checkoutModal = document.getElementById('checkout-modal');
 const currentTimeEl = document.getElementById('current-time');
 
-// Initialize the POS system
+// ===== SYSTEM INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', function() {
+    initializeSystem();
+});
+
+function initializeSystem() {
+    // Check if user is logged in
+    checkLoginStatus();
+
+    if (!isLoggedIn) {
+        showLoginScreen();
+        return;
+    }
+
+    // Initialize main system
+    loadSettings();
+    updateLanguage();
     displayProducts();
     updateCartDisplay();
     updateTime();
+    checkLowStock();
+
+    // Set up intervals
     setInterval(updateTime, 1000);
-    
+    setInterval(checkLowStock, 60000); // Check every minute
+
     // Event listeners
     setupEventListeners();
-});
+
+    console.log('POS System initialized successfully');
+}
 
 function setupEventListeners() {
     // Category buttons
