@@ -206,7 +206,12 @@ const languages = {
         confirmDeleteCategory: 'Are you sure you want to delete category',
         deletedSuccessfully: 'deleted successfully',
         categoriesExported: 'Categories exported successfully',
-        productsSold: 'Products Sold'
+        productsSold: 'Products Sold',
+        tools: 'Tools',
+        hardware: 'Hardware',
+        construction: 'Construction',
+        electrical: 'Electrical',
+        plumbing: 'Plumbing'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -410,7 +415,12 @@ const languages = {
         confirmDeleteCategory: 'هل أنت متأكد من أنك تريد حذف الفئة',
         deletedSuccessfully: 'تم الحذف بنجاح',
         categoriesExported: 'تم تصدير الفئات بنجاح',
-        productsSold: 'المنتجات المباعة'
+        productsSold: 'المنتجات المباعة',
+        tools: 'أدوات',
+        hardware: 'أجهزة',
+        construction: 'بناء',
+        electrical: 'كهربائي',
+        plumbing: 'سباكة'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -602,7 +612,12 @@ const languages = {
         confirmDeleteCategory: 'Êtes-vous sûr de vouloir supprimer la catégorie',
         deletedSuccessfully: 'supprimé avec succès',
         categoriesExported: 'Catégories exportées avec succès',
-        productsSold: 'Produits Vendus'
+        productsSold: 'Produits Vendus',
+        tools: 'Outils',
+        hardware: 'Quincaillerie',
+        construction: 'Construction',
+        electrical: 'Électrique',
+        plumbing: 'Plomberie'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -794,7 +809,12 @@ const languages = {
         confirmDeleteCategory: '¿Está seguro de que desea eliminar la categoría',
         deletedSuccessfully: 'eliminado exitosamente',
         categoriesExported: 'Categorías exportadas exitosamente',
-        productsSold: 'Productos Vendidos'
+        productsSold: 'Productos Vendidos',
+        tools: 'Herramientas',
+        hardware: 'Ferretería',
+        construction: 'Construcción',
+        electrical: 'Eléctrico',
+        plumbing: 'Fontanería'
     }
 };
 
@@ -907,11 +927,16 @@ const users = [
     { id: 5, username: 'cashier3', password: 'cashier123', role: 'cashier', name: 'Omar Benali', active: true, cardNumber: '1005', cardAccess: false }
 ];
 
-// Categories management
+// Categories management - Enhanced for hardware store
 let categories = JSON.parse(localStorage.getItem('categories')) || [
     { id: 1, name: 'Food', nameAr: 'طعام', nameFr: 'Nourriture', nameEs: 'Comida', active: true },
     { id: 2, name: 'Drinks', nameAr: 'مشروبات', nameFr: 'Boissons', nameEs: 'Bebidas', active: true },
-    { id: 3, name: 'Snacks', nameAr: 'وجبات خفيفة', nameFr: 'Collations', nameEs: 'Aperitivos', active: true }
+    { id: 3, name: 'Snacks', nameAr: 'وجبات خفيفة', nameFr: 'Collations', nameEs: 'Aperitivos', active: true },
+    { id: 4, name: 'Tools', nameAr: 'أدوات', nameFr: 'Outils', nameEs: 'Herramientas', active: true },
+    { id: 5, name: 'Hardware', nameAr: 'أجهزة', nameFr: 'Quincaillerie', nameEs: 'Ferretería', active: true },
+    { id: 6, name: 'Construction', nameAr: 'بناء', nameFr: 'Construction', nameEs: 'Construcción', active: true },
+    { id: 7, name: 'Electrical', nameAr: 'كهربائي', nameFr: 'Électrique', nameEs: 'Eléctrico', active: true },
+    { id: 8, name: 'Plumbing', nameAr: 'سباكة', nameFr: 'Plomberie', nameEs: 'Fontanería', active: true }
 ];
 
 // Enhanced product data with full inventory management, images, and expiry dates
@@ -999,6 +1024,158 @@ const products = [
         barcode: '1234567890134', supplier: 'Bakery Plus', cost: 2.00, active: true,
         image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRDI2OTFFIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🍪</dGV4dD4KPC9zdmc+',
         expiryDate: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // 1 day ago (expired)
+    },
+
+    // ===== HARDWARE PRODUCTS - ALGERIA MARKET =====
+
+    // TOOLS CATEGORY
+    {
+        id: 13, name: 'Hammer', nameAr: 'مطرقة', nameFr: 'Marteau', nameEs: 'Martillo',
+        price: 1250, category: 'tools', stock: 25, minStock: 5, maxStock: 100,
+        barcode: '2001001001', supplier: 'Algeria Tools Co', cost: 850, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjOEI0NTEzIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🔨</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 14, name: 'Screwdriver Set', nameAr: 'مجموعة مفكات', nameFr: 'Jeu de Tournevis', nameEs: 'Juego de Destornilladores',
+        price: 850, category: 'tools', stock: 40, minStock: 10, maxStock: 150,
+        barcode: '2001001002', supplier: 'Algeria Tools Co', cost: 580, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNDY5MEU3Ii8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🪛</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 15, name: 'Wrench Set', nameAr: 'مجموعة مفاتيح ربط', nameFr: 'Jeu de Clés', nameEs: 'Juego de Llaves',
+        price: 1450, category: 'tools', stock: 30, minStock: 8, maxStock: 120,
+        barcode: '2001001003', supplier: 'Algeria Tools Co', cost: 980, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNkM3NTdEIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🔧</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 16, name: 'Drill Bits Set', nameAr: 'مجموعة لقم الحفر', nameFr: 'Jeu de Forets', nameEs: 'Juego de Brocas',
+        price: 750, category: 'tools', stock: 50, minStock: 15, maxStock: 200,
+        barcode: '2001001004', supplier: 'Algeria Tools Co', cost: 480, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjMzQ0OTVFIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🪚</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 17, name: 'Measuring Tape', nameAr: 'شريط قياس', nameFr: 'Mètre Ruban', nameEs: 'Cinta Métrica',
+        price: 450, category: 'tools', stock: 60, minStock: 20, maxStock: 250,
+        barcode: '2001001005', supplier: 'Algeria Tools Co', cost: 280, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkZENzAwIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+📏</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+
+    // HARDWARE CATEGORY
+    {
+        id: 18, name: 'Wood Screws 4x50mm (100pcs)', nameAr: 'براغي خشب 4×50مم (100 قطعة)', nameFr: 'Vis à Bois 4x50mm (100pcs)', nameEs: 'Tornillos para Madera 4x50mm (100pcs)',
+        price: 320, category: 'hardware', stock: 200, minStock: 50, maxStock: 1000,
+        barcode: '2002001001', supplier: 'Algerian Hardware Supply', cost: 180, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNkM3NTdEIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🔩</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 19, name: 'Metal Bolts M8x40mm (50pcs)', nameAr: 'براغي معدنية M8×40مم (50 قطعة)', nameFr: 'Boulons Métal M8x40mm (50pcs)', nameEs: 'Pernos de Metal M8x40mm (50pcs)',
+        price: 580, category: 'hardware', stock: 150, minStock: 30, maxStock: 800,
+        barcode: '2002001002', supplier: 'Algerian Hardware Supply', cost: 350, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNDk1MDU3Ii8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+⚙️</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 20, name: 'Nails 3 inch (1kg)', nameAr: 'مسامير 3 بوصة (1 كيلو)', nameFr: 'Clous 3 pouces (1kg)', nameEs: 'Clavos 3 pulgadas (1kg)',
+        price: 420, category: 'hardware', stock: 80, minStock: 20, maxStock: 400,
+        barcode: '2002001003', supplier: 'Algerian Hardware Supply', cost: 250, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjOEI0NTEzIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+📌</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 21, name: 'Washers Assorted (200pcs)', nameAr: 'حلقات معدنية متنوعة (200 قطعة)', nameFr: 'Rondelles Assorties (200pcs)', nameEs: 'Arandelas Surtidas (200pcs)',
+        price: 280, category: 'hardware', stock: 120, minStock: 25, maxStock: 600,
+        barcode: '2002001004', supplier: 'Algerian Hardware Supply', cost: 160, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNkM3NTdEIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+⭕</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 22, name: 'Hinges 3 inch (pair)', nameAr: 'مفصلات 3 بوصة (زوج)', nameFr: 'Charnières 3 pouces (paire)', nameEs: 'Bisagras 3 pulgadas (par)',
+        price: 650, category: 'hardware', stock: 45, minStock: 10, maxStock: 200,
+        barcode: '2002001005', supplier: 'Algerian Hardware Supply', cost: 420, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNDk1MDU3Ii8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI">🚪</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+
+    // CONSTRUCTION CATEGORY
+    {
+        id: 23, name: 'Cement 50kg Bag', nameAr: 'كيس إسمنت 50 كيلو', nameFr: 'Sac de Ciment 50kg', nameEs: 'Bolsa de Cemento 50kg',
+        price: 850, category: 'construction', stock: 100, minStock: 20, maxStock: 500,
+        barcode: '2003001001', supplier: 'Algeria Construction Materials', cost: 650, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNkM3NTdEIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🏗️</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 24, name: 'Sand 25kg Bag', nameAr: 'كيس رمل 25 كيلو', nameFr: 'Sac de Sable 25kg', nameEs: 'Bolsa de Arena 25kg',
+        price: 320, category: 'construction', stock: 150, minStock: 30, maxStock: 800,
+        barcode: '2003001002', supplier: 'Algeria Construction Materials', cost: 220, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRjRBNDYwIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI">🏖️</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 25, name: 'Bricks (per piece)', nameAr: 'طوب (القطعة)', nameFr: 'Briques (à l\'unité)', nameEs: 'Ladrillos (por pieza)',
+        price: 45, category: 'construction', stock: 500, minStock: 100, maxStock: 2000,
+        barcode: '2003001003', supplier: 'Algeria Construction Materials', cost: 28, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjQ0Q1QzVDIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+🧱</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 26, name: 'Steel Rebar 12mm (6m)', nameAr: 'حديد تسليح 12مم (6 متر)', nameFr: 'Fer à Béton 12mm (6m)', nameEs: 'Varilla de Acero 12mm (6m)',
+        price: 1850, category: 'construction', stock: 80, minStock: 15, maxStock: 300,
+        barcode: '2003001004', supplier: 'Algeria Steel Co', cost: 1420, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNDk1MDU3Ii8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI">🔗</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+
+    // ELECTRICAL CATEGORY
+    {
+        id: 27, name: 'Electrical Wire 2.5mm (100m)', nameAr: 'سلك كهربائي 2.5مم (100 متر)', nameFr: 'Fil Électrique 2.5mm (100m)', nameEs: 'Cable Eléctrico 2.5mm (100m)',
+        price: 2850, category: 'electrical', stock: 35, minStock: 8, maxStock: 150,
+        barcode: '2004001001', supplier: 'Algeria Electric Supply', cost: 2100, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkZENzAwIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI">⚡</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 28, name: 'Light Switch', nameAr: 'مفتاح إضاءة', nameFr: 'Interrupteur', nameEs: 'Interruptor de Luz',
+        price: 180, category: 'electrical', stock: 120, minStock: 25, maxStock: 500,
+        barcode: '2004001002', supplier: 'Algeria Electric Supply', cost: 110, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRjhGOUZBIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJibGFjayIgdGV4dC1hbmNob3I9Im1pZGRsZSI">💡</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 29, name: 'Power Outlet', nameAr: 'مقبس كهربائي', nameFr: 'Prise Électrique', nameEs: 'Toma de Corriente',
+        price: 220, category: 'electrical', stock: 90, minStock: 20, maxStock: 400,
+        barcode: '2004001003', supplier: 'Algeria Electric Supply', cost: 140, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRjhGOUZBIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJibGFjayIgdGV4dC1hbmNob3I9Im1pZGRsZSI">🔌</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+
+    // PLUMBING CATEGORY
+    {
+        id: 30, name: 'PVC Pipe 32mm (3m)', nameAr: 'أنبوب PVC 32مم (3 متر)', nameFr: 'Tuyau PVC 32mm (3m)', nameEs: 'Tubo PVC 32mm (3m)',
+        price: 380, category: 'plumbing', stock: 75, minStock: 15, maxStock: 300,
+        barcode: '2005001001', supplier: 'Algeria Plumbing Co', cost: 250, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjRjhGOUZBIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJibGFjayIgdGV4dC1hbmNob3I9Im1pZGRsZSI">🚰</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 31, name: 'Pipe Fittings Set', nameAr: 'مجموعة وصلات الأنابيب', nameFr: 'Jeu de Raccords', nameEs: 'Juego de Accesorios',
+        price: 650, category: 'plumbing', stock: 55, minStock: 12, maxStock: 250,
+        barcode: '2005001002', supplier: 'Algeria Plumbing Co', cost: 420, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNkM3NTdEIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI">🔧</dGV4dD4KPC9zdmc+',
+        expiryDate: null
+    },
+    {
+        id: 32, name: 'Faucet Standard', nameAr: 'صنبور عادي', nameFr: 'Robinet Standard', nameEs: 'Grifo Estándar',
+        price: 1250, category: 'plumbing', stock: 25, minStock: 5, maxStock: 100,
+        barcode: '2005001003', supplier: 'Algeria Plumbing Co', cost: 850, active: true,
+        image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgdmlld0JveD0iMCAwIDEwMCAxMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiBmaWxsPSIjNEZBNEZGIi8+Cjx0ZXh0IHg9IjUwIiB5PSI1NSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI">🚿</dGV4dD4KPC9zdmc+',
+        expiryDate: null
     }
 ];
 
