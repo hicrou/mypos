@@ -793,6 +793,1030 @@ function switchView(viewName) {
     }
 }
 
+// ===== INVENTORY MANAGEMENT =====
+
+function loadInventoryView() {
+    const inventoryView = document.getElementById('inventory-view');
+    inventoryView.innerHTML = `
+        <div class="inventory-header">
+            <h2 data-translate="inventory">${t('inventory')}</h2>
+            <div class="inventory-actions">
+                <button class="btn btn-primary" onclick="showAddProductModal()" data-translate="addProduct">${t('addProduct')}</button>
+                <button class="btn btn-secondary" onclick="exportInventory()" data-translate="export">${t('export')}</button>
+                <button class="btn btn-warning" onclick="showLowStockReport()">${t('lowStock')}</button>
+            </div>
+        </div>
+
+        <div class="inventory-filters">
+            <input type="text" id="inventory-search" placeholder="${t('search')}..." onkeyup="filterInventory()">
+            <select id="category-filter" onchange="filterInventory()">
+                <option value="all">${t('allItems')}</option>
+                <option value="food">${t('food')}</option>
+                <option value="drinks">${t('drinks')}</option>
+                <option value="snacks">${t('snacks')}</option>
+            </select>
+            <select id="stock-filter" onchange="filterInventory()">
+                <option value="all">All Stock Levels</option>
+                <option value="low">Low Stock Only</option>
+                <option value="out">Out of Stock</option>
+            </select>
+        </div>
+
+        <div class="inventory-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>${t('name')}</th>
+                        <th>${t('category')}</th>
+                        <th>${t('price')}</th>
+                        <th>${t('stock')}</th>
+                        <th>Min Stock</th>
+                        <th>${t('barcode')}</th>
+                        <th>Supplier</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="inventory-tbody">
+                    ${generateInventoryRows()}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+function generateInventoryRows() {
+    return products.map(product => {
+        const productName = currentLanguage === 'ar' && product.nameAr ? product.nameAr : product.name;
+        const isLowStock = product.stock <= product.minStock;
+        const isOutOfStock = product.stock === 0;
+
+        return `
+            <tr class="${isOutOfStock ? 'out-of-stock' : isLowStock ? 'low-stock' : ''}">
+                <td>${productName}</td>
+                <td>${t(product.category)}</td>
+                <td>${formatCurrency(product.price)}</td>
+                <td>
+                    <span class="stock-level ${isOutOfStock ? 'out' : isLowStock ? 'low' : 'normal'}">
+                        ${product.stock}
+                    </span>
+                </td>
+                <td>${product.minStock}</td>
+                <td>${product.barcode}</td>
+                <td>${product.supplier || 'N/A'}</td>
+                <td class="actions">
+                    <button class="btn-small btn-primary" onclick="editProduct(${product.id})">${t('edit')}</button>
+                    <button class="btn-small btn-success" onclick="adjustStock(${product.id})">Adjust Stock</button>
+                    <button class="btn-small btn-danger" onclick="deleteProduct(${product.id})">${t('delete')}</button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function filterInventory() {
+    const searchTerm = document.getElementById('inventory-search').value.toLowerCase();
+    const categoryFilter = document.getElementById('category-filter').value;
+    const stockFilter = document.getElementById('stock-filter').value;
+
+    let filteredProducts = products.filter(product => {
+        const name = (currentLanguage === 'ar' && product.nameAr ? product.nameAr : product.name).toLowerCase();
+        const matchesSearch = name.includes(searchTerm) || product.barcode.includes(searchTerm);
+        const matchesCategory = categoryFilter === 'all' || product.category === categoryFilter;
+
+        let matchesStock = true;
+        if (stockFilter === 'low') {
+            matchesStock = product.stock <= product.minStock && product.stock > 0;
+        } else if (stockFilter === 'out') {
+            matchesStock = product.stock === 0;
+        }
+
+        return matchesSearch && matchesCategory && matchesStock;
+    });
+
+    document.getElementById('inventory-tbody').innerHTML = filteredProducts.map(product => {
+        const productName = currentLanguage === 'ar' && product.nameAr ? product.nameAr : product.name;
+        const isLowStock = product.stock <= product.minStock;
+        const isOutOfStock = product.stock === 0;
+
+        return `
+            <tr class="${isOutOfStock ? 'out-of-stock' : isLowStock ? 'low-stock' : ''}">
+                <td>${productName}</td>
+                <td>${t(product.category)}</td>
+                <td>${formatCurrency(product.price)}</td>
+                <td>
+                    <span class="stock-level ${isOutOfStock ? 'out' : isLowStock ? 'low' : 'normal'}">
+                        ${product.stock}
+                    </span>
+                </td>
+                <td>${product.minStock}</td>
+                <td>${product.barcode}</td>
+                <td>${product.supplier || 'N/A'}</td>
+                <td class="actions">
+                    <button class="btn-small btn-primary" onclick="editProduct(${product.id})">${t('edit')}</button>
+                    <button class="btn-small btn-success" onclick="adjustStock(${product.id})">Adjust Stock</button>
+                    <button class="btn-small btn-danger" onclick="deleteProduct(${product.id})">${t('delete')}</button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function showAddProductModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'block';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>${t('addProduct')}</h2>
+            <form onsubmit="addNewProduct(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>${t('name')} (English):</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>${t('name')} (Arabic):</label>
+                        <input type="text" id="product-name-ar">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>${t('category')}:</label>
+                        <select id="product-category" required>
+                            <option value="food">${t('food')}</option>
+                            <option value="drinks">${t('drinks')}</option>
+                            <option value="snacks">${t('snacks')}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>${t('price')}:</label>
+                        <input type="number" id="product-price" step="0.01" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>${t('stock')}:</label>
+                        <input type="number" id="product-stock" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Min Stock:</label>
+                        <input type="number" id="product-min-stock" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>${t('barcode')}:</label>
+                        <input type="text" id="product-barcode" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Supplier:</label>
+                        <input type="text" id="product-supplier">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">${t('cancel')}</button>
+                    <button type="submit" class="btn btn-primary">${t('save')}</button>
+                </div>
+            </form>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function addNewProduct(event) {
+    event.preventDefault();
+
+    const newProduct = {
+        id: Math.max(...products.map(p => p.id)) + 1,
+        name: document.getElementById('product-name').value,
+        nameAr: document.getElementById('product-name-ar').value,
+        category: document.getElementById('product-category').value,
+        price: parseFloat(document.getElementById('product-price').value),
+        stock: parseInt(document.getElementById('product-stock').value),
+        minStock: parseInt(document.getElementById('product-min-stock').value),
+        maxStock: parseInt(document.getElementById('product-stock').value) * 5,
+        barcode: document.getElementById('product-barcode').value,
+        supplier: document.getElementById('product-supplier').value,
+        cost: parseFloat(document.getElementById('product-price').value) * 0.6,
+        active: true
+    };
+
+    products.push(newProduct);
+    saveToStorage('products', products);
+
+    closeModal();
+    loadInventoryView();
+    displayProducts(); // Refresh main products view
+
+    alert(`Product "${newProduct.name}" added successfully!`);
+}
+
+function editProduct(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'block';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>${t('editProduct')}</h2>
+            <form onsubmit="updateProduct(event, ${productId})">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>${t('name')} (English):</label>
+                        <input type="text" id="edit-product-name" value="${product.name}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>${t('name')} (Arabic):</label>
+                        <input type="text" id="edit-product-name-ar" value="${product.nameAr || ''}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>${t('category')}:</label>
+                        <select id="edit-product-category" required>
+                            <option value="food" ${product.category === 'food' ? 'selected' : ''}>${t('food')}</option>
+                            <option value="drinks" ${product.category === 'drinks' ? 'selected' : ''}>${t('drinks')}</option>
+                            <option value="snacks" ${product.category === 'snacks' ? 'selected' : ''}>${t('snacks')}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>${t('price')}:</label>
+                        <input type="number" id="edit-product-price" step="0.01" value="${product.price}" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>${t('stock')}:</label>
+                        <input type="number" id="edit-product-stock" value="${product.stock}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Min Stock:</label>
+                        <input type="number" id="edit-product-min-stock" value="${product.minStock}" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>${t('barcode')}:</label>
+                        <input type="text" id="edit-product-barcode" value="${product.barcode}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Supplier:</label>
+                        <input type="text" id="edit-product-supplier" value="${product.supplier || ''}">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">${t('cancel')}</button>
+                    <button type="submit" class="btn btn-primary">${t('save')}</button>
+                </div>
+            </form>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function updateProduct(event, productId) {
+    event.preventDefault();
+
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    product.name = document.getElementById('edit-product-name').value;
+    product.nameAr = document.getElementById('edit-product-name-ar').value;
+    product.category = document.getElementById('edit-product-category').value;
+    product.price = parseFloat(document.getElementById('edit-product-price').value);
+    product.stock = parseInt(document.getElementById('edit-product-stock').value);
+    product.minStock = parseInt(document.getElementById('edit-product-min-stock').value);
+    product.barcode = document.getElementById('edit-product-barcode').value;
+    product.supplier = document.getElementById('edit-product-supplier').value;
+
+    saveToStorage('products', products);
+
+    closeModal();
+    loadInventoryView();
+    displayProducts(); // Refresh main products view
+
+    alert(`Product "${product.name}" updated successfully!`);
+}
+
+function adjustStock(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    const adjustment = prompt(`Current stock: ${product.stock}\nEnter adjustment (+/- number):`);
+    if (adjustment === null) return;
+
+    const adjustmentValue = parseInt(adjustment);
+    if (isNaN(adjustmentValue)) {
+        alert('Please enter a valid number');
+        return;
+    }
+
+    const newStock = product.stock + adjustmentValue;
+    if (newStock < 0) {
+        alert('Stock cannot be negative');
+        return;
+    }
+
+    product.stock = newStock;
+    saveToStorage('products', products);
+
+    loadInventoryView();
+    displayProducts(); // Refresh main products view
+
+    alert(`Stock adjusted for "${product.name}". New stock: ${product.stock}`);
+}
+
+function deleteProduct(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) return;
+
+    if (confirm(`Are you sure you want to delete "${product.name}"?`)) {
+        const index = products.findIndex(p => p.id === productId);
+        products.splice(index, 1);
+        saveToStorage('products', products);
+
+        loadInventoryView();
+        displayProducts(); // Refresh main products view
+
+        alert(`Product "${product.name}" deleted successfully!`);
+    }
+}
+
+function closeModal() {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => modal.remove());
+}
+
+// ===== REPORTS MANAGEMENT =====
+
+function loadReportsView() {
+    const reportsView = document.getElementById('reports-view');
+    reportsView.innerHTML = `
+        <div class="reports-header">
+            <h2 data-translate="reports">${t('reports')}</h2>
+            <div class="reports-actions">
+                <button class="btn btn-primary" onclick="generateDailyReport()">Daily Report</button>
+                <button class="btn btn-secondary" onclick="generateWeeklyReport()">Weekly Report</button>
+                <button class="btn btn-success" onclick="exportReports()">${t('export')}</button>
+            </div>
+        </div>
+
+        <div class="reports-dashboard">
+            <div class="report-cards">
+                <div class="report-card">
+                    <h3>Today's Sales</h3>
+                    <div class="report-value">${formatCurrency(getTodaysSales())}</div>
+                    <div class="report-subtitle">${getTodaysTransactions()} transactions</div>
+                </div>
+                <div class="report-card">
+                    <h3>This Week</h3>
+                    <div class="report-value">${formatCurrency(getWeekSales())}</div>
+                    <div class="report-subtitle">${getWeekTransactions()} transactions</div>
+                </div>
+                <div class="report-card">
+                    <h3>Low Stock Items</h3>
+                    <div class="report-value">${getLowStockCount()}</div>
+                    <div class="report-subtitle">items need restocking</div>
+                </div>
+                <div class="report-card">
+                    <h3>Total Products</h3>
+                    <div class="report-value">${products.length}</div>
+                    <div class="report-subtitle">active products</div>
+                </div>
+            </div>
+
+            <div class="reports-content">
+                <div class="report-section">
+                    <h3>Recent Sales</h3>
+                    <div class="sales-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Receipt #</th>
+                                    <th>Cashier</th>
+                                    <th>Items</th>
+                                    <th>Total</th>
+                                    <th>Payment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${generateRecentSalesRows()}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="report-section">
+                    <h3>Top Selling Products</h3>
+                    <div class="top-products">
+                        ${generateTopProductsReport()}
+                    </div>
+                </div>
+
+                <div class="report-section">
+                    <h3>Cashier Performance</h3>
+                    <div class="cashier-performance">
+                        ${generateCashierPerformance()}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function getTodaysSales() {
+    const today = new Date().toDateString();
+    return salesHistory
+        .filter(sale => new Date(sale.date).toDateString() === today)
+        .reduce((sum, sale) => sum + sale.total, 0);
+}
+
+function getTodaysTransactions() {
+    const today = new Date().toDateString();
+    return salesHistory.filter(sale => new Date(sale.date).toDateString() === today).length;
+}
+
+function getWeekSales() {
+    const weekAgo = new Date();
+    weekAgo.setDate(weekAgo.getDate() - 7);
+    return salesHistory
+        .filter(sale => new Date(sale.date) >= weekAgo)
+        .reduce((sum, sale) => sum + sale.total, 0);
+}
+
+function getWeekTransactions() {
+    const weekAgo = new Date();
+    weekAgo.setDate(weekAgo.getDate() - 7);
+    return salesHistory.filter(sale => new Date(sale.date) >= weekAgo).length;
+}
+
+function getLowStockCount() {
+    return products.filter(product => product.stock <= product.minStock).length;
+}
+
+function generateRecentSalesRows() {
+    const recentSales = salesHistory.slice(-10).reverse();
+    return recentSales.map(sale => {
+        const date = new Date(sale.date);
+        return `
+            <tr>
+                <td>${date.toLocaleDateString()}</td>
+                <td>${sale.id}</td>
+                <td>${sale.cashier}</td>
+                <td>${sale.items.length}</td>
+                <td>${formatCurrency(sale.total)}</td>
+                <td>${sale.paymentMethod}</td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function generateTopProductsReport() {
+    const productSales = {};
+
+    salesHistory.forEach(sale => {
+        sale.items.forEach(item => {
+            if (!productSales[item.id]) {
+                productSales[item.id] = {
+                    name: item.name,
+                    quantity: 0,
+                    revenue: 0
+                };
+            }
+            productSales[item.id].quantity += item.quantity;
+            productSales[item.id].revenue += item.price * item.quantity;
+        });
+    });
+
+    const sortedProducts = Object.values(productSales)
+        .sort((a, b) => b.quantity - a.quantity)
+        .slice(0, 5);
+
+    return sortedProducts.map((product, index) => `
+        <div class="top-product-item">
+            <span class="rank">#${index + 1}</span>
+            <span class="product-name">${product.name}</span>
+            <span class="quantity">${product.quantity} sold</span>
+            <span class="revenue">${formatCurrency(product.revenue)}</span>
+        </div>
+    `).join('');
+}
+
+function generateCashierPerformance() {
+    const cashierStats = {};
+
+    salesHistory.forEach(sale => {
+        if (!cashierStats[sale.cashier]) {
+            cashierStats[sale.cashier] = {
+                transactions: 0,
+                revenue: 0
+            };
+        }
+        cashierStats[sale.cashier].transactions++;
+        cashierStats[sale.cashier].revenue += sale.total;
+    });
+
+    return Object.entries(cashierStats).map(([cashier, stats]) => `
+        <div class="cashier-stat">
+            <span class="cashier-name">${cashier}</span>
+            <span class="transactions">${stats.transactions} transactions</span>
+            <span class="revenue">${formatCurrency(stats.revenue)}</span>
+        </div>
+    `).join('');
+}
+
+function generateDailyReport() {
+    const today = new Date().toDateString();
+    const todaySales = salesHistory.filter(sale => new Date(sale.date).toDateString() === today);
+
+    const reportWindow = window.open('', '_blank');
+    const reportHTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Daily Sales Report - ${today}</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                .header { text-align: center; margin-bottom: 30px; }
+                .summary { background: #f5f5f5; padding: 20px; margin-bottom: 20px; }
+                table { width: 100%; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                th { background: #667eea; color: white; }
+                .total { font-weight: bold; background: #f0f0f0; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>${settings.companyName}</h1>
+                <h2>Daily Sales Report</h2>
+                <p>Date: ${today}</p>
+            </div>
+
+            <div class="summary">
+                <h3>Summary</h3>
+                <p>Total Sales: ${formatCurrency(todaySales.reduce((sum, sale) => sum + sale.total, 0))}</p>
+                <p>Total Transactions: ${todaySales.length}</p>
+                <p>Average Transaction: ${formatCurrency(todaySales.reduce((sum, sale) => sum + sale.total, 0) / todaySales.length || 0)}</p>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Receipt #</th>
+                        <th>Cashier</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Payment Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${todaySales.map(sale => `
+                        <tr>
+                            <td>${new Date(sale.date).toLocaleTimeString()}</td>
+                            <td>${sale.id}</td>
+                            <td>${sale.cashier}</td>
+                            <td>${sale.items.length}</td>
+                            <td>${formatCurrency(sale.total)}</td>
+                            <td>${sale.paymentMethod}</td>
+                        </tr>
+                    `).join('')}
+                    <tr class="total">
+                        <td colspan="4"><strong>TOTAL</strong></td>
+                        <td><strong>${formatCurrency(todaySales.reduce((sum, sale) => sum + sale.total, 0))}</strong></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </body>
+        </html>
+    `;
+
+    reportWindow.document.write(reportHTML);
+    reportWindow.document.close();
+    reportWindow.focus();
+    reportWindow.print();
+}
+
+// ===== USERS MANAGEMENT =====
+
+function loadUsersView() {
+    if (!hasPermission('users')) {
+        document.getElementById('users-view').innerHTML = `
+            <div class="access-denied">
+                <h2>Access Denied</h2>
+                <p>You don't have permission to manage users.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const usersView = document.getElementById('users-view');
+    usersView.innerHTML = `
+        <div class="users-header">
+            <h2 data-translate="users">${t('users')}</h2>
+            <div class="users-actions">
+                <button class="btn btn-primary" onclick="showAddUserModal()">Add User</button>
+                <button class="btn btn-secondary" onclick="exportUsers()">Export Users</button>
+            </div>
+        </div>
+
+        <div class="users-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${generateUsersRows()}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+function generateUsersRows() {
+    return users.map(user => `
+        <tr class="${user.active ? '' : 'inactive'}">
+            <td>${user.id}</td>
+            <td>${user.username}</td>
+            <td>${user.name}</td>
+            <td>
+                <span class="role-badge role-${user.role}">${t(user.role)}</span>
+            </td>
+            <td>
+                <span class="status-badge ${user.active ? 'active' : 'inactive'}">
+                    ${user.active ? 'Active' : 'Inactive'}
+                </span>
+            </td>
+            <td class="actions">
+                <button class="btn-small btn-primary" onclick="editUser(${user.id})">${t('edit')}</button>
+                <button class="btn-small ${user.active ? 'btn-warning' : 'btn-success'}"
+                        onclick="toggleUserStatus(${user.id})">
+                    ${user.active ? 'Deactivate' : 'Activate'}
+                </button>
+                ${user.id !== currentUser.id ? `<button class="btn-small btn-danger" onclick="deleteUser(${user.id})">${t('delete')}</button>` : ''}
+            </td>
+        </tr>
+    `).join('');
+}
+
+function showAddUserModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'block';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Add New User</h2>
+            <form onsubmit="addNewUser(event)">
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input type="text" id="user-username" required>
+                </div>
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input type="text" id="user-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" id="user-password" required>
+                </div>
+                <div class="form-group">
+                    <label>Role:</label>
+                    <select id="user-role" required>
+                        <option value="cashier">${t('cashier')}</option>
+                        <option value="manager">${t('manager')}</option>
+                        ${currentUser.role === 'admin' ? `<option value="admin">${t('admin')}</option>` : ''}
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">${t('cancel')}</button>
+                    <button type="submit" class="btn btn-primary">${t('save')}</button>
+                </div>
+            </form>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function addNewUser(event) {
+    event.preventDefault();
+
+    const username = document.getElementById('user-username').value;
+
+    // Check if username already exists
+    if (users.find(u => u.username === username)) {
+        alert('Username already exists!');
+        return;
+    }
+
+    const newUser = {
+        id: Math.max(...users.map(u => u.id)) + 1,
+        username: username,
+        name: document.getElementById('user-name').value,
+        password: document.getElementById('user-password').value,
+        role: document.getElementById('user-role').value,
+        active: true
+    };
+
+    users.push(newUser);
+    saveToStorage('users', users);
+
+    closeModal();
+    loadUsersView();
+
+    alert(`User "${newUser.name}" added successfully!`);
+}
+
+function editUser(userId) {
+    const user = users.find(u => u.id === userId);
+    if (!user) return;
+
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'block';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Edit User</h2>
+            <form onsubmit="updateUser(event, ${userId})">
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input type="text" id="edit-user-username" value="${user.username}" required>
+                </div>
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input type="text" id="edit-user-name" value="${user.name}" required>
+                </div>
+                <div class="form-group">
+                    <label>New Password (leave blank to keep current):</label>
+                    <input type="password" id="edit-user-password">
+                </div>
+                <div class="form-group">
+                    <label>Role:</label>
+                    <select id="edit-user-role" required>
+                        <option value="cashier" ${user.role === 'cashier' ? 'selected' : ''}>${t('cashier')}</option>
+                        <option value="manager" ${user.role === 'manager' ? 'selected' : ''}>${t('manager')}</option>
+                        ${currentUser.role === 'admin' ? `<option value="admin" ${user.role === 'admin' ? 'selected' : ''}>${t('admin')}</option>` : ''}
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">${t('cancel')}</button>
+                    <button type="submit" class="btn btn-primary">${t('save')}</button>
+                </div>
+            </form>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function updateUser(event, userId) {
+    event.preventDefault();
+
+    const user = users.find(u => u.id === userId);
+    if (!user) return;
+
+    const newUsername = document.getElementById('edit-user-username').value;
+
+    // Check if username already exists (excluding current user)
+    if (users.find(u => u.username === newUsername && u.id !== userId)) {
+        alert('Username already exists!');
+        return;
+    }
+
+    user.username = newUsername;
+    user.name = document.getElementById('edit-user-name').value;
+    user.role = document.getElementById('edit-user-role').value;
+
+    const newPassword = document.getElementById('edit-user-password').value;
+    if (newPassword) {
+        user.password = newPassword;
+    }
+
+    saveToStorage('users', users);
+
+    closeModal();
+    loadUsersView();
+
+    alert(`User "${user.name}" updated successfully!`);
+}
+
+function toggleUserStatus(userId) {
+    const user = users.find(u => u.id === userId);
+    if (!user) return;
+
+    if (user.id === currentUser.id) {
+        alert("You cannot deactivate your own account!");
+        return;
+    }
+
+    user.active = !user.active;
+    saveToStorage('users', users);
+
+    loadUsersView();
+
+    alert(`User "${user.name}" ${user.active ? 'activated' : 'deactivated'} successfully!`);
+}
+
+function deleteUser(userId) {
+    const user = users.find(u => u.id === userId);
+    if (!user) return;
+
+    if (user.id === currentUser.id) {
+        alert("You cannot delete your own account!");
+        return;
+    }
+
+    if (confirm(`Are you sure you want to delete user "${user.name}"?`)) {
+        const index = users.findIndex(u => u.id === userId);
+        users.splice(index, 1);
+        saveToStorage('users', users);
+
+        loadUsersView();
+
+        alert(`User "${user.name}" deleted successfully!`);
+    }
+}
+
+// ===== SETTINGS MANAGEMENT =====
+
+function loadSettingsView() {
+    if (!hasPermission('settings')) {
+        document.getElementById('settings-view').innerHTML = `
+            <div class="access-denied">
+                <h2>Access Denied</h2>
+                <p>You don't have permission to access settings.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const settingsView = document.getElementById('settings-view');
+    settingsView.innerHTML = `
+        <div class="settings-header">
+            <h2 data-translate="settings">${t('settings')}</h2>
+            <div class="settings-actions">
+                <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+                <button class="btn btn-secondary" onclick="resetSettings()">Reset to Defaults</button>
+                <button class="btn btn-warning" onclick="exportData()">Export Data</button>
+                <button class="btn btn-success" onclick="importData()">Import Data</button>
+            </div>
+        </div>
+
+        <div class="settings-content">
+            <div class="settings-section">
+                <h3>Company Information</h3>
+                <div class="form-group">
+                    <label>Company Name:</label>
+                    <input type="text" id="setting-company-name" value="${settings.companyName}">
+                </div>
+                <div class="form-group">
+                    <label>Company Address:</label>
+                    <input type="text" id="setting-company-address" value="${settings.companyAddress}">
+                </div>
+                <div class="form-group">
+                    <label>Company Phone:</label>
+                    <input type="text" id="setting-company-phone" value="${settings.companyPhone}">
+                </div>
+                <div class="form-group">
+                    <label>Receipt Footer:</label>
+                    <textarea id="setting-receipt-footer">${settings.receiptFooter}</textarea>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>System Settings</h3>
+                <div class="form-group">
+                    <label>Tax Rate (%):</label>
+                    <input type="number" id="setting-tax-rate" step="0.01" value="${(settings.taxRate * 100).toFixed(2)}">
+                </div>
+                <div class="form-group">
+                    <label>Low Stock Threshold:</label>
+                    <input type="number" id="setting-low-stock-threshold" value="${settings.lowStockThreshold}">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="setting-auto-backup" ${settings.autoBackup ? 'checked' : ''}>
+                        Enable Auto Backup
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="setting-print-after-sale" ${settings.printAfterSale ? 'checked' : ''}>
+                        Auto Print Receipt After Sale
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="setting-show-barcode" ${settings.showBarcode ? 'checked' : ''}>
+                        Show Barcodes on Products
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Default Language & Currency</h3>
+                <div class="form-group">
+                    <label>Default Language:</label>
+                    <select id="setting-default-language">
+                        <option value="en" ${currentLanguage === 'en' ? 'selected' : ''}>🇺🇸 English</option>
+                        <option value="ar" ${currentLanguage === 'ar' ? 'selected' : ''}>🇩🇿 العربية</option>
+                        <option value="fr" ${currentLanguage === 'fr' ? 'selected' : ''}>🇫🇷 Français</option>
+                        <option value="es" ${currentLanguage === 'es' ? 'selected' : ''}>🇪🇸 Español</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Default Currency:</label>
+                    <select id="setting-default-currency">
+                        ${Object.entries(currencies).map(([code, curr]) =>
+                            `<option value="${code}" ${currentCurrency === code ? 'selected' : ''}>${curr.symbol} ${curr.name}</option>`
+                        ).join('')}
+                    </select>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3>Data Management</h3>
+                <div class="data-stats">
+                    <p><strong>Products:</strong> ${products.length} items</p>
+                    <p><strong>Sales History:</strong> ${salesHistory.length} transactions</p>
+                    <p><strong>Users:</strong> ${users.length} accounts</p>
+                    <p><strong>Last Backup:</strong> ${localStorage.getItem('lastBackup') || 'Never'}</p>
+                </div>
+                <div class="data-actions">
+                    <button class="btn btn-info" onclick="createBackup()">Create Backup</button>
+                    <button class="btn btn-warning" onclick="clearAllData()">Clear All Data</button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function saveSettings() {
+    settings.companyName = document.getElementById('setting-company-name').value;
+    settings.companyAddress = document.getElementById('setting-company-address').value;
+    settings.companyPhone = document.getElementById('setting-company-phone').value;
+    settings.receiptFooter = document.getElementById('setting-receipt-footer').value;
+    settings.taxRate = parseFloat(document.getElementById('setting-tax-rate').value) / 100;
+    settings.lowStockThreshold = parseInt(document.getElementById('setting-low-stock-threshold').value);
+    settings.autoBackup = document.getElementById('setting-auto-backup').checked;
+    settings.printAfterSale = document.getElementById('setting-print-after-sale').checked;
+    settings.showBarcode = document.getElementById('setting-show-barcode').checked;
+
+    // Save to localStorage
+    Object.keys(settings).forEach(key => {
+        localStorage.setItem(key, settings[key]);
+    });
+
+    // Update language and currency if changed
+    const newLanguage = document.getElementById('setting-default-language').value;
+    const newCurrency = document.getElementById('setting-default-currency').value;
+
+    if (newLanguage !== currentLanguage) {
+        changeLanguage(newLanguage);
+    }
+
+    if (newCurrency !== currentCurrency) {
+        changeCurrency(newCurrency);
+    }
+
+    alert('Settings saved successfully!');
+
+    // Refresh displays
+    displayProducts();
+    updateCartDisplay();
+}
+
+function createBackup() {
+    const backupData = {
+        products: products,
+        salesHistory: salesHistory,
+        users: users,
+        settings: settings,
+        timestamp: new Date().toISOString()
+    };
+
+    const dataStr = JSON.stringify(backupData, null, 2);
+    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(dataBlob);
+    link.download = `pos-backup-${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+
+    localStorage.setItem('lastBackup', new Date().toLocaleString());
+
+    alert('Backup created successfully!');
+}
+
 // ===== PRODUCT MANAGEMENT =====
 
 function displayProducts() {
@@ -1338,3 +2362,28 @@ window.closeCheckout = closeCheckout;
 window.completeSale = completeSale;
 window.printReceipt = printReceipt;
 window.scanBarcode = scanBarcode;
+
+// Inventory functions
+window.filterInventory = filterInventory;
+window.showAddProductModal = showAddProductModal;
+window.addNewProduct = addNewProduct;
+window.editProduct = editProduct;
+window.updateProduct = updateProduct;
+window.adjustStock = adjustStock;
+window.deleteProduct = deleteProduct;
+window.closeModal = closeModal;
+
+// Reports functions
+window.generateDailyReport = generateDailyReport;
+
+// Users functions
+window.showAddUserModal = showAddUserModal;
+window.addNewUser = addNewUser;
+window.editUser = editUser;
+window.updateUser = updateUser;
+window.toggleUserStatus = toggleUserStatus;
+window.deleteUser = deleteUser;
+
+// Settings functions
+window.saveSettings = saveSettings;
+window.createBackup = createBackup;
