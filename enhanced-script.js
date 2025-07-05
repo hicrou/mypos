@@ -107,6 +107,108 @@ const languages = {
         backup: 'نسخ احتياطي',
         restore: 'استعادة',
         dinar: 'دينار جزائري'
+    },
+    fr: {
+        welcome: 'Bienvenue dans Mon Système POS',
+        categories: 'Catégories',
+        products: 'Produits',
+        currentOrder: 'Commande Actuelle',
+        subtotal: 'Sous-total',
+        tax: 'Taxe',
+        total: 'Total',
+        clearCart: 'Vider le Panier',
+        checkout: 'Paiement',
+        emptyCart: 'Aucun article dans le panier',
+        allItems: 'Tous les Articles',
+        food: 'Nourriture',
+        drinks: 'Boissons',
+        snacks: 'Collations',
+        cashier: 'Caissier',
+        admin: 'Administrateur',
+        manager: 'Gestionnaire',
+        login: 'Connexion',
+        logout: 'Déconnexion',
+        username: 'Nom d\'utilisateur',
+        password: 'Mot de passe',
+        lowStock: 'Alerte Stock Faible',
+        printReceipt: 'Imprimer Reçu',
+        reports: 'Rapports',
+        inventory: 'Inventaire',
+        settings: 'Paramètres',
+        currency: 'Devise',
+        language: 'Langue',
+        sales: 'Ventes',
+        dashboard: 'Tableau de Bord',
+        users: 'Utilisateurs',
+        addProduct: 'Ajouter Produit',
+        editProduct: 'Modifier Produit',
+        deleteProduct: 'Supprimer Produit',
+        stock: 'Stock',
+        price: 'Prix',
+        barcode: 'Code-barres',
+        category: 'Catégorie',
+        save: 'Enregistrer',
+        cancel: 'Annuler',
+        delete: 'Supprimer',
+        edit: 'Modifier',
+        add: 'Ajouter',
+        search: 'Rechercher',
+        filter: 'Filtrer',
+        export: 'Exporter',
+        import: 'Importer',
+        backup: 'Sauvegarde',
+        restore: 'Restaurer'
+    },
+    es: {
+        welcome: 'Bienvenido a Mi Sistema POS',
+        categories: 'Categorías',
+        products: 'Productos',
+        currentOrder: 'Pedido Actual',
+        subtotal: 'Subtotal',
+        tax: 'Impuesto',
+        total: 'Total',
+        clearCart: 'Limpiar Carrito',
+        checkout: 'Pagar',
+        emptyCart: 'No hay artículos en el carrito',
+        allItems: 'Todos los Artículos',
+        food: 'Comida',
+        drinks: 'Bebidas',
+        snacks: 'Aperitivos',
+        cashier: 'Cajero',
+        admin: 'Administrador',
+        manager: 'Gerente',
+        login: 'Iniciar Sesión',
+        logout: 'Cerrar Sesión',
+        username: 'Usuario',
+        password: 'Contraseña',
+        lowStock: 'Alerta Stock Bajo',
+        printReceipt: 'Imprimir Recibo',
+        reports: 'Informes',
+        inventory: 'Inventario',
+        settings: 'Configuración',
+        currency: 'Moneda',
+        language: 'Idioma',
+        sales: 'Ventas',
+        dashboard: 'Panel de Control',
+        users: 'Usuarios',
+        addProduct: 'Agregar Producto',
+        editProduct: 'Editar Producto',
+        deleteProduct: 'Eliminar Producto',
+        stock: 'Stock',
+        price: 'Precio',
+        barcode: 'Código de Barras',
+        category: 'Categoría',
+        save: 'Guardar',
+        cancel: 'Cancelar',
+        delete: 'Eliminar',
+        edit: 'Editar',
+        add: 'Agregar',
+        search: 'Buscar',
+        filter: 'Filtrar',
+        export: 'Exportar',
+        import: 'Importar',
+        backup: 'Respaldo',
+        restore: 'Restaurar'
     }
 };
 
@@ -239,9 +341,12 @@ function showLoginScreen() {
                 <div class="login-header">
                     <h1>${t('welcome')}</h1>
                     <div class="language-selector">
+                        <label>Choose Language / اختر اللغة:</label>
                         <select id="login-language" onchange="changeLanguage(this.value)">
-                            <option value="en" ${currentLanguage === 'en' ? 'selected' : ''}>English</option>
-                            <option value="ar" ${currentLanguage === 'ar' ? 'selected' : ''}>العربية</option>
+                            <option value="en" ${currentLanguage === 'en' ? 'selected' : ''}>🇺🇸 English</option>
+                            <option value="ar" ${currentLanguage === 'ar' ? 'selected' : ''}>🇩🇿 العربية (Arabic)</option>
+                            <option value="fr" ${currentLanguage === 'fr' ? 'selected' : ''}>🇫🇷 Français (French)</option>
+                            <option value="es" ${currentLanguage === 'es' ? 'selected' : ''}>🇪🇸 Español (Spanish)</option>
                         </select>
                     </div>
                 </div>
@@ -492,15 +597,23 @@ function createMainInterface() {
                 </div>
                 <div class="nav-right">
                     <div class="controls">
-                        <select id="language-selector" onchange="changeLanguage(this.value)">
-                            <option value="en" ${currentLanguage === 'en' ? 'selected' : ''}>English</option>
-                            <option value="ar" ${currentLanguage === 'ar' ? 'selected' : ''}>العربية</option>
-                        </select>
-                        <select id="currency-selector" onchange="changeCurrency(this.value)">
-                            ${Object.entries(currencies).map(([code, curr]) =>
-                                `<option value="${code}" ${currentCurrency === code ? 'selected' : ''}>${curr.symbol} ${curr.name}</option>`
-                            ).join('')}
-                        </select>
+                        <div class="control-group">
+                            <label>Language:</label>
+                            <select id="language-selector" onchange="changeLanguage(this.value)">
+                                <option value="en" ${currentLanguage === 'en' ? 'selected' : ''}>🇺🇸 English</option>
+                                <option value="ar" ${currentLanguage === 'ar' ? 'selected' : ''}>🇩🇿 العربية</option>
+                                <option value="fr" ${currentLanguage === 'fr' ? 'selected' : ''}>🇫🇷 Français</option>
+                                <option value="es" ${currentLanguage === 'es' ? 'selected' : ''}>🇪🇸 Español</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label>Currency:</label>
+                            <select id="currency-selector" onchange="changeCurrency(this.value)">
+                                ${Object.entries(currencies).map(([code, curr]) =>
+                                    `<option value="${code}" ${currentCurrency === code ? 'selected' : ''}>${curr.symbol} ${curr.name}</option>`
+                                ).join('')}
+                            </select>
+                        </div>
                     </div>
                     <div class="user-info">
                         <span class="user-name">${currentUser.name} (${t(currentUser.role)})</span>
