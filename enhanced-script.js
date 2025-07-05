@@ -126,7 +126,28 @@ const languages = {
         productNotFound: 'Product Not Found',
         scannerConnected: 'Scanner Connected',
         scannerDisconnected: 'Scanner Disconnected',
-        cameraAccessError: 'Camera access denied or not available'
+        cameraAccessError: 'Camera access denied or not available',
+        totalSales: 'Total Sales',
+        totalTransactions: 'Total Transactions',
+        paymentMethod: 'Payment Method',
+        companyLogo: 'Company Logo',
+        uploadLogo: 'Upload Logo',
+        removeLogo: 'Remove Logo',
+        companySettings: 'Company Settings',
+        logoSettings: 'Logo Settings',
+        addProduct: 'Add Product',
+        editProduct: 'Edit Product',
+        allItems: 'All Items',
+        emptyCart: 'Cart is empty',
+        address: 'Address',
+        phone: 'Phone',
+        receiptFooter: 'Receipt Footer',
+        recommendedSize: 'Recommended size',
+        invalidFileType: 'Please select a valid image file (PNG, JPG, GIF)',
+        fileTooLarge: 'File size must be less than 2MB',
+        logoUpdated: 'Logo updated successfully!',
+        confirmRemoveLogo: 'Are you sure you want to remove the company logo?',
+        logoRemoved: 'Logo removed successfully!'
     },
     ar: {
         welcome: 'مرحباً بنظام نقاط البيع',
@@ -250,7 +271,28 @@ const languages = {
         productNotFound: 'المنتج غير موجود',
         scannerConnected: 'الماسح متصل',
         scannerDisconnected: 'الماسح غير متصل',
-        cameraAccessError: 'تم رفض الوصول للكاميرا أو غير متاحة'
+        cameraAccessError: 'تم رفض الوصول للكاميرا أو غير متاحة',
+        totalSales: 'إجمالي المبيعات',
+        totalTransactions: 'إجمالي المعاملات',
+        paymentMethod: 'طريقة الدفع',
+        companyLogo: 'شعار الشركة',
+        uploadLogo: 'رفع شعار',
+        removeLogo: 'إزالة الشعار',
+        companySettings: 'إعدادات الشركة',
+        logoSettings: 'إعدادات الشعار',
+        addProduct: 'إضافة منتج',
+        editProduct: 'تعديل المنتج',
+        allItems: 'جميع العناصر',
+        emptyCart: 'السلة فارغة',
+        address: 'العنوان',
+        phone: 'الهاتف',
+        receiptFooter: 'تذييل الإيصال',
+        recommendedSize: 'الحجم المُوصى به',
+        invalidFileType: 'يرجى اختيار ملف صورة صالح (PNG, JPG, GIF)',
+        fileTooLarge: 'يجب أن يكون حجم الملف أقل من 2 ميجابايت',
+        logoUpdated: 'تم تحديث الشعار بنجاح!',
+        confirmRemoveLogo: 'هل أنت متأكد من أنك تريد إزالة شعار الشركة؟',
+        logoRemoved: 'تم حذف الشعار بنجاح!'
     },
     fr: {
         welcome: 'Bienvenue dans Mon Système POS',
@@ -362,7 +404,28 @@ const languages = {
         noExpiredItems: 'Aucun article expiré ou proche de l\'expiration trouvé',
         expiryStatus: 'Statut d\'Expiration',
         daysUntilExpiry: 'Jours Jusqu\'à Expiration',
-        daysOverdue: 'Jours de Retard'
+        daysOverdue: 'Jours de Retard',
+        totalSales: 'Ventes Totales',
+        totalTransactions: 'Transactions Totales',
+        paymentMethod: 'Méthode de Paiement',
+        companyLogo: 'Logo de l\'Entreprise',
+        uploadLogo: 'Télécharger Logo',
+        removeLogo: 'Supprimer Logo',
+        companySettings: 'Paramètres Entreprise',
+        logoSettings: 'Paramètres Logo',
+        addProduct: 'Ajouter Produit',
+        editProduct: 'Modifier Produit',
+        allItems: 'Tous les Articles',
+        emptyCart: 'Panier vide',
+        address: 'Adresse',
+        phone: 'Téléphone',
+        receiptFooter: 'Pied de Page Reçu',
+        recommendedSize: 'Taille recommandée',
+        invalidFileType: 'Veuillez sélectionner un fichier image valide (PNG, JPG, GIF)',
+        fileTooLarge: 'La taille du fichier doit être inférieure à 2 Mo',
+        logoUpdated: 'Logo mis à jour avec succès!',
+        confirmRemoveLogo: 'Êtes-vous sûr de vouloir supprimer le logo de l\'entreprise?',
+        logoRemoved: 'Logo supprimé avec succès!'
     },
     es: {
         welcome: 'Bienvenido a Mi Sistema POS',
@@ -474,7 +537,28 @@ const languages = {
         noExpiredItems: 'No se encontraron artículos vencidos o próximos a vencer',
         expiryStatus: 'Estado de Vencimiento',
         daysUntilExpiry: 'Días Hasta Vencimiento',
-        daysOverdue: 'Días Vencidos'
+        daysOverdue: 'Días Vencidos',
+        totalSales: 'Ventas Totales',
+        totalTransactions: 'Transacciones Totales',
+        paymentMethod: 'Método de Pago',
+        companyLogo: 'Logo de la Empresa',
+        uploadLogo: 'Subir Logo',
+        removeLogo: 'Quitar Logo',
+        companySettings: 'Configuración Empresa',
+        logoSettings: 'Configuración Logo',
+        addProduct: 'Agregar Producto',
+        editProduct: 'Editar Producto',
+        allItems: 'Todos los Artículos',
+        emptyCart: 'Carrito vacío',
+        address: 'Dirección',
+        phone: 'Teléfono',
+        receiptFooter: 'Pie de Página Recibo',
+        recommendedSize: 'Tamaño recomendado',
+        invalidFileType: 'Por favor seleccione un archivo de imagen válido (PNG, JPG, GIF)',
+        fileTooLarge: 'El tamaño del archivo debe ser menor a 2MB',
+        logoUpdated: '¡Logo actualizado exitosamente!',
+        confirmRemoveLogo: '¿Está seguro de que desea eliminar el logo de la empresa?',
+        logoRemoved: '¡Logo eliminado exitosamente!'
     }
 };
 
@@ -692,6 +776,7 @@ const settings = {
     companyAddress: localStorage.getItem('companyAddress') || 'Algiers, Algeria',
     companyPhone: localStorage.getItem('companyPhone') || '+213 21 123 456',
     receiptFooter: localStorage.getItem('receiptFooter') || 'شكراً لزيارتكم - Thank you for your visit!',
+    companyLogo: localStorage.getItem('companyLogo') || '',
     lowStockThreshold: parseInt(localStorage.getItem('lowStockThreshold')) || 10,
     autoBackup: localStorage.getItem('autoBackup') === 'true',
     printAfterSale: localStorage.getItem('printAfterSale') === 'true',
@@ -1016,12 +1101,32 @@ function updateLanguage() {
     // Update all text elements with translations
     document.querySelectorAll('[data-translate]').forEach(element => {
         const key = element.getAttribute('data-translate');
-        element.textContent = t(key);
+        const translatedText = t(key);
+
+        // Handle different element types
+        if (element.tagName === 'INPUT' && element.type === 'button') {
+            element.value = translatedText;
+        } else if (element.tagName === 'INPUT' && element.placeholder) {
+            element.placeholder = translatedText;
+        } else if (element.tagName === 'BUTTON') {
+            element.textContent = translatedText;
+        } else {
+            element.textContent = translatedText;
+        }
     });
-    
+
     // Update document direction for Arabic
     document.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = currentLanguage;
+
+    // Update language selector
+    const languageSelector = document.getElementById('language-selector');
+    if (languageSelector) {
+        languageSelector.value = currentLanguage;
+    }
+
+    // Update currency selector with translated names
+    updateCurrencySelector();
 }
 
 // ===== MAIN SYSTEM INITIALIZATION =====
@@ -1064,6 +1169,12 @@ function createMainInterface() {
             <!-- Top Navigation -->
             <nav class="top-nav">
                 <div class="nav-left">
+                    <div id="main-logo" style="display: inline-flex; align-items: center;">
+                        ${settings.companyLogo ?
+                            `<img src="${settings.companyLogo}" alt="${settings.companyName}" style="max-height: 40px; margin-right: 15px;">` :
+                            `<span style="font-weight: bold; color: var(--primary-color); margin-right: 15px;">${settings.companyName}</span>`
+                        }
+                    </div>
                     <h1 data-translate="welcome">${t('welcome')}</h1>
                     <div class="nav-tabs">
                         <button class="nav-tab active" onclick="switchView('pos')" data-translate="sales">${t('sales')}</button>
@@ -1640,49 +1751,49 @@ function loadReportsView() {
         <div class="reports-header">
             <h2 data-translate="reports">${t('reports')}</h2>
             <div class="reports-actions">
-                <button class="btn btn-primary" onclick="generateDailyReport()">Daily Report</button>
-                <button class="btn btn-secondary" onclick="generateWeeklyReport()">Weekly Report</button>
-                <button class="btn btn-success" onclick="exportReports()">${t('export')}</button>
+                <button class="btn btn-primary" onclick="generateDailyReport()" data-translate="dailyReport">${t('dailyReport')}</button>
+                <button class="btn btn-secondary" onclick="generateWeeklyReport()" data-translate="weeklyReport">${t('weeklyReport')}</button>
+                <button class="btn btn-success" onclick="exportReports()" data-translate="export">${t('export')}</button>
             </div>
         </div>
 
         <div class="reports-dashboard">
             <div class="report-cards">
                 <div class="report-card">
-                    <h3>Today's Sales</h3>
+                    <h3 data-translate="todaysSales">${t('todaysSales')}</h3>
                     <div class="report-value">${formatCurrency(getTodaysSales())}</div>
-                    <div class="report-subtitle">${getTodaysTransactions()} transactions</div>
+                    <div class="report-subtitle">${getTodaysTransactions()} ${t('transactions')}</div>
                 </div>
                 <div class="report-card">
-                    <h3>This Week</h3>
+                    <h3 data-translate="thisWeek">${t('thisWeek')}</h3>
                     <div class="report-value">${formatCurrency(getWeekSales())}</div>
-                    <div class="report-subtitle">${getWeekTransactions()} transactions</div>
+                    <div class="report-subtitle">${getWeekTransactions()} ${t('transactions')}</div>
                 </div>
                 <div class="report-card">
-                    <h3>Low Stock Items</h3>
+                    <h3 data-translate="lowStock">${t('lowStock')} ${t('products')}</h3>
                     <div class="report-value">${getLowStockCount()}</div>
-                    <div class="report-subtitle">items need restocking</div>
+                    <div class="report-subtitle">${t('itemsNeedRestocking')}</div>
                 </div>
                 <div class="report-card">
-                    <h3>Total Products</h3>
+                    <h3 data-translate="totalProducts">${t('totalProducts')}</h3>
                     <div class="report-value">${products.length}</div>
-                    <div class="report-subtitle">active products</div>
+                    <div class="report-subtitle">${t('activeProducts')}</div>
                 </div>
             </div>
 
             <div class="reports-content">
                 <div class="report-section">
-                    <h3>Recent Sales</h3>
+                    <h3 data-translate="recentSales">${t('recentSales')}</h3>
                     <div class="sales-table">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Date</th>
-                                    <th>Receipt #</th>
-                                    <th>Cashier</th>
-                                    <th>Items</th>
-                                    <th>Total</th>
-                                    <th>Payment</th>
+                                    <th data-translate="date">${t('date')}</th>
+                                    <th data-translate="receipt">${t('receipt')} #</th>
+                                    <th data-translate="cashier">${t('cashier')}</th>
+                                    <th data-translate="products">${t('products')}</th>
+                                    <th data-translate="total">${t('total')}</th>
+                                    <th data-translate="paymentMethod">${t('paymentMethod')}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1693,14 +1804,14 @@ function loadReportsView() {
                 </div>
 
                 <div class="report-section">
-                    <h3>Top Selling Products</h3>
+                    <h3 data-translate="topSellingProducts">${t('topSellingProducts')}</h3>
                     <div class="top-products">
                         ${generateTopProductsReport()}
                     </div>
                 </div>
 
                 <div class="report-section">
-                    <h3>Cashier Performance</h3>
+                    <h3 data-translate="cashierPerformance">${t('cashierPerformance')}</h3>
                     <div class="cashier-performance">
                         ${generateCashierPerformance()}
                     </div>
@@ -1870,6 +1981,81 @@ function generateDailyReport() {
                     <tr class="total">
                         <td colspan="4"><strong>TOTAL</strong></td>
                         <td><strong>${formatCurrency(todaySales.reduce((sum, sale) => sum + sale.total, 0))}</strong></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </body>
+        </html>
+    `;
+
+    reportWindow.document.write(reportHTML);
+    reportWindow.document.close();
+    reportWindow.focus();
+    reportWindow.print();
+}
+
+function generateWeeklyReport() {
+    const weekAgo = new Date();
+    weekAgo.setDate(weekAgo.getDate() - 7);
+    const weeklySales = salesHistory.filter(sale => new Date(sale.date) >= weekAgo);
+
+    const reportWindow = window.open('', '_blank');
+    const reportHTML = `
+        <!DOCTYPE html>
+        <html dir="${currentLanguage === 'ar' ? 'rtl' : 'ltr'}" lang="${currentLanguage}">
+        <head>
+            <title>${t('weeklyReport')} - ${settings.companyName}</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                .header { text-align: center; margin-bottom: 30px; }
+                .summary { background: #f5f5f5; padding: 20px; margin-bottom: 20px; }
+                table { width: 100%; border-collapse: collapse; }
+                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                th { background: #667eea; color: white; }
+                .total { font-weight: bold; background: #f0f0f0; }
+                [dir="rtl"] th, [dir="rtl"] td { text-align: right; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>${settings.companyName}</h1>
+                <h2>${t('weeklyReport')}</h2>
+                <p>${t('date')}: ${weekAgo.toLocaleDateString()} - ${new Date().toLocaleDateString()}</p>
+            </div>
+
+            <div class="summary">
+                <h3>${t('summary')}</h3>
+                <p><strong>${t('totalSales')}:</strong> ${formatCurrency(weeklySales.reduce((sum, sale) => sum + sale.total, 0))}</p>
+                <p><strong>${t('totalTransactions')}:</strong> ${weeklySales.length}</p>
+                <p><strong>${t('averageTransaction')}:</strong> ${formatCurrency(weeklySales.reduce((sum, sale) => sum + sale.total, 0) / weeklySales.length || 0)}</p>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>${t('date')}</th>
+                        <th>${t('receipt')} #</th>
+                        <th>${t('cashier')}</th>
+                        <th>${t('products')}</th>
+                        <th>${t('total')}</th>
+                        <th>${t('paymentMethod')}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${weeklySales.map(sale => `
+                        <tr>
+                            <td>${new Date(sale.date).toLocaleDateString()}</td>
+                            <td>${sale.id}</td>
+                            <td>${sale.cashier}</td>
+                            <td>${sale.items.length}</td>
+                            <td>${formatCurrency(sale.total)}</td>
+                            <td>${sale.paymentMethod}</td>
+                        </tr>
+                    `).join('')}
+                    <tr class="total">
+                        <td colspan="4"><strong>${t('total').toUpperCase()}</strong></td>
+                        <td><strong>${formatCurrency(weeklySales.reduce((sum, sale) => sum + sale.total, 0))}</strong></td>
                         <td></td>
                     </tr>
                 </tbody>
@@ -2713,22 +2899,45 @@ function loadSettingsView() {
 
         <div class="settings-content">
             <div class="settings-section">
-                <h3>Company Information</h3>
+                <h3 data-translate="companySettings">${t('companySettings')}</h3>
                 <div class="form-group">
-                    <label>Company Name:</label>
+                    <label data-translate="name">${t('name')}:</label>
                     <input type="text" id="setting-company-name" value="${settings.companyName}">
                 </div>
                 <div class="form-group">
-                    <label>Company Address:</label>
+                    <label data-translate="address">${t('address')}:</label>
                     <input type="text" id="setting-company-address" value="${settings.companyAddress}">
                 </div>
                 <div class="form-group">
-                    <label>Company Phone:</label>
+                    <label data-translate="phone">${t('phone')}:</label>
                     <input type="text" id="setting-company-phone" value="${settings.companyPhone}">
                 </div>
                 <div class="form-group">
-                    <label>Receipt Footer:</label>
+                    <label data-translate="receiptFooter">${t('receiptFooter')}:</label>
                     <textarea id="setting-receipt-footer">${settings.receiptFooter}</textarea>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h3 data-translate="logoSettings">${t('logoSettings')}</h3>
+                <div class="logo-upload-section">
+                    <div class="current-logo">
+                        ${settings.companyLogo ? `
+                            <img src="${settings.companyLogo}" alt="Company Logo" id="current-logo-preview" style="max-width: 200px; max-height: 100px; border: 1px solid #ddd; border-radius: 8px;">
+                            <button type="button" class="btn btn-danger btn-small" onclick="removeLogo()" data-translate="removeLogo">${t('removeLogo')}</button>
+                        ` : `
+                            <div class="no-logo" style="width: 200px; height: 100px; border: 2px dashed #ddd; display: flex; align-items: center; justify-content: center; color: #666; border-radius: 8px;">
+                                ${t('companyLogo')}
+                            </div>
+                        `}
+                    </div>
+                    <div class="logo-upload-controls">
+                        <input type="file" id="logo-upload" accept="image/*" style="display: none;" onchange="handleLogoUpload(event)">
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('logo-upload').click()" data-translate="uploadLogo">${t('uploadLogo')}</button>
+                        <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                            ${t('recommendedSize')}: 200x100px, PNG/JPG
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -2855,6 +3064,89 @@ function createBackup() {
     localStorage.setItem('lastBackup', new Date().toLocaleString());
 
     alert('Backup created successfully!');
+}
+
+// ===== LOGO MANAGEMENT =====
+
+function handleLogoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+        alert(t('invalidFileType'));
+        return;
+    }
+
+    // Validate file size (max 2MB)
+    if (file.size > 2 * 1024 * 1024) {
+        alert(t('fileTooLarge'));
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const logoData = e.target.result;
+
+        // Update settings
+        settings.companyLogo = logoData;
+        localStorage.setItem('companyLogo', logoData);
+
+        // Update preview
+        updateLogoPreview(logoData);
+
+        // Update main interface logo
+        updateMainLogo();
+
+        alert(t('logoUpdated'));
+    };
+
+    reader.readAsDataURL(file);
+}
+
+function removeLogo() {
+    if (confirm(t('confirmRemoveLogo'))) {
+        settings.companyLogo = '';
+        localStorage.removeItem('companyLogo');
+
+        // Update preview
+        updateLogoPreview('');
+
+        // Update main interface
+        updateMainLogo();
+
+        // Refresh settings view
+        loadSettingsView();
+
+        alert(t('logoRemoved'));
+    }
+}
+
+function updateLogoPreview(logoData) {
+    const preview = document.getElementById('current-logo-preview');
+    if (preview) {
+        if (logoData) {
+            preview.src = logoData;
+            preview.style.display = 'block';
+        } else {
+            preview.style.display = 'none';
+        }
+    }
+}
+
+function updateMainLogo() {
+    // Update logo in main interface
+    const mainLogo = document.getElementById('main-logo');
+    if (mainLogo) {
+        if (settings.companyLogo) {
+            mainLogo.innerHTML = `<img src="${settings.companyLogo}" alt="${settings.companyName}" style="max-height: 40px;">`;
+        } else {
+            mainLogo.innerHTML = `<span style="font-weight: bold; color: var(--primary-color);">${settings.companyName}</span>`;
+        }
+    }
+
+    // Update logo in receipts and invoices (will be used in next print)
+    // The logo will automatically appear in printed documents
 }
 
 // ===== PRODUCT MANAGEMENT =====
@@ -3510,6 +3802,7 @@ window.closeModal = closeModal;
 
 // Reports functions
 window.generateDailyReport = generateDailyReport;
+window.generateWeeklyReport = generateWeeklyReport;
 
 // Users functions
 window.showAddUserModal = showAddUserModal;
@@ -3527,3 +3820,7 @@ window.createBackup = createBackup;
 window.printInvoice = printInvoice;
 window.printLowStockReport = printLowStockReport;
 window.printExpiredItemsReport = printExpiredItemsReport;
+
+// Logo functions
+window.handleLogoUpload = handleLogoUpload;
+window.removeLogo = removeLogo;
