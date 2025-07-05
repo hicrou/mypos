@@ -226,7 +226,11 @@ const languages = {
         englishName: 'English Name',
         arabicName: 'Arabic Name',
         frenchName: 'French Name',
-        spanishName: 'Spanish Name'
+        spanishName: 'Spanish Name',
+        requested: 'Requested',
+        outOfStock: 'Out of Stock',
+        remaining: 'remaining',
+        andMore: 'and {0} more'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -450,7 +454,11 @@ const languages = {
         englishName: 'الاسم الإنجليزي',
         arabicName: 'الاسم العربي',
         frenchName: 'الاسم الفرنسي',
-        spanishName: 'الاسم الإسباني'
+        spanishName: 'الاسم الإسباني',
+        requested: 'مطلوب',
+        outOfStock: 'نفد المخزون',
+        remaining: 'متبقي',
+        andMore: 'و {0} أكثر'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -662,7 +670,11 @@ const languages = {
         englishName: 'Nom Anglais',
         arabicName: 'Nom Arabe',
         frenchName: 'Nom Français',
-        spanishName: 'Nom Espagnol'
+        spanishName: 'Nom Espagnol',
+        requested: 'Demandé',
+        outOfStock: 'Rupture de Stock',
+        remaining: 'restant',
+        andMore: 'et {0} de plus'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -874,7 +886,11 @@ const languages = {
         englishName: 'Nombre en Inglés',
         arabicName: 'Nombre en Árabe',
         frenchName: 'Nombre en Francés',
-        spanishName: 'Nombre en Español'
+        spanishName: 'Nombre en Español',
+        requested: 'Solicitado',
+        outOfStock: 'Agotado',
+        remaining: 'restante',
+        andMore: 'y {0} más'
     }
 };
 
@@ -4602,11 +4618,24 @@ function completeSale() {
         currency: currentCurrency
     };
 
-    // Update inventory
+    // Validate stock availability before completing sale
+    for (let cartItem of cart) {
+        const product = products.find(p => p.id === cartItem.id);
+        if (product && product.stock < cartItem.quantity) {
+            alert(`${t('insufficientStock')}: ${getProductName(product)}\n${t('available')}: ${product.stock}, ${t('requested')}: ${cartItem.quantity}`);
+            return;
+        }
+    }
+
+    // Update inventory - reduce stock for sold items
     cart.forEach(cartItem => {
         const product = products.find(p => p.id === cartItem.id);
         if (product) {
             product.stock -= cartItem.quantity;
+            // Ensure stock doesn't go negative
+            if (product.stock < 0) {
+                product.stock = 0;
+            }
         }
     });
 
@@ -4629,6 +4658,50 @@ function completeSale() {
     displayProducts(); // Refresh to show updated stock
     closeCheckout();
     saveCart();
+
+    // Check for low stock alerts after sale
+    checkLowStockAfterSale();
+}
+
+// Check for low stock items after completing a sale
+function checkLowStockAfterSale() {
+    const lowStockItems = products.filter(product =>
+        product.active && product.stock <= product.minStock && product.stock > 0
+    );
+
+    const outOfStockItems = products.filter(product =>
+        product.active && product.stock <= 0
+    );
+
+    if (lowStockItems.length > 0 || outOfStockItems.length > 0) {
+        let alertMessage = '';
+
+        if (outOfStockItems.length > 0) {
+            alertMessage += `⚠️ ${t('outOfStock')} (${outOfStockItems.length}):\n`;
+            outOfStockItems.slice(0, 3).forEach(item => {
+                alertMessage += `• ${getProductName(item)}\n`;
+            });
+            if (outOfStockItems.length > 3) {
+                alertMessage += `... ${t('andMore').replace('{0}', outOfStockItems.length - 3)}\n`;
+            }
+            alertMessage += '\n';
+        }
+
+        if (lowStockItems.length > 0) {
+            alertMessage += `⚠️ ${t('lowStock')} (${lowStockItems.length}):\n`;
+            lowStockItems.slice(0, 3).forEach(item => {
+                alertMessage += `• ${getProductName(item)}: ${item.stock} ${t('remaining')}\n`;
+            });
+            if (lowStockItems.length > 3) {
+                alertMessage += `... ${t('andMore').replace('{0}', lowStockItems.length - 3)}\n`;
+            }
+        }
+
+        // Show alert after a short delay so sale completion message is seen first
+        setTimeout(() => {
+            alert(alertMessage);
+        }, 1000);
+    }
 }
 
 // ===== PRINTING SYSTEM =====
@@ -5022,3 +5095,6 @@ window.exportCategories = exportCategories;
 
 // Charts functions
 window.toggleCharts = toggleCharts;
+
+// Stock management functions
+window.checkLowStockAfterSale = checkLowStockAfterSale;
