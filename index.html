@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My POS System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to My POS System</h1>
+            <div class="user-info">
+                <span id="current-user">Cashier: Admin</span>
+                <span id="current-time"></span>
+            </div>
+        </header>
+
+        <main class="pos-layout">
+            <!-- Product Categories -->
+            <section class="categories">
+                <h2>Categories</h2>
+                <div class="category-buttons">
+                    <button class="category-btn active" data-category="all">All Items</button>
+                    <button class="category-btn" data-category="food">Food</button>
+                    <button class="category-btn" data-category="drinks">Drinks</button>
+                    <button class="category-btn" data-category="snacks">Snacks</button>
+                </div>
+            </section>
+
+            <!-- Products Grid -->
+            <section class="products">
+                <h2>Products</h2>
+                <div class="products-grid" id="products-grid">
+                    <!-- Products will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Shopping Cart -->
+            <section class="cart">
+                <h2>Current Order</h2>
+                <div class="cart-items" id="cart-items">
+                    <p class="empty-cart">No items in cart</p>
+                </div>
+                <div class="cart-summary">
+                    <div class="total-line">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="total-line">
+                        <span>Tax (8%):</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="total-line total">
+                        <span>Total:</span>
+                        <span id="total">$0.00</span>
+                    </div>
+                </div>
+                <div class="cart-actions">
+                    <button class="btn btn-secondary" id="clear-cart">Clear Cart</button>
+                    <button class="btn btn-primary" id="checkout">Checkout</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal" id="checkout-modal">
+        <div class="modal-content">
+            <h2>Checkout</h2>
+            <div class="payment-methods">
+                <button class="payment-btn" data-method="cash">Cash</button>
+                <button class="payment-btn" data-method="card">Card</button>
+                <button class="payment-btn" data-method="digital">Digital Wallet</button>
+            </div>
+            <div class="payment-details" id="payment-details">
+                <!-- Payment details will be shown here -->
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancel-checkout">Cancel</button>
+                <button class="btn btn-primary" id="complete-sale">Complete Sale</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
