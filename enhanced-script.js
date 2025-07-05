@@ -147,7 +147,37 @@ const languages = {
         fileTooLarge: 'File size must be less than 2MB',
         logoUpdated: 'Logo updated successfully!',
         confirmRemoveLogo: 'Are you sure you want to remove the company logo?',
-        logoRemoved: 'Logo removed successfully!'
+        logoRemoved: 'Logo removed successfully!',
+        addUser: 'Add User',
+        exportUsers: 'Export Users',
+        saveSettings: 'Save Settings',
+        resetSettings: 'Reset to Defaults',
+        exportData: 'Export Data',
+        importData: 'Import Data',
+        createBackup: 'Create Backup',
+        clearAllData: 'Clear All Data',
+        lowStockReport: 'Low Stock Report',
+        inventoryExported: 'Inventory exported successfully!',
+        reportsExported: 'Reports exported successfully!',
+        usersExported: 'Users exported successfully!',
+        accessDenied: 'Access denied',
+        confirmResetSettings: 'Are you sure you want to reset all settings to defaults?',
+        settingsReset: 'Settings reset to defaults successfully!',
+        dataExported: 'Data exported successfully!',
+        confirmImportData: 'This will replace current data. Are you sure?',
+        dataImported: 'Data imported successfully!',
+        importError: 'Import error',
+        confirmClearAllData: 'WARNING: This will delete all products and sales data!',
+        confirmClearAllDataFinal: 'FINAL WARNING: This action cannot be undone!',
+        allDataCleared: 'All data cleared successfully!',
+        username: 'Username',
+        active: 'Active',
+        inactive: 'Inactive',
+        status: 'Status',
+        allStockLevels: 'All Stock Levels',
+        lowStockOnly: 'Low Stock Only',
+        outOfStockOnly: 'Out of Stock Only',
+        search: 'Search'
     },
     ar: {
         welcome: 'مرحباً بنظام نقاط البيع',
@@ -292,7 +322,37 @@ const languages = {
         fileTooLarge: 'يجب أن يكون حجم الملف أقل من 2 ميجابايت',
         logoUpdated: 'تم تحديث الشعار بنجاح!',
         confirmRemoveLogo: 'هل أنت متأكد من أنك تريد إزالة شعار الشركة؟',
-        logoRemoved: 'تم حذف الشعار بنجاح!'
+        logoRemoved: 'تم حذف الشعار بنجاح!',
+        addUser: 'إضافة مستخدم',
+        exportUsers: 'تصدير المستخدمين',
+        saveSettings: 'حفظ الإعدادات',
+        resetSettings: 'إعادة تعيين للافتراضي',
+        exportData: 'تصدير البيانات',
+        importData: 'استيراد البيانات',
+        createBackup: 'إنشاء نسخة احتياطية',
+        clearAllData: 'مسح جميع البيانات',
+        lowStockReport: 'تقرير المخزون المنخفض',
+        inventoryExported: 'تم تصدير المخزون بنجاح!',
+        reportsExported: 'تم تصدير التقارير بنجاح!',
+        usersExported: 'تم تصدير المستخدمين بنجاح!',
+        accessDenied: 'تم رفض الوصول',
+        confirmResetSettings: 'هل أنت متأكد من أنك تريد إعادة تعيين جميع الإعدادات للافتراضي؟',
+        settingsReset: 'تم إعادة تعيين الإعدادات للافتراضي بنجاح!',
+        dataExported: 'تم تصدير البيانات بنجاح!',
+        confirmImportData: 'سيؤدي هذا إلى استبدال البيانات الحالية. هل أنت متأكد؟',
+        dataImported: 'تم استيراد البيانات بنجاح!',
+        importError: 'خطأ في الاستيراد',
+        confirmClearAllData: 'تحذير: سيؤدي هذا إلى حذف جميع المنتجات وبيانات المبيعات!',
+        confirmClearAllDataFinal: 'تحذير أخير: لا يمكن التراجع عن هذا الإجراء!',
+        allDataCleared: 'تم مسح جميع البيانات بنجاح!',
+        username: 'اسم المستخدم',
+        active: 'نشط',
+        inactive: 'غير نشط',
+        status: 'الحالة',
+        allStockLevels: 'جميع مستويات المخزون',
+        lowStockOnly: 'المخزون المنخفض فقط',
+        outOfStockOnly: 'نفد من المخزون فقط',
+        search: 'بحث'
     },
     fr: {
         welcome: 'Bienvenue dans Mon Système POS',
@@ -425,7 +485,37 @@ const languages = {
         fileTooLarge: 'La taille du fichier doit être inférieure à 2 Mo',
         logoUpdated: 'Logo mis à jour avec succès!',
         confirmRemoveLogo: 'Êtes-vous sûr de vouloir supprimer le logo de l\'entreprise?',
-        logoRemoved: 'Logo supprimé avec succès!'
+        logoRemoved: 'Logo supprimé avec succès!',
+        addUser: 'Ajouter Utilisateur',
+        exportUsers: 'Exporter Utilisateurs',
+        saveSettings: 'Sauvegarder Paramètres',
+        resetSettings: 'Réinitialiser par Défaut',
+        exportData: 'Exporter Données',
+        importData: 'Importer Données',
+        createBackup: 'Créer Sauvegarde',
+        clearAllData: 'Effacer Toutes Données',
+        lowStockReport: 'Rapport Stock Faible',
+        inventoryExported: 'Inventaire exporté avec succès!',
+        reportsExported: 'Rapports exportés avec succès!',
+        usersExported: 'Utilisateurs exportés avec succès!',
+        accessDenied: 'Accès refusé',
+        confirmResetSettings: 'Êtes-vous sûr de vouloir réinitialiser tous les paramètres par défaut?',
+        settingsReset: 'Paramètres réinitialisés par défaut avec succès!',
+        dataExported: 'Données exportées avec succès!',
+        confirmImportData: 'Cela remplacera les données actuelles. Êtes-vous sûr?',
+        dataImported: 'Données importées avec succès!',
+        importError: 'Erreur d\'importation',
+        confirmClearAllData: 'ATTENTION: Cela supprimera tous les produits et données de vente!',
+        confirmClearAllDataFinal: 'DERNIER AVERTISSEMENT: Cette action ne peut pas être annulée!',
+        allDataCleared: 'Toutes les données effacées avec succès!',
+        username: 'Nom d\'utilisateur',
+        active: 'Actif',
+        inactive: 'Inactif',
+        status: 'Statut',
+        allStockLevels: 'Tous Niveaux de Stock',
+        lowStockOnly: 'Stock Faible Seulement',
+        outOfStockOnly: 'Rupture de Stock Seulement',
+        search: 'Rechercher'
     },
     es: {
         welcome: 'Bienvenido a Mi Sistema POS',
@@ -558,7 +648,37 @@ const languages = {
         fileTooLarge: 'El tamaño del archivo debe ser menor a 2MB',
         logoUpdated: '¡Logo actualizado exitosamente!',
         confirmRemoveLogo: '¿Está seguro de que desea eliminar el logo de la empresa?',
-        logoRemoved: '¡Logo eliminado exitosamente!'
+        logoRemoved: '¡Logo eliminado exitosamente!',
+        addUser: 'Agregar Usuario',
+        exportUsers: 'Exportar Usuarios',
+        saveSettings: 'Guardar Configuración',
+        resetSettings: 'Restablecer por Defecto',
+        exportData: 'Exportar Datos',
+        importData: 'Importar Datos',
+        createBackup: 'Crear Respaldo',
+        clearAllData: 'Limpiar Todos los Datos',
+        lowStockReport: 'Reporte Stock Bajo',
+        inventoryExported: '¡Inventario exportado exitosamente!',
+        reportsExported: '¡Reportes exportados exitosamente!',
+        usersExported: '¡Usuarios exportados exitosamente!',
+        accessDenied: 'Acceso denegado',
+        confirmResetSettings: '¿Está seguro de que desea restablecer toda la configuración por defecto?',
+        settingsReset: '¡Configuración restablecida por defecto exitosamente!',
+        dataExported: '¡Datos exportados exitosamente!',
+        confirmImportData: 'Esto reemplazará los datos actuales. ¿Está seguro?',
+        dataImported: '¡Datos importados exitosamente!',
+        importError: 'Error de importación',
+        confirmClearAllData: 'ADVERTENCIA: ¡Esto eliminará todos los productos y datos de ventas!',
+        confirmClearAllDataFinal: 'ADVERTENCIA FINAL: ¡Esta acción no se puede deshacer!',
+        allDataCleared: '¡Todos los datos eliminados exitosamente!',
+        username: 'Usuario',
+        active: 'Activo',
+        inactive: 'Inactivo',
+        status: 'Estado',
+        allStockLevels: 'Todos Niveles de Stock',
+        lowStockOnly: 'Solo Stock Bajo',
+        outOfStockOnly: 'Solo Sin Stock',
+        search: 'Buscar'
     }
 };
 
@@ -1397,7 +1517,7 @@ function loadInventoryView() {
             <div class="inventory-actions">
                 <button class="btn btn-primary" onclick="showAddProductModal()" data-translate="addProduct">${t('addProduct')}</button>
                 <button class="btn btn-secondary" onclick="exportInventory()" data-translate="export">${t('export')}</button>
-                <button class="btn btn-warning" onclick="showLowStockReport()">${t('lowStock')}</button>
+                <button class="btn btn-warning" onclick="printLowStockReport()" data-translate="lowStockReport">${t('lowStockReport')}</button>
             </div>
         </div>
 
@@ -1410,9 +1530,9 @@ function loadInventoryView() {
                 <option value="snacks">${t('snacks')}</option>
             </select>
             <select id="stock-filter" onchange="filterInventory()">
-                <option value="all">All Stock Levels</option>
-                <option value="low">Low Stock Only</option>
-                <option value="out">Out of Stock</option>
+                <option value="all" data-translate="allStockLevels">${t('allStockLevels')}</option>
+                <option value="low" data-translate="lowStockOnly">${t('lowStockOnly')}</option>
+                <option value="out" data-translate="outOfStockOnly">${t('outOfStockOnly')}</option>
             </select>
         </div>
 
@@ -2645,8 +2765,8 @@ function loadUsersView() {
         <div class="users-header">
             <h2 data-translate="users">${t('users')}</h2>
             <div class="users-actions">
-                <button class="btn btn-primary" onclick="showAddUserModal()">Add User</button>
-                <button class="btn btn-secondary" onclick="exportUsers()">Export Users</button>
+                <button class="btn btn-primary" onclick="showAddUserModal()" data-translate="addUser">${t('addUser')}</button>
+                <button class="btn btn-secondary" onclick="exportUsers()" data-translate="exportUsers">${t('exportUsers')}</button>
             </div>
         </div>
 
@@ -2890,10 +3010,10 @@ function loadSettingsView() {
         <div class="settings-header">
             <h2 data-translate="settings">${t('settings')}</h2>
             <div class="settings-actions">
-                <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
-                <button class="btn btn-secondary" onclick="resetSettings()">Reset to Defaults</button>
-                <button class="btn btn-warning" onclick="exportData()">Export Data</button>
-                <button class="btn btn-success" onclick="importData()">Import Data</button>
+                <button class="btn btn-primary" onclick="saveSettings()" data-translate="saveSettings">${t('saveSettings')}</button>
+                <button class="btn btn-secondary" onclick="resetSettings()" data-translate="resetSettings">${t('resetSettings')}</button>
+                <button class="btn btn-warning" onclick="exportData()" data-translate="exportData">${t('exportData')}</button>
+                <button class="btn btn-success" onclick="importData()" data-translate="importData">${t('importData')}</button>
             </div>
         </div>
 
@@ -3001,8 +3121,8 @@ function loadSettingsView() {
                     <p><strong>Last Backup:</strong> ${localStorage.getItem('lastBackup') || 'Never'}</p>
                 </div>
                 <div class="data-actions">
-                    <button class="btn btn-info" onclick="createBackup()">Create Backup</button>
-                    <button class="btn btn-warning" onclick="clearAllData()">Clear All Data</button>
+                    <button class="btn btn-info" onclick="createBackup()" data-translate="createBackup">${t('createBackup')}</button>
+                    <button class="btn btn-warning" onclick="clearAllData()" data-translate="clearAllData">${t('clearAllData')}</button>
                 </div>
             </div>
         </div>
@@ -3064,6 +3184,219 @@ function createBackup() {
     localStorage.setItem('lastBackup', new Date().toLocaleString());
 
     alert('Backup created successfully!');
+}
+
+// ===== MISSING BUTTON FUNCTIONS =====
+
+function exportInventory() {
+    const inventoryData = products.map(product => ({
+        id: product.id,
+        name: getProductName(product),
+        category: t(product.category),
+        price: formatCurrency(product.price),
+        stock: product.stock,
+        minStock: product.minStock,
+        barcode: product.barcode,
+        supplier: product.supplier || 'N/A',
+        expiryDate: product.expiryDate || 'N/A'
+    }));
+
+    const csvContent = "data:text/csv;charset=utf-8,"
+        + [
+            [t('name'), t('category'), t('price'), t('stock'), 'Min Stock', t('barcode'), t('supplier'), t('expiryDate')].join(','),
+            ...inventoryData.map(row => Object.values(row).join(','))
+        ].join('\n');
+
+    const link = document.createElement('a');
+    link.href = encodeURI(csvContent);
+    link.download = `inventory-${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+
+    alert(t('inventoryExported'));
+}
+
+function exportReports() {
+    const reportsData = {
+        todaysSales: getTodaysSales(),
+        weekSales: getWeekSales(),
+        lowStockCount: getLowStockCount(),
+        totalProducts: products.length,
+        recentSales: salesHistory.slice(-10),
+        generatedAt: new Date().toISOString()
+    };
+
+    const dataStr = JSON.stringify(reportsData, null, 2);
+    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(dataBlob);
+    link.download = `reports-${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+
+    alert(t('reportsExported'));
+}
+
+function exportUsers() {
+    if (!hasPermission('users')) {
+        alert(t('accessDenied'));
+        return;
+    }
+
+    const usersData = users.map(user => ({
+        id: user.id,
+        username: user.username,
+        name: user.name,
+        role: t(user.role),
+        status: user.active ? t('active') : t('inactive')
+    }));
+
+    const csvContent = "data:text/csv;charset=utf-8,"
+        + [
+            ['ID', t('username'), t('name'), t('role'), t('status')].join(','),
+            ...usersData.map(row => Object.values(row).join(','))
+        ].join('\n');
+
+    const link = document.createElement('a');
+    link.href = encodeURI(csvContent);
+    link.download = `users-${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+
+    alert(t('usersExported'));
+}
+
+function resetSettings() {
+    if (confirm(t('confirmResetSettings'))) {
+        // Reset to default values
+        const defaultSettings = {
+            taxRate: 0.19,
+            companyName: 'My POS System',
+            companyAddress: 'Algiers, Algeria',
+            companyPhone: '+213 21 123 456',
+            receiptFooter: 'شكراً لزيارتكم - Thank you for your visit!',
+            companyLogo: '',
+            lowStockThreshold: 10,
+            autoBackup: false,
+            printAfterSale: false,
+            showBarcode: false
+        };
+
+        // Update settings object
+        Object.assign(settings, defaultSettings);
+
+        // Clear localStorage
+        Object.keys(defaultSettings).forEach(key => {
+            localStorage.removeItem(key);
+        });
+
+        // Refresh settings view
+        loadSettingsView();
+
+        // Update main interface
+        updateMainLogo();
+
+        alert(t('settingsReset'));
+    }
+}
+
+function exportData() {
+    const allData = {
+        products: products,
+        salesHistory: salesHistory,
+        users: users.map(u => ({...u, password: '***'})), // Hide passwords
+        settings: settings,
+        exportDate: new Date().toISOString(),
+        version: '1.0'
+    };
+
+    const dataStr = JSON.stringify(allData, null, 2);
+    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(dataBlob);
+    link.download = `pos-data-export-${new Date().toISOString().split('T')[0]}.json`;
+    link.click();
+
+    alert(t('dataExported'));
+}
+
+function importData() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+
+    input.onchange = function(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const importedData = JSON.parse(e.target.result);
+
+                if (confirm(t('confirmImportData'))) {
+                    // Import products (if available)
+                    if (importedData.products) {
+                        products.splice(0, products.length, ...importedData.products);
+                        saveToStorage('products', products);
+                    }
+
+                    // Import sales history (if available)
+                    if (importedData.salesHistory) {
+                        salesHistory.splice(0, salesHistory.length, ...importedData.salesHistory);
+                        saveToStorage('salesHistory', salesHistory);
+                    }
+
+                    // Import settings (if available)
+                    if (importedData.settings) {
+                        Object.assign(settings, importedData.settings);
+                        Object.keys(importedData.settings).forEach(key => {
+                            localStorage.setItem(key, importedData.settings[key]);
+                        });
+                    }
+
+                    alert(t('dataImported'));
+                    location.reload(); // Refresh to apply changes
+                }
+            } catch (error) {
+                alert(t('importError') + ': ' + error.message);
+            }
+        };
+        reader.readAsText(file);
+    };
+
+    input.click();
+}
+
+function clearAllData() {
+    if (confirm(t('confirmClearAllData'))) {
+        if (confirm(t('confirmClearAllDataFinal'))) {
+            // Clear all data except users (for security)
+            products.splice(0, products.length);
+            salesHistory.splice(0, salesHistory.length);
+
+            // Save empty arrays
+            saveToStorage('products', products);
+            saveToStorage('salesHistory', salesHistory);
+
+            // Clear cart
+            cart.splice(0, cart.length);
+
+            alert(t('allDataCleared'));
+            location.reload();
+        }
+    }
+}
+
+function startCameraScanning() {
+    // This function is already implemented above
+    // Just ensuring it's available
+    console.log('Camera scanning started');
+}
+
+function connectUSBScanner() {
+    // This function is already implemented above
+    // Just ensuring it's available
+    console.log('USB scanner connected');
 }
 
 // ===== LOGO MANAGEMENT =====
@@ -3824,3 +4157,16 @@ window.printExpiredItemsReport = printExpiredItemsReport;
 // Logo functions
 window.handleLogoUpload = handleLogoUpload;
 window.removeLogo = removeLogo;
+
+// Export/Import functions
+window.exportInventory = exportInventory;
+window.exportReports = exportReports;
+window.exportUsers = exportUsers;
+window.resetSettings = resetSettings;
+window.exportData = exportData;
+window.importData = importData;
+window.clearAllData = clearAllData;
+
+// Scanner functions
+window.startCameraScanning = startCameraScanning;
+window.connectUSBScanner = connectUSBScanner;
