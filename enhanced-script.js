@@ -219,7 +219,14 @@ const languages = {
         supplier: 'Supplier',
         adjustStock: 'Adjust Stock',
         id: 'ID',
-        notAvailable: 'N/A'
+        notAvailable: 'N/A',
+        report: 'Report',
+        fullName: 'Full Name',
+        newPassword: 'New Password (leave blank to keep current)',
+        englishName: 'English Name',
+        arabicName: 'Arabic Name',
+        frenchName: 'French Name',
+        spanishName: 'Spanish Name'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -436,7 +443,14 @@ const languages = {
         supplier: 'المورد',
         adjustStock: 'تعديل المخزون',
         id: 'المعرف',
-        notAvailable: 'غير متوفر'
+        notAvailable: 'غير متوفر',
+        report: 'تقرير',
+        fullName: 'الاسم الكامل',
+        newPassword: 'كلمة مرور جديدة (اتركها فارغة للاحتفاظ بالحالية)',
+        englishName: 'الاسم الإنجليزي',
+        arabicName: 'الاسم العربي',
+        frenchName: 'الاسم الفرنسي',
+        spanishName: 'الاسم الإسباني'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -641,7 +655,14 @@ const languages = {
         supplier: 'Fournisseur',
         adjustStock: 'Ajuster Stock',
         id: 'ID',
-        notAvailable: 'N/D'
+        notAvailable: 'N/D',
+        report: 'Rapport',
+        fullName: 'Nom Complet',
+        newPassword: 'Nouveau Mot de Passe (laisser vide pour conserver actuel)',
+        englishName: 'Nom Anglais',
+        arabicName: 'Nom Arabe',
+        frenchName: 'Nom Français',
+        spanishName: 'Nom Espagnol'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -846,7 +867,14 @@ const languages = {
         supplier: 'Proveedor',
         adjustStock: 'Ajustar Stock',
         id: 'ID',
-        notAvailable: 'N/D'
+        notAvailable: 'N/D',
+        report: 'Reporte',
+        fullName: 'Nombre Completo',
+        newPassword: 'Nueva Contraseña (dejar en blanco para mantener actual)',
+        englishName: 'Nombre en Inglés',
+        arabicName: 'Nombre en Árabe',
+        frenchName: 'Nombre en Francés',
+        spanishName: 'Nombre en Español'
     }
 };
 
@@ -2418,7 +2446,7 @@ function generateDailyReport() {
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Daily Sales Report - ${today}</title>
+            <title>${t('dailyReport')} - ${today}</title>
             <style>
                 body { font-family: Arial, sans-serif; margin: 20px; }
                 .header { text-align: center; margin-bottom: 30px; }
@@ -2432,12 +2460,12 @@ function generateDailyReport() {
         <body>
             <div class="header">
                 <h1>${settings.companyName}</h1>
-                <h2>Daily Sales Report</h2>
-                <p>Date: ${today}</p>
+                <h2>${t('dailyReport')}</h2>
+                <p>${t('date')}: ${today}</p>
             </div>
 
             <div class="summary">
-                <h3>Summary</h3>
+                <h3>${t('summary')}</h3>
                 <p>Total Sales: ${formatCurrency(todaySales.reduce((sum, sale) => sum + sale.total, 0))}</p>
                 <p>Total Transactions: ${todaySales.length}</p>
                 <p>Average Transaction: ${formatCurrency(todaySales.reduce((sum, sale) => sum + sale.total, 0) / todaySales.length || 0)}</p>
@@ -3200,15 +3228,15 @@ function showAddUserModal() {
             <h2>Add New User</h2>
             <form onsubmit="addNewUser(event)">
                 <div class="form-group">
-                    <label>Username:</label>
+                    <label data-translate="username">${t('username')}:</label>
                     <input type="text" id="user-username" required>
                 </div>
                 <div class="form-group">
-                    <label>Full Name:</label>
+                    <label data-translate="fullName">${t('fullName')}:</label>
                     <input type="text" id="user-name" required>
                 </div>
                 <div class="form-group">
-                    <label>Password:</label>
+                    <label data-translate="password">${t('password')}:</label>
                     <input type="password" id="user-password" required>
                 </div>
                 <div class="form-group">
@@ -3270,15 +3298,15 @@ function editUser(userId) {
             <h2>Edit User</h2>
             <form onsubmit="updateUser(event, ${userId})">
                 <div class="form-group">
-                    <label>Username:</label>
+                    <label data-translate="username">${t('username')}:</label>
                     <input type="text" id="edit-user-username" value="${user.username}" required>
                 </div>
                 <div class="form-group">
-                    <label>Full Name:</label>
+                    <label data-translate="fullName">${t('fullName')}:</label>
                     <input type="text" id="edit-user-name" value="${user.name}" required>
                 </div>
                 <div class="form-group">
-                    <label>New Password (leave blank to keep current):</label>
+                    <label data-translate="newPassword">${t('newPassword')}:</label>
                     <input type="password" id="edit-user-password">
                 </div>
                 <div class="form-group">
@@ -3855,19 +3883,19 @@ function showAddCategoryModal() {
             <h2 data-translate="addCategory">${t('addCategory')}</h2>
             <form onsubmit="addNewCategory(event)">
                 <div class="form-group">
-                    <label>English Name:</label>
+                    <label data-translate="englishName">${t('englishName')}:</label>
                     <input type="text" id="category-name-en" required>
                 </div>
                 <div class="form-group">
-                    <label>Arabic Name:</label>
+                    <label data-translate="arabicName">${t('arabicName')}:</label>
                     <input type="text" id="category-name-ar" required>
                 </div>
                 <div class="form-group">
-                    <label>French Name:</label>
+                    <label data-translate="frenchName">${t('frenchName')}:</label>
                     <input type="text" id="category-name-fr" required>
                 </div>
                 <div class="form-group">
-                    <label>Spanish Name:</label>
+                    <label data-translate="spanishName">${t('spanishName')}:</label>
                     <input type="text" id="category-name-es" required>
                 </div>
                 <div class="modal-actions">
@@ -3916,19 +3944,19 @@ function editCategory(categoryId) {
             <h2 data-translate="editCategory">${t('editCategory')}</h2>
             <form onsubmit="updateCategory(event, ${categoryId})">
                 <div class="form-group">
-                    <label>English Name:</label>
+                    <label data-translate="englishName">${t('englishName')}:</label>
                     <input type="text" id="edit-category-name-en" value="${category.name}" required>
                 </div>
                 <div class="form-group">
-                    <label>Arabic Name:</label>
+                    <label data-translate="arabicName">${t('arabicName')}:</label>
                     <input type="text" id="edit-category-name-ar" value="${category.nameAr}" required>
                 </div>
                 <div class="form-group">
-                    <label>French Name:</label>
+                    <label data-translate="frenchName">${t('frenchName')}:</label>
                     <input type="text" id="edit-category-name-fr" value="${category.nameFr}" required>
                 </div>
                 <div class="form-group">
-                    <label>Spanish Name:</label>
+                    <label data-translate="spanishName">${t('spanishName')}:</label>
                     <input type="text" id="edit-category-name-es" value="${category.nameEs}" required>
                 </div>
                 <div class="modal-actions">
