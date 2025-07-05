@@ -211,7 +211,10 @@ const languages = {
         hardware: 'Hardware',
         construction: 'Construction',
         electrical: 'Electrical',
-        plumbing: 'Plumbing'
+        plumbing: 'Plumbing',
+        accessDenied: 'Access Denied',
+        noPermissionCategories: 'You don\'t have permission to manage categories.',
+        topSellingProducts: 'Top Selling Products'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -420,7 +423,10 @@ const languages = {
         hardware: 'أجهزة',
         construction: 'بناء',
         electrical: 'كهربائي',
-        plumbing: 'سباكة'
+        plumbing: 'سباكة',
+        accessDenied: 'تم رفض الوصول',
+        noPermissionCategories: 'ليس لديك إذن لإدارة الفئات.',
+        topSellingProducts: 'المنتجات الأكثر مبيعاً'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -617,7 +623,10 @@ const languages = {
         hardware: 'Quincaillerie',
         construction: 'Construction',
         electrical: 'Électrique',
-        plumbing: 'Plomberie'
+        plumbing: 'Plomberie',
+        accessDenied: 'Accès Refusé',
+        noPermissionCategories: 'Vous n\'avez pas la permission de gérer les catégories.',
+        topSellingProducts: 'Produits les Plus Vendus'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -814,7 +823,10 @@ const languages = {
         hardware: 'Ferretería',
         construction: 'Construcción',
         electrical: 'Eléctrico',
-        plumbing: 'Fontanería'
+        plumbing: 'Fontanería',
+        accessDenied: 'Acceso Denegado',
+        noPermissionCategories: 'No tienes permiso para gestionar categorías.',
+        topSellingProducts: 'Productos Más Vendidos'
     }
 };
 
@@ -1599,6 +1611,7 @@ function createMainInterface() {
                     <div class="nav-tabs">
                         <button class="nav-tab active" onclick="switchView('pos')" data-translate="sales">${t('sales')}</button>
                         ${hasPermission('inventory') ? `<button class="nav-tab" onclick="switchView('inventory')" data-translate="inventory">${t('inventory')}</button>` : ''}
+                        ${hasPermission('inventory') ? `<button class="nav-tab" onclick="switchView('categories')" data-translate="categories">${t('categories')}</button>` : ''}
                         ${hasPermission('reports') ? `<button class="nav-tab" onclick="switchView('reports')" data-translate="reports">${t('reports')}</button>` : ''}
                         ${hasPermission('users') ? `<button class="nav-tab" onclick="switchView('users')" data-translate="users">${t('users')}</button>` : ''}
                         ${hasPermission('settings') ? `<button class="nav-tab" onclick="switchView('settings')" data-translate="settings">${t('settings')}</button>` : ''}
@@ -1649,6 +1662,11 @@ function createMainInterface() {
                                 <button class="category-btn" data-category="food" data-translate="food">${t('food')}</button>
                                 <button class="category-btn" data-category="drinks" data-translate="drinks">${t('drinks')}</button>
                                 <button class="category-btn" data-category="snacks" data-translate="snacks">${t('snacks')}</button>
+                                <button class="category-btn" data-category="tools" data-translate="tools">${t('tools')}</button>
+                                <button class="category-btn" data-category="hardware" data-translate="hardware">${t('hardware')}</button>
+                                <button class="category-btn" data-category="construction" data-translate="construction">${t('construction')}</button>
+                                <button class="category-btn" data-category="electrical" data-translate="electrical">${t('electrical')}</button>
+                                <button class="category-btn" data-category="plumbing" data-translate="plumbing">${t('plumbing')}</button>
                             </div>
                             <div class="low-stock-alert" id="low-stock-alert" style="display: none;">
                                 <h3 data-translate="lowStock">${t('lowStock')}</h3>
@@ -1703,6 +1721,13 @@ function createMainInterface() {
                     <h2 data-translate="inventory">${t('inventory')}</h2>
                     <div class="inventory-content">
                         <!-- Inventory management will be added -->
+                    </div>
+                </div>
+
+                <div id="categories-view" class="view" style="display: none;">
+                    <h2 data-translate="categoryManagement">${t('categoryManagement')}</h2>
+                    <div class="categories-content">
+                        <!-- Categories management will be loaded here -->
                     </div>
                 </div>
 
@@ -1795,6 +1820,9 @@ function switchView(viewName) {
         case 'inventory':
             loadInventoryView();
             break;
+        case 'categories':
+            loadCategoriesView();
+            break;
         case 'reports':
             loadReportsView();
             break;
@@ -1828,6 +1856,11 @@ function loadInventoryView() {
                 <option value="food">${t('food')}</option>
                 <option value="drinks">${t('drinks')}</option>
                 <option value="snacks">${t('snacks')}</option>
+                <option value="tools">${t('tools')}</option>
+                <option value="hardware">${t('hardware')}</option>
+                <option value="construction">${t('construction')}</option>
+                <option value="electrical">${t('electrical')}</option>
+                <option value="plumbing">${t('plumbing')}</option>
             </select>
             <select id="stock-filter" onchange="filterInventory()">
                 <option value="all" data-translate="allStockLevels">${t('allStockLevels')}</option>
@@ -3727,8 +3760,8 @@ function loadCategoriesView() {
     if (!hasPermission('inventory')) {
         document.getElementById('categories-view').innerHTML = `
             <div class="access-denied">
-                <h2>Access Denied</h2>
-                <p>You don't have permission to manage categories.</p>
+                <h2>${t('accessDenied')}</h2>
+                <p>${t('noPermissionCategories')}</p>
             </div>
         `;
         return;
