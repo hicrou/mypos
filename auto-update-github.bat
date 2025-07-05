@@ -1,28 +1,30 @@
 @echo off
 echo ========================================
-echo   Auto GitHub Update Script
+echo   ALWAYS SEND TO GITHUB - Auto Update
 echo ========================================
 echo.
 
 echo Checking for changes...
+git add .
+
+echo Checking status after add...
 git status --porcelain > temp_status.txt
 
 if not exist temp_status.txt (
-    echo No changes detected.
+    echo No changes detected after git add.
     goto :end
 )
 
 for /f %%i in ("temp_status.txt") do set size=%%~zi
 if %size% equ 0 (
-    echo No changes detected.
+    echo No changes detected after git add.
     goto :end
 )
 
-echo Changes detected! Updating GitHub...
+echo Changes detected! ALWAYS SENDING TO GITHUB...
 echo.
 
-echo Adding all changes...
-git add .
+echo All changes already added...
 
 echo.
 echo Committing changes...
@@ -35,7 +37,7 @@ if "%commit_message%"=="" (
     for /f "tokens=1-2 delims=/:" %%a in ('time /t') do (
         set mytime=%%a:%%b
     )
-    set commit_message=Auto-update: %mydate% %mytime%
+    set commit_message=ALWAYS SEND TO GITHUB - Auto-update: %mydate% %mytime%
 )
 
 git commit -m "%commit_message%"

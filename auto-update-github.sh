@@ -1,30 +1,32 @@
 #!/bin/bash
 
 echo "========================================"
-echo "   Auto GitHub Update Script"
+echo "   ALWAYS SEND TO GITHUB - Auto Update"
 echo "========================================"
 echo
 
+echo "Adding all changes first..."
+git add .
+
 echo "Checking for changes..."
 
-# Check if there are any changes
+# Check if there are any changes after git add
 if [ -z "$(git status --porcelain)" ]; then
-    echo "No changes detected."
+    echo "No changes detected after git add."
     exit 0
 fi
 
-echo "Changes detected! Updating GitHub..."
+echo "Changes detected! ALWAYS SENDING TO GITHUB..."
 echo
 
-echo "Adding all changes..."
-git add .
+echo "All changes already added..."
 
 echo
 read -p "Enter commit message (or press Enter for auto-message): " commit_message
 
 if [ -z "$commit_message" ]; then
     current_date=$(date +"%Y-%m-%d %H:%M")
-    commit_message="Auto-update: $current_date"
+    commit_message="ALWAYS SEND TO GITHUB - Auto-update: $current_date"
 fi
 
 echo "Committing changes..."
