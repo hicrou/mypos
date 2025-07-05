@@ -214,7 +214,12 @@ const languages = {
         plumbing: 'Plumbing',
         accessDenied: 'Access Denied',
         noPermissionCategories: 'You don\'t have permission to manage categories.',
-        topSellingProducts: 'Top Selling Products'
+        topSellingProducts: 'Top Selling Products',
+        minStock: 'Min Stock',
+        supplier: 'Supplier',
+        adjustStock: 'Adjust Stock',
+        id: 'ID',
+        notAvailable: 'N/A'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -426,7 +431,12 @@ const languages = {
         plumbing: 'سباكة',
         accessDenied: 'تم رفض الوصول',
         noPermissionCategories: 'ليس لديك إذن لإدارة الفئات.',
-        topSellingProducts: 'المنتجات الأكثر مبيعاً'
+        topSellingProducts: 'المنتجات الأكثر مبيعاً',
+        minStock: 'الحد الأدنى للمخزون',
+        supplier: 'المورد',
+        adjustStock: 'تعديل المخزون',
+        id: 'المعرف',
+        notAvailable: 'غير متوفر'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -626,7 +636,12 @@ const languages = {
         plumbing: 'Plomberie',
         accessDenied: 'Accès Refusé',
         noPermissionCategories: 'Vous n\'avez pas la permission de gérer les catégories.',
-        topSellingProducts: 'Produits les Plus Vendus'
+        topSellingProducts: 'Produits les Plus Vendus',
+        minStock: 'Stock Minimum',
+        supplier: 'Fournisseur',
+        adjustStock: 'Ajuster Stock',
+        id: 'ID',
+        notAvailable: 'N/D'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -826,7 +841,12 @@ const languages = {
         plumbing: 'Fontanería',
         accessDenied: 'Acceso Denegado',
         noPermissionCategories: 'No tienes permiso para gestionar categorías.',
-        topSellingProducts: 'Productos Más Vendidos'
+        topSellingProducts: 'Productos Más Vendidos',
+        minStock: 'Stock Mínimo',
+        supplier: 'Proveedor',
+        adjustStock: 'Ajustar Stock',
+        id: 'ID',
+        notAvailable: 'N/D'
     }
 };
 
@@ -1873,14 +1893,14 @@ function loadInventoryView() {
             <table>
                 <thead>
                     <tr>
-                        <th>${t('name')}</th>
-                        <th>${t('category')}</th>
-                        <th>${t('price')}</th>
-                        <th>${t('stock')}</th>
-                        <th>Min Stock</th>
-                        <th>${t('barcode')}</th>
-                        <th>Supplier</th>
-                        <th>Actions</th>
+                        <th data-translate="name">${t('name')}</th>
+                        <th data-translate="category">${t('category')}</th>
+                        <th data-translate="price">${t('price')}</th>
+                        <th data-translate="stock">${t('stock')}</th>
+                        <th data-translate="minStock">${t('minStock')}</th>
+                        <th data-translate="barcode">${t('barcode')}</th>
+                        <th data-translate="supplier">${t('supplier')}</th>
+                        <th data-translate="actions">${t('actions')}</th>
                     </tr>
                 </thead>
                 <tbody id="inventory-tbody">
@@ -1909,11 +1929,11 @@ function generateInventoryRows() {
                 </td>
                 <td>${product.minStock}</td>
                 <td>${product.barcode}</td>
-                <td>${product.supplier || 'N/A'}</td>
+                <td>${product.supplier || t('notAvailable')}</td>
                 <td class="actions">
-                    <button class="btn-small btn-primary" onclick="editProduct(${product.id})">${t('edit')}</button>
-                    <button class="btn-small btn-success" onclick="adjustStock(${product.id})">Adjust Stock</button>
-                    <button class="btn-small btn-danger" onclick="deleteProduct(${product.id})">${t('delete')}</button>
+                    <button class="btn-small btn-primary" onclick="editProduct(${product.id})" data-translate="edit">${t('edit')}</button>
+                    <button class="btn-small btn-success" onclick="adjustStock(${product.id})" data-translate="adjustStock">${t('adjustStock')}</button>
+                    <button class="btn-small btn-danger" onclick="deleteProduct(${product.id})" data-translate="delete">${t('delete')}</button>
                 </td>
             </tr>
         `;
@@ -1957,11 +1977,11 @@ function filterInventory() {
                 </td>
                 <td>${product.minStock}</td>
                 <td>${product.barcode}</td>
-                <td>${product.supplier || 'N/A'}</td>
+                <td>${product.supplier || t('notAvailable')}</td>
                 <td class="actions">
-                    <button class="btn-small btn-primary" onclick="editProduct(${product.id})">${t('edit')}</button>
-                    <button class="btn-small btn-success" onclick="adjustStock(${product.id})">Adjust Stock</button>
-                    <button class="btn-small btn-danger" onclick="deleteProduct(${product.id})">${t('delete')}</button>
+                    <button class="btn-small btn-primary" onclick="editProduct(${product.id})" data-translate="edit">${t('edit')}</button>
+                    <button class="btn-small btn-success" onclick="adjustStock(${product.id})" data-translate="adjustStock">${t('adjustStock')}</button>
+                    <button class="btn-small btn-danger" onclick="deleteProduct(${product.id})" data-translate="delete">${t('delete')}</button>
                 </td>
             </tr>
         `;
@@ -2006,17 +2026,17 @@ function showAddProductModal() {
                         <input type="number" id="product-stock" required>
                     </div>
                     <div class="form-group">
-                        <label>Min Stock:</label>
+                        <label data-translate="minStock">${t('minStock')}:</label>
                         <input type="number" id="product-min-stock" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>${t('barcode')}:</label>
+                        <label data-translate="barcode">${t('barcode')}:</label>
                         <input type="text" id="product-barcode" required>
                     </div>
                     <div class="form-group">
-                        <label>Supplier:</label>
+                        <label data-translate="supplier">${t('supplier')}:</label>
                         <input type="text" id="product-supplier">
                     </div>
                 </div>
@@ -2099,17 +2119,17 @@ function editProduct(productId) {
                         <input type="number" id="edit-product-stock" value="${product.stock}" required>
                     </div>
                     <div class="form-group">
-                        <label>Min Stock:</label>
+                        <label data-translate="minStock">${t('minStock')}:</label>
                         <input type="number" id="edit-product-min-stock" value="${product.minStock}" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>${t('barcode')}:</label>
+                        <label data-translate="barcode">${t('barcode')}:</label>
                         <input type="text" id="edit-product-barcode" value="${product.barcode}" required>
                     </div>
                     <div class="form-group">
-                        <label>Supplier:</label>
+                        <label data-translate="supplier">${t('supplier')}:</label>
                         <input type="text" id="edit-product-supplier" value="${product.supplier || ''}">
                     </div>
                 </div>
@@ -2906,7 +2926,7 @@ function generateLowStockReportHTML(lowStockProducts) {
                                 <td>${t(product.category)}</td>
                                 <td>${product.stock}</td>
                                 <td>${product.minStock}</td>
-                                <td>${product.supplier || 'N/A'}</td>
+                                <td>${product.supplier || t('notAvailable')}</td>
                                 <td>${isUrgent ? t('outOfStock') : t('lowStock')}</td>
                             </tr>
                         `;
@@ -3041,7 +3061,7 @@ function generateExpiredItemsReportHTML(expiredProducts, nearExpiryProducts) {
                                     <td>${expiryDate.toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : currentLanguage === 'fr' ? 'fr-FR' : currentLanguage === 'es' ? 'es-ES' : 'en-US')}</td>
                                     <td>${daysOverdue}</td>
                                     <td>${product.stock}</td>
-                                    <td>${product.supplier || 'N/A'}</td>
+                                    <td>${product.supplier || t('notAvailable')}</td>
                                 </tr>
                             `;
                         }).join('')}
@@ -3076,7 +3096,7 @@ function generateExpiredItemsReportHTML(expiredProducts, nearExpiryProducts) {
                                     <td>${expiryDate.toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : currentLanguage === 'fr' ? 'fr-FR' : currentLanguage === 'es' ? 'es-ES' : 'en-US')}</td>
                                     <td>${daysUntilExpiry}</td>
                                     <td>${product.stock}</td>
-                                    <td>${product.supplier || 'N/A'}</td>
+                                    <td>${product.supplier || t('notAvailable')}</td>
                                 </tr>
                             `;
                         }).join('')}
@@ -3121,7 +3141,7 @@ function loadUsersView() {
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th data-translate="id">${t('id')}</th>
                         <th data-translate="username">${t('username')}</th>
                         <th data-translate="name">${t('name')}</th>
                         <th data-translate="role">${t('role')}</th>
@@ -3148,7 +3168,7 @@ function generateUsersRows() {
             <td>
                 <span class="role-badge role-${user.role}">${t(user.role)}</span>
             </td>
-            <td>${user.cardNumber || 'N/A'}</td>
+            <td>${user.cardNumber || t('notAvailable')}</td>
             <td>
                 <span class="status-badge ${user.cardAccess ? 'active' : 'inactive'}">
                     ${user.cardAccess ? t('active') : t('inactive')}
@@ -3552,13 +3572,13 @@ function exportInventory() {
         stock: product.stock,
         minStock: product.minStock,
         barcode: product.barcode,
-        supplier: product.supplier || 'N/A',
-        expiryDate: product.expiryDate || 'N/A'
+        supplier: product.supplier || t('notAvailable'),
+        expiryDate: product.expiryDate || t('notAvailable')
     }));
 
     const csvContent = "data:text/csv;charset=utf-8,"
         + [
-            [t('name'), t('category'), t('price'), t('stock'), 'Min Stock', t('barcode'), t('supplier'), t('expiryDate')].join(','),
+            [t('name'), t('category'), t('price'), t('stock'), t('minStock'), t('barcode'), t('supplier'), t('expiryDate')].join(','),
             ...inventoryData.map(row => Object.values(row).join(','))
         ].join('\n');
 
@@ -3607,7 +3627,7 @@ function exportUsers() {
 
     const csvContent = "data:text/csv;charset=utf-8,"
         + [
-            ['ID', t('username'), t('name'), t('role'), t('status')].join(','),
+            [t('id'), t('username'), t('name'), t('role'), t('status')].join(','),
             ...usersData.map(row => Object.values(row).join(','))
         ].join('\n');
 
@@ -3781,7 +3801,7 @@ function loadCategoriesView() {
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th data-translate="id">${t('id')}</th>
                         <th data-translate="categoryName">${t('categoryName')}</th>
                         <th data-translate="status">${t('status')}</th>
                         <th data-translate="actions">${t('actions')}</th>
