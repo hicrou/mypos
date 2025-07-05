@@ -6,7 +6,7 @@
 // Multi-language support (English, Arabic, French, Spanish)
 const languages = {
     en: {
-        welcome: 'Welcome to My POS System',
+        welcome: 'Welcome to MyPOS',
         categories: 'Categories',
         products: 'Products',
         currentOrder: 'Current Order',
@@ -177,10 +177,39 @@ const languages = {
         allStockLevels: 'All Stock Levels',
         lowStockOnly: 'Low Stock Only',
         outOfStockOnly: 'Out of Stock Only',
-        search: 'Search'
+        search: 'Search',
+        selectPaymentMethod: 'Please select a payment method',
+        insufficientStock: 'Insufficient stock',
+        available: 'Available',
+        saleCompleted: 'Sale completed',
+        cardNumber: 'Card Number',
+        cardAccess: 'Card Access',
+        categories: 'Categories',
+        categoryManagement: 'Category Management',
+        addCategory: 'Add Category',
+        editCategory: 'Edit Category',
+        categoryName: 'Category Name',
+        charts: 'Charts',
+        salesChart: 'Sales Chart',
+        productChart: 'Product Chart',
+        dailySales: 'Daily Sales',
+        weeklySales: 'Weekly Sales',
+        monthlySales: 'Monthly Sales',
+        category: 'Category',
+        addedSuccessfully: 'added successfully',
+        updatedSuccessfully: 'updated successfully',
+        successfully: 'successfully',
+        activated: 'activated',
+        deactivated: 'deactivated',
+        cannotDeleteCategory: 'Cannot delete category',
+        productsUsingCategory: 'products using this category',
+        confirmDeleteCategory: 'Are you sure you want to delete category',
+        deletedSuccessfully: 'deleted successfully',
+        categoriesExported: 'Categories exported successfully',
+        productsSold: 'Products Sold'
     },
     ar: {
-        welcome: 'مرحباً بنظام نقاط البيع',
+        welcome: 'مرحباً بـ MyPOS',
         categories: 'الفئات',
         products: 'المنتجات',
         currentOrder: 'الطلب الحالي',
@@ -352,10 +381,39 @@ const languages = {
         allStockLevels: 'جميع مستويات المخزون',
         lowStockOnly: 'المخزون المنخفض فقط',
         outOfStockOnly: 'نفد من المخزون فقط',
-        search: 'بحث'
+        search: 'بحث',
+        selectPaymentMethod: 'يرجى اختيار طريقة الدفع',
+        insufficientStock: 'مخزون غير كافي',
+        available: 'متوفر',
+        saleCompleted: 'تمت عملية البيع',
+        cardNumber: 'رقم البطاقة',
+        cardAccess: 'الوصول بالبطاقة',
+        categories: 'الفئات',
+        categoryManagement: 'إدارة الفئات',
+        addCategory: 'إضافة فئة',
+        editCategory: 'تعديل الفئة',
+        categoryName: 'اسم الفئة',
+        charts: 'الرسوم البيانية',
+        salesChart: 'رسم بياني للمبيعات',
+        productChart: 'رسم بياني للمنتجات',
+        dailySales: 'المبيعات اليومية',
+        weeklySales: 'المبيعات الأسبوعية',
+        monthlySales: 'المبيعات الشهرية',
+        category: 'الفئة',
+        addedSuccessfully: 'تمت الإضافة بنجاح',
+        updatedSuccessfully: 'تم التحديث بنجاح',
+        successfully: 'بنجاح',
+        activated: 'تم التفعيل',
+        deactivated: 'تم إلغاء التفعيل',
+        cannotDeleteCategory: 'لا يمكن حذف الفئة',
+        productsUsingCategory: 'منتجات تستخدم هذه الفئة',
+        confirmDeleteCategory: 'هل أنت متأكد من أنك تريد حذف الفئة',
+        deletedSuccessfully: 'تم الحذف بنجاح',
+        categoriesExported: 'تم تصدير الفئات بنجاح',
+        productsSold: 'المنتجات المباعة'
     },
     fr: {
-        welcome: 'Bienvenue dans Mon Système POS',
+        welcome: 'Bienvenue à MyPOS',
         categories: 'Catégories',
         products: 'Produits',
         currentOrder: 'Commande Actuelle',
@@ -515,10 +573,39 @@ const languages = {
         allStockLevels: 'Tous Niveaux de Stock',
         lowStockOnly: 'Stock Faible Seulement',
         outOfStockOnly: 'Rupture de Stock Seulement',
-        search: 'Rechercher'
+        search: 'Rechercher',
+        selectPaymentMethod: 'Veuillez sélectionner un mode de paiement',
+        insufficientStock: 'Stock insuffisant',
+        available: 'Disponible',
+        saleCompleted: 'Vente terminée',
+        cardNumber: 'Numéro de Carte',
+        cardAccess: 'Accès par Carte',
+        categories: 'Catégories',
+        categoryManagement: 'Gestion des Catégories',
+        addCategory: 'Ajouter Catégorie',
+        editCategory: 'Modifier Catégorie',
+        categoryName: 'Nom de Catégorie',
+        charts: 'Graphiques',
+        salesChart: 'Graphique des Ventes',
+        productChart: 'Graphique des Produits',
+        dailySales: 'Ventes Quotidiennes',
+        weeklySales: 'Ventes Hebdomadaires',
+        monthlySales: 'Ventes Mensuelles',
+        category: 'Catégorie',
+        addedSuccessfully: 'ajouté avec succès',
+        updatedSuccessfully: 'mis à jour avec succès',
+        successfully: 'avec succès',
+        activated: 'activé',
+        deactivated: 'désactivé',
+        cannotDeleteCategory: 'Impossible de supprimer la catégorie',
+        productsUsingCategory: 'produits utilisant cette catégorie',
+        confirmDeleteCategory: 'Êtes-vous sûr de vouloir supprimer la catégorie',
+        deletedSuccessfully: 'supprimé avec succès',
+        categoriesExported: 'Catégories exportées avec succès',
+        productsSold: 'Produits Vendus'
     },
     es: {
-        welcome: 'Bienvenido a Mi Sistema POS',
+        welcome: 'Bienvenido a MyPOS',
         categories: 'Categorías',
         products: 'Productos',
         currentOrder: 'Pedido Actual',
@@ -678,7 +765,36 @@ const languages = {
         allStockLevels: 'Todos Niveles de Stock',
         lowStockOnly: 'Solo Stock Bajo',
         outOfStockOnly: 'Solo Sin Stock',
-        search: 'Buscar'
+        search: 'Buscar',
+        selectPaymentMethod: 'Por favor seleccione un método de pago',
+        insufficientStock: 'Stock insuficiente',
+        available: 'Disponible',
+        saleCompleted: 'Venta completada',
+        cardNumber: 'Número de Tarjeta',
+        cardAccess: 'Acceso con Tarjeta',
+        categories: 'Categorías',
+        categoryManagement: 'Gestión de Categorías',
+        addCategory: 'Agregar Categoría',
+        editCategory: 'Editar Categoría',
+        categoryName: 'Nombre de Categoría',
+        charts: 'Gráficos',
+        salesChart: 'Gráfico de Ventas',
+        productChart: 'Gráfico de Productos',
+        dailySales: 'Ventas Diarias',
+        weeklySales: 'Ventas Semanales',
+        monthlySales: 'Ventas Mensuales',
+        category: 'Categoría',
+        addedSuccessfully: 'agregado exitosamente',
+        updatedSuccessfully: 'actualizado exitosamente',
+        successfully: 'exitosamente',
+        activated: 'activado',
+        deactivated: 'desactivado',
+        cannotDeleteCategory: 'No se puede eliminar la categoría',
+        productsUsingCategory: 'productos usando esta categoría',
+        confirmDeleteCategory: '¿Está seguro de que desea eliminar la categoría',
+        deletedSuccessfully: 'eliminado exitosamente',
+        categoriesExported: 'Categorías exportadas exitosamente',
+        productsSold: 'Productos Vendidos'
     }
 };
 
@@ -782,13 +898,20 @@ const userRoles = {
     }
 };
 
-// Sample users (in production, this would be in a secure database)
+// Sample users with card access (in production, this would be in a secure database)
 const users = [
-    { id: 1, username: 'admin', password: 'admin123', role: 'admin', name: 'Administrator', active: true },
-    { id: 2, username: 'manager', password: 'manager123', role: 'manager', name: 'Store Manager', active: true },
-    { id: 3, username: 'cashier1', password: 'cashier123', role: 'cashier', name: 'Ahmed Ali', active: true },
-    { id: 4, username: 'cashier2', password: 'cashier123', role: 'cashier', name: 'Fatima Hassan', active: true },
-    { id: 5, username: 'cashier3', password: 'cashier123', role: 'cashier', name: 'Omar Benali', active: true }
+    { id: 1, username: 'admin', password: 'admin123', role: 'admin', name: 'Administrator', active: true, cardNumber: '1001', cardAccess: true },
+    { id: 2, username: 'manager', password: 'manager123', role: 'manager', name: 'Store Manager', active: true, cardNumber: '1002', cardAccess: true },
+    { id: 3, username: 'cashier1', password: 'cashier123', role: 'cashier', name: 'Ahmed Ali', active: true, cardNumber: '1003', cardAccess: true },
+    { id: 4, username: 'cashier2', password: 'cashier123', role: 'cashier', name: 'Fatima Hassan', active: true, cardNumber: '1004', cardAccess: true },
+    { id: 5, username: 'cashier3', password: 'cashier123', role: 'cashier', name: 'Omar Benali', active: true, cardNumber: '1005', cardAccess: false }
+];
+
+// Categories management
+let categories = JSON.parse(localStorage.getItem('categories')) || [
+    { id: 1, name: 'Food', nameAr: 'طعام', nameFr: 'Nourriture', nameEs: 'Comida', active: true },
+    { id: 2, name: 'Drinks', nameAr: 'مشروبات', nameFr: 'Boissons', nameEs: 'Bebidas', active: true },
+    { id: 3, name: 'Snacks', nameAr: 'وجبات خفيفة', nameFr: 'Collations', nameEs: 'Aperitivos', active: true }
 ];
 
 // Enhanced product data with full inventory management, images, and expiry dates
@@ -1873,6 +1996,7 @@ function loadReportsView() {
             <div class="reports-actions">
                 <button class="btn btn-primary" onclick="generateDailyReport()" data-translate="dailyReport">${t('dailyReport')}</button>
                 <button class="btn btn-secondary" onclick="generateWeeklyReport()" data-translate="weeklyReport">${t('weeklyReport')}</button>
+                <button class="btn btn-info" onclick="toggleCharts()" data-translate="charts">${t('charts')}</button>
                 <button class="btn btn-success" onclick="exportReports()" data-translate="export">${t('export')}</button>
             </div>
         </div>
@@ -1898,6 +2022,19 @@ function loadReportsView() {
                     <h3 data-translate="totalProducts">${t('totalProducts')}</h3>
                     <div class="report-value">${products.length}</div>
                     <div class="report-subtitle">${t('activeProducts')}</div>
+                </div>
+            </div>
+
+            <div class="charts-section" id="charts-section" style="display: none;">
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3 data-translate="salesChart">${t('salesChart')}</h3>
+                        <canvas id="salesChart" width="400" height="200"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3 data-translate="productChart">${t('productChart')}</h3>
+                        <canvas id="productChart" width="400" height="200"></canvas>
+                    </div>
                 </div>
             </div>
 
@@ -2775,11 +2912,13 @@ function loadUsersView() {
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Username</th>
-                        <th>Name</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th data-translate="username">${t('username')}</th>
+                        <th data-translate="name">${t('name')}</th>
+                        <th data-translate="role">${t('role')}</th>
+                        <th data-translate="cardNumber">${t('cardNumber')}</th>
+                        <th data-translate="cardAccess">${t('cardAccess')}</th>
+                        <th data-translate="status">${t('status')}</th>
+                        <th data-translate="actions">${t('actions')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -2799,9 +2938,15 @@ function generateUsersRows() {
             <td>
                 <span class="role-badge role-${user.role}">${t(user.role)}</span>
             </td>
+            <td>${user.cardNumber || 'N/A'}</td>
+            <td>
+                <span class="status-badge ${user.cardAccess ? 'active' : 'inactive'}">
+                    ${user.cardAccess ? t('active') : t('inactive')}
+                </span>
+            </td>
             <td>
                 <span class="status-badge ${user.active ? 'active' : 'inactive'}">
-                    ${user.active ? 'Active' : 'Inactive'}
+                    ${user.active ? t('active') : t('inactive')}
                 </span>
             </td>
             <td class="actions">
@@ -3397,6 +3542,442 @@ function connectUSBScanner() {
     // This function is already implemented above
     // Just ensuring it's available
     console.log('USB scanner connected');
+}
+
+// ===== CATEGORIES MANAGEMENT =====
+
+function loadCategoriesView() {
+    if (!hasPermission('inventory')) {
+        document.getElementById('categories-view').innerHTML = `
+            <div class="access-denied">
+                <h2>Access Denied</h2>
+                <p>You don't have permission to manage categories.</p>
+            </div>
+        `;
+        return;
+    }
+
+    const categoriesView = document.getElementById('categories-view');
+    categoriesView.innerHTML = `
+        <div class="categories-header">
+            <h2 data-translate="categoryManagement">${t('categoryManagement')}</h2>
+            <div class="categories-actions">
+                <button class="btn btn-primary" onclick="showAddCategoryModal()" data-translate="addCategory">${t('addCategory')}</button>
+                <button class="btn btn-secondary" onclick="exportCategories()" data-translate="export">${t('export')}</button>
+            </div>
+        </div>
+
+        <div class="categories-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th data-translate="categoryName">${t('categoryName')}</th>
+                        <th data-translate="status">${t('status')}</th>
+                        <th data-translate="actions">${t('actions')}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${generateCategoriesRows()}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+function generateCategoriesRows() {
+    return categories.map(category => `
+        <tr class="${category.active ? '' : 'inactive'}">
+            <td>${category.id}</td>
+            <td>${getCategoryName(category)}</td>
+            <td>
+                <span class="status-badge ${category.active ? 'active' : 'inactive'}">
+                    ${category.active ? t('active') : t('inactive')}
+                </span>
+            </td>
+            <td class="actions">
+                <button class="btn-small btn-primary" onclick="editCategory(${category.id})" data-translate="edit">${t('edit')}</button>
+                <button class="btn-small ${category.active ? 'btn-warning' : 'btn-success'}"
+                        onclick="toggleCategoryStatus(${category.id})">
+                    ${category.active ? t('deactivate') : t('activate')}
+                </button>
+                <button class="btn-small btn-danger" onclick="deleteCategory(${category.id})" data-translate="delete">${t('delete')}</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function getCategoryName(category) {
+    switch(currentLanguage) {
+        case 'ar': return category.nameAr || category.name;
+        case 'fr': return category.nameFr || category.name;
+        case 'es': return category.nameEs || category.name;
+        default: return category.name;
+    }
+}
+
+function showAddCategoryModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'block';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2 data-translate="addCategory">${t('addCategory')}</h2>
+            <form onsubmit="addNewCategory(event)">
+                <div class="form-group">
+                    <label>English Name:</label>
+                    <input type="text" id="category-name-en" required>
+                </div>
+                <div class="form-group">
+                    <label>Arabic Name:</label>
+                    <input type="text" id="category-name-ar" required>
+                </div>
+                <div class="form-group">
+                    <label>French Name:</label>
+                    <input type="text" id="category-name-fr" required>
+                </div>
+                <div class="form-group">
+                    <label>Spanish Name:</label>
+                    <input type="text" id="category-name-es" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()" data-translate="cancel">${t('cancel')}</button>
+                    <button type="submit" class="btn btn-primary" data-translate="save">${t('save')}</button>
+                </div>
+            </form>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function addNewCategory(event) {
+    event.preventDefault();
+
+    const newCategory = {
+        id: Math.max(...categories.map(c => c.id)) + 1,
+        name: document.getElementById('category-name-en').value,
+        nameAr: document.getElementById('category-name-ar').value,
+        nameFr: document.getElementById('category-name-fr').value,
+        nameEs: document.getElementById('category-name-es').value,
+        active: true
+    };
+
+    categories.push(newCategory);
+    saveToStorage('categories', categories);
+
+    closeModal();
+    loadCategoriesView();
+
+    // Refresh product categories
+    updateProductCategories();
+
+    alert(`${t('category')} "${getCategoryName(newCategory)}" ${t('addedSuccessfully')}!`);
+}
+
+function editCategory(categoryId) {
+    const category = categories.find(c => c.id === categoryId);
+    if (!category) return;
+
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'block';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2 data-translate="editCategory">${t('editCategory')}</h2>
+            <form onsubmit="updateCategory(event, ${categoryId})">
+                <div class="form-group">
+                    <label>English Name:</label>
+                    <input type="text" id="edit-category-name-en" value="${category.name}" required>
+                </div>
+                <div class="form-group">
+                    <label>Arabic Name:</label>
+                    <input type="text" id="edit-category-name-ar" value="${category.nameAr}" required>
+                </div>
+                <div class="form-group">
+                    <label>French Name:</label>
+                    <input type="text" id="edit-category-name-fr" value="${category.nameFr}" required>
+                </div>
+                <div class="form-group">
+                    <label>Spanish Name:</label>
+                    <input type="text" id="edit-category-name-es" value="${category.nameEs}" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()" data-translate="cancel">${t('cancel')}</button>
+                    <button type="submit" class="btn btn-primary" data-translate="save">${t('save')}</button>
+                </div>
+            </form>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function updateCategory(event, categoryId) {
+    event.preventDefault();
+
+    const category = categories.find(c => c.id === categoryId);
+    if (!category) return;
+
+    category.name = document.getElementById('edit-category-name-en').value;
+    category.nameAr = document.getElementById('edit-category-name-ar').value;
+    category.nameFr = document.getElementById('edit-category-name-fr').value;
+    category.nameEs = document.getElementById('edit-category-name-es').value;
+
+    saveToStorage('categories', categories);
+
+    closeModal();
+    loadCategoriesView();
+
+    // Refresh product categories
+    updateProductCategories();
+
+    alert(`${t('category')} "${getCategoryName(category)}" ${t('updatedSuccessfully')}!`);
+}
+
+function toggleCategoryStatus(categoryId) {
+    const category = categories.find(c => c.id === categoryId);
+    if (!category) return;
+
+    category.active = !category.active;
+    saveToStorage('categories', categories);
+
+    loadCategoriesView();
+
+    // Refresh product categories
+    updateProductCategories();
+
+    alert(`${t('category')} "${getCategoryName(category)}" ${category.active ? t('activated') : t('deactivated')} ${t('successfully')}!`);
+}
+
+function deleteCategory(categoryId) {
+    const category = categories.find(c => c.id === categoryId);
+    if (!category) return;
+
+    // Check if category is used by products
+    const productsUsingCategory = products.filter(p => p.category === category.name.toLowerCase());
+    if (productsUsingCategory.length > 0) {
+        alert(`${t('cannotDeleteCategory')} "${getCategoryName(category)}" - ${productsUsingCategory.length} ${t('productsUsingCategory')}`);
+        return;
+    }
+
+    if (confirm(`${t('confirmDeleteCategory')} "${getCategoryName(category)}"?`)) {
+        const index = categories.findIndex(c => c.id === categoryId);
+        categories.splice(index, 1);
+        saveToStorage('categories', categories);
+
+        loadCategoriesView();
+
+        // Refresh product categories
+        updateProductCategories();
+
+        alert(`${t('category')} "${getCategoryName(category)}" ${t('deletedSuccessfully')}!`);
+    }
+}
+
+function exportCategories() {
+    const categoriesData = categories.map(category => ({
+        id: category.id,
+        name: category.name,
+        nameAr: category.nameAr,
+        nameFr: category.nameFr,
+        nameEs: category.nameEs,
+        status: category.active ? t('active') : t('inactive')
+    }));
+
+    const csvContent = "data:text/csv;charset=utf-8,"
+        + [
+            ['ID', 'English', 'Arabic', 'French', 'Spanish', t('status')].join(','),
+            ...categoriesData.map(row => Object.values(row).join(','))
+        ].join('\n');
+
+    const link = document.createElement('a');
+    link.href = encodeURI(csvContent);
+    link.download = `categories-${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+
+    alert(t('categoriesExported'));
+}
+
+function updateProductCategories() {
+    // Refresh product display if on sales tab
+    if (currentView === 'sales') {
+        displayProducts();
+    }
+
+    // Refresh inventory if on inventory tab
+    if (currentView === 'inventory') {
+        loadInventoryView();
+    }
+}
+
+// ===== CHARTS FUNCTIONALITY =====
+
+let chartsVisible = false;
+let salesChart = null;
+let productChart = null;
+
+function toggleCharts() {
+    const chartsSection = document.getElementById('charts-section');
+    chartsVisible = !chartsVisible;
+
+    if (chartsVisible) {
+        chartsSection.style.display = 'block';
+        // Load Chart.js if not already loaded
+        if (typeof Chart === 'undefined') {
+            loadChartJS(() => initializeCharts());
+        } else {
+            initializeCharts();
+        }
+    } else {
+        chartsSection.style.display = 'none';
+        destroyCharts();
+    }
+}
+
+function loadChartJS(callback) {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+    script.onload = callback;
+    document.head.appendChild(script);
+}
+
+function initializeCharts() {
+    // Small delay to ensure Chart.js is fully loaded
+    setTimeout(() => {
+        initializeSalesChart();
+        initializeProductChart();
+    }, 100);
+}
+
+function destroyCharts() {
+    if (salesChart) {
+        salesChart.destroy();
+        salesChart = null;
+    }
+    if (productChart) {
+        productChart.destroy();
+        productChart = null;
+    }
+}
+
+function initializeSalesChart() {
+    const ctx = document.getElementById('salesChart');
+    if (!ctx || typeof Chart === 'undefined') return;
+
+    // Get last 7 days of sales data
+    const last7Days = [];
+    const salesData = [];
+
+    for (let i = 6; i >= 0; i--) {
+        const date = new Date();
+        date.setDate(date.getDate() - i);
+        const dateStr = date.toDateString();
+
+        last7Days.push(date.toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : currentLanguage === 'fr' ? 'fr-FR' : currentLanguage === 'es' ? 'es-ES' : 'en-US'));
+
+        const dayTotal = salesHistory
+            .filter(sale => new Date(sale.date).toDateString() === dateStr)
+            .reduce((sum, sale) => sum + sale.total, 0);
+
+        salesData.push(dayTotal);
+    }
+
+    salesChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: last7Days,
+            datasets: [{
+                label: t('dailySales'),
+                data: salesData,
+                borderColor: '#667eea',
+                backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: t('salesChart')
+                },
+                legend: {
+                    display: true
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return formatCurrency(value);
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function initializeProductChart() {
+    const ctx = document.getElementById('productChart');
+    if (!ctx || typeof Chart === 'undefined') return;
+
+    // Get top 5 selling products
+    const productSales = {};
+
+    salesHistory.forEach(sale => {
+        sale.items.forEach(item => {
+            if (!productSales[item.id]) {
+                productSales[item.id] = {
+                    name: getProductName(item),
+                    quantity: 0
+                };
+            }
+            productSales[item.id].quantity += item.quantity;
+        });
+    });
+
+    const sortedProducts = Object.values(productSales)
+        .sort((a, b) => b.quantity - a.quantity)
+        .slice(0, 5);
+
+    const labels = sortedProducts.map(p => p.name);
+    const data = sortedProducts.map(p => p.quantity);
+
+    productChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: t('productsSold'),
+                data: data,
+                backgroundColor: [
+                    '#667eea',
+                    '#764ba2',
+                    '#f093fb',
+                    '#f5576c',
+                    '#4facfe'
+                ],
+                borderWidth: 2,
+                borderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: t('topSellingProducts')
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                }
+            }
+        }
+    });
 }
 
 // ===== LOGO MANAGEMENT =====
@@ -4170,3 +4751,16 @@ window.clearAllData = clearAllData;
 // Scanner functions
 window.startCameraScanning = startCameraScanning;
 window.connectUSBScanner = connectUSBScanner;
+
+// Categories functions
+window.loadCategoriesView = loadCategoriesView;
+window.showAddCategoryModal = showAddCategoryModal;
+window.addNewCategory = addNewCategory;
+window.editCategory = editCategory;
+window.updateCategory = updateCategory;
+window.toggleCategoryStatus = toggleCategoryStatus;
+window.deleteCategory = deleteCategory;
+window.exportCategories = exportCategories;
+
+// Charts functions
+window.toggleCharts = toggleCharts;
