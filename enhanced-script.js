@@ -115,7 +115,18 @@ const languages = {
         noExpiredItems: 'No expired or near-expiry items found',
         expiryStatus: 'Expiry Status',
         daysUntilExpiry: 'Days Until Expiry',
-        daysOverdue: 'Days Overdue'
+        daysOverdue: 'Days Overdue',
+        scanBarcode: 'Scan Barcode',
+        enterBarcode: 'Enter Barcode',
+        useCamera: 'Use Camera',
+        manualEntry: 'Manual Entry',
+        connectScanner: 'Connect Scanner',
+        pointCameraAtBarcode: 'Point camera at barcode',
+        productAdded: 'Product Added',
+        productNotFound: 'Product Not Found',
+        scannerConnected: 'Scanner Connected',
+        scannerDisconnected: 'Scanner Disconnected',
+        cameraAccessError: 'Camera access denied or not available'
     },
     ar: {
         welcome: 'مرحباً بنظام نقاط البيع',
@@ -228,7 +239,18 @@ const languages = {
         noExpiredItems: 'لا توجد عناصر منتهية الصلاحية أو قريبة من انتهاء الصلاحية',
         expiryStatus: 'حالة انتهاء الصلاحية',
         daysUntilExpiry: 'أيام حتى انتهاء الصلاحية',
-        daysOverdue: 'أيام متأخرة'
+        daysOverdue: 'أيام متأخرة',
+        scanBarcode: 'مسح الباركود',
+        enterBarcode: 'أدخل الباركود',
+        useCamera: 'استخدم الكاميرا',
+        manualEntry: 'إدخال يدوي',
+        connectScanner: 'ربط الماسح',
+        pointCameraAtBarcode: 'وجه الكاميرا نحو الباركود',
+        productAdded: 'تم إضافة المنتج',
+        productNotFound: 'المنتج غير موجود',
+        scannerConnected: 'الماسح متصل',
+        scannerDisconnected: 'الماسح غير متصل',
+        cameraAccessError: 'تم رفض الوصول للكاميرا أو غير متاحة'
     },
     fr: {
         welcome: 'Bienvenue dans Mon Système POS',
@@ -3370,25 +3392,93 @@ function autoSave() {
     saveToStorage('settings', settings);
 }
 
-// ===== BARCODE SCANNING (PLACEHOLDER) =====
+// ===== ENHANCED BARCODE SCANNING =====
 
+let barcodeBuffer = '';
+let barcodeTimeout;
+let scannerConnected = false;
+
+// Enhanced barcode scanning with hardware support
 function scanBarcode() {
-    // This is a placeholder for barcode scanning functionality
-    // In a real implementation, you would integrate with a barcode scanner API
-    const barcode = prompt('Enter barcode or product name:');
-    if (barcode) {
-        const product = products.find(p =>
-            p.barcode === barcode ||
-            p.name.toLowerCase().includes(barcode.toLowerCase()) ||
-            (p.nameAr && p.nameAr.includes(barcode))
-        );
-
-        if (product) {
-            addToCart(product);
-        } else {
-            alert('Product not found');
-        }
+    // Check if we have camera access for mobile scanning
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        showBarcodeScanModal();
+    } else {
+        // Fallback to manual entry
+        manualBarcodeEntry();
     }
+}
+
+function manualBarcodeEntry() {
+    const barcode = prompt(t('enterBarcode') + ':');
+    if (barcode) {
+        processBarcodeInput(barcode.trim());
+    }
+}
+
+function showBarcodeScanModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal barcode-modal';
+    modal.style.display = 'block';
+    modal.innerHTML = `
+        <div class="modal-content barcode-scan-content">
+            <h2>${t('scanBarcode')}</h2>
+            <div class="scan-options">
+                <button class="btn btn-primary" onclick="startCameraScanning()">${t('useCamera')}</button>
+                <button class="btn btn-secondary" onclick="manualBarcodeEntry(); closeModal()">${t('manualEntry')}</button>
+                <button class="btn btn-info" onclick="connectUSBScanner()">${t('connectScanner')}</button>
+            </div>
+            <div id="camera-container" style="display: none;">
+                <video id="camera-preview" autoplay playsinline></video>
+                <div class="scan-overlay">
+                    <div class="scan-line"></div>
+                </div>
+                <div class="scan-instructions">${t('pointCameraAtBarcode')}</div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">${t('cancel')}</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Process barcode input from any source
+function processBarcodeInput(barcode) {
+    console.log('Processing barcode:', barcode);
+
+    // Find product by barcode
+    const product = findProductByBarcode(barcode);
+
+    if (product) {
+        addToCart(product);
+        showBarcodeSuccess(product);
+    } else {
+        showBarcodeError(barcode);
+    }
+}
+
+function findProductByBarcode(barcode) {
+    return products.find(p =>
+        p.active && (
+            p.barcode === barcode ||
+            p.barcode === barcode.replace(/^0+/, '') || // Remove leading zeros
+            barcode.includes(p.barcode) ||
+            p.name.toLowerCase().includes(barcode.toLowerCase()) ||
+            (p.nameAr && p.nameAr.includes(barcode)) ||
+            (p.nameFr && p.nameFr.toLowerCase().includes(barcode.toLowerCase())) ||
+            (p.nameEs && p.nameEs.toLowerCase().includes(barcode.toLowerCase()))
+        )
+    );
+}
+
+function showBarcodeSuccess(product) {
+    const productName = getProductName(product);
+    alert(`✅ ${t('productAdded')}: ${productName} - ${formatCurrency(product.price)}`);
+}
+
+function showBarcodeError(barcode) {
+    alert(`❌ ${t('productNotFound')}: ${barcode}`);
 }
 
 // Make functions globally available
