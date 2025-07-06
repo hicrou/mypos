@@ -282,7 +282,20 @@ const languages = {
         note: 'Note',
         generatedOn: 'Generated On',
         noProductsFound: 'No products found',
-        tryDifferentCategory: 'Try selecting a different category'
+        tryDifferentCategory: 'Try selecting a different category',
+        regular: 'Regular',
+        multiPriceOptions: 'Multi-Price Options',
+        optional: 'Optional',
+        wholesalePrice: 'Wholesale Price',
+        retailPrice: 'Retail Price',
+        vipPrice: 'VIP Price',
+        bulkPrice: 'Bulk Price',
+        priceType: 'Price Type',
+        selectPriceType: 'Select Price Type',
+        cannotAddMore: 'Cannot add more',
+        onlyInStock: 'Only in stock',
+        product: 'Product',
+        each: 'each'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -562,7 +575,20 @@ const languages = {
         note: 'ملاحظة',
         generatedOn: 'تم إنشاؤه في',
         noProductsFound: 'لم يتم العثور على منتجات',
-        tryDifferentCategory: 'جرب اختيار فئة مختلفة'
+        tryDifferentCategory: 'جرب اختيار فئة مختلفة',
+        regular: 'عادي',
+        multiPriceOptions: 'خيارات الأسعار المتعددة',
+        optional: 'اختياري',
+        wholesalePrice: 'سعر الجملة',
+        retailPrice: 'سعر التجزئة',
+        vipPrice: 'سعر كبار الشخصيات',
+        bulkPrice: 'سعر الكمية',
+        priceType: 'نوع السعر',
+        selectPriceType: 'اختر نوع السعر',
+        cannotAddMore: 'لا يمكن إضافة المزيد',
+        onlyInStock: 'متوفر فقط',
+        product: 'المنتج',
+        each: 'للقطعة'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -830,7 +856,20 @@ const languages = {
         note: 'Note',
         generatedOn: 'Généré Le',
         noProductsFound: 'Aucun produit trouvé',
-        tryDifferentCategory: 'Essayez de sélectionner une catégorie différente'
+        tryDifferentCategory: 'Essayez de sélectionner une catégorie différente',
+        regular: 'Régulier',
+        multiPriceOptions: 'Options de Prix Multiples',
+        optional: 'Optionnel',
+        wholesalePrice: 'Prix de Gros',
+        retailPrice: 'Prix de Détail',
+        vipPrice: 'Prix VIP',
+        bulkPrice: 'Prix en Vrac',
+        priceType: 'Type de Prix',
+        selectPriceType: 'Sélectionner le Type de Prix',
+        cannotAddMore: 'Impossible d\'ajouter plus',
+        onlyInStock: 'Seulement en stock',
+        product: 'Produit',
+        each: 'chacun'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -1098,7 +1137,20 @@ const languages = {
         note: 'Nota',
         generatedOn: 'Generado El',
         noProductsFound: 'No se encontraron productos',
-        tryDifferentCategory: 'Intente seleccionar una categoría diferente'
+        tryDifferentCategory: 'Intente seleccionar una categoría diferente',
+        regular: 'Regular',
+        multiPriceOptions: 'Opciones de Precios Múltiples',
+        optional: 'Opcional',
+        wholesalePrice: 'Precio Mayorista',
+        retailPrice: 'Precio Minorista',
+        vipPrice: 'Precio VIP',
+        bulkPrice: 'Precio por Volumen',
+        priceType: 'Tipo de Precio',
+        selectPriceType: 'Seleccionar Tipo de Precio',
+        cannotAddMore: 'No se puede agregar más',
+        onlyInStock: 'Solo en stock',
+        product: 'Producto',
+        each: 'cada uno'
     }
 };
 
@@ -1851,6 +1903,9 @@ function updateLanguage() {
 
     // Update currency selector with translated names
     updateCurrencySelector();
+
+    // Update category buttons with translated names
+    updateCategoryButtons();
 }
 
 // ===== MAIN SYSTEM INITIALIZATION =====
@@ -2330,9 +2385,34 @@ function showAddProductModal() {
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>${t('price')}:</label>
+                        <label>${t('price')} (${t('regular')}):</label>
                         <input type="number" id="product-price" step="0.01" required>
                     </div>
+                </div>
+                <div class="form-section">
+                    <h3>${t('multiPriceOptions')} (${t('optional')})</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>${t('wholesalePrice')}:</label>
+                            <input type="number" id="product-wholesale-price" step="0.01" placeholder="${t('optional')}">
+                        </div>
+                        <div class="form-group">
+                            <label>${t('retailPrice')}:</label>
+                            <input type="number" id="product-retail-price" step="0.01" placeholder="${t('optional')}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>${t('vipPrice')}:</label>
+                            <input type="number" id="product-vip-price" step="0.01" placeholder="${t('optional')}">
+                        </div>
+                        <div class="form-group">
+                            <label>${t('bulkPrice')}:</label>
+                            <input type="number" id="product-bulk-price" step="0.01" placeholder="${t('optional')}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
@@ -2367,12 +2447,26 @@ function showAddProductModal() {
 function addNewProduct(event) {
     event.preventDefault();
 
+    // Get multi-price values
+    const wholesalePrice = document.getElementById('product-wholesale-price').value;
+    const retailPrice = document.getElementById('product-retail-price').value;
+    const vipPrice = document.getElementById('product-vip-price').value;
+    const bulkPrice = document.getElementById('product-bulk-price').value;
+
     const newProduct = {
         id: Math.max(...products.map(p => p.id)) + 1,
         name: document.getElementById('product-name').value,
         nameAr: document.getElementById('product-name-ar').value,
         category: document.getElementById('product-category').value,
         price: parseFloat(document.getElementById('product-price').value),
+        // Multi-price options
+        prices: {
+            regular: parseFloat(document.getElementById('product-price').value),
+            wholesale: wholesalePrice ? parseFloat(wholesalePrice) : null,
+            retail: retailPrice ? parseFloat(retailPrice) : null,
+            vip: vipPrice ? parseFloat(vipPrice) : null,
+            bulk: bulkPrice ? parseFloat(bulkPrice) : null
+        },
         stock: parseInt(document.getElementById('product-stock').value),
         minStock: parseInt(document.getElementById('product-min-stock').value),
         maxStock: parseInt(document.getElementById('product-stock').value) * 5,
@@ -4838,29 +4932,100 @@ function displayFilteredProducts(filteredProducts) {
 
 // ===== CART MANAGEMENT =====
 
-function addToCart(product) {
+function addToCart(product, priceType = 'regular') {
     if (product.stock <= 0) {
-        alert(`${product.name} is out of stock!`);
+        alert(`${getProductName(product)} ${t('outOfStock')}!`);
         return;
     }
 
-    const existingItem = cart.find(item => item.id === product.id);
+    // Check if product has multiple prices and show selection modal
+    if (product.prices && hasMultiplePrices(product) && priceType === 'regular') {
+        showPriceSelectionModal(product);
+        return;
+    }
+
+    // Get the selected price
+    const selectedPrice = getProductPrice(product, priceType);
+
+    const existingItem = cart.find(item => item.id === product.id && item.priceType === priceType);
 
     if (existingItem) {
         if (existingItem.quantity >= product.stock) {
-            alert(`Cannot add more ${product.name}. Only ${product.stock} in stock.`);
+            alert(`${t('cannotAddMore')} ${getProductName(product)}. ${t('onlyInStock')}: ${product.stock}.`);
             return;
         }
         existingItem.quantity += 1;
     } else {
         cart.push({
             ...product,
-            quantity: 1
+            quantity: 1,
+            price: selectedPrice,
+            priceType: priceType,
+            priceLabel: t(priceType)
         });
     }
 
     updateCartDisplay();
     saveCart();
+}
+
+function hasMultiplePrices(product) {
+    if (!product.prices) return false;
+
+    const priceCount = Object.values(product.prices).filter(price => price !== null && price !== undefined).length;
+    return priceCount > 1;
+}
+
+function getProductPrice(product, priceType = 'regular') {
+    if (product.prices && product.prices[priceType] !== null && product.prices[priceType] !== undefined) {
+        return product.prices[priceType];
+    }
+    return product.price; // Fallback to regular price
+}
+
+function showPriceSelectionModal(product) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'block';
+
+    const availablePrices = [];
+    if (product.prices) {
+        Object.entries(product.prices).forEach(([type, price]) => {
+            if (price !== null && price !== undefined) {
+                availablePrices.push({ type, price });
+            }
+        });
+    }
+
+    modal.innerHTML = `
+        <div class="modal-content price-selection-modal">
+            <h2>${t('selectPriceType')}</h2>
+            <p>${t('product')}: <strong>${getProductName(product)}</strong></p>
+
+            <div class="price-options">
+                ${availablePrices.map(({ type, price }) => `
+                    <button class="price-option-btn" onclick="addToCartWithPrice(${product.id}, '${type}')">
+                        <div class="price-type">${t(type)}</div>
+                        <div class="price-amount">${formatPrice(price)}</div>
+                    </button>
+                `).join('')}
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeModal()">${t('cancel')}</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+}
+
+function addToCartWithPrice(productId, priceType) {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+        closeModal();
+        addToCart(product, priceType);
+    }
 }
 
 function removeFromCart(productId) {
@@ -4901,11 +5066,12 @@ function updateCartDisplay() {
     } else {
         cartItemsEl.innerHTML = cart.map(item => {
             const itemName = currentLanguage === 'ar' && item.nameAr ? item.nameAr : item.name;
+            const priceTypeLabel = item.priceType && item.priceType !== 'regular' ? ` (${t(item.priceType)})` : '';
             return `
                 <div class="cart-item">
                     <div class="item-info">
-                        <div class="item-name">${itemName}</div>
-                        <div class="item-price">${formatPrice(item.price)} each</div>
+                        <div class="item-name">${itemName}${priceTypeLabel}</div>
+                        <div class="item-price">${formatPrice(item.price)} ${t('each')}</div>
                     </div>
                     <div class="quantity-controls">
                         <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
@@ -5989,6 +6155,10 @@ window.generateCategoryButtons = generateCategoryButtons;
 window.updateCategoryButtons = updateCategoryButtons;
 window.attachCategoryButtonListeners = attachCategoryButtonListeners;
 window.filterProductsByCategory = filterProductsByCategory;
+window.addToCartWithPrice = addToCartWithPrice;
+window.hasMultiplePrices = hasMultiplePrices;
+window.getProductPrice = getProductPrice;
+window.showPriceSelectionModal = showPriceSelectionModal;
 
 // Charts functions
 window.toggleCharts = toggleCharts;
