@@ -2033,6 +2033,23 @@ body {
 
 .standard-actions .btn {
     flex: 1;
+    min-width: 0;
+}
+
+.standard-actions {
+    flex-wrap: wrap;
+}
+
+.standard-actions .btn[data-translate="quotation"] {
+    background: linear-gradient(135deg, #ffc107 0%, #ff8f00 100%);
+    border: none;
+    color: #212529;
+    font-weight: 600;
+}
+
+.standard-actions .btn[data-translate="quotation"]:hover {
+    background: linear-gradient(135deg, #ffb300 0%, #ff6f00 100%);
+    transform: translateY(-1px);
 }
 
 .print-actions {

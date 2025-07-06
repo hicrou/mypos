@@ -268,7 +268,19 @@ const languages = {
         receiptNumber: 'Receipt #',
         thankYou: 'Thank you for your business',
         quickCash: 'Quick Cash',
-        quickCard: 'Quick Card'
+        quickCard: 'Quick Card',
+        printQuotation: 'Print Quotation',
+        quotation: 'Quotation',
+        quotationNumber: 'Quotation #',
+        validUntil: 'Valid Until',
+        quotationNote: 'This is a quotation only. No payment has been processed.',
+        quotationFooter: 'Thank you for considering our services',
+        preparedBy: 'Prepared By',
+        status: 'Status',
+        pending: 'Pending',
+        item: 'Item',
+        note: 'Note',
+        generatedOn: 'Generated On'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -534,7 +546,19 @@ const languages = {
         receiptNumber: 'رقم الإيصال',
         thankYou: 'شكراً لك على تعاملك معنا',
         quickCash: 'دفع نقدي سريع',
-        quickCard: 'دفع بالبطاقة سريع'
+        quickCard: 'دفع بالبطاقة سريع',
+        printQuotation: 'طباعة عرض سعر',
+        quotation: 'عرض سعر',
+        quotationNumber: 'رقم عرض السعر',
+        validUntil: 'صالح حتى',
+        quotationNote: 'هذا عرض سعر فقط. لم يتم معالجة أي دفعة.',
+        quotationFooter: 'شكراً لك على النظر في خدماتنا',
+        preparedBy: 'أعده',
+        status: 'الحالة',
+        pending: 'قيد الانتظار',
+        item: 'الصنف',
+        note: 'ملاحظة',
+        generatedOn: 'تم إنشاؤه في'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -788,7 +812,19 @@ const languages = {
         receiptNumber: 'Reçu #',
         thankYou: 'Merci pour votre confiance',
         quickCash: 'Paiement Rapide',
-        quickCard: 'Carte Rapide'
+        quickCard: 'Carte Rapide',
+        printQuotation: 'Imprimer Devis',
+        quotation: 'Devis',
+        quotationNumber: 'Devis #',
+        validUntil: 'Valide Jusqu\'au',
+        quotationNote: 'Ceci est un devis seulement. Aucun paiement n\'a été traité.',
+        quotationFooter: 'Merci de considérer nos services',
+        preparedBy: 'Préparé Par',
+        status: 'Statut',
+        pending: 'En Attente',
+        item: 'Article',
+        note: 'Note',
+        generatedOn: 'Généré Le'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -1042,7 +1078,19 @@ const languages = {
         receiptNumber: 'Recibo #',
         thankYou: 'Gracias por su compra',
         quickCash: 'Efectivo Rápido',
-        quickCard: 'Tarjeta Rápida'
+        quickCard: 'Tarjeta Rápida',
+        printQuotation: 'Imprimir Cotización',
+        quotation: 'Cotización',
+        quotationNumber: 'Cotización #',
+        validUntil: 'Válido Hasta',
+        quotationNote: 'Esta es solo una cotización. No se ha procesado ningún pago.',
+        quotationFooter: 'Gracias por considerar nuestros servicios',
+        preparedBy: 'Preparado Por',
+        status: 'Estado',
+        pending: 'Pendiente',
+        item: 'Artículo',
+        note: 'Nota',
+        generatedOn: 'Generado El'
     }
 };
 
@@ -1973,9 +2021,11 @@ function createMainInterface() {
                                 </div>
                                 <div class="standard-actions">
                                     <button class="btn btn-primary" id="checkout" data-translate="checkout">${t('checkout')}</button>
+                                    <button class="btn btn-warning" onclick="printQuotation()" data-translate="quotation">📋 ${t('quotation')}</button>
                                     <button class="btn btn-secondary" id="clear-cart" data-translate="clearCart">${t('clearCart')}</button>
                                 </div>
                                 <div class="print-actions">
+                                    <button class="btn btn-warning btn-small" id="print-quotation" data-translate="printQuotation">${t('printQuotation')}</button>
                                     <button class="btn btn-success btn-small" id="print-receipt" data-translate="printReceipt">${t('printReceipt')}</button>
                                     <button class="btn btn-info btn-small" id="print-invoice" data-translate="printInvoice">${t('printInvoice')}</button>
                                 </div>
@@ -5196,6 +5246,257 @@ function printReceipt(sale = null) {
     receiptWindow.print();
 }
 
+// ===== QUOTATION PRINTING SYSTEM =====
+
+function printQuotation() {
+    if (cart.length === 0) {
+        alert(t('emptyCart'));
+        return;
+    }
+
+    const quotationData = generateQuotationData();
+    const quotationWindow = window.open('', '_blank');
+    const quotationHTML = generateQuotationHTML(quotationData);
+
+    quotationWindow.document.write(quotationHTML);
+    quotationWindow.document.close();
+    quotationWindow.focus();
+    quotationWindow.print();
+}
+
+function generateQuotationData() {
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const tax = subtotal * settings.taxRate;
+    const total = subtotal + tax;
+
+    // Create quotation valid for 30 days
+    const validUntilDate = new Date();
+    validUntilDate.setDate(validUntilDate.getDate() + 30);
+
+    return {
+        id: 'QUO-' + generateId(),
+        date: new Date().toISOString(),
+        validUntil: validUntilDate.toISOString(),
+        preparedBy: currentUser.name,
+        items: [...cart],
+        subtotal: subtotal,
+        tax: tax,
+        total: total,
+        currency: currentCurrency
+    };
+}
+
+function generateQuotationHTML(quotation) {
+    const date = new Date(quotation.date);
+    const validUntil = new Date(quotation.validUntil);
+    const formattedDate = date.toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : 'en-US');
+    const formattedValidUntil = validUntil.toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : 'en-US');
+
+    return `
+        <!DOCTYPE html>
+        <html dir="${currentLanguage === 'ar' ? 'rtl' : 'ltr'}">
+        <head>
+            <meta charset="UTF-8">
+            <title>${t('quotation')} - ${quotation.id}</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    max-width: 800px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    font-size: 14px;
+                    line-height: 1.6;
+                    color: #333;
+                }
+                .header {
+                    text-align: center;
+                    margin-bottom: 30px;
+                    border-bottom: 3px solid #667eea;
+                    padding-bottom: 20px;
+                }
+                .company-name {
+                    font-size: 24px;
+                    font-weight: bold;
+                    color: #667eea;
+                    margin-bottom: 10px;
+                }
+                .quotation-title {
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #495057;
+                    margin: 20px 0;
+                }
+                .quotation-info {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 20px;
+                    margin-bottom: 30px;
+                    background: #f8f9fa;
+                    padding: 20px;
+                    border-radius: 8px;
+                }
+                .info-section h4 {
+                    margin: 0 0 10px 0;
+                    color: #495057;
+                    font-weight: 600;
+                }
+                .info-section p {
+                    margin: 5px 0;
+                    color: #6c757d;
+                }
+                .items-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-bottom: 30px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                }
+                .items-table th {
+                    background: #667eea;
+                    color: white;
+                    padding: 15px;
+                    text-align: left;
+                    font-weight: 600;
+                }
+                .items-table td {
+                    padding: 12px 15px;
+                    border-bottom: 1px solid #e9ecef;
+                }
+                .items-table tr:nth-child(even) {
+                    background: #f8f9fa;
+                }
+                .items-table tr:hover {
+                    background: #e3f2fd;
+                }
+                .totals-section {
+                    background: #f8f9fa;
+                    padding: 20px;
+                    border-radius: 8px;
+                    margin-bottom: 30px;
+                }
+                .totals-table {
+                    width: 100%;
+                    max-width: 400px;
+                    margin-left: auto;
+                }
+                .totals-table td {
+                    padding: 8px 15px;
+                    border: none;
+                }
+                .totals-table .total-row {
+                    font-weight: bold;
+                    font-size: 16px;
+                    border-top: 2px solid #667eea;
+                    color: #667eea;
+                }
+                .quotation-note {
+                    background: #fff3cd;
+                    border: 1px solid #ffeaa7;
+                    border-radius: 8px;
+                    padding: 15px;
+                    margin-bottom: 20px;
+                    color: #856404;
+                    font-weight: 500;
+                }
+                .footer {
+                    text-align: center;
+                    color: #6c757d;
+                    font-size: 12px;
+                    border-top: 1px solid #e9ecef;
+                    padding-top: 20px;
+                }
+                @media print {
+                    body { margin: 0; padding: 10px; }
+                    .quotation-note { background: #f8f9fa !important; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <div class="company-name">${settings.companyName}</div>
+                <div>${settings.companyAddress}</div>
+                <div>${settings.companyPhone}</div>
+                <div class="quotation-title">${t('quotation').toUpperCase()}</div>
+            </div>
+
+            <div class="quotation-info">
+                <div class="info-section">
+                    <h4>${t('quotationNumber')}:</h4>
+                    <p>${quotation.id}</p>
+                    <h4>${t('date')}:</h4>
+                    <p>${formattedDate}</p>
+                    <h4>${t('validUntil')}:</h4>
+                    <p>${formattedValidUntil}</p>
+                </div>
+                <div class="info-section">
+                    <h4>${t('preparedBy')}:</h4>
+                    <p>${quotation.preparedBy}</p>
+                    <h4>${t('currency')}:</h4>
+                    <p>${currencies[quotation.currency].name}</p>
+                    <h4>${t('status')}:</h4>
+                    <p style="color: #28a745; font-weight: 600;">${t('pending')}</p>
+                </div>
+            </div>
+
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th>${t('item')}</th>
+                        <th>${t('qty')}</th>
+                        <th>${t('unitPrice')}</th>
+                        <th>${t('total')}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${quotation.items.map(item => {
+                        const itemName = currentLanguage === 'ar' && item.nameAr ? item.nameAr : item.name;
+                        const itemTotal = item.price * item.quantity;
+                        return `
+                            <tr>
+                                <td>${itemName}</td>
+                                <td>${item.quantity}</td>
+                                <td>${formatPrice(item.price)}</td>
+                                <td>${formatPrice(itemTotal)}</td>
+                            </tr>
+                        `;
+                    }).join('')}
+                </tbody>
+            </table>
+
+            <div class="totals-section">
+                <table class="totals-table">
+                    <tr>
+                        <td>${t('subtotal')}:</td>
+                        <td style="text-align: right;">${formatPrice(quotation.subtotal)}</td>
+                    </tr>
+                    <tr>
+                        <td>${t('tax')} (${(settings.taxRate * 100).toFixed(0)}%):</td>
+                        <td style="text-align: right;">${formatPrice(quotation.tax)}</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td>${t('total')}:</td>
+                        <td style="text-align: right;">${formatPrice(quotation.total)}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="quotation-note">
+                <strong>📋 ${t('note')}:</strong> ${t('quotationNote')}
+            </div>
+
+            <div class="footer">
+                <div>${t('quotationFooter')}</div>
+                <div style="margin-top: 10px;">
+                    ${settings.receiptFooter}
+                </div>
+                <div style="margin-top: 10px;">
+                    ${t('generatedOn')}: ${new Date().toLocaleString()}
+                </div>
+            </div>
+        </body>
+        </html>
+    `;
+}
+
 function generateReceiptHTML(sale) {
     const date = new Date(sale.date);
     const formattedDate = date.toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : 'en-US');
@@ -5345,6 +5646,7 @@ function setupEventListeners() {
     const checkoutBtn = document.getElementById('checkout');
     const printReceiptBtn = document.getElementById('print-receipt');
     const printInvoiceBtn = document.getElementById('print-invoice');
+    const printQuotationBtn = document.getElementById('print-quotation');
     const cancelCheckoutBtn = document.getElementById('cancel-checkout');
     const completeSaleBtn = document.getElementById('complete-sale');
 
@@ -5352,6 +5654,7 @@ function setupEventListeners() {
     if (checkoutBtn) checkoutBtn.addEventListener('click', openCheckout);
     if (printReceiptBtn) printReceiptBtn.addEventListener('click', () => printReceipt());
     if (printInvoiceBtn) printInvoiceBtn.addEventListener('click', () => printInvoice());
+    if (printQuotationBtn) printQuotationBtn.addEventListener('click', () => printQuotation());
     if (cancelCheckoutBtn) cancelCheckoutBtn.addEventListener('click', closeCheckout);
     if (completeSaleBtn) completeSaleBtn.addEventListener('click', completeSale);
 
@@ -5489,6 +5792,7 @@ window.openCheckout = openCheckout;
 window.closeCheckout = closeCheckout;
 window.completeSale = completeSale;
 window.printReceipt = printReceipt;
+window.printQuotation = printQuotation;
 window.scanBarcode = scanBarcode;
 window.quickCashPayment = quickCashPayment;
 window.quickCardPayment = quickCardPayment;
