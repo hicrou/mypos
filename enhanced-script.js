@@ -295,7 +295,12 @@ const languages = {
         cannotAddMore: 'Cannot add more',
         onlyInStock: 'Only in stock',
         product: 'Product',
-        each: 'each'
+        each: 'each',
+        scan: 'Scan',
+        priceTypeChanged: 'Price type changed to',
+        editQuantity: 'Edit quantity',
+        removeItem: 'Remove item',
+        invalidQuantity: 'Invalid quantity. Please enter a valid number.'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -588,7 +593,12 @@ const languages = {
         cannotAddMore: 'لا يمكن إضافة المزيد',
         onlyInStock: 'متوفر فقط',
         product: 'المنتج',
-        each: 'للقطعة'
+        each: 'للقطعة',
+        scan: 'مسح',
+        priceTypeChanged: 'تم تغيير نوع السعر إلى',
+        editQuantity: 'تعديل الكمية',
+        removeItem: 'إزالة العنصر',
+        invalidQuantity: 'كمية غير صحيحة. يرجى إدخال رقم صحيح.'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -869,7 +879,12 @@ const languages = {
         cannotAddMore: 'Impossible d\'ajouter plus',
         onlyInStock: 'Seulement en stock',
         product: 'Produit',
-        each: 'chacun'
+        each: 'chacun',
+        scan: 'Scanner',
+        priceTypeChanged: 'Type de prix changé en',
+        editQuantity: 'Modifier la quantité',
+        removeItem: 'Supprimer l\'article',
+        invalidQuantity: 'Quantité invalide. Veuillez entrer un nombre valide.'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -1150,7 +1165,12 @@ const languages = {
         cannotAddMore: 'No se puede agregar más',
         onlyInStock: 'Solo en stock',
         product: 'Producto',
-        each: 'cada uno'
+        each: 'cada uno',
+        scan: 'Escanear',
+        priceTypeChanged: 'Tipo de precio cambiado a',
+        editQuantity: 'Editar cantidad',
+        removeItem: 'Eliminar artículo',
+        invalidQuantity: 'Cantidad inválida. Por favor ingrese un número válido.'
     }
 };
 
@@ -2032,6 +2052,16 @@ function createMainInterface() {
                         <section class="categories-section">
                             <div class="search-bar">
                                 <input type="text" id="product-search" placeholder="${t('search')}..." onkeyup="searchProducts()">
+                                <div class="price-type-selector-container">
+                                    <label for="price-type-selector">${t('priceType')}:</label>
+                                    <select id="price-type-selector" class="price-type-select" onchange="updatePriceTypeDisplay()" title="${t('selectPriceType')}">
+                                        <option value="regular">${t('regular')}</option>
+                                        <option value="wholesale">${t('wholesalePrice')}</option>
+                                        <option value="retail">${t('retailPrice')}</option>
+                                        <option value="vip">${t('vipPrice')}</option>
+                                        <option value="bulk">${t('bulkPrice')}</option>
+                                    </select>
+                                </div>
                                 <button onclick="scanBarcode()" class="btn btn-secondary">📷 Scan</button>
                             </div>
                             <h2 data-translate="categories">${t('categories')}</h2>
@@ -4932,22 +4962,28 @@ function displayFilteredProducts(filteredProducts) {
 
 // ===== CART MANAGEMENT =====
 
-function addToCart(product, priceType = 'regular') {
+function addToCart(product, priceType = null) {
     if (product.stock <= 0) {
         alert(`${getProductName(product)} ${t('outOfStock')}!`);
         return;
     }
 
-    // Check if product has multiple prices and show selection modal
-    if (product.prices && hasMultiplePrices(product) && priceType === 'regular') {
-        showPriceSelectionModal(product);
-        return;
+    // Get selected price type from selector if not specified
+    if (!priceType) {
+        const priceTypeSelector = document.getElementById('price-type-selector');
+        priceType = priceTypeSelector ? priceTypeSelector.value : 'regular';
     }
 
     // Get the selected price
-    const selectedPrice = getProductPrice(product, priceType);
+    let selectedPrice = getProductPrice(product, priceType);
 
-    const existingItem = cart.find(item => item.id === product.id && item.priceType === priceType);
+    // If selected price type not available, fallback to regular price
+    if (selectedPrice === null || selectedPrice === undefined) {
+        selectedPrice = product.price;
+        priceType = 'regular';
+    }
+
+    const existingItem = cart.find(item => item.id === product.id && (item.priceType || 'regular') === priceType);
 
     if (existingItem) {
         if (existingItem.quantity >= product.stock) {
@@ -4967,6 +5003,40 @@ function addToCart(product, priceType = 'regular') {
 
     updateCartDisplay();
     saveCart();
+}
+
+// Update price type display when selector changes
+function updatePriceTypeDisplay() {
+    const priceTypeSelector = document.getElementById('price-type-selector');
+    const selectedType = priceTypeSelector.value;
+
+    // Update product cards to show selected price type
+    displayProducts();
+
+    // Show notification of price type change
+    const notification = document.createElement('div');
+    notification.className = 'price-type-notification';
+    notification.innerHTML = `${t('priceTypeChanged')}: ${t(selectedType)}`;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--primary-color);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 6px;
+        z-index: 1000;
+        font-size: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    `;
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 2000);
 }
 
 function hasMultiplePrices(product) {
@@ -5028,29 +5098,56 @@ function addToCartWithPrice(productId, priceType) {
     }
 }
 
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
+function removeFromCart(productId, priceType = 'regular') {
+    cart = cart.filter(item => !(item.id === productId && (item.priceType || 'regular') === priceType));
     updateCartDisplay();
     saveCart();
 }
 
-function updateQuantity(productId, change) {
-    const item = cart.find(item => item.id === productId);
+function updateQuantity(productId, change, priceType = 'regular') {
+    const item = cart.find(item => item.id === productId && (item.priceType || 'regular') === priceType);
     const product = products.find(p => p.id === productId);
 
     if (item && product) {
         const newQuantity = item.quantity + change;
 
         if (newQuantity <= 0) {
-            removeFromCart(productId);
+            removeFromCart(productId, priceType);
         } else if (newQuantity > product.stock) {
-            alert(`Cannot add more ${product.name}. Only ${product.stock} in stock.`);
+            alert(`${t('cannotAddMore')} ${getProductName(product)}. ${t('onlyInStock')}: ${product.stock}.`);
         } else {
             item.quantity = newQuantity;
             updateCartDisplay();
             saveCart();
         }
     }
+}
+
+// Direct quantity editing function
+function updateQuantityDirect(productId, newQuantity, priceType = 'regular') {
+    const item = cart.find(item => item.id === productId && (item.priceType || 'regular') === priceType);
+    const product = products.find(p => p.id === productId);
+
+    if (!item || !product) return;
+
+    const quantity = parseInt(newQuantity);
+
+    // Validate quantity
+    if (isNaN(quantity) || quantity < 1) {
+        alert(t('invalidQuantity'));
+        updateCartDisplay(); // Reset to previous value
+        return;
+    }
+
+    if (quantity > product.stock) {
+        alert(`${t('cannotAddMore')} ${getProductName(product)}. ${t('onlyInStock')}: ${product.stock}.`);
+        updateCartDisplay(); // Reset to previous value
+        return;
+    }
+
+    item.quantity = quantity;
+    updateCartDisplay();
+    saveCart();
 }
 
 function updateCartDisplay() {
@@ -5074,10 +5171,13 @@ function updateCartDisplay() {
                         <div class="item-price">${formatPrice(item.price)} ${t('each')}</div>
                     </div>
                     <div class="quantity-controls">
-                        <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
-                        <span class="quantity">${item.quantity}</span>
-                        <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
-                        <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️</button>
+                        <button class="qty-btn" onclick="updateQuantity(${item.id}, -1, '${item.priceType || 'regular'}')">-</button>
+                        <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="${item.stock}"
+                               onchange="updateQuantityDirect(${item.id}, this.value, '${item.priceType || 'regular'}')"
+                               onblur="updateQuantityDirect(${item.id}, this.value, '${item.priceType || 'regular'}')"
+                               title="Edit quantity">
+                        <button class="qty-btn" onclick="updateQuantity(${item.id}, 1, '${item.priceType || 'regular'}')">+</button>
+                        <button class="remove-btn" onclick="removeFromCart(${item.id}, '${item.priceType || 'regular'}')" title="Remove item">🗑️</button>
                     </div>
                 </div>
             `;
@@ -6159,6 +6259,8 @@ window.addToCartWithPrice = addToCartWithPrice;
 window.hasMultiplePrices = hasMultiplePrices;
 window.getProductPrice = getProductPrice;
 window.showPriceSelectionModal = showPriceSelectionModal;
+window.updateQuantityDirect = updateQuantityDirect;
+window.updatePriceTypeDisplay = updatePriceTypeDisplay;
 
 // Charts functions
 window.toggleCharts = toggleCharts;

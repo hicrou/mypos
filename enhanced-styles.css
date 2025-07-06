@@ -2211,6 +2211,112 @@ body {
     font-weight: 600;
 }
 
+/* ===== PRICE TYPE SELECTOR ===== */
+.price-type-selector-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 10px;
+}
+
+.price-type-selector-container label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #495057;
+    white-space: nowrap;
+}
+
+.price-type-select {
+    padding: 6px 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-size: 12px;
+    background: white;
+    color: #495057;
+    min-width: 120px;
+}
+
+.price-type-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+/* ===== EDITABLE QUANTITY INPUT ===== */
+.quantity-input {
+    width: 50px;
+    padding: 4px 6px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    background: white;
+    color: #495057;
+}
+
+.quantity-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+    background: #f8f9fa;
+}
+
+.quantity-input:hover {
+    border-color: #adb5bd;
+}
+
+/* Enhanced quantity controls */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #dee2e6;
+    background: #f8f9fa;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 600;
+    color: #495057;
+    transition: all 0.2s ease;
+}
+
+.qty-btn:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.qty-btn:active {
+    background: #dee2e6;
+}
+
+.remove-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #dc3545;
+    background: #f8d7da;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #721c24;
+    transition: all 0.2s ease;
+    margin-left: 5px;
+}
+
+.remove-btn:hover {
+    background: #f5c6cb;
+    border-color: #b21f2d;
+}
+
 /* ===== PRINT STYLES ===== */
 @media print {
     .top-nav,
