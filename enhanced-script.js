@@ -230,7 +230,10 @@ const languages = {
         requested: 'Requested',
         outOfStock: 'Out of Stock',
         remaining: 'remaining',
-        andMore: 'and {0} more'
+        andMore: 'and {0} more',
+        time: 'Time',
+        items: 'Items',
+        completeSale: 'Complete Sale'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -458,7 +461,10 @@ const languages = {
         requested: 'مطلوب',
         outOfStock: 'نفد المخزون',
         remaining: 'متبقي',
-        andMore: 'و {0} أكثر'
+        andMore: 'و {0} أكثر',
+        time: 'الوقت',
+        items: 'العناصر',
+        completeSale: 'إتمام البيع'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -674,7 +680,10 @@ const languages = {
         requested: 'Demandé',
         outOfStock: 'Rupture de Stock',
         remaining: 'restant',
-        andMore: 'et {0} de plus'
+        andMore: 'et {0} de plus',
+        time: 'Heure',
+        items: 'Articles',
+        completeSale: 'Finaliser Vente'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -890,7 +899,10 @@ const languages = {
         requested: 'Solicitado',
         outOfStock: 'Agotado',
         remaining: 'restante',
-        andMore: 'y {0} más'
+        andMore: 'y {0} más',
+        time: 'Hora',
+        items: 'Artículos',
+        completeSale: 'Completar Venta'
     }
 };
 
@@ -1839,7 +1851,7 @@ function createMainInterface() {
                 </div>
                 <div class="modal-actions">
                     <button class="btn btn-secondary" id="cancel-checkout" data-translate="cancel">${t('cancel')}</button>
-                    <button class="btn btn-primary" id="complete-sale">Complete Sale</button>
+                    <button class="btn btn-primary" id="complete-sale" data-translate="completeSale">${t('completeSale')}</button>
                 </div>
             </div>
         </div>
@@ -2490,12 +2502,12 @@ function generateDailyReport() {
             <table>
                 <thead>
                     <tr>
-                        <th>Time</th>
-                        <th>Receipt #</th>
-                        <th>Cashier</th>
-                        <th>Items</th>
-                        <th>Total</th>
-                        <th>Payment Method</th>
+                        <th data-translate="time">${t('time')}</th>
+                        <th data-translate="receipt">${t('receipt')} #</th>
+                        <th data-translate="cashier">${t('cashier')}</th>
+                        <th data-translate="items">${t('items')}</th>
+                        <th data-translate="total">${t('total')}</th>
+                        <th data-translate="paymentMethod">${t('paymentMethod')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -3226,8 +3238,9 @@ function generateUsersRows() {
             <td class="actions">
                 <button class="btn-small btn-primary" onclick="editUser(${user.id})">${t('edit')}</button>
                 <button class="btn-small ${user.active ? 'btn-warning' : 'btn-success'}"
-                        onclick="toggleUserStatus(${user.id})">
-                    ${user.active ? 'Deactivate' : 'Activate'}
+                        onclick="toggleUserStatus(${user.id})"
+                        data-translate="${user.active ? 'deactivate' : 'activate'}">
+                    ${user.active ? t('deactivate') : t('activate')}
                 </button>
                 ${user.id !== currentUser.id ? `<button class="btn-small btn-danger" onclick="deleteUser(${user.id})">${t('delete')}</button>` : ''}
             </td>
