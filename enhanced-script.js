@@ -248,7 +248,9 @@ const languages = {
         selectAtLeastOneProduct: 'Please select at least one product',
         products: 'products',
         name: 'Name',
-        actions: 'Actions'
+        actions: 'Actions',
+        adminOnlySettings: 'System settings can only be modified by administrators.',
+        contactAdministrator: 'Please contact your system administrator for changes.'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -494,7 +496,9 @@ const languages = {
         selectAtLeastOneProduct: 'يرجى تحديد منتج واحد على الأقل',
         products: 'منتجات',
         name: 'الاسم',
-        actions: 'الإجراءات'
+        actions: 'الإجراءات',
+        adminOnlySettings: 'إعدادات النظام يمكن تعديلها من قبل المديرين فقط.',
+        contactAdministrator: 'يرجى الاتصال بمدير النظام لإجراء التغييرات.'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -728,7 +732,9 @@ const languages = {
         selectAtLeastOneProduct: 'Veuillez sélectionner au moins un produit',
         products: 'produits',
         name: 'Nom',
-        actions: 'Actions'
+        actions: 'Actions',
+        adminOnlySettings: 'Les paramètres système ne peuvent être modifiés que par les administrateurs.',
+        contactAdministrator: 'Veuillez contacter votre administrateur système pour les modifications.'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -962,7 +968,9 @@ const languages = {
         selectAtLeastOneProduct: 'Por favor seleccione al menos un producto',
         products: 'productos',
         name: 'Nombre',
-        actions: 'Acciones'
+        actions: 'Acciones',
+        adminOnlySettings: 'La configuración del sistema solo puede ser modificada por administradores.',
+        contactAdministrator: 'Por favor contacte a su administrador del sistema para cambios.'
     }
 };
 
@@ -1736,68 +1744,74 @@ function createMainInterface() {
         <div class="pos-container">
             <!-- Top Navigation -->
             <nav class="top-nav">
-                <div class="nav-left">
-                    <div id="main-logo" style="display: inline-flex; align-items: center;">
-                        ${settings.companyLogo ?
-                            `<img src="${settings.companyLogo}" alt="${settings.companyName}" style="max-height: 40px; margin-right: 15px;">` :
-                            `<span style="font-weight: bold; color: var(--primary-color); margin-right: 15px;">${settings.companyName}</span>`
-                        }
-                    </div>
-                    <h1 data-translate="welcome">${t('welcome')}</h1>
-                    <div class="nav-tabs">
-                        <button class="nav-tab active" onclick="switchView('pos')" data-translate="sales">${t('sales')}</button>
-                        ${hasPermission('inventory') ? `<button class="nav-tab" onclick="switchView('inventory')" data-translate="inventory">${t('inventory')}</button>` : ''}
-                        ${hasPermission('inventory') ? `<button class="nav-tab" onclick="switchView('categories')" data-translate="categories">${t('categories')}</button>` : ''}
-                        ${hasPermission('reports') ? `<button class="nav-tab" onclick="switchView('reports')" data-translate="reports">${t('reports')}</button>` : ''}
-                        ${hasPermission('users') ? `<button class="nav-tab" onclick="switchView('users')" data-translate="users">${t('users')}</button>` : ''}
-                        ${hasPermission('settings') ? `<button class="nav-tab" onclick="switchView('settings')" data-translate="settings">${t('settings')}</button>` : ''}
-                    </div>
-                </div>
-                <div class="nav-right">
-                    <div class="controls-panel">
-                        <div class="language-currency-controls">
-                            <div class="control-item">
-                                <label class="control-label">
-                                    <i class="icon">🌐</i>
-                                    <span data-translate="language">${t('language')}</span>
-                                </label>
-                                <select id="language-selector" class="enhanced-select" onchange="changeLanguage(this.value)">
-                                    <option value="en" ${currentLanguage === 'en' ? 'selected' : ''}>🇺🇸 English</option>
-                                    <option value="ar" ${currentLanguage === 'ar' ? 'selected' : ''}>🇩🇿 العربية</option>
-                                    <option value="fr" ${currentLanguage === 'fr' ? 'selected' : ''}>🇫🇷 Français</option>
-                                    <option value="es" ${currentLanguage === 'es' ? 'selected' : ''}>🇪🇸 Español</option>
-                                </select>
+                <div class="nav-container">
+                    <div class="nav-left">
+                        <div class="company-branding">
+                            <div id="main-logo" class="company-logo">
+                                ${settings.companyLogo ?
+                                    `<img src="${settings.companyLogo}" alt="${settings.companyName}" class="logo-image">` :
+                                    `<div class="logo-text">${settings.companyName}</div>`
+                                }
                             </div>
-                            <div class="control-item">
-                                <label class="control-label">
-                                    <i class="icon">💰</i>
-                                    <span data-translate="currency">${t('currency')}</span>
-                                </label>
-                                <select id="currency-selector" class="enhanced-select" onchange="changeCurrency(this.value)">
-                                    ${Object.entries(currencies).map(([code, curr]) =>
-                                        `<option value="${code}" ${currentCurrency === code ? 'selected' : ''}>${curr.symbol} ${curr.name}</option>`
-                                    ).join('')}
-                                </select>
+                            <h1 class="welcome-title" data-translate="welcome">${t('welcome')}</h1>
+                        </div>
+                        <div class="nav-tabs-container">
+                            <div class="nav-tabs">
+                                <button class="nav-tab active" onclick="switchView('pos')" data-translate="sales">${t('sales')}</button>
+                                ${hasPermission('inventory') ? `<button class="nav-tab" onclick="switchView('inventory')" data-translate="inventory">${t('inventory')}</button>` : ''}
+                                ${hasPermission('inventory') ? `<button class="nav-tab" onclick="switchView('categories')" data-translate="categories">${t('categories')}</button>` : ''}
+                                ${hasPermission('reports') ? `<button class="nav-tab" onclick="switchView('reports')" data-translate="reports">${t('reports')}</button>` : ''}
+                                ${hasPermission('users') ? `<button class="nav-tab" onclick="switchView('users')" data-translate="users">${t('users')}</button>` : ''}
+                                ${currentUser && currentUser.role === 'admin' ? `<button class="nav-tab" onclick="switchView('settings')" data-translate="settings">${t('settings')}</button>` : ''}
                             </div>
                         </div>
-                        <div class="user-info-panel">
-                            <div class="user-details">
-                                <div class="user-avatar">
-                                    <i class="user-icon">👤</i>
+                    </div>
+                    <div class="nav-right">
+                        <div class="controls-panel">
+                            <div class="language-currency-controls">
+                                <div class="control-item">
+                                    <label class="control-label">
+                                        <i class="icon">🌐</i>
+                                        <span data-translate="language">${t('language')}</span>
+                                    </label>
+                                    <select id="language-selector" class="enhanced-select" onchange="changeLanguage(this.value)">
+                                        <option value="en" ${currentLanguage === 'en' ? 'selected' : ''}>🇺🇸 English</option>
+                                        <option value="ar" ${currentLanguage === 'ar' ? 'selected' : ''}>🇩🇿 العربية</option>
+                                        <option value="fr" ${currentLanguage === 'fr' ? 'selected' : ''}>🇫🇷 Français</option>
+                                        <option value="es" ${currentLanguage === 'es' ? 'selected' : ''}>🇪🇸 Español</option>
+                                    </select>
                                 </div>
-                                <div class="user-text">
-                                    <span class="user-name">${currentUser.name}</span>
-                                    <span class="user-role">${t(currentUser.role)}</span>
+                                <div class="control-item">
+                                    <label class="control-label">
+                                        <i class="icon">💰</i>
+                                        <span data-translate="currency">${t('currency')}</span>
+                                    </label>
+                                    <select id="currency-selector" class="enhanced-select" onchange="changeCurrency(this.value)">
+                                        ${Object.entries(currencies).map(([code, curr]) =>
+                                            `<option value="${code}" ${currentCurrency === code ? 'selected' : ''}>${curr.symbol} ${curr.name}</option>`
+                                        ).join('')}
+                                    </select>
                                 </div>
                             </div>
-                            <div class="time-display">
-                                <i class="time-icon">🕐</i>
-                                <span id="current-time"></span>
+                            <div class="user-info-panel">
+                                <div class="user-details">
+                                    <div class="user-avatar">
+                                        <i class="user-icon">👤</i>
+                                    </div>
+                                    <div class="user-text">
+                                        <span class="user-name">${currentUser.name}</span>
+                                        <span class="user-role">${t(currentUser.role)}</span>
+                                    </div>
+                                </div>
+                                <div class="time-display">
+                                    <i class="time-icon">🕐</i>
+                                    <span id="current-time"></span>
+                                </div>
+                                <button class="btn btn-logout" onclick="logout()" data-translate="logout">
+                                    <i class="logout-icon">🚪</i>
+                                    ${t('logout')}
+                                </button>
                             </div>
-                            <button class="btn btn-logout" onclick="logout()" data-translate="logout">
-                                <i class="logout-icon">🚪</i>
-                                ${t('logout')}
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -3518,11 +3532,14 @@ function deleteUser(userId) {
 // ===== SETTINGS MANAGEMENT =====
 
 function loadSettingsView() {
-    if (!hasPermission('settings')) {
+    // Only administrators can access system settings
+    if (!currentUser || currentUser.role !== 'admin') {
         document.getElementById('settings-view').innerHTML = `
             <div class="access-denied">
-                <h2>Access Denied</h2>
-                <p>You don't have permission to access settings.</p>
+                <h2 data-translate="accessDenied">${t('accessDenied')}</h2>
+                <p data-translate="adminOnlySettings">${t('adminOnlySettings')}</p>
+                <div class="access-denied-icon">🔒</div>
+                <p class="access-denied-note">${t('contactAdministrator')}</p>
             </div>
         `;
         return;
