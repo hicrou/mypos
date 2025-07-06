@@ -250,7 +250,9 @@ const languages = {
         name: 'Name',
         actions: 'Actions',
         adminOnlySettings: 'System settings can only be modified by administrators.',
-        contactAdministrator: 'Please contact your system administrator for changes.'
+        contactAdministrator: 'Please contact your system administrator for changes.',
+        unitPrice: 'Unit Price',
+        qty: 'Qty'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -498,7 +500,9 @@ const languages = {
         name: 'الاسم',
         actions: 'الإجراءات',
         adminOnlySettings: 'إعدادات النظام يمكن تعديلها من قبل المديرين فقط.',
-        contactAdministrator: 'يرجى الاتصال بمدير النظام لإجراء التغييرات.'
+        contactAdministrator: 'يرجى الاتصال بمدير النظام لإجراء التغييرات.',
+        unitPrice: 'سعر الوحدة',
+        qty: 'الكمية'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -734,7 +738,9 @@ const languages = {
         name: 'Nom',
         actions: 'Actions',
         adminOnlySettings: 'Les paramètres système ne peuvent être modifiés que par les administrateurs.',
-        contactAdministrator: 'Veuillez contacter votre administrateur système pour les modifications.'
+        contactAdministrator: 'Veuillez contacter votre administrateur système pour les modifications.',
+        unitPrice: 'Prix Unitaire',
+        qty: 'Qté'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -970,7 +976,9 @@ const languages = {
         name: 'Nombre',
         actions: 'Acciones',
         adminOnlySettings: 'La configuración del sistema solo puede ser modificada por administradores.',
-        contactAdministrator: 'Por favor contacte a su administrador del sistema para cambios.'
+        contactAdministrator: 'Por favor contacte a su administrador del sistema para cambios.',
+        unitPrice: 'Precio Unitario',
+        qty: 'Cant'
     }
 };
 
@@ -1406,6 +1414,26 @@ function getCurrencyName(currencyCode) {
 // Convert price to current currency
 function convertPrice(price) {
     return price * currencies[currentCurrency].rate;
+}
+
+// Format price without conversion (for product display)
+function formatPrice(amount) {
+    const currency = currencies[currentCurrency];
+
+    // Get language-specific symbol
+    let symbol;
+    if (typeof currency.symbol === 'object') {
+        symbol = currency.symbol[currentLanguage] || currency.symbol.en;
+    } else {
+        symbol = currency.symbol;
+    }
+
+    // Format based on language (no conversion)
+    if (currentLanguage === 'ar') {
+        return `${amount.toFixed(2)} ${symbol}`;
+    } else {
+        return `${symbol}${amount.toFixed(2)}`;
+    }
 }
 
 // Generate unique ID
@@ -2074,7 +2102,7 @@ function generateInventoryRows() {
             <tr class="${isOutOfStock ? 'out-of-stock' : isLowStock ? 'low-stock' : ''}">
                 <td>${productName}</td>
                 <td>${t(product.category)}</td>
-                <td>${formatCurrency(product.price)}</td>
+                <td>${formatPrice(product.price)}</td>
                 <td>
                     <span class="stock-level ${isOutOfStock ? 'out' : isLowStock ? 'low' : 'normal'}">
                         ${product.stock}
@@ -4496,7 +4524,7 @@ function displayProducts() {
             ${product.image ? `<div class="product-image"><img src="${product.image}" alt="${productName}" /></div>` : ''}
             <div class="product-info">
                 <h3>${productName}</h3>
-                <div class="price">${formatCurrency(product.price)}</div>
+                <div class="price">${formatPrice(product.price)}</div>
                 <div class="stock-info">
                     <span class="stock-count">${t('stock')}: ${product.stock}</span>
                     ${statusBadge}
@@ -4627,7 +4655,7 @@ function updateCartDisplay() {
                 <div class="cart-item">
                     <div class="item-info">
                         <div class="item-name">${itemName}</div>
-                        <div class="item-price">${formatCurrency(item.price)} each</div>
+                        <div class="item-price">${formatPrice(item.price)} each</div>
                     </div>
                     <div class="quantity-controls">
                         <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
@@ -4922,8 +4950,11 @@ function generateReceiptHTML(sale) {
                             <span>${itemName}</span>
                         </div>
                         <div class="item-line">
-                            <span>${item.quantity} x ${formatCurrency(item.price)}</span>
-                            <span>${formatCurrency(itemTotal)}</span>
+                            <span>${t('qty')}: ${item.quantity}</span>
+                        </div>
+                        <div class="item-line">
+                            <span>${t('unitPrice')}: ${formatPrice(item.price)}</span>
+                            <span>${t('total')}: ${formatPrice(itemTotal)}</span>
                         </div>
                     `;
                 }).join('')}
@@ -4934,15 +4965,15 @@ function generateReceiptHTML(sale) {
             <div class="totals">
                 <div class="item-line">
                     <span>Subtotal:</span>
-                    <span>${formatCurrency(sale.subtotal)}</span>
+                    <span>${formatPrice(sale.subtotal)}</span>
                 </div>
                 <div class="item-line">
                     <span>Tax (${(settings.taxRate * 100).toFixed(0)}%):</span>
-                    <span>${formatCurrency(sale.tax)}</span>
+                    <span>${formatPrice(sale.tax)}</span>
                 </div>
                 <div class="item-line total-line">
                     <span>TOTAL:</span>
-                    <span>${formatCurrency(sale.total)}</span>
+                    <span>${formatPrice(sale.total)}</span>
                 </div>
             </div>
 
