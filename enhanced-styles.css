@@ -2570,6 +2570,36 @@ input[type="file"]:focus {
     font-size: 16px;
 }
 
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+.lazy-image {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: #f8f9fa;
+}
+
+.lazy-image.loaded {
+    opacity: 1;
+}
+
+.product-image.no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    color: #dee2e6;
+    font-size: 48px;
+}
+
+/* Loading optimizations */
+.product-card {
+    will-change: transform;
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease;
+}
+
 /* ===== PRINT STYLES ===== */
 @media print {
     .top-nav,

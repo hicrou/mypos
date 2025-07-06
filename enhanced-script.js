@@ -1,6 +1,67 @@
 // ===== PROFESSIONAL POS SYSTEM =====
 // Multi-language, Multi-currency, Multi-user with all professional features
 
+// ===== PERFORMANCE OPTIMIZATION =====
+// Show loading screen immediately
+document.addEventListener('DOMContentLoaded', function() {
+    showLoadingScreen();
+    // Defer heavy initialization
+    setTimeout(initializeApp, 100);
+});
+
+function showLoadingScreen() {
+    document.body.innerHTML = `
+        <div id="loading-screen" style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: Arial, sans-serif;
+            z-index: 9999;
+        ">
+            <div style="text-align: center;">
+                <div style="
+                    width: 80px;
+                    height: 80px;
+                    border: 4px solid rgba(255,255,255,0.3);
+                    border-top: 4px solid white;
+                    border-radius: 50%;
+                    animation: spin 1s linear infinite;
+                    margin-bottom: 20px;
+                "></div>
+                <h2 style="margin: 0 0 10px 0; font-size: 24px;">MyPOS</h2>
+                <p style="margin: 0; opacity: 0.8;">Loading your professional POS system...</p>
+            </div>
+            <style>
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            </style>
+        </div>
+    `;
+}
+
+function hideLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+        loadingScreen.style.opacity = '0';
+        loadingScreen.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => {
+            if (loadingScreen.parentNode) {
+                loadingScreen.parentNode.removeChild(loadingScreen);
+            }
+        }, 500);
+    }
+}
+
 // ===== CONFIGURATION & DATA =====
 
 // Multi-language support (English, Arabic, French, Spanish)
@@ -1810,23 +1871,62 @@ function generateId() {
     return Date.now() + Math.random().toString(36).substr(2, 9);
 }
 
-// Save to localStorage
+// ===== OPTIMIZED STORAGE FUNCTIONS =====
+
+// Cache for frequently accessed data
+const dataCache = new Map();
+
+// Save to localStorage with caching
 function saveToStorage(key, data) {
     try {
-        localStorage.setItem(key, JSON.stringify(data));
+        const jsonData = JSON.stringify(data);
+        localStorage.setItem(key, jsonData);
+        // Update cache
+        dataCache.set(key, data);
     } catch (e) {
         console.error('Failed to save to localStorage:', e);
+        // Try to free up space
+        clearOldData();
+        try {
+            localStorage.setItem(key, JSON.stringify(data));
+            dataCache.set(key, data);
+        } catch (retryError) {
+            alert('Storage limit reached. Please clear some data.');
+        }
     }
 }
 
-// Load from localStorage
+// Load from localStorage with caching
 function loadFromStorage(key, defaultValue = null) {
     try {
+        // Check cache first
+        if (dataCache.has(key)) {
+            return dataCache.get(key);
+        }
+
         const data = localStorage.getItem(key);
-        return data ? JSON.parse(data) : defaultValue;
+        if (data) {
+            const parsedData = JSON.parse(data);
+            // Cache the data
+            dataCache.set(key, parsedData);
+            return parsedData;
+        }
+        return defaultValue;
     } catch (e) {
         console.error('Failed to load from localStorage:', e);
         return defaultValue;
+    }
+}
+
+function clearOldData() {
+    // Clear old sales data (keep only last 30 days)
+    try {
+        const salesHistory = loadFromStorage('salesHistory', []);
+        const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+        const recentSales = salesHistory.filter(sale => new Date(sale.date) > thirtyDaysAgo);
+        saveToStorage('salesHistory', recentSales);
+    } catch (error) {
+        console.error('Error clearing old data:', error);
     }
 }
 
@@ -2107,9 +2207,9 @@ function updateLanguage() {
 
 // ===== MAIN SYSTEM INITIALIZATION =====
 
-document.addEventListener('DOMContentLoaded', function() {
+function initializeApp() {
     initializeSystem();
-});
+}
 
 function initializeSystem() {
     checkLoginStatus();
@@ -2119,25 +2219,37 @@ function initializeSystem() {
         return;
     }
 
-    // Initialize main system
+    // Initialize main system with performance optimization
     loadSettings();
     createMainInterface();
     updateLanguage();
-    displayProducts();
-    updateCartDisplay();
-    updateTime();
-    checkLowStock();
 
-    // Set up category buttons
-    attachCategoryButtonListeners();
+    // Hide loading screen after interface is ready
+    hideLoadingScreen();
 
-    // Set up intervals
-    setInterval(updateTime, 1000);
-    setInterval(checkLowStock, 60000); // Check every minute
-    setInterval(autoSave, 30000); // Auto-save every 30 seconds
+    // Defer heavy operations
+    setTimeout(() => {
+        displayProducts(20); // Load only first 20 products initially
+        updateCartDisplay();
+        attachCategoryButtonListeners();
+        setupEventListeners();
 
-    // Event listeners
-    setupEventListeners();
+        // Load remaining products after a delay
+        setTimeout(() => {
+            displayProducts(); // Load all products
+        }, 500);
+    }, 50);
+
+    // Defer non-critical operations
+    setTimeout(() => {
+        updateTime();
+        checkLowStock();
+
+        // Set up intervals
+        setInterval(updateTime, 1000);
+        setInterval(checkLowStock, 60000); // Check every minute
+        setInterval(autoSave, 30000); // Auto-save every 30 seconds
+    }, 200);
 
     console.log('Professional POS System initialized successfully');
 }
@@ -5391,7 +5503,7 @@ function updateMainLogo() {
 
 // ===== PRODUCT MANAGEMENT =====
 
-function displayProducts() {
+function displayProducts(limit = null) {
     const filteredProducts = currentCategory === 'all'
         ? products.filter(p => p.active)
         : products.filter(p => p.category === currentCategory && p.active);
@@ -5401,7 +5513,10 @@ function displayProducts() {
 
     productsGrid.innerHTML = '';
 
-    filteredProducts.forEach(product => {
+    // Limit products for initial load performance
+    const productsToShow = limit ? filteredProducts.slice(0, limit) : filteredProducts;
+
+    productsToShow.forEach(product => {
         const productName = getProductName(product);
         const isLowStock = product.stock <= product.minStock;
         const isExpired = product.expiryDate && new Date(product.expiryDate) < new Date();
@@ -5424,7 +5539,7 @@ function displayProducts() {
         const productCard = document.createElement('div');
         productCard.className = `product-card ${statusClass}`;
         productCard.innerHTML = `
-            ${product.image ? `<div class="product-image"><img src="${product.image}" alt="${productName}" /></div>` : ''}
+            ${product.image ? `<div class="product-image"><img data-src="${product.image}" alt="${productName}" class="lazy-image" /></div>` : '<div class="product-image no-image">📦</div>'}
             <div class="product-info">
                 <h3>${productName}</h3>
                 <div class="price">${formatPrice(product.price)}</div>
@@ -5447,7 +5562,50 @@ function displayProducts() {
 
         productsGrid.appendChild(productCard);
     });
+
+    // Initialize lazy loading for images
+    initializeLazyLoading();
 }
+
+// ===== LAZY LOADING OPTIMIZATION =====
+function initializeLazyLoading() {
+    const lazyImages = document.querySelectorAll('.lazy-image');
+
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy-image');
+                    img.classList.add('loaded');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+
+        lazyImages.forEach(img => imageObserver.observe(img));
+    } else {
+        // Fallback for older browsers
+        lazyImages.forEach(img => {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy-image');
+            img.classList.add('loaded');
+        });
+    }
+}
+
+// ===== PERFORMANCE MONITORING =====
+function logPerformance(label) {
+    if (performance && performance.now) {
+        console.log(`${label}: ${performance.now().toFixed(2)}ms`);
+    }
+}
+
+// Monitor initial load time
+window.addEventListener('load', function() {
+    logPerformance('Page fully loaded');
+});
 
 function searchProducts() {
     const searchTerm = document.getElementById('product-search').value.toLowerCase();
@@ -6797,6 +6955,8 @@ window.loadLoyaltyView = loadLoyaltyView;
 window.showAddLoyaltyCardModal = showAddLoyaltyCardModal;
 window.addNewLoyaltyCard = addNewLoyaltyCard;
 window.generateCardNumber = generateCardNumber;
+window.initializeLazyLoading = initializeLazyLoading;
+window.clearOldData = clearOldData;
 
 // Charts functions
 window.toggleCharts = toggleCharts;
