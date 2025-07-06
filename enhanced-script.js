@@ -300,7 +300,18 @@ const languages = {
         priceTypeChanged: 'Price type changed to',
         editQuantity: 'Edit quantity',
         removeItem: 'Remove item',
-        invalidQuantity: 'Invalid quantity. Please enter a valid number.'
+        invalidQuantity: 'Invalid quantity. Please enter a valid number.',
+        productImage: 'Product Image',
+        uploadImage: 'Upload Image',
+        imageUrl: 'Image URL',
+        imageHelp: 'Select an image file (JPG, PNG, GIF)',
+        imageUrlHelp: 'Or enter a direct image URL',
+        noImageSelected: 'No image selected',
+        invalidImageType: 'Invalid image type. Please select JPG, PNG, GIF, or WebP.',
+        imageTooLarge: 'Image too large. Maximum size is 5MB.',
+        invalidImageUrl: 'Invalid image URL. Please enter a valid URL.',
+        imageLoadError: 'Failed to load image. Please check the URL.',
+        removeImage: 'Remove Image'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -598,7 +609,18 @@ const languages = {
         priceTypeChanged: 'تم تغيير نوع السعر إلى',
         editQuantity: 'تعديل الكمية',
         removeItem: 'إزالة العنصر',
-        invalidQuantity: 'كمية غير صحيحة. يرجى إدخال رقم صحيح.'
+        invalidQuantity: 'كمية غير صحيحة. يرجى إدخال رقم صحيح.',
+        productImage: 'صورة المنتج',
+        uploadImage: 'رفع صورة',
+        imageUrl: 'رابط الصورة',
+        imageHelp: 'اختر ملف صورة (JPG, PNG, GIF)',
+        imageUrlHelp: 'أو أدخل رابط صورة مباشر',
+        noImageSelected: 'لم يتم اختيار صورة',
+        invalidImageType: 'نوع صورة غير صحيح. يرجى اختيار JPG أو PNG أو GIF أو WebP.',
+        imageTooLarge: 'الصورة كبيرة جداً. الحد الأقصى 5 ميجابايت.',
+        invalidImageUrl: 'رابط صورة غير صحيح. يرجى إدخال رابط صحيح.',
+        imageLoadError: 'فشل في تحميل الصورة. يرجى التحقق من الرابط.',
+        removeImage: 'إزالة الصورة'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -884,7 +906,18 @@ const languages = {
         priceTypeChanged: 'Type de prix changé en',
         editQuantity: 'Modifier la quantité',
         removeItem: 'Supprimer l\'article',
-        invalidQuantity: 'Quantité invalide. Veuillez entrer un nombre valide.'
+        invalidQuantity: 'Quantité invalide. Veuillez entrer un nombre valide.',
+        productImage: 'Image du Produit',
+        uploadImage: 'Télécharger Image',
+        imageUrl: 'URL de l\'Image',
+        imageHelp: 'Sélectionnez un fichier image (JPG, PNG, GIF)',
+        imageUrlHelp: 'Ou entrez une URL d\'image directe',
+        noImageSelected: 'Aucune image sélectionnée',
+        invalidImageType: 'Type d\'image invalide. Veuillez sélectionner JPG, PNG, GIF ou WebP.',
+        imageTooLarge: 'Image trop volumineuse. Taille maximale 5MB.',
+        invalidImageUrl: 'URL d\'image invalide. Veuillez entrer une URL valide.',
+        imageLoadError: 'Échec du chargement de l\'image. Vérifiez l\'URL.',
+        removeImage: 'Supprimer l\'Image'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -1170,7 +1203,18 @@ const languages = {
         priceTypeChanged: 'Tipo de precio cambiado a',
         editQuantity: 'Editar cantidad',
         removeItem: 'Eliminar artículo',
-        invalidQuantity: 'Cantidad inválida. Por favor ingrese un número válido.'
+        invalidQuantity: 'Cantidad inválida. Por favor ingrese un número válido.',
+        productImage: 'Imagen del Producto',
+        uploadImage: 'Subir Imagen',
+        imageUrl: 'URL de Imagen',
+        imageHelp: 'Seleccione un archivo de imagen (JPG, PNG, GIF)',
+        imageUrlHelp: 'O ingrese una URL de imagen directa',
+        noImageSelected: 'No se ha seleccionado imagen',
+        invalidImageType: 'Tipo de imagen inválido. Seleccione JPG, PNG, GIF o WebP.',
+        imageTooLarge: 'Imagen demasiado grande. Tamaño máximo 5MB.',
+        invalidImageUrl: 'URL de imagen inválida. Ingrese una URL válida.',
+        imageLoadError: 'Error al cargar imagen. Verifique la URL.',
+        removeImage: 'Eliminar Imagen'
     }
 };
 
@@ -2464,6 +2508,29 @@ function showAddProductModal() {
                         <input type="text" id="product-supplier">
                     </div>
                 </div>
+                <div class="form-section">
+                    <h3>${t('productImage')}</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>${t('uploadImage')}:</label>
+                            <input type="file" id="product-image" accept="image/*" onchange="previewProductImage(this)">
+                            <small class="form-help">${t('imageHelp')}</small>
+                        </div>
+                        <div class="form-group">
+                            <label>${t('imageUrl')} (${t('optional')}):</label>
+                            <input type="url" id="product-image-url" placeholder="https://example.com/image.jpg" onchange="previewImageFromUrl(this)">
+                            <small class="form-help">${t('imageUrlHelp')}</small>
+                        </div>
+                    </div>
+                    <div class="image-preview-container">
+                        <div id="image-preview" class="image-preview">
+                            <div class="no-image-placeholder">
+                                <span>📷</span>
+                                <p>${t('noImageSelected')}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal-actions">
                     <button type="button" class="btn btn-secondary" onclick="closeModal()">${t('cancel')}</button>
                     <button type="submit" class="btn btn-primary">${t('save')}</button>
@@ -2472,6 +2539,112 @@ function showAddProductModal() {
         </div>
     `;
     document.body.appendChild(modal);
+}
+
+// ===== IMAGE HANDLING FUNCTIONS =====
+
+function previewProductImage(input) {
+    const preview = document.getElementById('image-preview');
+    const file = input.files[0];
+
+    if (file) {
+        // Validate file type
+        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+        if (!validTypes.includes(file.type)) {
+            alert(t('invalidImageType'));
+            input.value = '';
+            showNoImagePlaceholder();
+            return;
+        }
+
+        // Validate file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            alert(t('imageTooLarge'));
+            input.value = '';
+            showNoImagePlaceholder();
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            showImagePreview(e.target.result);
+        };
+        reader.readAsDataURL(file);
+
+        // Clear URL input if file is selected
+        const urlInput = document.getElementById('product-image-url');
+        if (urlInput) urlInput.value = '';
+    } else {
+        showNoImagePlaceholder();
+    }
+}
+
+function previewImageFromUrl(input) {
+    const url = input.value.trim();
+
+    if (url) {
+        // Basic URL validation
+        try {
+            new URL(url);
+        } catch {
+            alert(t('invalidImageUrl'));
+            input.value = '';
+            showNoImagePlaceholder();
+            return;
+        }
+
+        // Create image to test if URL is valid
+        const img = new Image();
+        img.onload = function() {
+            showImagePreview(url);
+        };
+        img.onerror = function() {
+            alert(t('imageLoadError'));
+            input.value = '';
+            showNoImagePlaceholder();
+        };
+        img.src = url;
+
+        // Clear file input if URL is entered
+        const fileInput = document.getElementById('product-image');
+        if (fileInput) fileInput.value = '';
+    } else {
+        showNoImagePlaceholder();
+    }
+}
+
+function showImagePreview(src) {
+    const preview = document.getElementById('image-preview');
+    if (preview) {
+        preview.innerHTML = `
+            <img src="${src}" alt="Product Preview" class="preview-image">
+            <div class="image-actions">
+                <button type="button" class="btn btn-secondary btn-small" onclick="removeImagePreview()">${t('removeImage')}</button>
+            </div>
+        `;
+    }
+}
+
+function showNoImagePlaceholder() {
+    const preview = document.getElementById('image-preview');
+    if (preview) {
+        preview.innerHTML = `
+            <div class="no-image-placeholder">
+                <span>📷</span>
+                <p>${t('noImageSelected')}</p>
+            </div>
+        `;
+    }
+}
+
+function removeImagePreview() {
+    const fileInput = document.getElementById('product-image');
+    const urlInput = document.getElementById('product-image-url');
+
+    if (fileInput) fileInput.value = '';
+    if (urlInput) urlInput.value = '';
+
+    showNoImagePlaceholder();
 }
 
 function addNewProduct(event) {
@@ -2483,37 +2656,64 @@ function addNewProduct(event) {
     const vipPrice = document.getElementById('product-vip-price').value;
     const bulkPrice = document.getElementById('product-bulk-price').value;
 
-    const newProduct = {
-        id: Math.max(...products.map(p => p.id)) + 1,
-        name: document.getElementById('product-name').value,
-        nameAr: document.getElementById('product-name-ar').value,
-        category: document.getElementById('product-category').value,
-        price: parseFloat(document.getElementById('product-price').value),
-        // Multi-price options
-        prices: {
-            regular: parseFloat(document.getElementById('product-price').value),
-            wholesale: wholesalePrice ? parseFloat(wholesalePrice) : null,
-            retail: retailPrice ? parseFloat(retailPrice) : null,
-            vip: vipPrice ? parseFloat(vipPrice) : null,
-            bulk: bulkPrice ? parseFloat(bulkPrice) : null
-        },
-        stock: parseInt(document.getElementById('product-stock').value),
-        minStock: parseInt(document.getElementById('product-min-stock').value),
-        maxStock: parseInt(document.getElementById('product-stock').value) * 5,
-        barcode: document.getElementById('product-barcode').value,
-        supplier: document.getElementById('product-supplier').value,
-        cost: parseFloat(document.getElementById('product-price').value) * 0.6,
-        active: true
-    };
+    // Get image data
+    const imageFile = document.getElementById('product-image').files[0];
+    const imageUrl = document.getElementById('product-image-url').value.trim();
+    let productImage = null;
 
-    products.push(newProduct);
-    saveToStorage('products', products);
+    // Determine image source
+    if (imageFile) {
+        // Convert file to base64 for storage
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const newProduct = createProductObject(e.target.result);
+            saveProduct(newProduct);
+        };
+        reader.readAsDataURL(imageFile);
+        return; // Exit here, will continue in reader.onload
+    } else if (imageUrl) {
+        productImage = imageUrl;
+    }
 
-    closeModal();
-    loadInventoryView();
-    displayProducts(); // Refresh main products view
+    const newProduct = createProductObject(productImage);
+    saveProduct(newProduct);
 
-    alert(`Product "${newProduct.name}" added successfully!`);
+    function createProductObject(image) {
+        return {
+            id: Math.max(...products.map(p => p.id)) + 1,
+            name: document.getElementById('product-name').value,
+            nameAr: document.getElementById('product-name-ar').value,
+            category: document.getElementById('product-category').value,
+            price: parseFloat(document.getElementById('product-price').value),
+            // Multi-price options
+            prices: {
+                regular: parseFloat(document.getElementById('product-price').value),
+                wholesale: wholesalePrice ? parseFloat(wholesalePrice) : null,
+                retail: retailPrice ? parseFloat(retailPrice) : null,
+                vip: vipPrice ? parseFloat(vipPrice) : null,
+                bulk: bulkPrice ? parseFloat(bulkPrice) : null
+            },
+            stock: parseInt(document.getElementById('product-stock').value),
+            minStock: parseInt(document.getElementById('product-min-stock').value),
+            maxStock: parseInt(document.getElementById('product-stock').value) * 5,
+            barcode: document.getElementById('product-barcode').value,
+            supplier: document.getElementById('product-supplier').value,
+            cost: parseFloat(document.getElementById('product-price').value) * 0.6,
+            image: image, // Add image to product
+            active: true
+        };
+    }
+
+    function saveProduct(product) {
+        products.push(product);
+        saveToStorage('products', products);
+
+        closeModal();
+        loadInventoryView();
+        displayProducts(); // Refresh main products view
+
+        alert(`${t('product')} "${product.name}" ${t('addedSuccessfully')}!`);
+    }
 }
 
 function editProduct(productId) {
@@ -6261,6 +6461,9 @@ window.getProductPrice = getProductPrice;
 window.showPriceSelectionModal = showPriceSelectionModal;
 window.updateQuantityDirect = updateQuantityDirect;
 window.updatePriceTypeDisplay = updatePriceTypeDisplay;
+window.previewProductImage = previewProductImage;
+window.previewImageFromUrl = previewImageFromUrl;
+window.removeImagePreview = removeImagePreview;
 
 // Charts functions
 window.toggleCharts = toggleCharts;
