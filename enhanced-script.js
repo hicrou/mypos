@@ -246,7 +246,9 @@ const languages = {
         deselectAll: 'Deselect All',
         selectWithoutBarcode: 'Select Without Barcode',
         selectAtLeastOneProduct: 'Please select at least one product',
-        products: 'products'
+        products: 'products',
+        name: 'Name',
+        actions: 'Actions'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -490,7 +492,9 @@ const languages = {
         deselectAll: 'إلغاء تحديد الكل',
         selectWithoutBarcode: 'تحديد بدون باركود',
         selectAtLeastOneProduct: 'يرجى تحديد منتج واحد على الأقل',
-        products: 'منتجات'
+        products: 'منتجات',
+        name: 'الاسم',
+        actions: 'الإجراءات'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -722,7 +726,9 @@ const languages = {
         deselectAll: 'Tout Désélectionner',
         selectWithoutBarcode: 'Sélectionner Sans Code-Barres',
         selectAtLeastOneProduct: 'Veuillez sélectionner au moins un produit',
-        products: 'produits'
+        products: 'produits',
+        name: 'Nom',
+        actions: 'Actions'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -954,7 +960,9 @@ const languages = {
         deselectAll: 'Deseleccionar Todo',
         selectWithoutBarcode: 'Seleccionar Sin Código',
         selectAtLeastOneProduct: 'Por favor seleccione al menos un producto',
-        products: 'productos'
+        products: 'productos',
+        name: 'Nombre',
+        actions: 'Acciones'
     }
 };
 
