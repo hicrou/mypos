@@ -1754,29 +1754,51 @@ function createMainInterface() {
                     </div>
                 </div>
                 <div class="nav-right">
-                    <div class="controls">
-                        <div class="control-group">
-                            <label>Language:</label>
-                            <select id="language-selector" onchange="changeLanguage(this.value)">
-                                <option value="en" ${currentLanguage === 'en' ? 'selected' : ''}>🇺🇸 English</option>
-                                <option value="ar" ${currentLanguage === 'ar' ? 'selected' : ''}>🇩🇿 العربية</option>
-                                <option value="fr" ${currentLanguage === 'fr' ? 'selected' : ''}>🇫🇷 Français</option>
-                                <option value="es" ${currentLanguage === 'es' ? 'selected' : ''}>🇪🇸 Español</option>
-                            </select>
+                    <div class="controls-panel">
+                        <div class="language-currency-controls">
+                            <div class="control-item">
+                                <label class="control-label">
+                                    <i class="icon">🌐</i>
+                                    <span data-translate="language">${t('language')}</span>
+                                </label>
+                                <select id="language-selector" class="enhanced-select" onchange="changeLanguage(this.value)">
+                                    <option value="en" ${currentLanguage === 'en' ? 'selected' : ''}>🇺🇸 English</option>
+                                    <option value="ar" ${currentLanguage === 'ar' ? 'selected' : ''}>🇩🇿 العربية</option>
+                                    <option value="fr" ${currentLanguage === 'fr' ? 'selected' : ''}>🇫🇷 Français</option>
+                                    <option value="es" ${currentLanguage === 'es' ? 'selected' : ''}>🇪🇸 Español</option>
+                                </select>
+                            </div>
+                            <div class="control-item">
+                                <label class="control-label">
+                                    <i class="icon">💰</i>
+                                    <span data-translate="currency">${t('currency')}</span>
+                                </label>
+                                <select id="currency-selector" class="enhanced-select" onchange="changeCurrency(this.value)">
+                                    ${Object.entries(currencies).map(([code, curr]) =>
+                                        `<option value="${code}" ${currentCurrency === code ? 'selected' : ''}>${curr.symbol} ${curr.name}</option>`
+                                    ).join('')}
+                                </select>
+                            </div>
                         </div>
-                        <div class="control-group">
-                            <label>Currency:</label>
-                            <select id="currency-selector" onchange="changeCurrency(this.value)">
-                                ${Object.entries(currencies).map(([code, curr]) =>
-                                    `<option value="${code}" ${currentCurrency === code ? 'selected' : ''}>${curr.symbol} ${curr.name}</option>`
-                                ).join('')}
-                            </select>
+                        <div class="user-info-panel">
+                            <div class="user-details">
+                                <div class="user-avatar">
+                                    <i class="user-icon">👤</i>
+                                </div>
+                                <div class="user-text">
+                                    <span class="user-name">${currentUser.name}</span>
+                                    <span class="user-role">${t(currentUser.role)}</span>
+                                </div>
+                            </div>
+                            <div class="time-display">
+                                <i class="time-icon">🕐</i>
+                                <span id="current-time"></span>
+                            </div>
+                            <button class="btn btn-logout" onclick="logout()" data-translate="logout">
+                                <i class="logout-icon">🚪</i>
+                                ${t('logout')}
+                            </button>
                         </div>
-                    </div>
-                    <div class="user-info">
-                        <span class="user-name">${currentUser.name} (${t(currentUser.role)})</span>
-                        <span id="current-time"></span>
-                        <button class="btn btn-secondary" onclick="logout()" data-translate="logout">${t('logout')}</button>
                     </div>
                 </div>
             </nav>
