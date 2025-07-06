@@ -252,7 +252,23 @@ const languages = {
         adminOnlySettings: 'System settings can only be modified by administrators.',
         contactAdministrator: 'Please contact your system administrator for changes.',
         unitPrice: 'Unit Price',
-        qty: 'Qty'
+        qty: 'Qty',
+        managerAuthRequired: 'Manager Authorization Required',
+        managerAuthMessage: 'This action requires manager or administrator authorization.',
+        enterManagerUsername: 'Enter manager username',
+        enterManagerPassword: 'Enter manager password',
+        authorize: 'Authorize',
+        pleaseEnterCredentials: 'Please enter username and password',
+        invalidManagerCredentials: 'Invalid manager credentials',
+        confirmClearCart: 'Are you sure you want to clear the cart',
+        cartCleared: 'Cart cleared successfully',
+        authorizedBy: 'Authorized by',
+        pleaseSelectPayment: 'Please select a payment method',
+        saleCompleted: 'Sale Completed',
+        receiptNumber: 'Receipt #',
+        thankYou: 'Thank you for your business',
+        quickCash: 'Quick Cash',
+        quickCard: 'Quick Card'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -502,7 +518,23 @@ const languages = {
         adminOnlySettings: 'إعدادات النظام يمكن تعديلها من قبل المديرين فقط.',
         contactAdministrator: 'يرجى الاتصال بمدير النظام لإجراء التغييرات.',
         unitPrice: 'سعر الوحدة',
-        qty: 'الكمية'
+        qty: 'الكمية',
+        managerAuthRequired: 'مطلوب تفويض المدير',
+        managerAuthMessage: 'هذا الإجراء يتطلب تفويض المدير أو المسؤول.',
+        enterManagerUsername: 'أدخل اسم مستخدم المدير',
+        enterManagerPassword: 'أدخل كلمة مرور المدير',
+        authorize: 'تفويض',
+        pleaseEnterCredentials: 'يرجى إدخال اسم المستخدم وكلمة المرور',
+        invalidManagerCredentials: 'بيانات اعتماد المدير غير صحيحة',
+        confirmClearCart: 'هل أنت متأكد من أنك تريد مسح السلة',
+        cartCleared: 'تم مسح السلة بنجاح',
+        authorizedBy: 'مفوض من قبل',
+        pleaseSelectPayment: 'يرجى اختيار طريقة الدفع',
+        saleCompleted: 'تمت عملية البيع',
+        receiptNumber: 'رقم الإيصال',
+        thankYou: 'شكراً لك على تعاملك معنا',
+        quickCash: 'دفع نقدي سريع',
+        quickCard: 'دفع بالبطاقة سريع'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -740,7 +772,23 @@ const languages = {
         adminOnlySettings: 'Les paramètres système ne peuvent être modifiés que par les administrateurs.',
         contactAdministrator: 'Veuillez contacter votre administrateur système pour les modifications.',
         unitPrice: 'Prix Unitaire',
-        qty: 'Qté'
+        qty: 'Qté',
+        managerAuthRequired: 'Autorisation Gestionnaire Requise',
+        managerAuthMessage: 'Cette action nécessite une autorisation de gestionnaire ou administrateur.',
+        enterManagerUsername: 'Entrez le nom d\'utilisateur du gestionnaire',
+        enterManagerPassword: 'Entrez le mot de passe du gestionnaire',
+        authorize: 'Autoriser',
+        pleaseEnterCredentials: 'Veuillez entrer le nom d\'utilisateur et le mot de passe',
+        invalidManagerCredentials: 'Identifiants gestionnaire invalides',
+        confirmClearCart: 'Êtes-vous sûr de vouloir vider le panier',
+        cartCleared: 'Panier vidé avec succès',
+        authorizedBy: 'Autorisé par',
+        pleaseSelectPayment: 'Veuillez sélectionner un mode de paiement',
+        saleCompleted: 'Vente Terminée',
+        receiptNumber: 'Reçu #',
+        thankYou: 'Merci pour votre confiance',
+        quickCash: 'Paiement Rapide',
+        quickCard: 'Carte Rapide'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -978,7 +1026,23 @@ const languages = {
         adminOnlySettings: 'La configuración del sistema solo puede ser modificada por administradores.',
         contactAdministrator: 'Por favor contacte a su administrador del sistema para cambios.',
         unitPrice: 'Precio Unitario',
-        qty: 'Cant'
+        qty: 'Cant',
+        managerAuthRequired: 'Autorización de Gerente Requerida',
+        managerAuthMessage: 'Esta acción requiere autorización de gerente o administrador.',
+        enterManagerUsername: 'Ingrese nombre de usuario del gerente',
+        enterManagerPassword: 'Ingrese contraseña del gerente',
+        authorize: 'Autorizar',
+        pleaseEnterCredentials: 'Por favor ingrese usuario y contraseña',
+        invalidManagerCredentials: 'Credenciales de gerente inválidas',
+        confirmClearCart: '¿Está seguro de que desea limpiar el carrito',
+        cartCleared: 'Carrito limpiado exitosamente',
+        authorizedBy: 'Autorizado por',
+        pleaseSelectPayment: 'Por favor seleccione un método de pago',
+        saleCompleted: 'Venta Completada',
+        receiptNumber: 'Recibo #',
+        thankYou: 'Gracias por su compra',
+        quickCash: 'Efectivo Rápido',
+        quickCard: 'Tarjeta Rápida'
     }
 };
 
@@ -1903,10 +1967,18 @@ function createMainInterface() {
                                 </div>
                             </div>
                             <div class="cart-actions">
-                                <button class="btn btn-secondary" id="clear-cart" data-translate="clearCart">${t('clearCart')}</button>
-                                <button class="btn btn-success" id="print-receipt" data-translate="printReceipt">${t('printReceipt')}</button>
-                                <button class="btn btn-info" id="print-invoice" data-translate="printInvoice">${t('printInvoice')}</button>
-                                <button class="btn btn-primary" id="checkout" data-translate="checkout">${t('checkout')}</button>
+                                <div class="quick-payment-buttons">
+                                    <button class="btn btn-success btn-large" onclick="quickCashPayment()" data-translate="quickCash">💵 ${t('quickCash')}</button>
+                                    <button class="btn btn-info btn-large" onclick="quickCardPayment()" data-translate="quickCard">💳 ${t('quickCard')}</button>
+                                </div>
+                                <div class="standard-actions">
+                                    <button class="btn btn-primary" id="checkout" data-translate="checkout">${t('checkout')}</button>
+                                    <button class="btn btn-secondary" id="clear-cart" data-translate="clearCart">${t('clearCart')}</button>
+                                </div>
+                                <div class="print-actions">
+                                    <button class="btn btn-success btn-small" id="print-receipt" data-translate="printReceipt">${t('printReceipt')}</button>
+                                    <button class="btn btn-info btn-small" id="print-invoice" data-translate="printInvoice">${t('printInvoice')}</button>
+                                </div>
                             </div>
                             <div class="management-actions" style="margin-top: 15px;">
                                 <button class="btn btn-warning btn-small" onclick="printLowStockReport()" data-translate="printLowStock">${t('printLowStock')}</button>
@@ -4686,10 +4758,113 @@ function updateTotals() {
 }
 
 function clearCart() {
-    if (cart.length > 0 && confirm(`${t('clearCart')}?`)) {
+    if (cart.length === 0) {
+        alert(t('emptyCart'));
+        return;
+    }
+
+    // Check if current user is manager or admin
+    if (currentUser.role !== 'manager' && currentUser.role !== 'admin') {
+        // Request manager authorization
+        showManagerAuthModal('clearCart');
+        return;
+    }
+
+    // Manager/Admin can clear cart directly
+    if (confirm(`${t('confirmClearCart')}?`)) {
         cart = [];
         updateCartDisplay();
         saveCart();
+        alert(t('cartCleared'));
+    }
+}
+
+// Manager authorization modal
+function showManagerAuthModal(action) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'block';
+
+    modal.innerHTML = `
+        <div class="modal-content manager-auth-modal">
+            <h2 data-translate="managerAuthRequired">${t('managerAuthRequired')}</h2>
+            <p data-translate="managerAuthMessage">${t('managerAuthMessage')}</p>
+
+            <div class="auth-form">
+                <div class="form-group">
+                    <label data-translate="username">${t('username')}:</label>
+                    <input type="text" id="manager-username" placeholder="${t('enterManagerUsername')}" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label data-translate="password">${t('password')}:</label>
+                    <input type="password" id="manager-password" placeholder="${t('enterManagerPassword')}" autocomplete="current-password">
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeManagerAuth()" data-translate="cancel">${t('cancel')}</button>
+                <button type="button" class="btn btn-primary" onclick="authorizeManagerAction('${action}')" data-translate="authorize">${t('authorize')}</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    document.getElementById('manager-username').focus();
+
+    // Add Enter key support
+    modal.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            authorizeManagerAction(action);
+        }
+    });
+}
+
+function closeManagerAuth() {
+    const modal = document.querySelector('.manager-auth-modal').closest('.modal');
+    if (modal) {
+        document.body.removeChild(modal);
+    }
+}
+
+function authorizeManagerAction(action) {
+    const username = document.getElementById('manager-username').value.trim();
+    const password = document.getElementById('manager-password').value;
+
+    if (!username || !password) {
+        alert(t('pleaseEnterCredentials'));
+        return;
+    }
+
+    // Check manager credentials
+    const managerUser = users.find(user =>
+        user.username === username &&
+        user.password === password &&
+        (user.role === 'manager' || user.role === 'admin') &&
+        user.active
+    );
+
+    if (!managerUser) {
+        alert(t('invalidManagerCredentials'));
+        document.getElementById('manager-password').value = '';
+        document.getElementById('manager-password').focus();
+        return;
+    }
+
+    // Close modal
+    closeManagerAuth();
+
+    // Execute authorized action
+    switch(action) {
+        case 'clearCart':
+            if (confirm(`${t('confirmClearCart')}?`)) {
+                cart = [];
+                updateCartDisplay();
+                saveCart();
+                alert(`${t('cartCleared')} - ${t('authorizedBy')}: ${managerUser.name}`);
+            }
+            break;
+        default:
+            console.log('Unknown action:', action);
     }
 }
 
@@ -4711,28 +4886,54 @@ function openCheckout() {
         return;
     }
 
+    // Validate stock before opening checkout
+    for (let cartItem of cart) {
+        const product = products.find(p => p.id === cartItem.id);
+        if (product && product.stock < cartItem.quantity) {
+            alert(`${t('insufficientStock')}: ${getProductName(product)}\n${t('available')}: ${product.stock}, ${t('requested')}: ${cartItem.quantity}`);
+            return;
+        }
+    }
+
     const modal = document.getElementById('checkout-modal');
     const checkoutItems = document.getElementById('checkout-items');
     const checkoutTotal = document.getElementById('checkout-total-amount');
 
-    // Display checkout items
-    const subtotal = cart.reduce((sum, item) => sum + (convertPrice(item.price) * item.quantity), 0);
+    // Display checkout items with better formatting
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const tax = subtotal * settings.taxRate;
     const total = subtotal + tax;
 
     checkoutItems.innerHTML = cart.map(item => {
         const itemName = currentLanguage === 'ar' && item.nameAr ? item.nameAr : item.name;
+        const lineTotal = item.price * item.quantity;
         return `
             <div class="checkout-item">
-                <span>${itemName} x ${item.quantity}</span>
-                <span>${formatCurrency((item.price * item.quantity) / currencies[currentCurrency].rate)}</span>
+                <div class="item-details">
+                    <span class="item-name">${itemName}</span>
+                    <span class="item-qty">${item.quantity} x ${formatPrice(item.price)}</span>
+                </div>
+                <span class="item-total">${formatPrice(lineTotal)}</span>
             </div>
         `;
     }).join('');
 
-    checkoutTotal.textContent = formatCurrency(total / currencies[currentCurrency].rate);
+    checkoutTotal.textContent = formatPrice(total);
+
+    // Auto-select cash payment for faster checkout
+    const cashBtn = document.querySelector('.payment-btn[data-method="cash"]');
+    if (cashBtn) {
+        document.querySelectorAll('.payment-btn').forEach(btn => btn.classList.remove('active'));
+        cashBtn.classList.add('active');
+    }
 
     modal.style.display = 'block';
+
+    // Focus on complete sale button for keyboard users
+    setTimeout(() => {
+        const completeSaleBtn = document.getElementById('complete-sale');
+        if (completeSaleBtn) completeSaleBtn.focus();
+    }, 100);
 }
 
 function closeCheckout() {
@@ -4745,12 +4946,12 @@ function completeSale() {
     const selectedPayment = document.querySelector('.payment-btn.active');
 
     if (!selectedPayment) {
-        alert('Please select a payment method');
+        alert(t('pleaseSelectPayment'));
         return;
     }
 
     const paymentMethod = selectedPayment.dataset.method;
-    const subtotal = cart.reduce((sum, item) => sum + (convertPrice(item.price) * item.quantity), 0);
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     const tax = subtotal * settings.taxRate;
     const total = subtotal + tax;
 
@@ -4760,9 +4961,9 @@ function completeSale() {
         date: new Date().toISOString(),
         cashier: currentUser.name,
         items: [...cart],
-        subtotal: subtotal / currencies[currentCurrency].rate,
-        tax: tax / currencies[currentCurrency].rate,
-        total: total / currencies[currentCurrency].rate,
+        subtotal: subtotal,
+        tax: tax,
+        total: total,
         paymentMethod: paymentMethod,
         currency: currentCurrency
     };
@@ -4799,7 +5000,7 @@ function completeSale() {
     }
 
     // Show success message
-    alert(`${t('checkout')} ${t('completed')}!\n${t('total')}: ${formatCurrency(total / currencies[currentCurrency].rate)}\n${t('paymentMethod')}: ${paymentMethod}`);
+    showSaleSuccessMessage(sale);
 
     // Clear cart and close modal
     cart = [];
@@ -4809,6 +5010,109 @@ function completeSale() {
     saveCart();
 
     // Check for low stock alerts after sale
+    checkLowStockAfterSale();
+}
+
+// Show sale success message with options
+function showSaleSuccessMessage(sale) {
+    const message = `✅ ${t('saleCompleted')}!\n\n` +
+                   `${t('receiptNumber')}: ${sale.id}\n` +
+                   `${t('total')}: ${formatPrice(sale.total)}\n` +
+                   `${t('paymentMethod')}: ${t(sale.paymentMethod)}\n` +
+                   `${t('cashier')}: ${sale.cashier}\n\n` +
+                   `${t('thankYou')}!`;
+
+    alert(message);
+}
+
+// Quick payment functions for common scenarios
+function quickCashPayment() {
+    if (cart.length === 0) {
+        alert(t('emptyCart'));
+        return;
+    }
+
+    // Validate stock
+    for (let cartItem of cart) {
+        const product = products.find(p => p.id === cartItem.id);
+        if (product && product.stock < cartItem.quantity) {
+            alert(`${t('insufficientStock')}: ${getProductName(product)}\n${t('available')}: ${product.stock}, ${t('requested')}: ${cartItem.quantity}`);
+            return;
+        }
+    }
+
+    // Process cash payment directly
+    processQuickPayment('cash');
+}
+
+function quickCardPayment() {
+    if (cart.length === 0) {
+        alert(t('emptyCart'));
+        return;
+    }
+
+    // Validate stock
+    for (let cartItem of cart) {
+        const product = products.find(p => p.id === cartItem.id);
+        if (product && product.stock < cartItem.quantity) {
+            alert(`${t('insufficientStock')}: ${getProductName(product)}\n${t('available')}: ${product.stock}, ${t('requested')}: ${cartItem.quantity}`);
+            return;
+        }
+    }
+
+    // Process card payment directly
+    processQuickPayment('card');
+}
+
+function processQuickPayment(paymentMethod) {
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const tax = subtotal * settings.taxRate;
+    const total = subtotal + tax;
+
+    // Create sale record
+    const sale = {
+        id: generateId(),
+        date: new Date().toISOString(),
+        cashier: currentUser.name,
+        items: [...cart],
+        subtotal: subtotal,
+        tax: tax,
+        total: total,
+        paymentMethod: paymentMethod,
+        currency: currentCurrency
+    };
+
+    // Update inventory
+    cart.forEach(cartItem => {
+        const product = products.find(p => p.id === cartItem.id);
+        if (product) {
+            product.stock -= cartItem.quantity;
+            if (product.stock < 0) {
+                product.stock = 0;
+            }
+        }
+    });
+
+    // Save sale
+    salesHistory.push(sale);
+    saveToStorage('salesHistory', salesHistory);
+    saveToStorage('products', products);
+
+    // Print receipt if enabled
+    if (settings.printAfterSale) {
+        printReceipt(sale);
+    }
+
+    // Show success message
+    showSaleSuccessMessage(sale);
+
+    // Clear cart and refresh
+    cart = [];
+    updateCartDisplay();
+    displayProducts();
+    saveCart();
+
+    // Check for low stock alerts
     checkLowStockAfterSale();
 }
 
@@ -5186,6 +5490,11 @@ window.closeCheckout = closeCheckout;
 window.completeSale = completeSale;
 window.printReceipt = printReceipt;
 window.scanBarcode = scanBarcode;
+window.quickCashPayment = quickCashPayment;
+window.quickCardPayment = quickCardPayment;
+window.showManagerAuthModal = showManagerAuthModal;
+window.closeManagerAuth = closeManagerAuth;
+window.authorizeManagerAction = authorizeManagerAction;
 
 // Inventory functions
 window.filterInventory = filterInventory;

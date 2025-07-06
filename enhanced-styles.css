@@ -2004,6 +2004,99 @@ body {
     font-style: italic;
 }
 
+/* ===== ENHANCED CART ACTIONS ===== */
+.quick-payment-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.quick-payment-buttons .btn-large {
+    flex: 1;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.quick-payment-buttons .btn-large:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.standard-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.standard-actions .btn {
+    flex: 1;
+}
+
+.print-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.print-actions .btn-small {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 12px;
+}
+
+/* ===== MANAGER AUTH MODAL ===== */
+.manager-auth-modal {
+    max-width: 400px;
+    padding: 30px;
+}
+
+.manager-auth-modal h2 {
+    color: #dc3545;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.manager-auth-modal p {
+    text-align: center;
+    color: #6c757d;
+    margin-bottom: 25px;
+}
+
+.auth-form .form-group {
+    margin-bottom: 20px;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #495057;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+
 /* ===== PRINT STYLES ===== */
 @media print {
     .top-nav,
