@@ -233,7 +233,20 @@ const languages = {
         andMore: 'and {0} more',
         time: 'Time',
         items: 'Items',
-        completeSale: 'Complete Sale'
+        completeSale: 'Complete Sale',
+        printBarcode: 'Print Barcode',
+        generateBarcode: 'Generate Barcode',
+        barcodeGenerated: 'Barcode generated and ready to print',
+        noBarcodeFound: 'No barcode available for this product',
+        bulkBarcodePrint: 'Bulk Barcode Print',
+        selectProductsForBarcode: 'Select products to print barcodes',
+        printSelectedBarcodes: 'Print Selected Barcodes',
+        quantityPerProduct: 'Quantity per product',
+        selectAll: 'Select All',
+        deselectAll: 'Deselect All',
+        selectWithoutBarcode: 'Select Without Barcode',
+        selectAtLeastOneProduct: 'Please select at least one product',
+        products: 'products'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -464,7 +477,20 @@ const languages = {
         andMore: 'و {0} أكثر',
         time: 'الوقت',
         items: 'العناصر',
-        completeSale: 'إتمام البيع'
+        completeSale: 'إتمام البيع',
+        printBarcode: 'طباعة الباركود',
+        generateBarcode: 'إنشاء باركود',
+        barcodeGenerated: 'تم إنشاء الباركود وهو جاهز للطباعة',
+        noBarcodeFound: 'لا يوجد باركود متاح لهذا المنتج',
+        bulkBarcodePrint: 'طباعة باركود مجمعة',
+        selectProductsForBarcode: 'اختر المنتجات لطباعة الباركود',
+        printSelectedBarcodes: 'طباعة الباركود المحددة',
+        quantityPerProduct: 'الكمية لكل منتج',
+        selectAll: 'تحديد الكل',
+        deselectAll: 'إلغاء تحديد الكل',
+        selectWithoutBarcode: 'تحديد بدون باركود',
+        selectAtLeastOneProduct: 'يرجى تحديد منتج واحد على الأقل',
+        products: 'منتجات'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -683,7 +709,20 @@ const languages = {
         andMore: 'et {0} de plus',
         time: 'Heure',
         items: 'Articles',
-        completeSale: 'Finaliser Vente'
+        completeSale: 'Finaliser Vente',
+        printBarcode: 'Imprimer Code-Barres',
+        generateBarcode: 'Générer Code-Barres',
+        barcodeGenerated: 'Code-barres généré et prêt à imprimer',
+        noBarcodeFound: 'Aucun code-barres disponible pour ce produit',
+        bulkBarcodePrint: 'Impression Code-Barres en Lot',
+        selectProductsForBarcode: 'Sélectionner produits pour imprimer codes-barres',
+        printSelectedBarcodes: 'Imprimer Codes-Barres Sélectionnés',
+        quantityPerProduct: 'Quantité par produit',
+        selectAll: 'Tout Sélectionner',
+        deselectAll: 'Tout Désélectionner',
+        selectWithoutBarcode: 'Sélectionner Sans Code-Barres',
+        selectAtLeastOneProduct: 'Veuillez sélectionner au moins un produit',
+        products: 'produits'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -902,7 +941,20 @@ const languages = {
         andMore: 'y {0} más',
         time: 'Hora',
         items: 'Artículos',
-        completeSale: 'Completar Venta'
+        completeSale: 'Completar Venta',
+        printBarcode: 'Imprimir Código de Barras',
+        generateBarcode: 'Generar Código de Barras',
+        barcodeGenerated: 'Código de barras generado y listo para imprimir',
+        noBarcodeFound: 'No hay código de barras disponible para este producto',
+        bulkBarcodePrint: 'Impresión Masiva de Códigos',
+        selectProductsForBarcode: 'Seleccionar productos para imprimir códigos',
+        printSelectedBarcodes: 'Imprimir Códigos Seleccionados',
+        quantityPerProduct: 'Cantidad por producto',
+        selectAll: 'Seleccionar Todo',
+        deselectAll: 'Deseleccionar Todo',
+        selectWithoutBarcode: 'Seleccionar Sin Código',
+        selectAtLeastOneProduct: 'Por favor seleccione al menos un producto',
+        products: 'productos'
     }
 };
 
@@ -1922,6 +1974,7 @@ function loadInventoryView() {
                 <button class="btn btn-primary" onclick="showAddProductModal()" data-translate="addProduct">${t('addProduct')}</button>
                 <button class="btn btn-secondary" onclick="exportInventory()" data-translate="export">${t('export')}</button>
                 <button class="btn btn-warning" onclick="printLowStockReport()" data-translate="lowStockReport">${t('lowStockReport')}</button>
+                <button class="btn btn-info" onclick="showBulkBarcodeModal()" data-translate="bulkBarcodePrint">${t('bulkBarcodePrint')}</button>
             </div>
         </div>
 
@@ -1989,6 +2042,10 @@ function generateInventoryRows() {
                 <td class="actions">
                     <button class="btn-small btn-primary" onclick="editProduct(${product.id})" data-translate="edit">${t('edit')}</button>
                     <button class="btn-small btn-success" onclick="adjustStock(${product.id})" data-translate="adjustStock">${t('adjustStock')}</button>
+                    ${!product.barcode || product.barcode === '' ?
+                        `<button class="btn-small btn-info" onclick="printBarcode(${product.id})" data-translate="printBarcode">${t('printBarcode')}</button>` :
+                        `<button class="btn-small btn-secondary" onclick="printBarcode(${product.id})" data-translate="printBarcode">${t('printBarcode')}</button>`
+                    }
                     <button class="btn-small btn-danger" onclick="deleteProduct(${product.id})" data-translate="delete">${t('delete')}</button>
                 </td>
             </tr>
@@ -2037,6 +2094,10 @@ function filterInventory() {
                 <td class="actions">
                     <button class="btn-small btn-primary" onclick="editProduct(${product.id})" data-translate="edit">${t('edit')}</button>
                     <button class="btn-small btn-success" onclick="adjustStock(${product.id})" data-translate="adjustStock">${t('adjustStock')}</button>
+                    ${!product.barcode || product.barcode === '' ?
+                        `<button class="btn-small btn-info" onclick="printBarcode(${product.id})" data-translate="printBarcode">${t('printBarcode')}</button>` :
+                        `<button class="btn-small btn-secondary" onclick="printBarcode(${product.id})" data-translate="printBarcode">${t('printBarcode')}</button>`
+                    }
                     <button class="btn-small btn-danger" onclick="deleteProduct(${product.id})" data-translate="delete">${t('delete')}</button>
                 </td>
             </tr>
@@ -5111,3 +5172,464 @@ window.toggleCharts = toggleCharts;
 
 // Stock management functions
 window.checkLowStockAfterSale = checkLowStockAfterSale;
+
+// Barcode printing functions
+window.printBarcode = printBarcode;
+window.printMultipleBarcodes = printMultipleBarcodes;
+window.showBulkBarcodeModal = showBulkBarcodeModal;
+window.selectAllProducts = selectAllProducts;
+window.selectProductsWithoutBarcode = selectProductsWithoutBarcode;
+window.printSelectedBarcodes = printSelectedBarcodes;
+
+// ===== BARCODE PRINTING FUNCTIONALITY =====
+
+function printBarcode(productId) {
+    const product = products.find(p => p.id === productId);
+    if (!product) {
+        alert(t('productNotFound'));
+        return;
+    }
+
+    // Generate barcode if product doesn't have one
+    if (!product.barcode || product.barcode === '') {
+        product.barcode = generateProductBarcode(product);
+        saveToStorage('products', products);
+
+        // Refresh inventory display
+        if (currentView === 'inventory') {
+            loadInventoryView();
+        }
+
+        alert(t('barcodeGenerated'));
+    }
+
+    // Create barcode print window
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>${t('printBarcode')} - ${getProductName(product)}</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 20px;
+                    text-align: center;
+                }
+                .barcode-container {
+                    border: 2px solid #000;
+                    padding: 20px;
+                    margin: 20px auto;
+                    width: 300px;
+                    background: white;
+                }
+                .product-name {
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                    color: #333;
+                }
+                .barcode-display {
+                    font-family: 'Courier New', monospace;
+                    font-size: 24px;
+                    letter-spacing: 2px;
+                    margin: 15px 0;
+                    padding: 10px;
+                    border: 1px solid #ccc;
+                    background: #f9f9f9;
+                }
+                .barcode-visual {
+                    margin: 15px 0;
+                    height: 60px;
+                    background: repeating-linear-gradient(
+                        90deg,
+                        #000 0px,
+                        #000 2px,
+                        #fff 2px,
+                        #fff 4px
+                    );
+                    border: 1px solid #000;
+                }
+                .product-info {
+                    font-size: 12px;
+                    color: #666;
+                    margin-top: 10px;
+                }
+                .price {
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: #2c5aa0;
+                    margin: 5px 0;
+                }
+                @media print {
+                    body { margin: 0; }
+                    .barcode-container {
+                        border: 2px solid #000;
+                        page-break-inside: avoid;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="barcode-container">
+                <div class="product-name">${getProductName(product)}</div>
+                <div class="barcode-visual"></div>
+                <div class="barcode-display">${product.barcode}</div>
+                <div class="price">${formatCurrency(product.price)}</div>
+                <div class="product-info">
+                    ${t('category')}: ${t(product.category)}<br>
+                    ${t('stock')}: ${product.stock}<br>
+                    ${new Date().toLocaleDateString()}
+                </div>
+            </div>
+            <script>
+                window.onload = function() {
+                    window.print();
+                    setTimeout(function() {
+                        window.close();
+                    }, 1000);
+                };
+            </script>
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
+}
+
+function generateProductBarcode(product) {
+    // Generate a unique barcode based on product ID and timestamp
+    const timestamp = Date.now().toString().slice(-6); // Last 6 digits of timestamp
+    const productIdPadded = product.id.toString().padStart(4, '0'); // Pad product ID to 4 digits
+    const categoryCode = getCategoryCode(product.category);
+
+    // Format: CategoryCode + ProductID + Timestamp (13 digits total - EAN-13 format)
+    const barcode = categoryCode + productIdPadded + timestamp;
+
+    return barcode;
+}
+
+function getCategoryCode(category) {
+    // Map categories to 3-digit codes
+    const categoryCodes = {
+        'tools': '200',
+        'hardware': '201',
+        'construction': '202',
+        'electrical': '203',
+        'plumbing': '204',
+        'food': '100',
+        'drinks': '101',
+        'snacks': '102'
+    };
+
+    return categoryCodes[category.toLowerCase()] || '999';
+}
+
+// Enhanced barcode printing with multiple labels
+function printMultipleBarcodes(productId, quantity = 1) {
+    const product = products.find(p => p.id === productId);
+    if (!product) {
+        alert(t('productNotFound'));
+        return;
+    }
+
+    // Generate barcode if needed
+    if (!product.barcode || product.barcode === '') {
+        product.barcode = generateProductBarcode(product);
+        saveToStorage('products', products);
+    }
+
+    const printWindow = window.open('', '_blank');
+    let barcodeLabels = '';
+
+    // Generate multiple barcode labels
+    for (let i = 0; i < quantity; i++) {
+        barcodeLabels += `
+            <div class="barcode-label">
+                <div class="product-name">${getProductName(product)}</div>
+                <div class="barcode-visual"></div>
+                <div class="barcode-display">${product.barcode}</div>
+                <div class="price">${formatCurrency(product.price)}</div>
+            </div>
+        `;
+    }
+
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>${t('printBarcode')} - ${getProductName(product)} (${quantity}x)</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 10px;
+                }
+                .barcode-label {
+                    border: 1px solid #000;
+                    padding: 10px;
+                    margin: 5px;
+                    width: 200px;
+                    height: 120px;
+                    display: inline-block;
+                    text-align: center;
+                    vertical-align: top;
+                    background: white;
+                    page-break-inside: avoid;
+                }
+                .product-name {
+                    font-size: 10px;
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                    height: 20px;
+                    overflow: hidden;
+                }
+                .barcode-visual {
+                    height: 30px;
+                    background: repeating-linear-gradient(
+                        90deg,
+                        #000 0px,
+                        #000 1px,
+                        #fff 1px,
+                        #fff 2px
+                    );
+                    margin: 5px 0;
+                    border: 1px solid #000;
+                }
+                .barcode-display {
+                    font-family: 'Courier New', monospace;
+                    font-size: 8px;
+                    margin: 5px 0;
+                }
+                .price {
+                    font-size: 12px;
+                    font-weight: bold;
+                    color: #2c5aa0;
+                }
+                @media print {
+                    body { margin: 0; }
+                }
+            </style>
+        </head>
+        <body>
+            ${barcodeLabels}
+            <script>
+                window.onload = function() {
+                    window.print();
+                    setTimeout(function() {
+                        window.close();
+                    }, 1000);
+                };
+            </script>
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
+}
+
+// Show bulk barcode printing modal
+function showBulkBarcodeModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'block';
+
+    const productsList = products.map(product => `
+        <div class="product-checkbox">
+            <label>
+                <input type="checkbox" value="${product.id}" class="barcode-product-checkbox">
+                <span class="product-info">
+                    <strong>${getProductName(product)}</strong><br>
+                    <small>${t('category')}: ${t(product.category)} | ${t('price')}: ${formatCurrency(product.price)}</small><br>
+                    <small>${t('barcode')}: ${product.barcode || t('noBarcodeFound')}</small>
+                </span>
+            </label>
+            <input type="number" min="1" max="50" value="1" class="quantity-input" data-product-id="${product.id}">
+        </div>
+    `).join('');
+
+    modal.innerHTML = `
+        <div class="modal-content bulk-barcode-modal">
+            <h2 data-translate="bulkBarcodePrint">${t('bulkBarcodePrint')}</h2>
+            <p data-translate="selectProductsForBarcode">${t('selectProductsForBarcode')}</p>
+
+            <div class="bulk-actions">
+                <button type="button" class="btn btn-secondary" onclick="selectAllProducts(true)">${t('selectAll')}</button>
+                <button type="button" class="btn btn-secondary" onclick="selectAllProducts(false)">${t('deselectAll')}</button>
+                <button type="button" class="btn btn-info" onclick="selectProductsWithoutBarcode()">${t('selectWithoutBarcode')}</button>
+            </div>
+
+            <div class="products-list">
+                ${productsList}
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeModal()" data-translate="cancel">${t('cancel')}</button>
+                <button type="button" class="btn btn-primary" onclick="printSelectedBarcodes()" data-translate="printSelectedBarcodes">${t('printSelectedBarcodes')}</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function selectAllProducts(select) {
+    const checkboxes = document.querySelectorAll('.barcode-product-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = select;
+    });
+}
+
+function selectProductsWithoutBarcode() {
+    const checkboxes = document.querySelectorAll('.barcode-product-checkbox');
+    checkboxes.forEach(checkbox => {
+        const productId = parseInt(checkbox.value);
+        const product = products.find(p => p.id === productId);
+        checkbox.checked = !product.barcode || product.barcode === '';
+    });
+}
+
+function printSelectedBarcodes() {
+    const selectedProducts = [];
+    const checkboxes = document.querySelectorAll('.barcode-product-checkbox:checked');
+
+    if (checkboxes.length === 0) {
+        alert(t('selectAtLeastOneProduct'));
+        return;
+    }
+
+    checkboxes.forEach(checkbox => {
+        const productId = parseInt(checkbox.value);
+        const quantityInput = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
+        const quantity = parseInt(quantityInput.value) || 1;
+
+        selectedProducts.push({
+            productId: productId,
+            quantity: quantity
+        });
+    });
+
+    // Generate barcodes for products that don't have them
+    selectedProducts.forEach(item => {
+        const product = products.find(p => p.id === item.productId);
+        if (product && (!product.barcode || product.barcode === '')) {
+            product.barcode = generateProductBarcode(product);
+        }
+    });
+
+    // Save updated products
+    saveToStorage('products', products);
+
+    // Create bulk print window
+    printBulkBarcodes(selectedProducts);
+
+    // Close modal
+    closeModal();
+
+    // Refresh inventory view
+    if (currentView === 'inventory') {
+        loadInventoryView();
+    }
+}
+
+function printBulkBarcodes(selectedProducts) {
+    const printWindow = window.open('', '_blank');
+    let barcodeLabels = '';
+
+    selectedProducts.forEach(item => {
+        const product = products.find(p => p.id === item.productId);
+        if (product) {
+            for (let i = 0; i < item.quantity; i++) {
+                barcodeLabels += `
+                    <div class="barcode-label">
+                        <div class="product-name">${getProductName(product)}</div>
+                        <div class="barcode-visual"></div>
+                        <div class="barcode-display">${product.barcode}</div>
+                        <div class="price">${formatCurrency(product.price)}</div>
+                        <div class="category">${t(product.category)}</div>
+                    </div>
+                `;
+            }
+        }
+    });
+
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>${t('bulkBarcodePrint')} - ${selectedProducts.length} ${t('products')}</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    margin: 10px;
+                }
+                .barcode-label {
+                    border: 1px solid #000;
+                    padding: 8px;
+                    margin: 3px;
+                    width: 180px;
+                    height: 110px;
+                    display: inline-block;
+                    text-align: center;
+                    vertical-align: top;
+                    background: white;
+                    page-break-inside: avoid;
+                }
+                .product-name {
+                    font-size: 9px;
+                    font-weight: bold;
+                    margin-bottom: 3px;
+                    height: 18px;
+                    overflow: hidden;
+                    line-height: 9px;
+                }
+                .barcode-visual {
+                    height: 25px;
+                    background: repeating-linear-gradient(
+                        90deg,
+                        #000 0px,
+                        #000 1px,
+                        #fff 1px,
+                        #fff 2px
+                    );
+                    margin: 3px 0;
+                    border: 1px solid #000;
+                }
+                .barcode-display {
+                    font-family: 'Courier New', monospace;
+                    font-size: 7px;
+                    margin: 3px 0;
+                    letter-spacing: 1px;
+                }
+                .price {
+                    font-size: 11px;
+                    font-weight: bold;
+                    color: #2c5aa0;
+                    margin: 2px 0;
+                }
+                .category {
+                    font-size: 7px;
+                    color: #666;
+                    margin-top: 2px;
+                }
+                @media print {
+                    body { margin: 0; }
+                    .barcode-label {
+                        margin: 2px;
+                        page-break-inside: avoid;
+                    }
+                }
+            </style>
+        </head>
+        <body>
+            <h3 style="text-align: center; margin-bottom: 20px;">${t('bulkBarcodePrint')} - ${new Date().toLocaleDateString()}</h3>
+            ${barcodeLabels}
+            <script>
+                window.onload = function() {
+                    window.print();
+                    setTimeout(function() {
+                        window.close();
+                    }, 1000);
+                };
+            </script>
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
+}
