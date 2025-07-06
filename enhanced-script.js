@@ -5288,14 +5288,11 @@ function printBarcode(productId) {
                 .barcode-visual {
                     margin: 15px 0;
                     height: 60px;
-                    background: repeating-linear-gradient(
-                        90deg,
-                        #000 0px,
-                        #000 2px,
-                        #fff 2px,
-                        #fff 4px
-                    );
                     border: 1px solid #000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: white;
                 }
                 .product-info {
                     font-size: 12px;
@@ -5320,7 +5317,7 @@ function printBarcode(productId) {
         <body>
             <div class="barcode-container">
                 <div class="product-name">${getProductName(product)}</div>
-                <div class="barcode-visual"></div>
+                <div class="barcode-visual">${createBarcodeSVG(product.barcode, 250, 60)}</div>
                 <div class="barcode-display">${product.barcode}</div>
                 <div class="price">${formatCurrency(product.price)}</div>
                 <div class="product-info">
@@ -5353,6 +5350,86 @@ function generateProductBarcode(product) {
     const barcode = categoryCode + productIdPadded + timestamp;
 
     return barcode;
+}
+
+// Generate visual barcode pattern (EAN-13 style)
+function generateBarcodePattern(barcodeNumber) {
+    // EAN-13 barcode patterns for left side (odd positions)
+    const leftPatterns = {
+        '0': '0001101',
+        '1': '0011001',
+        '2': '0010011',
+        '3': '0111101',
+        '4': '0100011',
+        '5': '0110001',
+        '6': '0101111',
+        '7': '0111011',
+        '8': '0110111',
+        '9': '0001011'
+    };
+
+    // EAN-13 barcode patterns for right side (even positions)
+    const rightPatterns = {
+        '0': '1110010',
+        '1': '1100110',
+        '2': '1101100',
+        '3': '1000010',
+        '4': '1011100',
+        '5': '1001110',
+        '6': '1010000',
+        '7': '1000100',
+        '8': '1001000',
+        '9': '1110100'
+    };
+
+    // Ensure we have at least 12 digits
+    const paddedNumber = barcodeNumber.padStart(12, '0').slice(0, 12);
+
+    let barcodePattern = '101'; // Start guard
+
+    // Left side (first 6 digits)
+    for (let i = 0; i < 6; i++) {
+        const digit = paddedNumber[i];
+        barcodePattern += leftPatterns[digit] || leftPatterns['0'];
+    }
+
+    barcodePattern += '01010'; // Center guard
+
+    // Right side (last 6 digits)
+    for (let i = 6; i < 12; i++) {
+        const digit = paddedNumber[i];
+        barcodePattern += rightPatterns[digit] || rightPatterns['0'];
+    }
+
+    barcodePattern += '101'; // End guard
+
+    return barcodePattern;
+}
+
+// Create SVG barcode with proper scaling and appearance
+function createBarcodeSVG(barcodeNumber, width = 200, height = 60) {
+    const pattern = generateBarcodePattern(barcodeNumber);
+    const barWidth = Math.max(1, width / pattern.length); // Minimum 1px bar width
+    const actualWidth = barWidth * pattern.length;
+
+    let svg = `<svg width="${actualWidth}" height="${height}" xmlns="http://www.w3.org/2000/svg" style="background: white;">`;
+    svg += `<rect width="${actualWidth}" height="${height}" fill="white"/>`;
+
+    let x = 0;
+    for (let i = 0; i < pattern.length; i++) {
+        if (pattern[i] === '1') {
+            svg += `<rect x="${x}" y="0" width="${barWidth}" height="${height * 0.8}" fill="black"/>`;
+        }
+        x += barWidth;
+    }
+
+    // Add the barcode number below the bars
+    const fontSize = Math.min(height * 0.15, 12);
+    const textY = height * 0.95;
+    svg += `<text x="${actualWidth / 2}" y="${textY}" text-anchor="middle" font-family="monospace" font-size="${fontSize}" fill="black">${barcodeNumber}</text>`;
+
+    svg += '</svg>';
+    return svg;
 }
 
 function getCategoryCode(category) {
@@ -5393,7 +5470,7 @@ function printMultipleBarcodes(productId, quantity = 1) {
         barcodeLabels += `
             <div class="barcode-label">
                 <div class="product-name">${getProductName(product)}</div>
-                <div class="barcode-visual"></div>
+                <div class="barcode-visual">${createBarcodeSVG(product.barcode, 180, 30)}</div>
                 <div class="barcode-display">${product.barcode}</div>
                 <div class="price">${formatCurrency(product.price)}</div>
             </div>
@@ -5431,15 +5508,15 @@ function printMultipleBarcodes(productId, quantity = 1) {
                 }
                 .barcode-visual {
                     height: 30px;
-                    background: repeating-linear-gradient(
-                        90deg,
-                        #000 0px,
-                        #000 1px,
-                        #fff 1px,
-                        #fff 2px
-                    );
                     margin: 5px 0;
-                    border: 1px solid #000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: white;
+                }
+                .barcode-visual svg {
+                    max-width: 100%;
+                    height: 100%;
                 }
                 .barcode-display {
                     font-family: 'Courier New', monospace;
@@ -5586,7 +5663,7 @@ function printBulkBarcodes(selectedProducts) {
                 barcodeLabels += `
                     <div class="barcode-label">
                         <div class="product-name">${getProductName(product)}</div>
-                        <div class="barcode-visual"></div>
+                        <div class="barcode-visual">${createBarcodeSVG(product.barcode, 160, 25)}</div>
                         <div class="barcode-display">${product.barcode}</div>
                         <div class="price">${formatCurrency(product.price)}</div>
                         <div class="category">${t(product.category)}</div>
@@ -5628,15 +5705,15 @@ function printBulkBarcodes(selectedProducts) {
                 }
                 .barcode-visual {
                     height: 25px;
-                    background: repeating-linear-gradient(
-                        90deg,
-                        #000 0px,
-                        #000 1px,
-                        #fff 1px,
-                        #fff 2px
-                    );
                     margin: 3px 0;
-                    border: 1px solid #000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: white;
+                }
+                .barcode-visual svg {
+                    max-width: 100%;
+                    height: 100%;
                 }
                 .barcode-display {
                     font-family: 'Courier New', monospace;
