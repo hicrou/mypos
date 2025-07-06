@@ -2114,6 +2114,30 @@ body {
     margin-top: 25px;
 }
 
+/* ===== NO PRODUCTS FOUND MESSAGE ===== */
+.no-products {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 12px;
+    border: 2px dashed #dee2e6;
+    margin: 20px;
+}
+
+.no-products h3 {
+    color: #495057;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.no-products p {
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.8;
+}
+
 /* ===== PRINT STYLES ===== */
 @media print {
     .top-nav,

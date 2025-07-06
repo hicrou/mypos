@@ -280,7 +280,9 @@ const languages = {
         pending: 'Pending',
         item: 'Item',
         note: 'Note',
-        generatedOn: 'Generated On'
+        generatedOn: 'Generated On',
+        noProductsFound: 'No products found',
+        tryDifferentCategory: 'Try selecting a different category'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -558,7 +560,9 @@ const languages = {
         pending: 'قيد الانتظار',
         item: 'الصنف',
         note: 'ملاحظة',
-        generatedOn: 'تم إنشاؤه في'
+        generatedOn: 'تم إنشاؤه في',
+        noProductsFound: 'لم يتم العثور على منتجات',
+        tryDifferentCategory: 'جرب اختيار فئة مختلفة'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -824,7 +828,9 @@ const languages = {
         pending: 'En Attente',
         item: 'Article',
         note: 'Note',
-        generatedOn: 'Généré Le'
+        generatedOn: 'Généré Le',
+        noProductsFound: 'Aucun produit trouvé',
+        tryDifferentCategory: 'Essayez de sélectionner une catégorie différente'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -1090,7 +1096,9 @@ const languages = {
         pending: 'Pendiente',
         item: 'Artículo',
         note: 'Nota',
-        generatedOn: 'Generado El'
+        generatedOn: 'Generado El',
+        noProductsFound: 'No se encontraron productos',
+        tryDifferentCategory: 'Intente seleccionar una categoría diferente'
     }
 };
 
@@ -1868,6 +1876,9 @@ function initializeSystem() {
     updateTime();
     checkLowStock();
 
+    // Set up category buttons
+    attachCategoryButtonListeners();
+
     // Set up intervals
     setInterval(updateTime, 1000);
     setInterval(checkLowStock, 60000); // Check every minute
@@ -1969,16 +1980,8 @@ function createMainInterface() {
                                 <button onclick="scanBarcode()" class="btn btn-secondary">📷 Scan</button>
                             </div>
                             <h2 data-translate="categories">${t('categories')}</h2>
-                            <div class="category-buttons">
-                                <button class="category-btn active" data-category="all" data-translate="allItems">${t('allItems')}</button>
-                                <button class="category-btn" data-category="food" data-translate="food">${t('food')}</button>
-                                <button class="category-btn" data-category="drinks" data-translate="drinks">${t('drinks')}</button>
-                                <button class="category-btn" data-category="snacks" data-translate="snacks">${t('snacks')}</button>
-                                <button class="category-btn" data-category="tools" data-translate="tools">${t('tools')}</button>
-                                <button class="category-btn" data-category="hardware" data-translate="hardware">${t('hardware')}</button>
-                                <button class="category-btn" data-category="construction" data-translate="construction">${t('construction')}</button>
-                                <button class="category-btn" data-category="electrical" data-translate="electrical">${t('electrical')}</button>
-                                <button class="category-btn" data-category="plumbing" data-translate="plumbing">${t('plumbing')}</button>
+                            <div class="category-buttons" id="category-buttons">
+                                ${generateCategoryButtons()}
                             </div>
                             <div class="low-stock-alert" id="low-stock-alert" style="display: none;">
                                 <h3 data-translate="lowStock">${t('lowStock')}</h3>
@@ -4089,6 +4092,119 @@ function connectUSBScanner() {
     console.log('USB scanner connected');
 }
 
+// ===== DYNAMIC CATEGORY BUTTONS =====
+
+function generateCategoryButtons() {
+    // Always start with "All Items" button
+    let buttonsHTML = `<button class="category-btn active" data-category="all" data-translate="allItems">${t('allItems')}</button>`;
+
+    // Add buttons for active categories from database
+    const activeCategories = categories.filter(category => category.active);
+
+    activeCategories.forEach(category => {
+        const categoryKey = category.name.toLowerCase();
+        const categoryName = getCategoryName(category);
+
+        buttonsHTML += `<button class="category-btn" data-category="${categoryKey}" title="${categoryName}">${categoryName}</button>`;
+    });
+
+    return buttonsHTML;
+}
+
+function updateCategoryButtons() {
+    const categoryButtonsContainer = document.getElementById('category-buttons');
+    if (categoryButtonsContainer) {
+        categoryButtonsContainer.innerHTML = generateCategoryButtons();
+
+        // Re-attach event listeners for category buttons
+        attachCategoryButtonListeners();
+    }
+}
+
+function attachCategoryButtonListeners() {
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active class from all buttons
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+
+            // Add active class to clicked button
+            this.classList.add('active');
+
+            // Filter products by category
+            const category = this.dataset.category;
+            filterProductsByCategory(category);
+        });
+    });
+}
+
+function filterProductsByCategory(category) {
+    if (category === 'all') {
+        displayProducts(); // Show all products
+    } else {
+        // Filter products by the selected category
+        const filteredProducts = products.filter(product =>
+            product.category.toLowerCase() === category.toLowerCase()
+        );
+        displayFilteredProducts(filteredProducts);
+    }
+}
+
+function displayFilteredProducts(filteredProducts) {
+    const productsGrid = document.getElementById('products-grid');
+    if (!productsGrid) return;
+
+    if (filteredProducts.length === 0) {
+        productsGrid.innerHTML = `
+            <div class="no-products">
+                <h3>${t('noProductsFound')}</h3>
+                <p>${t('tryDifferentCategory')}</p>
+            </div>
+        `;
+        return;
+    }
+
+    productsGrid.innerHTML = '';
+
+    filteredProducts.forEach(product => {
+        const productName = getProductName(product);
+        const isLowStock = product.stock <= product.minStock;
+        const isOutOfStock = product.stock === 0;
+
+        let statusClass = '';
+        let statusBadge = '';
+
+        if (isOutOfStock) {
+            statusClass = 'out-of-stock';
+            statusBadge = `<span class="stock-badge out-of-stock">${t('outOfStock')}</span>`;
+        } else if (isLowStock) {
+            statusClass = 'low-stock';
+            statusBadge = `<span class="stock-badge low-stock">${t('lowStock')}</span>`;
+        }
+
+        const productCard = document.createElement('div');
+        productCard.className = `product-card ${statusClass}`;
+        productCard.innerHTML = `
+            ${product.image ? `<div class="product-image"><img src="${product.image}" alt="${productName}" /></div>` : ''}
+            <div class="product-info">
+                <h3>${productName}</h3>
+                <div class="price">${formatPrice(product.price)}</div>
+                <div class="stock-info">
+                    <span class="stock-count">${t('stock')}: ${product.stock}</span>
+                    ${statusBadge}
+                </div>
+                ${product.expiryDate ? `<div class="expiry-date">${t('expiryDate')}: ${new Date(product.expiryDate).toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : currentLanguage === 'fr' ? 'fr-FR' : currentLanguage === 'es' ? 'es-ES' : 'en-US')}</div>` : ''}
+                ${settings.showBarcode ? `<div class="barcode">${product.barcode}</div>` : ''}
+            </div>
+        `;
+
+        if (!isOutOfStock) {
+            productCard.addEventListener('click', () => addToCart(product));
+        }
+
+        productsGrid.appendChild(productCard);
+    });
+}
+
 // ===== CATEGORIES MANAGEMENT =====
 
 function loadCategoriesView() {
@@ -4216,6 +4332,9 @@ function addNewCategory(event) {
     // Refresh product categories
     updateProductCategories();
 
+    // Update main screen category buttons
+    updateCategoryButtons();
+
     alert(`${t('category')} "${getCategoryName(newCategory)}" ${t('addedSuccessfully')}!`);
 }
 
@@ -4275,6 +4394,9 @@ function updateCategory(event, categoryId) {
     // Refresh product categories
     updateProductCategories();
 
+    // Update main screen category buttons
+    updateCategoryButtons();
+
     alert(`${t('category')} "${getCategoryName(category)}" ${t('updatedSuccessfully')}!`);
 }
 
@@ -4289,6 +4411,9 @@ function toggleCategoryStatus(categoryId) {
 
     // Refresh product categories
     updateProductCategories();
+
+    // Update main screen category buttons
+    updateCategoryButtons();
 
     alert(`${t('category')} "${getCategoryName(category)}" ${category.active ? t('activated') : t('deactivated')} ${t('successfully')}!`);
 }
@@ -4313,6 +4438,9 @@ function deleteCategory(categoryId) {
 
         // Refresh product categories
         updateProductCategories();
+
+        // Update main screen category buttons
+        updateCategoryButtons();
 
         alert(`${t('category')} "${getCategoryName(category)}" ${t('deletedSuccessfully')}!`);
     }
@@ -5857,6 +5985,10 @@ window.updateCategory = updateCategory;
 window.toggleCategoryStatus = toggleCategoryStatus;
 window.deleteCategory = deleteCategory;
 window.exportCategories = exportCategories;
+window.generateCategoryButtons = generateCategoryButtons;
+window.updateCategoryButtons = updateCategoryButtons;
+window.attachCategoryButtonListeners = attachCategoryButtonListeners;
+window.filterProductsByCategory = filterProductsByCategory;
 
 // Charts functions
 window.toggleCharts = toggleCharts;
