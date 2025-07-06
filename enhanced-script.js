@@ -311,7 +311,37 @@ const languages = {
         imageTooLarge: 'Image too large. Maximum size is 5MB.',
         invalidImageUrl: 'Invalid image URL. Please enter a valid URL.',
         imageLoadError: 'Failed to load image. Please check the URL.',
-        removeImage: 'Remove Image'
+        removeImage: 'Remove Image',
+        loyaltyCards: 'Loyalty Cards',
+        loyaltyCard: 'Loyalty Card',
+        cardNumber: 'Card Number',
+        customerName: 'Customer Name',
+        customerPhone: 'Customer Phone',
+        customerEmail: 'Customer Email',
+        points: 'Points',
+        totalSpent: 'Total Spent',
+        addLoyaltyCard: 'Add Loyalty Card',
+        editLoyaltyCard: 'Edit Loyalty Card',
+        loyaltySettings: 'Loyalty Settings',
+        pointsPerDollar: 'Points per Dollar',
+        redemptionValue: 'Redemption Value',
+        minimumRedemption: 'Minimum Redemption',
+        welcomeBonus: 'Welcome Bonus',
+        applyLoyaltyCard: 'Apply Loyalty Card',
+        redeemPoints: 'Redeem Points',
+        earnedPoints: 'Earned Points',
+        redeemedPoints: 'Redeemed Points',
+        totalCards: 'Total Cards',
+        totalPoints: 'Total Points',
+        noLoyaltyCards: 'No loyalty cards found',
+        expired: 'Expired',
+        inactive: 'Inactive',
+        active: 'Active',
+        history: 'History',
+        toggleStatus: 'Toggle Status',
+        generate: 'Generate',
+        initialPoints: 'Initial Points',
+        cardNumberExists: 'Card number already exists'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -620,7 +650,37 @@ const languages = {
         imageTooLarge: 'الصورة كبيرة جداً. الحد الأقصى 5 ميجابايت.',
         invalidImageUrl: 'رابط صورة غير صحيح. يرجى إدخال رابط صحيح.',
         imageLoadError: 'فشل في تحميل الصورة. يرجى التحقق من الرابط.',
-        removeImage: 'إزالة الصورة'
+        removeImage: 'إزالة الصورة',
+        loyaltyCards: 'بطاقات الولاء',
+        loyaltyCard: 'بطاقة ولاء',
+        cardNumber: 'رقم البطاقة',
+        customerName: 'اسم العميل',
+        customerPhone: 'هاتف العميل',
+        customerEmail: 'بريد العميل الإلكتروني',
+        points: 'النقاط',
+        totalSpent: 'إجمالي المبلغ المنفق',
+        addLoyaltyCard: 'إضافة بطاقة ولاء',
+        editLoyaltyCard: 'تعديل بطاقة الولاء',
+        loyaltySettings: 'إعدادات الولاء',
+        pointsPerDollar: 'النقاط لكل دولار',
+        redemptionValue: 'قيمة الاستبدال',
+        minimumRedemption: 'الحد الأدنى للاستبدال',
+        welcomeBonus: 'مكافأة الترحيب',
+        applyLoyaltyCard: 'تطبيق بطاقة الولاء',
+        redeemPoints: 'استبدال النقاط',
+        earnedPoints: 'النقاط المكتسبة',
+        redeemedPoints: 'النقاط المستبدلة',
+        totalCards: 'إجمالي البطاقات',
+        totalPoints: 'إجمالي النقاط',
+        noLoyaltyCards: 'لا توجد بطاقات ولاء',
+        expired: 'منتهية الصلاحية',
+        inactive: 'غير نشطة',
+        active: 'نشطة',
+        history: 'التاريخ',
+        toggleStatus: 'تغيير الحالة',
+        generate: 'توليد',
+        initialPoints: 'النقاط الأولية',
+        cardNumberExists: 'رقم البطاقة موجود بالفعل'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -917,7 +977,37 @@ const languages = {
         imageTooLarge: 'Image trop volumineuse. Taille maximale 5MB.',
         invalidImageUrl: 'URL d\'image invalide. Veuillez entrer une URL valide.',
         imageLoadError: 'Échec du chargement de l\'image. Vérifiez l\'URL.',
-        removeImage: 'Supprimer l\'Image'
+        removeImage: 'Supprimer l\'Image',
+        loyaltyCards: 'Cartes de Fidélité',
+        loyaltyCard: 'Carte de Fidélité',
+        cardNumber: 'Numéro de Carte',
+        customerName: 'Nom du Client',
+        customerPhone: 'Téléphone du Client',
+        customerEmail: 'Email du Client',
+        points: 'Points',
+        totalSpent: 'Total Dépensé',
+        addLoyaltyCard: 'Ajouter Carte de Fidélité',
+        editLoyaltyCard: 'Modifier Carte de Fidélité',
+        loyaltySettings: 'Paramètres de Fidélité',
+        pointsPerDollar: 'Points par Dollar',
+        redemptionValue: 'Valeur de Rachat',
+        minimumRedemption: 'Rachat Minimum',
+        welcomeBonus: 'Bonus de Bienvenue',
+        applyLoyaltyCard: 'Appliquer Carte de Fidélité',
+        redeemPoints: 'Racheter des Points',
+        earnedPoints: 'Points Gagnés',
+        redeemedPoints: 'Points Rachetés',
+        totalCards: 'Total des Cartes',
+        totalPoints: 'Total des Points',
+        noLoyaltyCards: 'Aucune carte de fidélité trouvée',
+        expired: 'Expirée',
+        inactive: 'Inactive',
+        active: 'Active',
+        history: 'Historique',
+        toggleStatus: 'Basculer le Statut',
+        generate: 'Générer',
+        initialPoints: 'Points Initiaux',
+        cardNumberExists: 'Le numéro de carte existe déjà'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -1214,7 +1304,37 @@ const languages = {
         imageTooLarge: 'Imagen demasiado grande. Tamaño máximo 5MB.',
         invalidImageUrl: 'URL de imagen inválida. Ingrese una URL válida.',
         imageLoadError: 'Error al cargar imagen. Verifique la URL.',
-        removeImage: 'Eliminar Imagen'
+        removeImage: 'Eliminar Imagen',
+        loyaltyCards: 'Tarjetas de Lealtad',
+        loyaltyCard: 'Tarjeta de Lealtad',
+        cardNumber: 'Número de Tarjeta',
+        customerName: 'Nombre del Cliente',
+        customerPhone: 'Teléfono del Cliente',
+        customerEmail: 'Email del Cliente',
+        points: 'Puntos',
+        totalSpent: 'Total Gastado',
+        addLoyaltyCard: 'Agregar Tarjeta de Lealtad',
+        editLoyaltyCard: 'Editar Tarjeta de Lealtad',
+        loyaltySettings: 'Configuración de Lealtad',
+        pointsPerDollar: 'Puntos por Dólar',
+        redemptionValue: 'Valor de Canje',
+        minimumRedemption: 'Canje Mínimo',
+        welcomeBonus: 'Bono de Bienvenida',
+        applyLoyaltyCard: 'Aplicar Tarjeta de Lealtad',
+        redeemPoints: 'Canjear Puntos',
+        earnedPoints: 'Puntos Ganados',
+        redeemedPoints: 'Puntos Canjeados',
+        totalCards: 'Total de Tarjetas',
+        totalPoints: 'Total de Puntos',
+        noLoyaltyCards: 'No se encontraron tarjetas de lealtad',
+        expired: 'Expirada',
+        inactive: 'Inactiva',
+        active: 'Activa',
+        history: 'Historial',
+        toggleStatus: 'Cambiar Estado',
+        generate: 'Generar',
+        initialPoints: 'Puntos Iniciales',
+        cardNumberExists: 'El número de tarjeta ya existe'
     }
 };
 
@@ -1588,6 +1708,19 @@ let currentCurrency = localStorage.getItem('posCurrency') || 'USD';
 let salesHistory = JSON.parse(localStorage.getItem('salesHistory')) || [];
 let isLoggedIn = false;
 let currentView = 'pos'; // pos, inventory, reports, settings, users
+
+// ===== LOYALTY CARD SYSTEM =====
+let loyaltyCards = getFromStorage('loyaltyCards') || [];
+let loyaltySettings = getFromStorage('loyaltySettings') || {
+    pointsPerDollar: 1,
+    pointsRedemptionValue: 0.01, // $0.01 per point
+    minimumRedemption: 100,
+    bonusPointsThreshold: 100, // Bonus points for spending over this amount
+    bonusPointsMultiplier: 2,
+    cardExpiryMonths: 12,
+    welcomeBonus: 50,
+    enabled: true
+};
 
 // System settings
 const settings = {
@@ -2032,6 +2165,7 @@ function createMainInterface() {
                                 ${hasPermission('inventory') ? `<button class="nav-tab" onclick="switchView('categories')" data-translate="categories">${t('categories')}</button>` : ''}
                                 ${hasPermission('reports') ? `<button class="nav-tab" onclick="switchView('reports')" data-translate="reports">${t('reports')}</button>` : ''}
                                 ${hasPermission('users') ? `<button class="nav-tab" onclick="switchView('users')" data-translate="users">${t('users')}</button>` : ''}
+                                ${hasPermission('reports') ? `<button class="nav-tab" onclick="switchView('loyalty')" data-translate="loyaltyCards">${t('loyaltyCards')}</button>` : ''}
                                 ${currentUser && currentUser.role === 'admin' ? `<button class="nav-tab" onclick="switchView('settings')" data-translate="settings">${t('settings')}</button>` : ''}
                             </div>
                         </div>
@@ -2199,6 +2333,13 @@ function createMainInterface() {
                     </div>
                 </div>
 
+                <div id="loyalty-view" class="view" style="display: none;">
+                    <h2 data-translate="loyaltyCards">${t('loyaltyCards')}</h2>
+                    <div class="loyalty-content">
+                        <!-- Loyalty cards management will be loaded here -->
+                    </div>
+                </div>
+
                 <div id="settings-view" class="view" style="display: none;">
                     <h2 data-translate="settings">${t('settings')}</h2>
                     <div class="settings-content">
@@ -2282,6 +2423,9 @@ function switchView(viewName) {
             break;
         case 'users':
             loadUsersView();
+            break;
+        case 'loyalty':
+            loadLoyaltyView();
             break;
         case 'settings':
             loadSettingsView();
@@ -4004,6 +4148,191 @@ function deleteUser(userId) {
 
         alert(`User "${user.name}" deleted successfully!`);
     }
+}
+
+// ===== LOYALTY CARD MANAGEMENT =====
+
+function loadLoyaltyView() {
+    const loyaltyContent = document.querySelector('.loyalty-content');
+
+    loyaltyContent.innerHTML = `
+        <div class="loyalty-header">
+            <div class="loyalty-actions">
+                <button class="btn btn-primary" onclick="showAddLoyaltyCardModal()">${t('addLoyaltyCard')}</button>
+                <button class="btn btn-secondary" onclick="showLoyaltySettingsModal()">${t('loyaltySettings')}</button>
+                <button class="btn btn-info" onclick="exportLoyaltyCards()">${t('export')}</button>
+            </div>
+        </div>
+
+        <div class="loyalty-stats">
+            <div class="stat-card">
+                <h3>${loyaltyCards.length}</h3>
+                <p>${t('totalCards')}</p>
+            </div>
+            <div class="stat-card">
+                <h3>${loyaltyCards.reduce((sum, card) => sum + card.points, 0)}</h3>
+                <p>${t('totalPoints')}</p>
+            </div>
+            <div class="stat-card">
+                <h3>${formatPrice(loyaltyCards.reduce((sum, card) => sum + card.totalSpent, 0))}</h3>
+                <p>${t('totalSpent')}</p>
+            </div>
+        </div>
+
+        <div class="loyalty-table-container">
+            <table class="loyalty-table">
+                <thead>
+                    <tr>
+                        <th>${t('cardNumber')}</th>
+                        <th>${t('customerName')}</th>
+                        <th>${t('customerPhone')}</th>
+                        <th>${t('points')}</th>
+                        <th>${t('totalSpent')}</th>
+                        <th>${t('status')}</th>
+                        <th>${t('actions')}</th>
+                    </tr>
+                </thead>
+                <tbody id="loyalty-table-body">
+                    ${generateLoyaltyRows()}
+                </tbody>
+            </table>
+        </div>
+    `;
+}
+
+function generateLoyaltyRows() {
+    if (loyaltyCards.length === 0) {
+        return `
+            <tr>
+                <td colspan="7" class="no-data">
+                    <div class="no-data-message">
+                        <span>💳</span>
+                        <p>${t('noLoyaltyCards')}</p>
+                        <button class="btn btn-primary" onclick="showAddLoyaltyCardModal()">${t('addLoyaltyCard')}</button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }
+
+    return loyaltyCards.map(card => {
+        const isExpired = new Date(card.expiryDate) < new Date();
+        const statusClass = isExpired ? 'expired' : card.active ? 'active' : 'inactive';
+        const statusText = isExpired ? t('expired') : card.active ? t('active') : t('inactive');
+
+        return `
+            <tr class="loyalty-row ${statusClass}">
+                <td class="card-number">${card.cardNumber}</td>
+                <td class="customer-name">${card.customerName}</td>
+                <td class="customer-phone">${card.customerPhone || '-'}</td>
+                <td class="points">${card.points}</td>
+                <td class="total-spent">${formatPrice(card.totalSpent)}</td>
+                <td class="status">
+                    <span class="status-badge ${statusClass}">${statusText}</span>
+                </td>
+                <td class="actions">
+                    <button class="btn btn-small btn-primary" onclick="editLoyaltyCard(${card.id})" title="${t('edit')}">✏️</button>
+                    <button class="btn btn-small btn-info" onclick="viewLoyaltyCardHistory(${card.id})" title="${t('history')}">📊</button>
+                    <button class="btn btn-small btn-warning" onclick="toggleLoyaltyCardStatus(${card.id})" title="${t('toggleStatus')}">${card.active ? '⏸️' : '▶️'}</button>
+                    <button class="btn btn-small btn-danger" onclick="deleteLoyaltyCard(${card.id})" title="${t('delete')}">🗑️</button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function showAddLoyaltyCardModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'block';
+
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>${t('addLoyaltyCard')}</h2>
+            <form onsubmit="addNewLoyaltyCard(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>${t('cardNumber')}:</label>
+                        <input type="text" id="loyalty-card-number" value="${generateCardNumber()}" required readonly>
+                        <button type="button" class="btn btn-small" onclick="document.getElementById('loyalty-card-number').value = generateCardNumber()">${t('generate')}</button>
+                    </div>
+                    <div class="form-group">
+                        <label>${t('customerName')}:</label>
+                        <input type="text" id="loyalty-customer-name" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>${t('customerPhone')}:</label>
+                        <input type="tel" id="loyalty-customer-phone">
+                    </div>
+                    <div class="form-group">
+                        <label>${t('customerEmail')}:</label>
+                        <input type="email" id="loyalty-customer-email">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>${t('initialPoints')}:</label>
+                        <input type="number" id="loyalty-initial-points" value="${loyaltySettings.welcomeBonus}" min="0">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">${t('cancel')}</button>
+                    <button type="submit" class="btn btn-primary">${t('addLoyaltyCard')}</button>
+                </div>
+            </form>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+}
+
+function generateCardNumber() {
+    // Generate a 12-digit card number
+    const prefix = '4000'; // Loyalty card prefix
+    const randomDigits = Math.random().toString().slice(2, 10); // 8 random digits
+    return prefix + randomDigits;
+}
+
+function addNewLoyaltyCard(event) {
+    event.preventDefault();
+
+    const cardNumber = document.getElementById('loyalty-card-number').value;
+    const customerName = document.getElementById('loyalty-customer-name').value;
+    const customerPhone = document.getElementById('loyalty-customer-phone').value;
+    const customerEmail = document.getElementById('loyalty-customer-email').value;
+    const initialPoints = parseInt(document.getElementById('loyalty-initial-points').value) || 0;
+
+    // Check if card number already exists
+    if (loyaltyCards.find(card => card.cardNumber === cardNumber)) {
+        alert(t('cardNumberExists'));
+        return;
+    }
+
+    const newCard = {
+        id: Math.max(...loyaltyCards.map(c => c.id), 0) + 1,
+        cardNumber: cardNumber,
+        customerName: customerName,
+        customerPhone: customerPhone,
+        customerEmail: customerEmail,
+        points: initialPoints,
+        totalSpent: 0,
+        totalEarned: initialPoints,
+        totalRedeemed: 0,
+        active: true,
+        createdDate: new Date().toISOString(),
+        expiryDate: new Date(Date.now() + loyaltySettings.cardExpiryMonths * 30 * 24 * 60 * 60 * 1000).toISOString(),
+        transactions: []
+    };
+
+    loyaltyCards.push(newCard);
+    saveToStorage('loyaltyCards', loyaltyCards);
+
+    closeModal();
+    loadLoyaltyView();
+
+    alert(`${t('loyaltyCard')} ${cardNumber} ${t('addedSuccessfully')}!`);
 }
 
 // ===== SETTINGS MANAGEMENT =====
@@ -6464,6 +6793,10 @@ window.updatePriceTypeDisplay = updatePriceTypeDisplay;
 window.previewProductImage = previewProductImage;
 window.previewImageFromUrl = previewImageFromUrl;
 window.removeImagePreview = removeImagePreview;
+window.loadLoyaltyView = loadLoyaltyView;
+window.showAddLoyaltyCardModal = showAddLoyaltyCardModal;
+window.addNewLoyaltyCard = addNewLoyaltyCard;
+window.generateCardNumber = generateCardNumber;
 
 // Charts functions
 window.toggleCharts = toggleCharts;
