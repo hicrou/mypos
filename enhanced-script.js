@@ -1,67 +1,6 @@
 // ===== PROFESSIONAL POS SYSTEM =====
 // Multi-language, Multi-currency, Multi-user with all professional features
 
-// ===== PERFORMANCE OPTIMIZATION =====
-// Show loading screen immediately
-document.addEventListener('DOMContentLoaded', function() {
-    showLoadingScreen();
-    // Defer heavy initialization
-    setTimeout(initializeApp, 100);
-});
-
-function showLoadingScreen() {
-    document.body.innerHTML = `
-        <div id="loading-screen" style="
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-family: Arial, sans-serif;
-            z-index: 9999;
-        ">
-            <div style="text-align: center;">
-                <div style="
-                    width: 80px;
-                    height: 80px;
-                    border: 4px solid rgba(255,255,255,0.3);
-                    border-top: 4px solid white;
-                    border-radius: 50%;
-                    animation: spin 1s linear infinite;
-                    margin-bottom: 20px;
-                "></div>
-                <h2 style="margin: 0 0 10px 0; font-size: 24px;">MyPOS</h2>
-                <p style="margin: 0; opacity: 0.8;">Loading your professional POS system...</p>
-            </div>
-            <style>
-                @keyframes spin {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
-                }
-            </style>
-        </div>
-    `;
-}
-
-function hideLoadingScreen() {
-    const loadingScreen = document.getElementById('loading-screen');
-    if (loadingScreen) {
-        loadingScreen.style.opacity = '0';
-        loadingScreen.style.transition = 'opacity 0.5s ease';
-        setTimeout(() => {
-            if (loadingScreen.parentNode) {
-                loadingScreen.parentNode.removeChild(loadingScreen);
-            }
-        }, 500);
-    }
-}
-
 // ===== CONFIGURATION & DATA =====
 
 // Multi-language support (English, Arabic, French, Spanish)
@@ -287,122 +226,7 @@ const languages = {
         englishName: 'English Name',
         arabicName: 'Arabic Name',
         frenchName: 'French Name',
-        spanishName: 'Spanish Name',
-        requested: 'Requested',
-        outOfStock: 'Out of Stock',
-        remaining: 'remaining',
-        andMore: 'and {0} more',
-        time: 'Time',
-        items: 'Items',
-        completeSale: 'Complete Sale',
-        printBarcode: 'Print Barcode',
-        generateBarcode: 'Generate Barcode',
-        barcodeGenerated: 'Barcode generated and ready to print',
-        noBarcodeFound: 'No barcode available for this product',
-        bulkBarcodePrint: 'Bulk Barcode Print',
-        selectProductsForBarcode: 'Select products to print barcodes',
-        printSelectedBarcodes: 'Print Selected Barcodes',
-        quantityPerProduct: 'Quantity per product',
-        selectAll: 'Select All',
-        deselectAll: 'Deselect All',
-        selectWithoutBarcode: 'Select Without Barcode',
-        selectAtLeastOneProduct: 'Please select at least one product',
-        products: 'products',
-        name: 'Name',
-        actions: 'Actions',
-        adminOnlySettings: 'System settings can only be modified by administrators.',
-        contactAdministrator: 'Please contact your system administrator for changes.',
-        unitPrice: 'Unit Price',
-        qty: 'Qty',
-        managerAuthRequired: 'Manager Authorization Required',
-        managerAuthMessage: 'This action requires manager or administrator authorization.',
-        enterManagerUsername: 'Enter manager username',
-        enterManagerPassword: 'Enter manager password',
-        authorize: 'Authorize',
-        pleaseEnterCredentials: 'Please enter username and password',
-        invalidManagerCredentials: 'Invalid manager credentials',
-        confirmClearCart: 'Are you sure you want to clear the cart',
-        cartCleared: 'Cart cleared successfully',
-        authorizedBy: 'Authorized by',
-        pleaseSelectPayment: 'Please select a payment method',
-        saleCompleted: 'Sale Completed',
-        receiptNumber: 'Receipt #',
-        thankYou: 'Thank you for your business',
-        quickCash: 'Quick Cash',
-        quickCard: 'Quick Card',
-        printQuotation: 'Print Quotation',
-        quotation: 'Quotation',
-        quotationNumber: 'Quotation #',
-        validUntil: 'Valid Until',
-        quotationNote: 'This is a quotation only. No payment has been processed.',
-        quotationFooter: 'Thank you for considering our services',
-        preparedBy: 'Prepared By',
-        status: 'Status',
-        pending: 'Pending',
-        item: 'Item',
-        note: 'Note',
-        generatedOn: 'Generated On',
-        noProductsFound: 'No products found',
-        tryDifferentCategory: 'Try selecting a different category',
-        regular: 'Regular',
-        multiPriceOptions: 'Multi-Price Options',
-        optional: 'Optional',
-        wholesalePrice: 'Wholesale Price',
-        retailPrice: 'Retail Price',
-        vipPrice: 'VIP Price',
-        bulkPrice: 'Bulk Price',
-        priceType: 'Price Type',
-        selectPriceType: 'Select Price Type',
-        cannotAddMore: 'Cannot add more',
-        onlyInStock: 'Only in stock',
-        product: 'Product',
-        each: 'each',
-        scan: 'Scan',
-        priceTypeChanged: 'Price type changed to',
-        editQuantity: 'Edit quantity',
-        removeItem: 'Remove item',
-        invalidQuantity: 'Invalid quantity. Please enter a valid number.',
-        productImage: 'Product Image',
-        uploadImage: 'Upload Image',
-        imageUrl: 'Image URL',
-        imageHelp: 'Select an image file (JPG, PNG, GIF)',
-        imageUrlHelp: 'Or enter a direct image URL',
-        noImageSelected: 'No image selected',
-        invalidImageType: 'Invalid image type. Please select JPG, PNG, GIF, or WebP.',
-        imageTooLarge: 'Image too large. Maximum size is 5MB.',
-        invalidImageUrl: 'Invalid image URL. Please enter a valid URL.',
-        imageLoadError: 'Failed to load image. Please check the URL.',
-        removeImage: 'Remove Image',
-        loyaltyCards: 'Loyalty Cards',
-        loyaltyCard: 'Loyalty Card',
-        cardNumber: 'Card Number',
-        customerName: 'Customer Name',
-        customerPhone: 'Customer Phone',
-        customerEmail: 'Customer Email',
-        points: 'Points',
-        totalSpent: 'Total Spent',
-        addLoyaltyCard: 'Add Loyalty Card',
-        editLoyaltyCard: 'Edit Loyalty Card',
-        loyaltySettings: 'Loyalty Settings',
-        pointsPerDollar: 'Points per Dollar',
-        redemptionValue: 'Redemption Value',
-        minimumRedemption: 'Minimum Redemption',
-        welcomeBonus: 'Welcome Bonus',
-        applyLoyaltyCard: 'Apply Loyalty Card',
-        redeemPoints: 'Redeem Points',
-        earnedPoints: 'Earned Points',
-        redeemedPoints: 'Redeemed Points',
-        totalCards: 'Total Cards',
-        totalPoints: 'Total Points',
-        noLoyaltyCards: 'No loyalty cards found',
-        expired: 'Expired',
-        inactive: 'Inactive',
-        active: 'Active',
-        history: 'History',
-        toggleStatus: 'Toggle Status',
-        generate: 'Generate',
-        initialPoints: 'Initial Points',
-        cardNumberExists: 'Card number already exists'
+        spanishName: 'Spanish Name'
     },
     ar: {
         welcome: 'مرحباً بـ MyPOS',
@@ -626,122 +450,7 @@ const languages = {
         englishName: 'الاسم الإنجليزي',
         arabicName: 'الاسم العربي',
         frenchName: 'الاسم الفرنسي',
-        spanishName: 'الاسم الإسباني',
-        requested: 'مطلوب',
-        outOfStock: 'نفد المخزون',
-        remaining: 'متبقي',
-        andMore: 'و {0} أكثر',
-        time: 'الوقت',
-        items: 'العناصر',
-        completeSale: 'إتمام البيع',
-        printBarcode: 'طباعة الباركود',
-        generateBarcode: 'إنشاء باركود',
-        barcodeGenerated: 'تم إنشاء الباركود وهو جاهز للطباعة',
-        noBarcodeFound: 'لا يوجد باركود متاح لهذا المنتج',
-        bulkBarcodePrint: 'طباعة باركود مجمعة',
-        selectProductsForBarcode: 'اختر المنتجات لطباعة الباركود',
-        printSelectedBarcodes: 'طباعة الباركود المحددة',
-        quantityPerProduct: 'الكمية لكل منتج',
-        selectAll: 'تحديد الكل',
-        deselectAll: 'إلغاء تحديد الكل',
-        selectWithoutBarcode: 'تحديد بدون باركود',
-        selectAtLeastOneProduct: 'يرجى تحديد منتج واحد على الأقل',
-        products: 'منتجات',
-        name: 'الاسم',
-        actions: 'الإجراءات',
-        adminOnlySettings: 'إعدادات النظام يمكن تعديلها من قبل المديرين فقط.',
-        contactAdministrator: 'يرجى الاتصال بمدير النظام لإجراء التغييرات.',
-        unitPrice: 'سعر الوحدة',
-        qty: 'الكمية',
-        managerAuthRequired: 'مطلوب تفويض المدير',
-        managerAuthMessage: 'هذا الإجراء يتطلب تفويض المدير أو المسؤول.',
-        enterManagerUsername: 'أدخل اسم مستخدم المدير',
-        enterManagerPassword: 'أدخل كلمة مرور المدير',
-        authorize: 'تفويض',
-        pleaseEnterCredentials: 'يرجى إدخال اسم المستخدم وكلمة المرور',
-        invalidManagerCredentials: 'بيانات اعتماد المدير غير صحيحة',
-        confirmClearCart: 'هل أنت متأكد من أنك تريد مسح السلة',
-        cartCleared: 'تم مسح السلة بنجاح',
-        authorizedBy: 'مفوض من قبل',
-        pleaseSelectPayment: 'يرجى اختيار طريقة الدفع',
-        saleCompleted: 'تمت عملية البيع',
-        receiptNumber: 'رقم الإيصال',
-        thankYou: 'شكراً لك على تعاملك معنا',
-        quickCash: 'دفع نقدي سريع',
-        quickCard: 'دفع بالبطاقة سريع',
-        printQuotation: 'طباعة عرض سعر',
-        quotation: 'عرض سعر',
-        quotationNumber: 'رقم عرض السعر',
-        validUntil: 'صالح حتى',
-        quotationNote: 'هذا عرض سعر فقط. لم يتم معالجة أي دفعة.',
-        quotationFooter: 'شكراً لك على النظر في خدماتنا',
-        preparedBy: 'أعده',
-        status: 'الحالة',
-        pending: 'قيد الانتظار',
-        item: 'الصنف',
-        note: 'ملاحظة',
-        generatedOn: 'تم إنشاؤه في',
-        noProductsFound: 'لم يتم العثور على منتجات',
-        tryDifferentCategory: 'جرب اختيار فئة مختلفة',
-        regular: 'عادي',
-        multiPriceOptions: 'خيارات الأسعار المتعددة',
-        optional: 'اختياري',
-        wholesalePrice: 'سعر الجملة',
-        retailPrice: 'سعر التجزئة',
-        vipPrice: 'سعر كبار الشخصيات',
-        bulkPrice: 'سعر الكمية',
-        priceType: 'نوع السعر',
-        selectPriceType: 'اختر نوع السعر',
-        cannotAddMore: 'لا يمكن إضافة المزيد',
-        onlyInStock: 'متوفر فقط',
-        product: 'المنتج',
-        each: 'للقطعة',
-        scan: 'مسح',
-        priceTypeChanged: 'تم تغيير نوع السعر إلى',
-        editQuantity: 'تعديل الكمية',
-        removeItem: 'إزالة العنصر',
-        invalidQuantity: 'كمية غير صحيحة. يرجى إدخال رقم صحيح.',
-        productImage: 'صورة المنتج',
-        uploadImage: 'رفع صورة',
-        imageUrl: 'رابط الصورة',
-        imageHelp: 'اختر ملف صورة (JPG, PNG, GIF)',
-        imageUrlHelp: 'أو أدخل رابط صورة مباشر',
-        noImageSelected: 'لم يتم اختيار صورة',
-        invalidImageType: 'نوع صورة غير صحيح. يرجى اختيار JPG أو PNG أو GIF أو WebP.',
-        imageTooLarge: 'الصورة كبيرة جداً. الحد الأقصى 5 ميجابايت.',
-        invalidImageUrl: 'رابط صورة غير صحيح. يرجى إدخال رابط صحيح.',
-        imageLoadError: 'فشل في تحميل الصورة. يرجى التحقق من الرابط.',
-        removeImage: 'إزالة الصورة',
-        loyaltyCards: 'بطاقات الولاء',
-        loyaltyCard: 'بطاقة ولاء',
-        cardNumber: 'رقم البطاقة',
-        customerName: 'اسم العميل',
-        customerPhone: 'هاتف العميل',
-        customerEmail: 'بريد العميل الإلكتروني',
-        points: 'النقاط',
-        totalSpent: 'إجمالي المبلغ المنفق',
-        addLoyaltyCard: 'إضافة بطاقة ولاء',
-        editLoyaltyCard: 'تعديل بطاقة الولاء',
-        loyaltySettings: 'إعدادات الولاء',
-        pointsPerDollar: 'النقاط لكل دولار',
-        redemptionValue: 'قيمة الاستبدال',
-        minimumRedemption: 'الحد الأدنى للاستبدال',
-        welcomeBonus: 'مكافأة الترحيب',
-        applyLoyaltyCard: 'تطبيق بطاقة الولاء',
-        redeemPoints: 'استبدال النقاط',
-        earnedPoints: 'النقاط المكتسبة',
-        redeemedPoints: 'النقاط المستبدلة',
-        totalCards: 'إجمالي البطاقات',
-        totalPoints: 'إجمالي النقاط',
-        noLoyaltyCards: 'لا توجد بطاقات ولاء',
-        expired: 'منتهية الصلاحية',
-        inactive: 'غير نشطة',
-        active: 'نشطة',
-        history: 'التاريخ',
-        toggleStatus: 'تغيير الحالة',
-        generate: 'توليد',
-        initialPoints: 'النقاط الأولية',
-        cardNumberExists: 'رقم البطاقة موجود بالفعل'
+        spanishName: 'الاسم الإسباني'
     },
     fr: {
         welcome: 'Bienvenue à MyPOS',
@@ -953,122 +662,7 @@ const languages = {
         englishName: 'Nom Anglais',
         arabicName: 'Nom Arabe',
         frenchName: 'Nom Français',
-        spanishName: 'Nom Espagnol',
-        requested: 'Demandé',
-        outOfStock: 'Rupture de Stock',
-        remaining: 'restant',
-        andMore: 'et {0} de plus',
-        time: 'Heure',
-        items: 'Articles',
-        completeSale: 'Finaliser Vente',
-        printBarcode: 'Imprimer Code-Barres',
-        generateBarcode: 'Générer Code-Barres',
-        barcodeGenerated: 'Code-barres généré et prêt à imprimer',
-        noBarcodeFound: 'Aucun code-barres disponible pour ce produit',
-        bulkBarcodePrint: 'Impression Code-Barres en Lot',
-        selectProductsForBarcode: 'Sélectionner produits pour imprimer codes-barres',
-        printSelectedBarcodes: 'Imprimer Codes-Barres Sélectionnés',
-        quantityPerProduct: 'Quantité par produit',
-        selectAll: 'Tout Sélectionner',
-        deselectAll: 'Tout Désélectionner',
-        selectWithoutBarcode: 'Sélectionner Sans Code-Barres',
-        selectAtLeastOneProduct: 'Veuillez sélectionner au moins un produit',
-        products: 'produits',
-        name: 'Nom',
-        actions: 'Actions',
-        adminOnlySettings: 'Les paramètres système ne peuvent être modifiés que par les administrateurs.',
-        contactAdministrator: 'Veuillez contacter votre administrateur système pour les modifications.',
-        unitPrice: 'Prix Unitaire',
-        qty: 'Qté',
-        managerAuthRequired: 'Autorisation Gestionnaire Requise',
-        managerAuthMessage: 'Cette action nécessite une autorisation de gestionnaire ou administrateur.',
-        enterManagerUsername: 'Entrez le nom d\'utilisateur du gestionnaire',
-        enterManagerPassword: 'Entrez le mot de passe du gestionnaire',
-        authorize: 'Autoriser',
-        pleaseEnterCredentials: 'Veuillez entrer le nom d\'utilisateur et le mot de passe',
-        invalidManagerCredentials: 'Identifiants gestionnaire invalides',
-        confirmClearCart: 'Êtes-vous sûr de vouloir vider le panier',
-        cartCleared: 'Panier vidé avec succès',
-        authorizedBy: 'Autorisé par',
-        pleaseSelectPayment: 'Veuillez sélectionner un mode de paiement',
-        saleCompleted: 'Vente Terminée',
-        receiptNumber: 'Reçu #',
-        thankYou: 'Merci pour votre confiance',
-        quickCash: 'Paiement Rapide',
-        quickCard: 'Carte Rapide',
-        printQuotation: 'Imprimer Devis',
-        quotation: 'Devis',
-        quotationNumber: 'Devis #',
-        validUntil: 'Valide Jusqu\'au',
-        quotationNote: 'Ceci est un devis seulement. Aucun paiement n\'a été traité.',
-        quotationFooter: 'Merci de considérer nos services',
-        preparedBy: 'Préparé Par',
-        status: 'Statut',
-        pending: 'En Attente',
-        item: 'Article',
-        note: 'Note',
-        generatedOn: 'Généré Le',
-        noProductsFound: 'Aucun produit trouvé',
-        tryDifferentCategory: 'Essayez de sélectionner une catégorie différente',
-        regular: 'Régulier',
-        multiPriceOptions: 'Options de Prix Multiples',
-        optional: 'Optionnel',
-        wholesalePrice: 'Prix de Gros',
-        retailPrice: 'Prix de Détail',
-        vipPrice: 'Prix VIP',
-        bulkPrice: 'Prix en Vrac',
-        priceType: 'Type de Prix',
-        selectPriceType: 'Sélectionner le Type de Prix',
-        cannotAddMore: 'Impossible d\'ajouter plus',
-        onlyInStock: 'Seulement en stock',
-        product: 'Produit',
-        each: 'chacun',
-        scan: 'Scanner',
-        priceTypeChanged: 'Type de prix changé en',
-        editQuantity: 'Modifier la quantité',
-        removeItem: 'Supprimer l\'article',
-        invalidQuantity: 'Quantité invalide. Veuillez entrer un nombre valide.',
-        productImage: 'Image du Produit',
-        uploadImage: 'Télécharger Image',
-        imageUrl: 'URL de l\'Image',
-        imageHelp: 'Sélectionnez un fichier image (JPG, PNG, GIF)',
-        imageUrlHelp: 'Ou entrez une URL d\'image directe',
-        noImageSelected: 'Aucune image sélectionnée',
-        invalidImageType: 'Type d\'image invalide. Veuillez sélectionner JPG, PNG, GIF ou WebP.',
-        imageTooLarge: 'Image trop volumineuse. Taille maximale 5MB.',
-        invalidImageUrl: 'URL d\'image invalide. Veuillez entrer une URL valide.',
-        imageLoadError: 'Échec du chargement de l\'image. Vérifiez l\'URL.',
-        removeImage: 'Supprimer l\'Image',
-        loyaltyCards: 'Cartes de Fidélité',
-        loyaltyCard: 'Carte de Fidélité',
-        cardNumber: 'Numéro de Carte',
-        customerName: 'Nom du Client',
-        customerPhone: 'Téléphone du Client',
-        customerEmail: 'Email du Client',
-        points: 'Points',
-        totalSpent: 'Total Dépensé',
-        addLoyaltyCard: 'Ajouter Carte de Fidélité',
-        editLoyaltyCard: 'Modifier Carte de Fidélité',
-        loyaltySettings: 'Paramètres de Fidélité',
-        pointsPerDollar: 'Points par Dollar',
-        redemptionValue: 'Valeur de Rachat',
-        minimumRedemption: 'Rachat Minimum',
-        welcomeBonus: 'Bonus de Bienvenue',
-        applyLoyaltyCard: 'Appliquer Carte de Fidélité',
-        redeemPoints: 'Racheter des Points',
-        earnedPoints: 'Points Gagnés',
-        redeemedPoints: 'Points Rachetés',
-        totalCards: 'Total des Cartes',
-        totalPoints: 'Total des Points',
-        noLoyaltyCards: 'Aucune carte de fidélité trouvée',
-        expired: 'Expirée',
-        inactive: 'Inactive',
-        active: 'Active',
-        history: 'Historique',
-        toggleStatus: 'Basculer le Statut',
-        generate: 'Générer',
-        initialPoints: 'Points Initiaux',
-        cardNumberExists: 'Le numéro de carte existe déjà'
+        spanishName: 'Nom Espagnol'
     },
     es: {
         welcome: 'Bienvenido a MyPOS',
@@ -1280,122 +874,7 @@ const languages = {
         englishName: 'Nombre en Inglés',
         arabicName: 'Nombre en Árabe',
         frenchName: 'Nombre en Francés',
-        spanishName: 'Nombre en Español',
-        requested: 'Solicitado',
-        outOfStock: 'Agotado',
-        remaining: 'restante',
-        andMore: 'y {0} más',
-        time: 'Hora',
-        items: 'Artículos',
-        completeSale: 'Completar Venta',
-        printBarcode: 'Imprimir Código de Barras',
-        generateBarcode: 'Generar Código de Barras',
-        barcodeGenerated: 'Código de barras generado y listo para imprimir',
-        noBarcodeFound: 'No hay código de barras disponible para este producto',
-        bulkBarcodePrint: 'Impresión Masiva de Códigos',
-        selectProductsForBarcode: 'Seleccionar productos para imprimir códigos',
-        printSelectedBarcodes: 'Imprimir Códigos Seleccionados',
-        quantityPerProduct: 'Cantidad por producto',
-        selectAll: 'Seleccionar Todo',
-        deselectAll: 'Deseleccionar Todo',
-        selectWithoutBarcode: 'Seleccionar Sin Código',
-        selectAtLeastOneProduct: 'Por favor seleccione al menos un producto',
-        products: 'productos',
-        name: 'Nombre',
-        actions: 'Acciones',
-        adminOnlySettings: 'La configuración del sistema solo puede ser modificada por administradores.',
-        contactAdministrator: 'Por favor contacte a su administrador del sistema para cambios.',
-        unitPrice: 'Precio Unitario',
-        qty: 'Cant',
-        managerAuthRequired: 'Autorización de Gerente Requerida',
-        managerAuthMessage: 'Esta acción requiere autorización de gerente o administrador.',
-        enterManagerUsername: 'Ingrese nombre de usuario del gerente',
-        enterManagerPassword: 'Ingrese contraseña del gerente',
-        authorize: 'Autorizar',
-        pleaseEnterCredentials: 'Por favor ingrese usuario y contraseña',
-        invalidManagerCredentials: 'Credenciales de gerente inválidas',
-        confirmClearCart: '¿Está seguro de que desea limpiar el carrito',
-        cartCleared: 'Carrito limpiado exitosamente',
-        authorizedBy: 'Autorizado por',
-        pleaseSelectPayment: 'Por favor seleccione un método de pago',
-        saleCompleted: 'Venta Completada',
-        receiptNumber: 'Recibo #',
-        thankYou: 'Gracias por su compra',
-        quickCash: 'Efectivo Rápido',
-        quickCard: 'Tarjeta Rápida',
-        printQuotation: 'Imprimir Cotización',
-        quotation: 'Cotización',
-        quotationNumber: 'Cotización #',
-        validUntil: 'Válido Hasta',
-        quotationNote: 'Esta es solo una cotización. No se ha procesado ningún pago.',
-        quotationFooter: 'Gracias por considerar nuestros servicios',
-        preparedBy: 'Preparado Por',
-        status: 'Estado',
-        pending: 'Pendiente',
-        item: 'Artículo',
-        note: 'Nota',
-        generatedOn: 'Generado El',
-        noProductsFound: 'No se encontraron productos',
-        tryDifferentCategory: 'Intente seleccionar una categoría diferente',
-        regular: 'Regular',
-        multiPriceOptions: 'Opciones de Precios Múltiples',
-        optional: 'Opcional',
-        wholesalePrice: 'Precio Mayorista',
-        retailPrice: 'Precio Minorista',
-        vipPrice: 'Precio VIP',
-        bulkPrice: 'Precio por Volumen',
-        priceType: 'Tipo de Precio',
-        selectPriceType: 'Seleccionar Tipo de Precio',
-        cannotAddMore: 'No se puede agregar más',
-        onlyInStock: 'Solo en stock',
-        product: 'Producto',
-        each: 'cada uno',
-        scan: 'Escanear',
-        priceTypeChanged: 'Tipo de precio cambiado a',
-        editQuantity: 'Editar cantidad',
-        removeItem: 'Eliminar artículo',
-        invalidQuantity: 'Cantidad inválida. Por favor ingrese un número válido.',
-        productImage: 'Imagen del Producto',
-        uploadImage: 'Subir Imagen',
-        imageUrl: 'URL de Imagen',
-        imageHelp: 'Seleccione un archivo de imagen (JPG, PNG, GIF)',
-        imageUrlHelp: 'O ingrese una URL de imagen directa',
-        noImageSelected: 'No se ha seleccionado imagen',
-        invalidImageType: 'Tipo de imagen inválido. Seleccione JPG, PNG, GIF o WebP.',
-        imageTooLarge: 'Imagen demasiado grande. Tamaño máximo 5MB.',
-        invalidImageUrl: 'URL de imagen inválida. Ingrese una URL válida.',
-        imageLoadError: 'Error al cargar imagen. Verifique la URL.',
-        removeImage: 'Eliminar Imagen',
-        loyaltyCards: 'Tarjetas de Lealtad',
-        loyaltyCard: 'Tarjeta de Lealtad',
-        cardNumber: 'Número de Tarjeta',
-        customerName: 'Nombre del Cliente',
-        customerPhone: 'Teléfono del Cliente',
-        customerEmail: 'Email del Cliente',
-        points: 'Puntos',
-        totalSpent: 'Total Gastado',
-        addLoyaltyCard: 'Agregar Tarjeta de Lealtad',
-        editLoyaltyCard: 'Editar Tarjeta de Lealtad',
-        loyaltySettings: 'Configuración de Lealtad',
-        pointsPerDollar: 'Puntos por Dólar',
-        redemptionValue: 'Valor de Canje',
-        minimumRedemption: 'Canje Mínimo',
-        welcomeBonus: 'Bono de Bienvenida',
-        applyLoyaltyCard: 'Aplicar Tarjeta de Lealtad',
-        redeemPoints: 'Canjear Puntos',
-        earnedPoints: 'Puntos Ganados',
-        redeemedPoints: 'Puntos Canjeados',
-        totalCards: 'Total de Tarjetas',
-        totalPoints: 'Total de Puntos',
-        noLoyaltyCards: 'No se encontraron tarjetas de lealtad',
-        expired: 'Expirada',
-        inactive: 'Inactiva',
-        active: 'Activa',
-        history: 'Historial',
-        toggleStatus: 'Cambiar Estado',
-        generate: 'Generar',
-        initialPoints: 'Puntos Iniciales',
-        cardNumberExists: 'El número de tarjeta ya existe'
+        spanishName: 'Nombre en Español'
     }
 };
 
@@ -1770,19 +1249,6 @@ let salesHistory = JSON.parse(localStorage.getItem('salesHistory')) || [];
 let isLoggedIn = false;
 let currentView = 'pos'; // pos, inventory, reports, settings, users
 
-// ===== LOYALTY CARD SYSTEM =====
-let loyaltyCards = getFromStorage('loyaltyCards') || [];
-let loyaltySettings = getFromStorage('loyaltySettings') || {
-    pointsPerDollar: 1,
-    pointsRedemptionValue: 0.01, // $0.01 per point
-    minimumRedemption: 100,
-    bonusPointsThreshold: 100, // Bonus points for spending over this amount
-    bonusPointsMultiplier: 2,
-    cardExpiryMonths: 12,
-    welcomeBonus: 50,
-    enabled: true
-};
-
 // System settings
 const settings = {
     taxRate: parseFloat(localStorage.getItem('taxRate')) || 0.19, // 19% VAT (Algeria standard)
@@ -1846,87 +1312,28 @@ function convertPrice(price) {
     return price * currencies[currentCurrency].rate;
 }
 
-// Format price without conversion (for product display)
-function formatPrice(amount) {
-    const currency = currencies[currentCurrency];
-
-    // Get language-specific symbol
-    let symbol;
-    if (typeof currency.symbol === 'object') {
-        symbol = currency.symbol[currentLanguage] || currency.symbol.en;
-    } else {
-        symbol = currency.symbol;
-    }
-
-    // Format based on language (no conversion)
-    if (currentLanguage === 'ar') {
-        return `${amount.toFixed(2)} ${symbol}`;
-    } else {
-        return `${symbol}${amount.toFixed(2)}`;
-    }
-}
-
 // Generate unique ID
 function generateId() {
     return Date.now() + Math.random().toString(36).substr(2, 9);
 }
 
-// ===== OPTIMIZED STORAGE FUNCTIONS =====
-
-// Cache for frequently accessed data
-const dataCache = new Map();
-
-// Save to localStorage with caching
+// Save to localStorage
 function saveToStorage(key, data) {
     try {
-        const jsonData = JSON.stringify(data);
-        localStorage.setItem(key, jsonData);
-        // Update cache
-        dataCache.set(key, data);
+        localStorage.setItem(key, JSON.stringify(data));
     } catch (e) {
         console.error('Failed to save to localStorage:', e);
-        // Try to free up space
-        clearOldData();
-        try {
-            localStorage.setItem(key, JSON.stringify(data));
-            dataCache.set(key, data);
-        } catch (retryError) {
-            alert('Storage limit reached. Please clear some data.');
-        }
     }
 }
 
-// Load from localStorage with caching
+// Load from localStorage
 function loadFromStorage(key, defaultValue = null) {
     try {
-        // Check cache first
-        if (dataCache.has(key)) {
-            return dataCache.get(key);
-        }
-
         const data = localStorage.getItem(key);
-        if (data) {
-            const parsedData = JSON.parse(data);
-            // Cache the data
-            dataCache.set(key, parsedData);
-            return parsedData;
-        }
-        return defaultValue;
+        return data ? JSON.parse(data) : defaultValue;
     } catch (e) {
         console.error('Failed to load from localStorage:', e);
         return defaultValue;
-    }
-}
-
-function clearOldData() {
-    // Clear old sales data (keep only last 30 days)
-    try {
-        const salesHistory = loadFromStorage('salesHistory', []);
-        const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
-        const recentSales = salesHistory.filter(sale => new Date(sale.date) > thirtyDaysAgo);
-        saveToStorage('salesHistory', recentSales);
-    } catch (error) {
-        console.error('Error clearing old data:', error);
     }
 }
 
@@ -2200,16 +1607,13 @@ function updateLanguage() {
 
     // Update currency selector with translated names
     updateCurrencySelector();
-
-    // Update category buttons with translated names
-    updateCategoryButtons();
 }
 
 // ===== MAIN SYSTEM INITIALIZATION =====
 
-function initializeApp() {
+document.addEventListener('DOMContentLoaded', function() {
     initializeSystem();
-}
+});
 
 function initializeSystem() {
     checkLoginStatus();
@@ -2219,37 +1623,22 @@ function initializeSystem() {
         return;
     }
 
-    // Initialize main system with performance optimization
+    // Initialize main system
     loadSettings();
     createMainInterface();
     updateLanguage();
+    displayProducts();
+    updateCartDisplay();
+    updateTime();
+    checkLowStock();
 
-    // Hide loading screen after interface is ready
-    hideLoadingScreen();
+    // Set up intervals
+    setInterval(updateTime, 1000);
+    setInterval(checkLowStock, 60000); // Check every minute
+    setInterval(autoSave, 30000); // Auto-save every 30 seconds
 
-    // Defer heavy operations
-    setTimeout(() => {
-        displayProducts(20); // Load only first 20 products initially
-        updateCartDisplay();
-        attachCategoryButtonListeners();
-        setupEventListeners();
-
-        // Load remaining products after a delay
-        setTimeout(() => {
-            displayProducts(); // Load all products
-        }, 500);
-    }, 50);
-
-    // Defer non-critical operations
-    setTimeout(() => {
-        updateTime();
-        checkLowStock();
-
-        // Set up intervals
-        setInterval(updateTime, 1000);
-        setInterval(checkLowStock, 60000); // Check every minute
-        setInterval(autoSave, 30000); // Auto-save every 30 seconds
-    }, 200);
+    // Event listeners
+    setupEventListeners();
 
     console.log('Professional POS System initialized successfully');
 }
@@ -2259,76 +1648,47 @@ function createMainInterface() {
         <div class="pos-container">
             <!-- Top Navigation -->
             <nav class="top-nav">
-                <div class="nav-container">
-                    <div class="nav-left">
-                        <div class="company-branding">
-                            <div id="main-logo" class="company-logo">
-                                ${settings.companyLogo ?
-                                    `<img src="${settings.companyLogo}" alt="${settings.companyName}" class="logo-image">` :
-                                    `<div class="logo-text">${settings.companyName}</div>`
-                                }
-                            </div>
-                            <h1 class="welcome-title" data-translate="welcome">${t('welcome')}</h1>
+                <div class="nav-left">
+                    <div id="main-logo" style="display: inline-flex; align-items: center;">
+                        ${settings.companyLogo ?
+                            `<img src="${settings.companyLogo}" alt="${settings.companyName}" style="max-height: 40px; margin-right: 15px;">` :
+                            `<span style="font-weight: bold; color: var(--primary-color); margin-right: 15px;">${settings.companyName}</span>`
+                        }
+                    </div>
+                    <h1 data-translate="welcome">${t('welcome')}</h1>
+                    <div class="nav-tabs">
+                        <button class="nav-tab active" onclick="switchView('pos')" data-translate="sales">${t('sales')}</button>
+                        ${hasPermission('inventory') ? `<button class="nav-tab" onclick="switchView('inventory')" data-translate="inventory">${t('inventory')}</button>` : ''}
+                        ${hasPermission('inventory') ? `<button class="nav-tab" onclick="switchView('categories')" data-translate="categories">${t('categories')}</button>` : ''}
+                        ${hasPermission('reports') ? `<button class="nav-tab" onclick="switchView('reports')" data-translate="reports">${t('reports')}</button>` : ''}
+                        ${hasPermission('users') ? `<button class="nav-tab" onclick="switchView('users')" data-translate="users">${t('users')}</button>` : ''}
+                        ${hasPermission('settings') ? `<button class="nav-tab" onclick="switchView('settings')" data-translate="settings">${t('settings')}</button>` : ''}
+                    </div>
+                </div>
+                <div class="nav-right">
+                    <div class="controls">
+                        <div class="control-group">
+                            <label>Language:</label>
+                            <select id="language-selector" onchange="changeLanguage(this.value)">
+                                <option value="en" ${currentLanguage === 'en' ? 'selected' : ''}>🇺🇸 English</option>
+                                <option value="ar" ${currentLanguage === 'ar' ? 'selected' : ''}>🇩🇿 العربية</option>
+                                <option value="fr" ${currentLanguage === 'fr' ? 'selected' : ''}>🇫🇷 Français</option>
+                                <option value="es" ${currentLanguage === 'es' ? 'selected' : ''}>🇪🇸 Español</option>
+                            </select>
                         </div>
-                        <div class="nav-tabs-container">
-                            <div class="nav-tabs">
-                                <button class="nav-tab active" onclick="switchView('pos')" data-translate="sales">${t('sales')}</button>
-                                ${hasPermission('inventory') ? `<button class="nav-tab" onclick="switchView('inventory')" data-translate="inventory">${t('inventory')}</button>` : ''}
-                                ${hasPermission('inventory') ? `<button class="nav-tab" onclick="switchView('categories')" data-translate="categories">${t('categories')}</button>` : ''}
-                                ${hasPermission('reports') ? `<button class="nav-tab" onclick="switchView('reports')" data-translate="reports">${t('reports')}</button>` : ''}
-                                ${hasPermission('users') ? `<button class="nav-tab" onclick="switchView('users')" data-translate="users">${t('users')}</button>` : ''}
-                                ${hasPermission('reports') ? `<button class="nav-tab" onclick="switchView('loyalty')" data-translate="loyaltyCards">${t('loyaltyCards')}</button>` : ''}
-                                ${currentUser && currentUser.role === 'admin' ? `<button class="nav-tab" onclick="switchView('settings')" data-translate="settings">${t('settings')}</button>` : ''}
-                            </div>
+                        <div class="control-group">
+                            <label>Currency:</label>
+                            <select id="currency-selector" onchange="changeCurrency(this.value)">
+                                ${Object.entries(currencies).map(([code, curr]) =>
+                                    `<option value="${code}" ${currentCurrency === code ? 'selected' : ''}>${curr.symbol} ${curr.name}</option>`
+                                ).join('')}
+                            </select>
                         </div>
                     </div>
-                    <div class="nav-right">
-                        <div class="controls-panel">
-                            <div class="language-currency-controls">
-                                <div class="control-item">
-                                    <label class="control-label">
-                                        <i class="icon">🌐</i>
-                                        <span data-translate="language">${t('language')}</span>
-                                    </label>
-                                    <select id="language-selector" class="enhanced-select" onchange="changeLanguage(this.value)">
-                                        <option value="en" ${currentLanguage === 'en' ? 'selected' : ''}>🇺🇸 English</option>
-                                        <option value="ar" ${currentLanguage === 'ar' ? 'selected' : ''}>🇩🇿 العربية</option>
-                                        <option value="fr" ${currentLanguage === 'fr' ? 'selected' : ''}>🇫🇷 Français</option>
-                                        <option value="es" ${currentLanguage === 'es' ? 'selected' : ''}>🇪🇸 Español</option>
-                                    </select>
-                                </div>
-                                <div class="control-item">
-                                    <label class="control-label">
-                                        <i class="icon">💰</i>
-                                        <span data-translate="currency">${t('currency')}</span>
-                                    </label>
-                                    <select id="currency-selector" class="enhanced-select" onchange="changeCurrency(this.value)">
-                                        ${Object.entries(currencies).map(([code, curr]) =>
-                                            `<option value="${code}" ${currentCurrency === code ? 'selected' : ''}>${curr.symbol} ${curr.name}</option>`
-                                        ).join('')}
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="user-info-panel">
-                                <div class="user-details">
-                                    <div class="user-avatar">
-                                        <i class="user-icon">👤</i>
-                                    </div>
-                                    <div class="user-text">
-                                        <span class="user-name">${currentUser.name}</span>
-                                        <span class="user-role">${t(currentUser.role)}</span>
-                                    </div>
-                                </div>
-                                <div class="time-display">
-                                    <i class="time-icon">🕐</i>
-                                    <span id="current-time"></span>
-                                </div>
-                                <button class="btn btn-logout" onclick="logout()" data-translate="logout">
-                                    <i class="logout-icon">🚪</i>
-                                    ${t('logout')}
-                                </button>
-                            </div>
-                        </div>
+                    <div class="user-info">
+                        <span class="user-name">${currentUser.name} (${t(currentUser.role)})</span>
+                        <span id="current-time"></span>
+                        <button class="btn btn-secondary" onclick="logout()" data-translate="logout">${t('logout')}</button>
                     </div>
                 </div>
             </nav>
@@ -2342,21 +1702,19 @@ function createMainInterface() {
                         <section class="categories-section">
                             <div class="search-bar">
                                 <input type="text" id="product-search" placeholder="${t('search')}..." onkeyup="searchProducts()">
-                                <div class="price-type-selector-container">
-                                    <label for="price-type-selector">${t('priceType')}:</label>
-                                    <select id="price-type-selector" class="price-type-select" onchange="updatePriceTypeDisplay()" title="${t('selectPriceType')}">
-                                        <option value="regular">${t('regular')}</option>
-                                        <option value="wholesale">${t('wholesalePrice')}</option>
-                                        <option value="retail">${t('retailPrice')}</option>
-                                        <option value="vip">${t('vipPrice')}</option>
-                                        <option value="bulk">${t('bulkPrice')}</option>
-                                    </select>
-                                </div>
                                 <button onclick="scanBarcode()" class="btn btn-secondary">📷 Scan</button>
                             </div>
                             <h2 data-translate="categories">${t('categories')}</h2>
-                            <div class="category-buttons" id="category-buttons">
-                                ${generateCategoryButtons()}
+                            <div class="category-buttons">
+                                <button class="category-btn active" data-category="all" data-translate="allItems">${t('allItems')}</button>
+                                <button class="category-btn" data-category="food" data-translate="food">${t('food')}</button>
+                                <button class="category-btn" data-category="drinks" data-translate="drinks">${t('drinks')}</button>
+                                <button class="category-btn" data-category="snacks" data-translate="snacks">${t('snacks')}</button>
+                                <button class="category-btn" data-category="tools" data-translate="tools">${t('tools')}</button>
+                                <button class="category-btn" data-category="hardware" data-translate="hardware">${t('hardware')}</button>
+                                <button class="category-btn" data-category="construction" data-translate="construction">${t('construction')}</button>
+                                <button class="category-btn" data-category="electrical" data-translate="electrical">${t('electrical')}</button>
+                                <button class="category-btn" data-category="plumbing" data-translate="plumbing">${t('plumbing')}</button>
                             </div>
                             <div class="low-stock-alert" id="low-stock-alert" style="display: none;">
                                 <h3 data-translate="lowStock">${t('lowStock')}</h3>
@@ -2393,20 +1751,10 @@ function createMainInterface() {
                                 </div>
                             </div>
                             <div class="cart-actions">
-                                <div class="quick-payment-buttons">
-                                    <button class="btn btn-success btn-large" onclick="quickCashPayment()" data-translate="quickCash">💵 ${t('quickCash')}</button>
-                                    <button class="btn btn-info btn-large" onclick="quickCardPayment()" data-translate="quickCard">💳 ${t('quickCard')}</button>
-                                </div>
-                                <div class="standard-actions">
-                                    <button class="btn btn-primary" id="checkout" data-translate="checkout">${t('checkout')}</button>
-                                    <button class="btn btn-warning" onclick="printQuotation()" data-translate="quotation">📋 ${t('quotation')}</button>
-                                    <button class="btn btn-secondary" id="clear-cart" data-translate="clearCart">${t('clearCart')}</button>
-                                </div>
-                                <div class="print-actions">
-                                    <button class="btn btn-warning btn-small" id="print-quotation" data-translate="printQuotation">${t('printQuotation')}</button>
-                                    <button class="btn btn-success btn-small" id="print-receipt" data-translate="printReceipt">${t('printReceipt')}</button>
-                                    <button class="btn btn-info btn-small" id="print-invoice" data-translate="printInvoice">${t('printInvoice')}</button>
-                                </div>
+                                <button class="btn btn-secondary" id="clear-cart" data-translate="clearCart">${t('clearCart')}</button>
+                                <button class="btn btn-success" id="print-receipt" data-translate="printReceipt">${t('printReceipt')}</button>
+                                <button class="btn btn-info" id="print-invoice" data-translate="printInvoice">${t('printInvoice')}</button>
+                                <button class="btn btn-primary" id="checkout" data-translate="checkout">${t('checkout')}</button>
                             </div>
                             <div class="management-actions" style="margin-top: 15px;">
                                 <button class="btn btn-warning btn-small" onclick="printLowStockReport()" data-translate="printLowStock">${t('printLowStock')}</button>
@@ -2445,13 +1793,6 @@ function createMainInterface() {
                     </div>
                 </div>
 
-                <div id="loyalty-view" class="view" style="display: none;">
-                    <h2 data-translate="loyaltyCards">${t('loyaltyCards')}</h2>
-                    <div class="loyalty-content">
-                        <!-- Loyalty cards management will be loaded here -->
-                    </div>
-                </div>
-
                 <div id="settings-view" class="view" style="display: none;">
                     <h2 data-translate="settings">${t('settings')}</h2>
                     <div class="settings-content">
@@ -2482,7 +1823,7 @@ function createMainInterface() {
                 </div>
                 <div class="modal-actions">
                     <button class="btn btn-secondary" id="cancel-checkout" data-translate="cancel">${t('cancel')}</button>
-                    <button class="btn btn-primary" id="complete-sale" data-translate="completeSale">${t('completeSale')}</button>
+                    <button class="btn btn-primary" id="complete-sale">Complete Sale</button>
                 </div>
             </div>
         </div>
@@ -2536,9 +1877,6 @@ function switchView(viewName) {
         case 'users':
             loadUsersView();
             break;
-        case 'loyalty':
-            loadLoyaltyView();
-            break;
         case 'settings':
             loadSettingsView();
             break;
@@ -2556,7 +1894,6 @@ function loadInventoryView() {
                 <button class="btn btn-primary" onclick="showAddProductModal()" data-translate="addProduct">${t('addProduct')}</button>
                 <button class="btn btn-secondary" onclick="exportInventory()" data-translate="export">${t('export')}</button>
                 <button class="btn btn-warning" onclick="printLowStockReport()" data-translate="lowStockReport">${t('lowStockReport')}</button>
-                <button class="btn btn-info" onclick="showBulkBarcodeModal()" data-translate="bulkBarcodePrint">${t('bulkBarcodePrint')}</button>
             </div>
         </div>
 
@@ -2612,7 +1949,7 @@ function generateInventoryRows() {
             <tr class="${isOutOfStock ? 'out-of-stock' : isLowStock ? 'low-stock' : ''}">
                 <td>${productName}</td>
                 <td>${t(product.category)}</td>
-                <td>${formatPrice(product.price)}</td>
+                <td>${formatCurrency(product.price)}</td>
                 <td>
                     <span class="stock-level ${isOutOfStock ? 'out' : isLowStock ? 'low' : 'normal'}">
                         ${product.stock}
@@ -2624,10 +1961,6 @@ function generateInventoryRows() {
                 <td class="actions">
                     <button class="btn-small btn-primary" onclick="editProduct(${product.id})" data-translate="edit">${t('edit')}</button>
                     <button class="btn-small btn-success" onclick="adjustStock(${product.id})" data-translate="adjustStock">${t('adjustStock')}</button>
-                    ${!product.barcode || product.barcode === '' ?
-                        `<button class="btn-small btn-info" onclick="printBarcode(${product.id})" data-translate="printBarcode">${t('printBarcode')}</button>` :
-                        `<button class="btn-small btn-secondary" onclick="printBarcode(${product.id})" data-translate="printBarcode">${t('printBarcode')}</button>`
-                    }
                     <button class="btn-small btn-danger" onclick="deleteProduct(${product.id})" data-translate="delete">${t('delete')}</button>
                 </td>
             </tr>
@@ -2676,10 +2009,6 @@ function filterInventory() {
                 <td class="actions">
                     <button class="btn-small btn-primary" onclick="editProduct(${product.id})" data-translate="edit">${t('edit')}</button>
                     <button class="btn-small btn-success" onclick="adjustStock(${product.id})" data-translate="adjustStock">${t('adjustStock')}</button>
-                    ${!product.barcode || product.barcode === '' ?
-                        `<button class="btn-small btn-info" onclick="printBarcode(${product.id})" data-translate="printBarcode">${t('printBarcode')}</button>` :
-                        `<button class="btn-small btn-secondary" onclick="printBarcode(${product.id})" data-translate="printBarcode">${t('printBarcode')}</button>`
-                    }
                     <button class="btn-small btn-danger" onclick="deleteProduct(${product.id})" data-translate="delete">${t('delete')}</button>
                 </td>
             </tr>
@@ -2715,34 +2044,9 @@ function showAddProductModal() {
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>${t('price')} (${t('regular')}):</label>
+                        <label>${t('price')}:</label>
                         <input type="number" id="product-price" step="0.01" required>
                     </div>
-                </div>
-                <div class="form-section">
-                    <h3>${t('multiPriceOptions')} (${t('optional')})</h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>${t('wholesalePrice')}:</label>
-                            <input type="number" id="product-wholesale-price" step="0.01" placeholder="${t('optional')}">
-                        </div>
-                        <div class="form-group">
-                            <label>${t('retailPrice')}:</label>
-                            <input type="number" id="product-retail-price" step="0.01" placeholder="${t('optional')}">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>${t('vipPrice')}:</label>
-                            <input type="number" id="product-vip-price" step="0.01" placeholder="${t('optional')}">
-                        </div>
-                        <div class="form-group">
-                            <label>${t('bulkPrice')}:</label>
-                            <input type="number" id="product-bulk-price" step="0.01" placeholder="${t('optional')}">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
@@ -2764,29 +2068,6 @@ function showAddProductModal() {
                         <input type="text" id="product-supplier">
                     </div>
                 </div>
-                <div class="form-section">
-                    <h3>${t('productImage')}</h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>${t('uploadImage')}:</label>
-                            <input type="file" id="product-image" accept="image/*" onchange="previewProductImage(this)">
-                            <small class="form-help">${t('imageHelp')}</small>
-                        </div>
-                        <div class="form-group">
-                            <label>${t('imageUrl')} (${t('optional')}):</label>
-                            <input type="url" id="product-image-url" placeholder="https://example.com/image.jpg" onchange="previewImageFromUrl(this)">
-                            <small class="form-help">${t('imageUrlHelp')}</small>
-                        </div>
-                    </div>
-                    <div class="image-preview-container">
-                        <div id="image-preview" class="image-preview">
-                            <div class="no-image-placeholder">
-                                <span>📷</span>
-                                <p>${t('noImageSelected')}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="modal-actions">
                     <button type="button" class="btn btn-secondary" onclick="closeModal()">${t('cancel')}</button>
                     <button type="submit" class="btn btn-primary">${t('save')}</button>
@@ -2797,179 +2078,32 @@ function showAddProductModal() {
     document.body.appendChild(modal);
 }
 
-// ===== IMAGE HANDLING FUNCTIONS =====
-
-function previewProductImage(input) {
-    const preview = document.getElementById('image-preview');
-    const file = input.files[0];
-
-    if (file) {
-        // Validate file type
-        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-        if (!validTypes.includes(file.type)) {
-            alert(t('invalidImageType'));
-            input.value = '';
-            showNoImagePlaceholder();
-            return;
-        }
-
-        // Validate file size (max 5MB)
-        if (file.size > 5 * 1024 * 1024) {
-            alert(t('imageTooLarge'));
-            input.value = '';
-            showNoImagePlaceholder();
-            return;
-        }
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            showImagePreview(e.target.result);
-        };
-        reader.readAsDataURL(file);
-
-        // Clear URL input if file is selected
-        const urlInput = document.getElementById('product-image-url');
-        if (urlInput) urlInput.value = '';
-    } else {
-        showNoImagePlaceholder();
-    }
-}
-
-function previewImageFromUrl(input) {
-    const url = input.value.trim();
-
-    if (url) {
-        // Basic URL validation
-        try {
-            new URL(url);
-        } catch {
-            alert(t('invalidImageUrl'));
-            input.value = '';
-            showNoImagePlaceholder();
-            return;
-        }
-
-        // Create image to test if URL is valid
-        const img = new Image();
-        img.onload = function() {
-            showImagePreview(url);
-        };
-        img.onerror = function() {
-            alert(t('imageLoadError'));
-            input.value = '';
-            showNoImagePlaceholder();
-        };
-        img.src = url;
-
-        // Clear file input if URL is entered
-        const fileInput = document.getElementById('product-image');
-        if (fileInput) fileInput.value = '';
-    } else {
-        showNoImagePlaceholder();
-    }
-}
-
-function showImagePreview(src) {
-    const preview = document.getElementById('image-preview');
-    if (preview) {
-        preview.innerHTML = `
-            <img src="${src}" alt="Product Preview" class="preview-image">
-            <div class="image-actions">
-                <button type="button" class="btn btn-secondary btn-small" onclick="removeImagePreview()">${t('removeImage')}</button>
-            </div>
-        `;
-    }
-}
-
-function showNoImagePlaceholder() {
-    const preview = document.getElementById('image-preview');
-    if (preview) {
-        preview.innerHTML = `
-            <div class="no-image-placeholder">
-                <span>📷</span>
-                <p>${t('noImageSelected')}</p>
-            </div>
-        `;
-    }
-}
-
-function removeImagePreview() {
-    const fileInput = document.getElementById('product-image');
-    const urlInput = document.getElementById('product-image-url');
-
-    if (fileInput) fileInput.value = '';
-    if (urlInput) urlInput.value = '';
-
-    showNoImagePlaceholder();
-}
-
 function addNewProduct(event) {
     event.preventDefault();
 
-    // Get multi-price values
-    const wholesalePrice = document.getElementById('product-wholesale-price').value;
-    const retailPrice = document.getElementById('product-retail-price').value;
-    const vipPrice = document.getElementById('product-vip-price').value;
-    const bulkPrice = document.getElementById('product-bulk-price').value;
+    const newProduct = {
+        id: Math.max(...products.map(p => p.id)) + 1,
+        name: document.getElementById('product-name').value,
+        nameAr: document.getElementById('product-name-ar').value,
+        category: document.getElementById('product-category').value,
+        price: parseFloat(document.getElementById('product-price').value),
+        stock: parseInt(document.getElementById('product-stock').value),
+        minStock: parseInt(document.getElementById('product-min-stock').value),
+        maxStock: parseInt(document.getElementById('product-stock').value) * 5,
+        barcode: document.getElementById('product-barcode').value,
+        supplier: document.getElementById('product-supplier').value,
+        cost: parseFloat(document.getElementById('product-price').value) * 0.6,
+        active: true
+    };
 
-    // Get image data
-    const imageFile = document.getElementById('product-image').files[0];
-    const imageUrl = document.getElementById('product-image-url').value.trim();
-    let productImage = null;
+    products.push(newProduct);
+    saveToStorage('products', products);
 
-    // Determine image source
-    if (imageFile) {
-        // Convert file to base64 for storage
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const newProduct = createProductObject(e.target.result);
-            saveProduct(newProduct);
-        };
-        reader.readAsDataURL(imageFile);
-        return; // Exit here, will continue in reader.onload
-    } else if (imageUrl) {
-        productImage = imageUrl;
-    }
+    closeModal();
+    loadInventoryView();
+    displayProducts(); // Refresh main products view
 
-    const newProduct = createProductObject(productImage);
-    saveProduct(newProduct);
-
-    function createProductObject(image) {
-        return {
-            id: Math.max(...products.map(p => p.id)) + 1,
-            name: document.getElementById('product-name').value,
-            nameAr: document.getElementById('product-name-ar').value,
-            category: document.getElementById('product-category').value,
-            price: parseFloat(document.getElementById('product-price').value),
-            // Multi-price options
-            prices: {
-                regular: parseFloat(document.getElementById('product-price').value),
-                wholesale: wholesalePrice ? parseFloat(wholesalePrice) : null,
-                retail: retailPrice ? parseFloat(retailPrice) : null,
-                vip: vipPrice ? parseFloat(vipPrice) : null,
-                bulk: bulkPrice ? parseFloat(bulkPrice) : null
-            },
-            stock: parseInt(document.getElementById('product-stock').value),
-            minStock: parseInt(document.getElementById('product-min-stock').value),
-            maxStock: parseInt(document.getElementById('product-stock').value) * 5,
-            barcode: document.getElementById('product-barcode').value,
-            supplier: document.getElementById('product-supplier').value,
-            cost: parseFloat(document.getElementById('product-price').value) * 0.6,
-            image: image, // Add image to product
-            active: true
-        };
-    }
-
-    function saveProduct(product) {
-        products.push(product);
-        saveToStorage('products', products);
-
-        closeModal();
-        loadInventoryView();
-        displayProducts(); // Refresh main products view
-
-        alert(`${t('product')} "${product.name}" ${t('addedSuccessfully')}!`);
-    }
+    alert(`Product "${newProduct.name}" added successfully!`);
 }
 
 function editProduct(productId) {
@@ -3340,12 +2474,12 @@ function generateDailyReport() {
             <table>
                 <thead>
                     <tr>
-                        <th data-translate="time">${t('time')}</th>
-                        <th data-translate="receipt">${t('receipt')} #</th>
-                        <th data-translate="cashier">${t('cashier')}</th>
-                        <th data-translate="items">${t('items')}</th>
-                        <th data-translate="total">${t('total')}</th>
-                        <th data-translate="paymentMethod">${t('paymentMethod')}</th>
+                        <th>Time</th>
+                        <th>Receipt #</th>
+                        <th>Cashier</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Payment Method</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -4076,9 +3210,8 @@ function generateUsersRows() {
             <td class="actions">
                 <button class="btn-small btn-primary" onclick="editUser(${user.id})">${t('edit')}</button>
                 <button class="btn-small ${user.active ? 'btn-warning' : 'btn-success'}"
-                        onclick="toggleUserStatus(${user.id})"
-                        data-translate="${user.active ? 'deactivate' : 'activate'}">
-                    ${user.active ? t('deactivate') : t('activate')}
+                        onclick="toggleUserStatus(${user.id})">
+                    ${user.active ? 'Deactivate' : 'Activate'}
                 </button>
                 ${user.id !== currentUser.id ? `<button class="btn-small btn-danger" onclick="deleteUser(${user.id})">${t('delete')}</button>` : ''}
             </td>
@@ -4262,202 +3395,14 @@ function deleteUser(userId) {
     }
 }
 
-// ===== LOYALTY CARD MANAGEMENT =====
-
-function loadLoyaltyView() {
-    const loyaltyContent = document.querySelector('.loyalty-content');
-
-    loyaltyContent.innerHTML = `
-        <div class="loyalty-header">
-            <div class="loyalty-actions">
-                <button class="btn btn-primary" onclick="showAddLoyaltyCardModal()">${t('addLoyaltyCard')}</button>
-                <button class="btn btn-secondary" onclick="showLoyaltySettingsModal()">${t('loyaltySettings')}</button>
-                <button class="btn btn-info" onclick="exportLoyaltyCards()">${t('export')}</button>
-            </div>
-        </div>
-
-        <div class="loyalty-stats">
-            <div class="stat-card">
-                <h3>${loyaltyCards.length}</h3>
-                <p>${t('totalCards')}</p>
-            </div>
-            <div class="stat-card">
-                <h3>${loyaltyCards.reduce((sum, card) => sum + card.points, 0)}</h3>
-                <p>${t('totalPoints')}</p>
-            </div>
-            <div class="stat-card">
-                <h3>${formatPrice(loyaltyCards.reduce((sum, card) => sum + card.totalSpent, 0))}</h3>
-                <p>${t('totalSpent')}</p>
-            </div>
-        </div>
-
-        <div class="loyalty-table-container">
-            <table class="loyalty-table">
-                <thead>
-                    <tr>
-                        <th>${t('cardNumber')}</th>
-                        <th>${t('customerName')}</th>
-                        <th>${t('customerPhone')}</th>
-                        <th>${t('points')}</th>
-                        <th>${t('totalSpent')}</th>
-                        <th>${t('status')}</th>
-                        <th>${t('actions')}</th>
-                    </tr>
-                </thead>
-                <tbody id="loyalty-table-body">
-                    ${generateLoyaltyRows()}
-                </tbody>
-            </table>
-        </div>
-    `;
-}
-
-function generateLoyaltyRows() {
-    if (loyaltyCards.length === 0) {
-        return `
-            <tr>
-                <td colspan="7" class="no-data">
-                    <div class="no-data-message">
-                        <span>💳</span>
-                        <p>${t('noLoyaltyCards')}</p>
-                        <button class="btn btn-primary" onclick="showAddLoyaltyCardModal()">${t('addLoyaltyCard')}</button>
-                    </div>
-                </td>
-            </tr>
-        `;
-    }
-
-    return loyaltyCards.map(card => {
-        const isExpired = new Date(card.expiryDate) < new Date();
-        const statusClass = isExpired ? 'expired' : card.active ? 'active' : 'inactive';
-        const statusText = isExpired ? t('expired') : card.active ? t('active') : t('inactive');
-
-        return `
-            <tr class="loyalty-row ${statusClass}">
-                <td class="card-number">${card.cardNumber}</td>
-                <td class="customer-name">${card.customerName}</td>
-                <td class="customer-phone">${card.customerPhone || '-'}</td>
-                <td class="points">${card.points}</td>
-                <td class="total-spent">${formatPrice(card.totalSpent)}</td>
-                <td class="status">
-                    <span class="status-badge ${statusClass}">${statusText}</span>
-                </td>
-                <td class="actions">
-                    <button class="btn btn-small btn-primary" onclick="editLoyaltyCard(${card.id})" title="${t('edit')}">✏️</button>
-                    <button class="btn btn-small btn-info" onclick="viewLoyaltyCardHistory(${card.id})" title="${t('history')}">📊</button>
-                    <button class="btn btn-small btn-warning" onclick="toggleLoyaltyCardStatus(${card.id})" title="${t('toggleStatus')}">${card.active ? '⏸️' : '▶️'}</button>
-                    <button class="btn btn-small btn-danger" onclick="deleteLoyaltyCard(${card.id})" title="${t('delete')}">🗑️</button>
-                </td>
-            </tr>
-        `;
-    }).join('');
-}
-
-function showAddLoyaltyCardModal() {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.style.display = 'block';
-
-    modal.innerHTML = `
-        <div class="modal-content">
-            <h2>${t('addLoyaltyCard')}</h2>
-            <form onsubmit="addNewLoyaltyCard(event)">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>${t('cardNumber')}:</label>
-                        <input type="text" id="loyalty-card-number" value="${generateCardNumber()}" required readonly>
-                        <button type="button" class="btn btn-small" onclick="document.getElementById('loyalty-card-number').value = generateCardNumber()">${t('generate')}</button>
-                    </div>
-                    <div class="form-group">
-                        <label>${t('customerName')}:</label>
-                        <input type="text" id="loyalty-customer-name" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>${t('customerPhone')}:</label>
-                        <input type="tel" id="loyalty-customer-phone">
-                    </div>
-                    <div class="form-group">
-                        <label>${t('customerEmail')}:</label>
-                        <input type="email" id="loyalty-customer-email">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>${t('initialPoints')}:</label>
-                        <input type="number" id="loyalty-initial-points" value="${loyaltySettings.welcomeBonus}" min="0">
-                    </div>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal()">${t('cancel')}</button>
-                    <button type="submit" class="btn btn-primary">${t('addLoyaltyCard')}</button>
-                </div>
-            </form>
-        </div>
-    `;
-
-    document.body.appendChild(modal);
-}
-
-function generateCardNumber() {
-    // Generate a 12-digit card number
-    const prefix = '4000'; // Loyalty card prefix
-    const randomDigits = Math.random().toString().slice(2, 10); // 8 random digits
-    return prefix + randomDigits;
-}
-
-function addNewLoyaltyCard(event) {
-    event.preventDefault();
-
-    const cardNumber = document.getElementById('loyalty-card-number').value;
-    const customerName = document.getElementById('loyalty-customer-name').value;
-    const customerPhone = document.getElementById('loyalty-customer-phone').value;
-    const customerEmail = document.getElementById('loyalty-customer-email').value;
-    const initialPoints = parseInt(document.getElementById('loyalty-initial-points').value) || 0;
-
-    // Check if card number already exists
-    if (loyaltyCards.find(card => card.cardNumber === cardNumber)) {
-        alert(t('cardNumberExists'));
-        return;
-    }
-
-    const newCard = {
-        id: Math.max(...loyaltyCards.map(c => c.id), 0) + 1,
-        cardNumber: cardNumber,
-        customerName: customerName,
-        customerPhone: customerPhone,
-        customerEmail: customerEmail,
-        points: initialPoints,
-        totalSpent: 0,
-        totalEarned: initialPoints,
-        totalRedeemed: 0,
-        active: true,
-        createdDate: new Date().toISOString(),
-        expiryDate: new Date(Date.now() + loyaltySettings.cardExpiryMonths * 30 * 24 * 60 * 60 * 1000).toISOString(),
-        transactions: []
-    };
-
-    loyaltyCards.push(newCard);
-    saveToStorage('loyaltyCards', loyaltyCards);
-
-    closeModal();
-    loadLoyaltyView();
-
-    alert(`${t('loyaltyCard')} ${cardNumber} ${t('addedSuccessfully')}!`);
-}
-
 // ===== SETTINGS MANAGEMENT =====
 
 function loadSettingsView() {
-    // Only administrators can access system settings
-    if (!currentUser || currentUser.role !== 'admin') {
+    if (!hasPermission('settings')) {
         document.getElementById('settings-view').innerHTML = `
             <div class="access-denied">
-                <h2 data-translate="accessDenied">${t('accessDenied')}</h2>
-                <p data-translate="adminOnlySettings">${t('adminOnlySettings')}</p>
-                <div class="access-denied-icon">🔒</div>
-                <p class="access-denied-note">${t('contactAdministrator')}</p>
+                <h2>Access Denied</h2>
+                <p>You don't have permission to access settings.</p>
             </div>
         `;
         return;
@@ -4857,119 +3802,6 @@ function connectUSBScanner() {
     console.log('USB scanner connected');
 }
 
-// ===== DYNAMIC CATEGORY BUTTONS =====
-
-function generateCategoryButtons() {
-    // Always start with "All Items" button
-    let buttonsHTML = `<button class="category-btn active" data-category="all" data-translate="allItems">${t('allItems')}</button>`;
-
-    // Add buttons for active categories from database
-    const activeCategories = categories.filter(category => category.active);
-
-    activeCategories.forEach(category => {
-        const categoryKey = category.name.toLowerCase();
-        const categoryName = getCategoryName(category);
-
-        buttonsHTML += `<button class="category-btn" data-category="${categoryKey}" title="${categoryName}">${categoryName}</button>`;
-    });
-
-    return buttonsHTML;
-}
-
-function updateCategoryButtons() {
-    const categoryButtonsContainer = document.getElementById('category-buttons');
-    if (categoryButtonsContainer) {
-        categoryButtonsContainer.innerHTML = generateCategoryButtons();
-
-        // Re-attach event listeners for category buttons
-        attachCategoryButtonListeners();
-    }
-}
-
-function attachCategoryButtonListeners() {
-    document.querySelectorAll('.category-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Remove active class from all buttons
-            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-
-            // Add active class to clicked button
-            this.classList.add('active');
-
-            // Filter products by category
-            const category = this.dataset.category;
-            filterProductsByCategory(category);
-        });
-    });
-}
-
-function filterProductsByCategory(category) {
-    if (category === 'all') {
-        displayProducts(); // Show all products
-    } else {
-        // Filter products by the selected category
-        const filteredProducts = products.filter(product =>
-            product.category.toLowerCase() === category.toLowerCase()
-        );
-        displayFilteredProducts(filteredProducts);
-    }
-}
-
-function displayFilteredProducts(filteredProducts) {
-    const productsGrid = document.getElementById('products-grid');
-    if (!productsGrid) return;
-
-    if (filteredProducts.length === 0) {
-        productsGrid.innerHTML = `
-            <div class="no-products">
-                <h3>${t('noProductsFound')}</h3>
-                <p>${t('tryDifferentCategory')}</p>
-            </div>
-        `;
-        return;
-    }
-
-    productsGrid.innerHTML = '';
-
-    filteredProducts.forEach(product => {
-        const productName = getProductName(product);
-        const isLowStock = product.stock <= product.minStock;
-        const isOutOfStock = product.stock === 0;
-
-        let statusClass = '';
-        let statusBadge = '';
-
-        if (isOutOfStock) {
-            statusClass = 'out-of-stock';
-            statusBadge = `<span class="stock-badge out-of-stock">${t('outOfStock')}</span>`;
-        } else if (isLowStock) {
-            statusClass = 'low-stock';
-            statusBadge = `<span class="stock-badge low-stock">${t('lowStock')}</span>`;
-        }
-
-        const productCard = document.createElement('div');
-        productCard.className = `product-card ${statusClass}`;
-        productCard.innerHTML = `
-            ${product.image ? `<div class="product-image"><img src="${product.image}" alt="${productName}" /></div>` : ''}
-            <div class="product-info">
-                <h3>${productName}</h3>
-                <div class="price">${formatPrice(product.price)}</div>
-                <div class="stock-info">
-                    <span class="stock-count">${t('stock')}: ${product.stock}</span>
-                    ${statusBadge}
-                </div>
-                ${product.expiryDate ? `<div class="expiry-date">${t('expiryDate')}: ${new Date(product.expiryDate).toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : currentLanguage === 'fr' ? 'fr-FR' : currentLanguage === 'es' ? 'es-ES' : 'en-US')}</div>` : ''}
-                ${settings.showBarcode ? `<div class="barcode">${product.barcode}</div>` : ''}
-            </div>
-        `;
-
-        if (!isOutOfStock) {
-            productCard.addEventListener('click', () => addToCart(product));
-        }
-
-        productsGrid.appendChild(productCard);
-    });
-}
-
 // ===== CATEGORIES MANAGEMENT =====
 
 function loadCategoriesView() {
@@ -5097,9 +3929,6 @@ function addNewCategory(event) {
     // Refresh product categories
     updateProductCategories();
 
-    // Update main screen category buttons
-    updateCategoryButtons();
-
     alert(`${t('category')} "${getCategoryName(newCategory)}" ${t('addedSuccessfully')}!`);
 }
 
@@ -5159,9 +3988,6 @@ function updateCategory(event, categoryId) {
     // Refresh product categories
     updateProductCategories();
 
-    // Update main screen category buttons
-    updateCategoryButtons();
-
     alert(`${t('category')} "${getCategoryName(category)}" ${t('updatedSuccessfully')}!`);
 }
 
@@ -5176,9 +4002,6 @@ function toggleCategoryStatus(categoryId) {
 
     // Refresh product categories
     updateProductCategories();
-
-    // Update main screen category buttons
-    updateCategoryButtons();
 
     alert(`${t('category')} "${getCategoryName(category)}" ${category.active ? t('activated') : t('deactivated')} ${t('successfully')}!`);
 }
@@ -5203,9 +4026,6 @@ function deleteCategory(categoryId) {
 
         // Refresh product categories
         updateProductCategories();
-
-        // Update main screen category buttons
-        updateCategoryButtons();
 
         alert(`${t('category')} "${getCategoryName(category)}" ${t('deletedSuccessfully')}!`);
     }
@@ -5503,7 +4323,7 @@ function updateMainLogo() {
 
 // ===== PRODUCT MANAGEMENT =====
 
-function displayProducts(limit = null) {
+function displayProducts() {
     const filteredProducts = currentCategory === 'all'
         ? products.filter(p => p.active)
         : products.filter(p => p.category === currentCategory && p.active);
@@ -5513,10 +4333,7 @@ function displayProducts(limit = null) {
 
     productsGrid.innerHTML = '';
 
-    // Limit products for initial load performance
-    const productsToShow = limit ? filteredProducts.slice(0, limit) : filteredProducts;
-
-    productsToShow.forEach(product => {
+    filteredProducts.forEach(product => {
         const productName = getProductName(product);
         const isLowStock = product.stock <= product.minStock;
         const isExpired = product.expiryDate && new Date(product.expiryDate) < new Date();
@@ -5539,10 +4356,10 @@ function displayProducts(limit = null) {
         const productCard = document.createElement('div');
         productCard.className = `product-card ${statusClass}`;
         productCard.innerHTML = `
-            ${product.image ? `<div class="product-image"><img data-src="${product.image}" alt="${productName}" class="lazy-image" /></div>` : '<div class="product-image no-image">📦</div>'}
+            ${product.image ? `<div class="product-image"><img src="${product.image}" alt="${productName}" /></div>` : ''}
             <div class="product-info">
                 <h3>${productName}</h3>
-                <div class="price">${formatPrice(product.price)}</div>
+                <div class="price">${formatCurrency(product.price)}</div>
                 <div class="stock-info">
                     <span class="stock-count">${t('stock')}: ${product.stock}</span>
                     ${statusBadge}
@@ -5562,50 +4379,7 @@ function displayProducts(limit = null) {
 
         productsGrid.appendChild(productCard);
     });
-
-    // Initialize lazy loading for images
-    initializeLazyLoading();
 }
-
-// ===== LAZY LOADING OPTIMIZATION =====
-function initializeLazyLoading() {
-    const lazyImages = document.querySelectorAll('.lazy-image');
-
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy-image');
-                    img.classList.add('loaded');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-
-        lazyImages.forEach(img => imageObserver.observe(img));
-    } else {
-        // Fallback for older browsers
-        lazyImages.forEach(img => {
-            img.src = img.dataset.src;
-            img.classList.remove('lazy-image');
-            img.classList.add('loaded');
-        });
-    }
-}
-
-// ===== PERFORMANCE MONITORING =====
-function logPerformance(label) {
-    if (performance && performance.now) {
-        console.log(`${label}: ${performance.now().toFixed(2)}ms`);
-    }
-}
-
-// Monitor initial load time
-window.addEventListener('load', function() {
-    logPerformance('Page fully loaded');
-});
 
 function searchProducts() {
     const searchTerm = document.getElementById('product-search').value.toLowerCase();
@@ -5649,42 +4423,24 @@ function displayFilteredProducts(filteredProducts) {
 
 // ===== CART MANAGEMENT =====
 
-function addToCart(product, priceType = null) {
+function addToCart(product) {
     if (product.stock <= 0) {
-        alert(`${getProductName(product)} ${t('outOfStock')}!`);
+        alert(`${product.name} is out of stock!`);
         return;
     }
 
-    // Get selected price type from selector if not specified
-    if (!priceType) {
-        const priceTypeSelector = document.getElementById('price-type-selector');
-        priceType = priceTypeSelector ? priceTypeSelector.value : 'regular';
-    }
-
-    // Get the selected price
-    let selectedPrice = getProductPrice(product, priceType);
-
-    // If selected price type not available, fallback to regular price
-    if (selectedPrice === null || selectedPrice === undefined) {
-        selectedPrice = product.price;
-        priceType = 'regular';
-    }
-
-    const existingItem = cart.find(item => item.id === product.id && (item.priceType || 'regular') === priceType);
+    const existingItem = cart.find(item => item.id === product.id);
 
     if (existingItem) {
         if (existingItem.quantity >= product.stock) {
-            alert(`${t('cannotAddMore')} ${getProductName(product)}. ${t('onlyInStock')}: ${product.stock}.`);
+            alert(`Cannot add more ${product.name}. Only ${product.stock} in stock.`);
             return;
         }
         existingItem.quantity += 1;
     } else {
         cart.push({
             ...product,
-            quantity: 1,
-            price: selectedPrice,
-            priceType: priceType,
-            priceLabel: t(priceType)
+            quantity: 1
         });
     }
 
@@ -5692,149 +4448,29 @@ function addToCart(product, priceType = null) {
     saveCart();
 }
 
-// Update price type display when selector changes
-function updatePriceTypeDisplay() {
-    const priceTypeSelector = document.getElementById('price-type-selector');
-    const selectedType = priceTypeSelector.value;
-
-    // Update product cards to show selected price type
-    displayProducts();
-
-    // Show notification of price type change
-    const notification = document.createElement('div');
-    notification.className = 'price-type-notification';
-    notification.innerHTML = `${t('priceTypeChanged')}: ${t(selectedType)}`;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--primary-color);
-        color: white;
-        padding: 10px 20px;
-        border-radius: 6px;
-        z-index: 1000;
-        font-size: 14px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    `;
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
-        }
-    }, 2000);
-}
-
-function hasMultiplePrices(product) {
-    if (!product.prices) return false;
-
-    const priceCount = Object.values(product.prices).filter(price => price !== null && price !== undefined).length;
-    return priceCount > 1;
-}
-
-function getProductPrice(product, priceType = 'regular') {
-    if (product.prices && product.prices[priceType] !== null && product.prices[priceType] !== undefined) {
-        return product.prices[priceType];
-    }
-    return product.price; // Fallback to regular price
-}
-
-function showPriceSelectionModal(product) {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.style.display = 'block';
-
-    const availablePrices = [];
-    if (product.prices) {
-        Object.entries(product.prices).forEach(([type, price]) => {
-            if (price !== null && price !== undefined) {
-                availablePrices.push({ type, price });
-            }
-        });
-    }
-
-    modal.innerHTML = `
-        <div class="modal-content price-selection-modal">
-            <h2>${t('selectPriceType')}</h2>
-            <p>${t('product')}: <strong>${getProductName(product)}</strong></p>
-
-            <div class="price-options">
-                ${availablePrices.map(({ type, price }) => `
-                    <button class="price-option-btn" onclick="addToCartWithPrice(${product.id}, '${type}')">
-                        <div class="price-type">${t(type)}</div>
-                        <div class="price-amount">${formatPrice(price)}</div>
-                    </button>
-                `).join('')}
-            </div>
-
-            <div class="modal-actions">
-                <button type="button" class="btn btn-secondary" onclick="closeModal()">${t('cancel')}</button>
-            </div>
-        </div>
-    `;
-
-    document.body.appendChild(modal);
-}
-
-function addToCartWithPrice(productId, priceType) {
-    const product = products.find(p => p.id === productId);
-    if (product) {
-        closeModal();
-        addToCart(product, priceType);
-    }
-}
-
-function removeFromCart(productId, priceType = 'regular') {
-    cart = cart.filter(item => !(item.id === productId && (item.priceType || 'regular') === priceType));
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
     updateCartDisplay();
     saveCart();
 }
 
-function updateQuantity(productId, change, priceType = 'regular') {
-    const item = cart.find(item => item.id === productId && (item.priceType || 'regular') === priceType);
+function updateQuantity(productId, change) {
+    const item = cart.find(item => item.id === productId);
     const product = products.find(p => p.id === productId);
 
     if (item && product) {
         const newQuantity = item.quantity + change;
 
         if (newQuantity <= 0) {
-            removeFromCart(productId, priceType);
+            removeFromCart(productId);
         } else if (newQuantity > product.stock) {
-            alert(`${t('cannotAddMore')} ${getProductName(product)}. ${t('onlyInStock')}: ${product.stock}.`);
+            alert(`Cannot add more ${product.name}. Only ${product.stock} in stock.`);
         } else {
             item.quantity = newQuantity;
             updateCartDisplay();
             saveCart();
         }
     }
-}
-
-// Direct quantity editing function
-function updateQuantityDirect(productId, newQuantity, priceType = 'regular') {
-    const item = cart.find(item => item.id === productId && (item.priceType || 'regular') === priceType);
-    const product = products.find(p => p.id === productId);
-
-    if (!item || !product) return;
-
-    const quantity = parseInt(newQuantity);
-
-    // Validate quantity
-    if (isNaN(quantity) || quantity < 1) {
-        alert(t('invalidQuantity'));
-        updateCartDisplay(); // Reset to previous value
-        return;
-    }
-
-    if (quantity > product.stock) {
-        alert(`${t('cannotAddMore')} ${getProductName(product)}. ${t('onlyInStock')}: ${product.stock}.`);
-        updateCartDisplay(); // Reset to previous value
-        return;
-    }
-
-    item.quantity = quantity;
-    updateCartDisplay();
-    saveCart();
 }
 
 function updateCartDisplay() {
@@ -5850,21 +4486,17 @@ function updateCartDisplay() {
     } else {
         cartItemsEl.innerHTML = cart.map(item => {
             const itemName = currentLanguage === 'ar' && item.nameAr ? item.nameAr : item.name;
-            const priceTypeLabel = item.priceType && item.priceType !== 'regular' ? ` (${t(item.priceType)})` : '';
             return `
                 <div class="cart-item">
                     <div class="item-info">
-                        <div class="item-name">${itemName}${priceTypeLabel}</div>
-                        <div class="item-price">${formatPrice(item.price)} ${t('each')}</div>
+                        <div class="item-name">${itemName}</div>
+                        <div class="item-price">${formatCurrency(item.price)} each</div>
                     </div>
                     <div class="quantity-controls">
-                        <button class="qty-btn" onclick="updateQuantity(${item.id}, -1, '${item.priceType || 'regular'}')">-</button>
-                        <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="${item.stock}"
-                               onchange="updateQuantityDirect(${item.id}, this.value, '${item.priceType || 'regular'}')"
-                               onblur="updateQuantityDirect(${item.id}, this.value, '${item.priceType || 'regular'}')"
-                               title="Edit quantity">
-                        <button class="qty-btn" onclick="updateQuantity(${item.id}, 1, '${item.priceType || 'regular'}')">+</button>
-                        <button class="remove-btn" onclick="removeFromCart(${item.id}, '${item.priceType || 'regular'}')" title="Remove item">🗑️</button>
+                        <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                        <span class="quantity">${item.quantity}</span>
+                        <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                        <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️</button>
                     </div>
                 </div>
             `;
@@ -5889,113 +4521,10 @@ function updateTotals() {
 }
 
 function clearCart() {
-    if (cart.length === 0) {
-        alert(t('emptyCart'));
-        return;
-    }
-
-    // Check if current user is manager or admin
-    if (currentUser.role !== 'manager' && currentUser.role !== 'admin') {
-        // Request manager authorization
-        showManagerAuthModal('clearCart');
-        return;
-    }
-
-    // Manager/Admin can clear cart directly
-    if (confirm(`${t('confirmClearCart')}?`)) {
+    if (cart.length > 0 && confirm(`${t('clearCart')}?`)) {
         cart = [];
         updateCartDisplay();
         saveCart();
-        alert(t('cartCleared'));
-    }
-}
-
-// Manager authorization modal
-function showManagerAuthModal(action) {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.style.display = 'block';
-
-    modal.innerHTML = `
-        <div class="modal-content manager-auth-modal">
-            <h2 data-translate="managerAuthRequired">${t('managerAuthRequired')}</h2>
-            <p data-translate="managerAuthMessage">${t('managerAuthMessage')}</p>
-
-            <div class="auth-form">
-                <div class="form-group">
-                    <label data-translate="username">${t('username')}:</label>
-                    <input type="text" id="manager-username" placeholder="${t('enterManagerUsername')}" autocomplete="username">
-                </div>
-                <div class="form-group">
-                    <label data-translate="password">${t('password')}:</label>
-                    <input type="password" id="manager-password" placeholder="${t('enterManagerPassword')}" autocomplete="current-password">
-                </div>
-            </div>
-
-            <div class="modal-actions">
-                <button type="button" class="btn btn-secondary" onclick="closeManagerAuth()" data-translate="cancel">${t('cancel')}</button>
-                <button type="button" class="btn btn-primary" onclick="authorizeManagerAction('${action}')" data-translate="authorize">${t('authorize')}</button>
-            </div>
-        </div>
-    `;
-
-    document.body.appendChild(modal);
-    document.getElementById('manager-username').focus();
-
-    // Add Enter key support
-    modal.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            authorizeManagerAction(action);
-        }
-    });
-}
-
-function closeManagerAuth() {
-    const modal = document.querySelector('.manager-auth-modal').closest('.modal');
-    if (modal) {
-        document.body.removeChild(modal);
-    }
-}
-
-function authorizeManagerAction(action) {
-    const username = document.getElementById('manager-username').value.trim();
-    const password = document.getElementById('manager-password').value;
-
-    if (!username || !password) {
-        alert(t('pleaseEnterCredentials'));
-        return;
-    }
-
-    // Check manager credentials
-    const managerUser = users.find(user =>
-        user.username === username &&
-        user.password === password &&
-        (user.role === 'manager' || user.role === 'admin') &&
-        user.active
-    );
-
-    if (!managerUser) {
-        alert(t('invalidManagerCredentials'));
-        document.getElementById('manager-password').value = '';
-        document.getElementById('manager-password').focus();
-        return;
-    }
-
-    // Close modal
-    closeManagerAuth();
-
-    // Execute authorized action
-    switch(action) {
-        case 'clearCart':
-            if (confirm(`${t('confirmClearCart')}?`)) {
-                cart = [];
-                updateCartDisplay();
-                saveCart();
-                alert(`${t('cartCleared')} - ${t('authorizedBy')}: ${managerUser.name}`);
-            }
-            break;
-        default:
-            console.log('Unknown action:', action);
     }
 }
 
@@ -6017,54 +4546,28 @@ function openCheckout() {
         return;
     }
 
-    // Validate stock before opening checkout
-    for (let cartItem of cart) {
-        const product = products.find(p => p.id === cartItem.id);
-        if (product && product.stock < cartItem.quantity) {
-            alert(`${t('insufficientStock')}: ${getProductName(product)}\n${t('available')}: ${product.stock}, ${t('requested')}: ${cartItem.quantity}`);
-            return;
-        }
-    }
-
     const modal = document.getElementById('checkout-modal');
     const checkoutItems = document.getElementById('checkout-items');
     const checkoutTotal = document.getElementById('checkout-total-amount');
 
-    // Display checkout items with better formatting
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    // Display checkout items
+    const subtotal = cart.reduce((sum, item) => sum + (convertPrice(item.price) * item.quantity), 0);
     const tax = subtotal * settings.taxRate;
     const total = subtotal + tax;
 
     checkoutItems.innerHTML = cart.map(item => {
         const itemName = currentLanguage === 'ar' && item.nameAr ? item.nameAr : item.name;
-        const lineTotal = item.price * item.quantity;
         return `
             <div class="checkout-item">
-                <div class="item-details">
-                    <span class="item-name">${itemName}</span>
-                    <span class="item-qty">${item.quantity} x ${formatPrice(item.price)}</span>
-                </div>
-                <span class="item-total">${formatPrice(lineTotal)}</span>
+                <span>${itemName} x ${item.quantity}</span>
+                <span>${formatCurrency((item.price * item.quantity) / currencies[currentCurrency].rate)}</span>
             </div>
         `;
     }).join('');
 
-    checkoutTotal.textContent = formatPrice(total);
-
-    // Auto-select cash payment for faster checkout
-    const cashBtn = document.querySelector('.payment-btn[data-method="cash"]');
-    if (cashBtn) {
-        document.querySelectorAll('.payment-btn').forEach(btn => btn.classList.remove('active'));
-        cashBtn.classList.add('active');
-    }
+    checkoutTotal.textContent = formatCurrency(total / currencies[currentCurrency].rate);
 
     modal.style.display = 'block';
-
-    // Focus on complete sale button for keyboard users
-    setTimeout(() => {
-        const completeSaleBtn = document.getElementById('complete-sale');
-        if (completeSaleBtn) completeSaleBtn.focus();
-    }, 100);
 }
 
 function closeCheckout() {
@@ -6077,12 +4580,12 @@ function completeSale() {
     const selectedPayment = document.querySelector('.payment-btn.active');
 
     if (!selectedPayment) {
-        alert(t('pleaseSelectPayment'));
+        alert('Please select a payment method');
         return;
     }
 
     const paymentMethod = selectedPayment.dataset.method;
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const subtotal = cart.reduce((sum, item) => sum + (convertPrice(item.price) * item.quantity), 0);
     const tax = subtotal * settings.taxRate;
     const total = subtotal + tax;
 
@@ -6092,123 +4595,9 @@ function completeSale() {
         date: new Date().toISOString(),
         cashier: currentUser.name,
         items: [...cart],
-        subtotal: subtotal,
-        tax: tax,
-        total: total,
-        paymentMethod: paymentMethod,
-        currency: currentCurrency
-    };
-
-    // Validate stock availability before completing sale
-    for (let cartItem of cart) {
-        const product = products.find(p => p.id === cartItem.id);
-        if (product && product.stock < cartItem.quantity) {
-            alert(`${t('insufficientStock')}: ${getProductName(product)}\n${t('available')}: ${product.stock}, ${t('requested')}: ${cartItem.quantity}`);
-            return;
-        }
-    }
-
-    // Update inventory - reduce stock for sold items
-    cart.forEach(cartItem => {
-        const product = products.find(p => p.id === cartItem.id);
-        if (product) {
-            product.stock -= cartItem.quantity;
-            // Ensure stock doesn't go negative
-            if (product.stock < 0) {
-                product.stock = 0;
-            }
-        }
-    });
-
-    // Save sale
-    salesHistory.push(sale);
-    saveToStorage('salesHistory', salesHistory);
-    saveToStorage('products', products);
-
-    // Print receipt if enabled
-    if (settings.printAfterSale) {
-        printReceipt(sale);
-    }
-
-    // Show success message
-    showSaleSuccessMessage(sale);
-
-    // Clear cart and close modal
-    cart = [];
-    updateCartDisplay();
-    displayProducts(); // Refresh to show updated stock
-    closeCheckout();
-    saveCart();
-
-    // Check for low stock alerts after sale
-    checkLowStockAfterSale();
-}
-
-// Show sale success message with options
-function showSaleSuccessMessage(sale) {
-    const message = `✅ ${t('saleCompleted')}!\n\n` +
-                   `${t('receiptNumber')}: ${sale.id}\n` +
-                   `${t('total')}: ${formatPrice(sale.total)}\n` +
-                   `${t('paymentMethod')}: ${t(sale.paymentMethod)}\n` +
-                   `${t('cashier')}: ${sale.cashier}\n\n` +
-                   `${t('thankYou')}!`;
-
-    alert(message);
-}
-
-// Quick payment functions for common scenarios
-function quickCashPayment() {
-    if (cart.length === 0) {
-        alert(t('emptyCart'));
-        return;
-    }
-
-    // Validate stock
-    for (let cartItem of cart) {
-        const product = products.find(p => p.id === cartItem.id);
-        if (product && product.stock < cartItem.quantity) {
-            alert(`${t('insufficientStock')}: ${getProductName(product)}\n${t('available')}: ${product.stock}, ${t('requested')}: ${cartItem.quantity}`);
-            return;
-        }
-    }
-
-    // Process cash payment directly
-    processQuickPayment('cash');
-}
-
-function quickCardPayment() {
-    if (cart.length === 0) {
-        alert(t('emptyCart'));
-        return;
-    }
-
-    // Validate stock
-    for (let cartItem of cart) {
-        const product = products.find(p => p.id === cartItem.id);
-        if (product && product.stock < cartItem.quantity) {
-            alert(`${t('insufficientStock')}: ${getProductName(product)}\n${t('available')}: ${product.stock}, ${t('requested')}: ${cartItem.quantity}`);
-            return;
-        }
-    }
-
-    // Process card payment directly
-    processQuickPayment('card');
-}
-
-function processQuickPayment(paymentMethod) {
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const tax = subtotal * settings.taxRate;
-    const total = subtotal + tax;
-
-    // Create sale record
-    const sale = {
-        id: generateId(),
-        date: new Date().toISOString(),
-        cashier: currentUser.name,
-        items: [...cart],
-        subtotal: subtotal,
-        tax: tax,
-        total: total,
+        subtotal: subtotal / currencies[currentCurrency].rate,
+        tax: tax / currencies[currentCurrency].rate,
+        total: total / currencies[currentCurrency].rate,
         paymentMethod: paymentMethod,
         currency: currentCurrency
     };
@@ -6218,9 +4607,6 @@ function processQuickPayment(paymentMethod) {
         const product = products.find(p => p.id === cartItem.id);
         if (product) {
             product.stock -= cartItem.quantity;
-            if (product.stock < 0) {
-                product.stock = 0;
-            }
         }
     });
 
@@ -6235,57 +4621,14 @@ function processQuickPayment(paymentMethod) {
     }
 
     // Show success message
-    showSaleSuccessMessage(sale);
+    alert(`${t('checkout')} ${t('completed')}!\n${t('total')}: ${formatCurrency(total / currencies[currentCurrency].rate)}\n${t('paymentMethod')}: ${paymentMethod}`);
 
-    // Clear cart and refresh
+    // Clear cart and close modal
     cart = [];
     updateCartDisplay();
-    displayProducts();
+    displayProducts(); // Refresh to show updated stock
+    closeCheckout();
     saveCart();
-
-    // Check for low stock alerts
-    checkLowStockAfterSale();
-}
-
-// Check for low stock items after completing a sale
-function checkLowStockAfterSale() {
-    const lowStockItems = products.filter(product =>
-        product.active && product.stock <= product.minStock && product.stock > 0
-    );
-
-    const outOfStockItems = products.filter(product =>
-        product.active && product.stock <= 0
-    );
-
-    if (lowStockItems.length > 0 || outOfStockItems.length > 0) {
-        let alertMessage = '';
-
-        if (outOfStockItems.length > 0) {
-            alertMessage += `⚠️ ${t('outOfStock')} (${outOfStockItems.length}):\n`;
-            outOfStockItems.slice(0, 3).forEach(item => {
-                alertMessage += `• ${getProductName(item)}\n`;
-            });
-            if (outOfStockItems.length > 3) {
-                alertMessage += `... ${t('andMore').replace('{0}', outOfStockItems.length - 3)}\n`;
-            }
-            alertMessage += '\n';
-        }
-
-        if (lowStockItems.length > 0) {
-            alertMessage += `⚠️ ${t('lowStock')} (${lowStockItems.length}):\n`;
-            lowStockItems.slice(0, 3).forEach(item => {
-                alertMessage += `• ${getProductName(item)}: ${item.stock} ${t('remaining')}\n`;
-            });
-            if (lowStockItems.length > 3) {
-                alertMessage += `... ${t('andMore').replace('{0}', lowStockItems.length - 3)}\n`;
-            }
-        }
-
-        // Show alert after a short delay so sale completion message is seen first
-        setTimeout(() => {
-            alert(alertMessage);
-        }, 1000);
-    }
 }
 
 // ===== PRINTING SYSTEM =====
@@ -6325,257 +4668,6 @@ function printReceipt(sale = null) {
     receiptWindow.document.close();
     receiptWindow.focus();
     receiptWindow.print();
-}
-
-// ===== QUOTATION PRINTING SYSTEM =====
-
-function printQuotation() {
-    if (cart.length === 0) {
-        alert(t('emptyCart'));
-        return;
-    }
-
-    const quotationData = generateQuotationData();
-    const quotationWindow = window.open('', '_blank');
-    const quotationHTML = generateQuotationHTML(quotationData);
-
-    quotationWindow.document.write(quotationHTML);
-    quotationWindow.document.close();
-    quotationWindow.focus();
-    quotationWindow.print();
-}
-
-function generateQuotationData() {
-    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const tax = subtotal * settings.taxRate;
-    const total = subtotal + tax;
-
-    // Create quotation valid for 30 days
-    const validUntilDate = new Date();
-    validUntilDate.setDate(validUntilDate.getDate() + 30);
-
-    return {
-        id: 'QUO-' + generateId(),
-        date: new Date().toISOString(),
-        validUntil: validUntilDate.toISOString(),
-        preparedBy: currentUser.name,
-        items: [...cart],
-        subtotal: subtotal,
-        tax: tax,
-        total: total,
-        currency: currentCurrency
-    };
-}
-
-function generateQuotationHTML(quotation) {
-    const date = new Date(quotation.date);
-    const validUntil = new Date(quotation.validUntil);
-    const formattedDate = date.toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : 'en-US');
-    const formattedValidUntil = validUntil.toLocaleDateString(currentLanguage === 'ar' ? 'ar-DZ' : 'en-US');
-
-    return `
-        <!DOCTYPE html>
-        <html dir="${currentLanguage === 'ar' ? 'rtl' : 'ltr'}">
-        <head>
-            <meta charset="UTF-8">
-            <title>${t('quotation')} - ${quotation.id}</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    max-width: 800px;
-                    margin: 0 auto;
-                    padding: 20px;
-                    font-size: 14px;
-                    line-height: 1.6;
-                    color: #333;
-                }
-                .header {
-                    text-align: center;
-                    margin-bottom: 30px;
-                    border-bottom: 3px solid #667eea;
-                    padding-bottom: 20px;
-                }
-                .company-name {
-                    font-size: 24px;
-                    font-weight: bold;
-                    color: #667eea;
-                    margin-bottom: 10px;
-                }
-                .quotation-title {
-                    font-size: 20px;
-                    font-weight: bold;
-                    color: #495057;
-                    margin: 20px 0;
-                }
-                .quotation-info {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 20px;
-                    margin-bottom: 30px;
-                    background: #f8f9fa;
-                    padding: 20px;
-                    border-radius: 8px;
-                }
-                .info-section h4 {
-                    margin: 0 0 10px 0;
-                    color: #495057;
-                    font-weight: 600;
-                }
-                .info-section p {
-                    margin: 5px 0;
-                    color: #6c757d;
-                }
-                .items-table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin-bottom: 30px;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                }
-                .items-table th {
-                    background: #667eea;
-                    color: white;
-                    padding: 15px;
-                    text-align: left;
-                    font-weight: 600;
-                }
-                .items-table td {
-                    padding: 12px 15px;
-                    border-bottom: 1px solid #e9ecef;
-                }
-                .items-table tr:nth-child(even) {
-                    background: #f8f9fa;
-                }
-                .items-table tr:hover {
-                    background: #e3f2fd;
-                }
-                .totals-section {
-                    background: #f8f9fa;
-                    padding: 20px;
-                    border-radius: 8px;
-                    margin-bottom: 30px;
-                }
-                .totals-table {
-                    width: 100%;
-                    max-width: 400px;
-                    margin-left: auto;
-                }
-                .totals-table td {
-                    padding: 8px 15px;
-                    border: none;
-                }
-                .totals-table .total-row {
-                    font-weight: bold;
-                    font-size: 16px;
-                    border-top: 2px solid #667eea;
-                    color: #667eea;
-                }
-                .quotation-note {
-                    background: #fff3cd;
-                    border: 1px solid #ffeaa7;
-                    border-radius: 8px;
-                    padding: 15px;
-                    margin-bottom: 20px;
-                    color: #856404;
-                    font-weight: 500;
-                }
-                .footer {
-                    text-align: center;
-                    color: #6c757d;
-                    font-size: 12px;
-                    border-top: 1px solid #e9ecef;
-                    padding-top: 20px;
-                }
-                @media print {
-                    body { margin: 0; padding: 10px; }
-                    .quotation-note { background: #f8f9fa !important; }
-                }
-            </style>
-        </head>
-        <body>
-            <div class="header">
-                <div class="company-name">${settings.companyName}</div>
-                <div>${settings.companyAddress}</div>
-                <div>${settings.companyPhone}</div>
-                <div class="quotation-title">${t('quotation').toUpperCase()}</div>
-            </div>
-
-            <div class="quotation-info">
-                <div class="info-section">
-                    <h4>${t('quotationNumber')}:</h4>
-                    <p>${quotation.id}</p>
-                    <h4>${t('date')}:</h4>
-                    <p>${formattedDate}</p>
-                    <h4>${t('validUntil')}:</h4>
-                    <p>${formattedValidUntil}</p>
-                </div>
-                <div class="info-section">
-                    <h4>${t('preparedBy')}:</h4>
-                    <p>${quotation.preparedBy}</p>
-                    <h4>${t('currency')}:</h4>
-                    <p>${currencies[quotation.currency].name}</p>
-                    <h4>${t('status')}:</h4>
-                    <p style="color: #28a745; font-weight: 600;">${t('pending')}</p>
-                </div>
-            </div>
-
-            <table class="items-table">
-                <thead>
-                    <tr>
-                        <th>${t('item')}</th>
-                        <th>${t('qty')}</th>
-                        <th>${t('unitPrice')}</th>
-                        <th>${t('total')}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${quotation.items.map(item => {
-                        const itemName = currentLanguage === 'ar' && item.nameAr ? item.nameAr : item.name;
-                        const itemTotal = item.price * item.quantity;
-                        return `
-                            <tr>
-                                <td>${itemName}</td>
-                                <td>${item.quantity}</td>
-                                <td>${formatPrice(item.price)}</td>
-                                <td>${formatPrice(itemTotal)}</td>
-                            </tr>
-                        `;
-                    }).join('')}
-                </tbody>
-            </table>
-
-            <div class="totals-section">
-                <table class="totals-table">
-                    <tr>
-                        <td>${t('subtotal')}:</td>
-                        <td style="text-align: right;">${formatPrice(quotation.subtotal)}</td>
-                    </tr>
-                    <tr>
-                        <td>${t('tax')} (${(settings.taxRate * 100).toFixed(0)}%):</td>
-                        <td style="text-align: right;">${formatPrice(quotation.tax)}</td>
-                    </tr>
-                    <tr class="total-row">
-                        <td>${t('total')}:</td>
-                        <td style="text-align: right;">${formatPrice(quotation.total)}</td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="quotation-note">
-                <strong>📋 ${t('note')}:</strong> ${t('quotationNote')}
-            </div>
-
-            <div class="footer">
-                <div>${t('quotationFooter')}</div>
-                <div style="margin-top: 10px;">
-                    ${settings.receiptFooter}
-                </div>
-                <div style="margin-top: 10px;">
-                    ${t('generatedOn')}: ${new Date().toLocaleString()}
-                </div>
-            </div>
-        </body>
-        </html>
-    `;
 }
 
 function generateReceiptHTML(sale) {
@@ -6636,11 +4728,8 @@ function generateReceiptHTML(sale) {
                             <span>${itemName}</span>
                         </div>
                         <div class="item-line">
-                            <span>${t('qty')}: ${item.quantity}</span>
-                        </div>
-                        <div class="item-line">
-                            <span>${t('unitPrice')}: ${formatPrice(item.price)}</span>
-                            <span>${t('total')}: ${formatPrice(itemTotal)}</span>
+                            <span>${item.quantity} x ${formatCurrency(item.price)}</span>
+                            <span>${formatCurrency(itemTotal)}</span>
                         </div>
                     `;
                 }).join('')}
@@ -6651,15 +4740,15 @@ function generateReceiptHTML(sale) {
             <div class="totals">
                 <div class="item-line">
                     <span>Subtotal:</span>
-                    <span>${formatPrice(sale.subtotal)}</span>
+                    <span>${formatCurrency(sale.subtotal)}</span>
                 </div>
                 <div class="item-line">
                     <span>Tax (${(settings.taxRate * 100).toFixed(0)}%):</span>
-                    <span>${formatPrice(sale.tax)}</span>
+                    <span>${formatCurrency(sale.tax)}</span>
                 </div>
                 <div class="item-line total-line">
                     <span>TOTAL:</span>
-                    <span>${formatPrice(sale.total)}</span>
+                    <span>${formatCurrency(sale.total)}</span>
                 </div>
             </div>
 
@@ -6727,7 +4816,6 @@ function setupEventListeners() {
     const checkoutBtn = document.getElementById('checkout');
     const printReceiptBtn = document.getElementById('print-receipt');
     const printInvoiceBtn = document.getElementById('print-invoice');
-    const printQuotationBtn = document.getElementById('print-quotation');
     const cancelCheckoutBtn = document.getElementById('cancel-checkout');
     const completeSaleBtn = document.getElementById('complete-sale');
 
@@ -6735,7 +4823,6 @@ function setupEventListeners() {
     if (checkoutBtn) checkoutBtn.addEventListener('click', openCheckout);
     if (printReceiptBtn) printReceiptBtn.addEventListener('click', () => printReceipt());
     if (printInvoiceBtn) printInvoiceBtn.addEventListener('click', () => printInvoice());
-    if (printQuotationBtn) printQuotationBtn.addEventListener('click', () => printQuotation());
     if (cancelCheckoutBtn) cancelCheckoutBtn.addEventListener('click', closeCheckout);
     if (completeSaleBtn) completeSaleBtn.addEventListener('click', completeSale);
 
@@ -6873,13 +4960,7 @@ window.openCheckout = openCheckout;
 window.closeCheckout = closeCheckout;
 window.completeSale = completeSale;
 window.printReceipt = printReceipt;
-window.printQuotation = printQuotation;
 window.scanBarcode = scanBarcode;
-window.quickCashPayment = quickCashPayment;
-window.quickCardPayment = quickCardPayment;
-window.showManagerAuthModal = showManagerAuthModal;
-window.closeManagerAuth = closeManagerAuth;
-window.authorizeManagerAction = authorizeManagerAction;
 
 // Inventory functions
 window.filterInventory = filterInventory;
@@ -6938,566 +5019,6 @@ window.updateCategory = updateCategory;
 window.toggleCategoryStatus = toggleCategoryStatus;
 window.deleteCategory = deleteCategory;
 window.exportCategories = exportCategories;
-window.generateCategoryButtons = generateCategoryButtons;
-window.updateCategoryButtons = updateCategoryButtons;
-window.attachCategoryButtonListeners = attachCategoryButtonListeners;
-window.filterProductsByCategory = filterProductsByCategory;
-window.addToCartWithPrice = addToCartWithPrice;
-window.hasMultiplePrices = hasMultiplePrices;
-window.getProductPrice = getProductPrice;
-window.showPriceSelectionModal = showPriceSelectionModal;
-window.updateQuantityDirect = updateQuantityDirect;
-window.updatePriceTypeDisplay = updatePriceTypeDisplay;
-window.previewProductImage = previewProductImage;
-window.previewImageFromUrl = previewImageFromUrl;
-window.removeImagePreview = removeImagePreview;
-window.loadLoyaltyView = loadLoyaltyView;
-window.showAddLoyaltyCardModal = showAddLoyaltyCardModal;
-window.addNewLoyaltyCard = addNewLoyaltyCard;
-window.generateCardNumber = generateCardNumber;
-window.initializeLazyLoading = initializeLazyLoading;
-window.clearOldData = clearOldData;
 
 // Charts functions
 window.toggleCharts = toggleCharts;
-
-// Stock management functions
-window.checkLowStockAfterSale = checkLowStockAfterSale;
-
-// Barcode printing functions
-window.printBarcode = printBarcode;
-window.printMultipleBarcodes = printMultipleBarcodes;
-window.showBulkBarcodeModal = showBulkBarcodeModal;
-window.selectAllProducts = selectAllProducts;
-window.selectProductsWithoutBarcode = selectProductsWithoutBarcode;
-window.printSelectedBarcodes = printSelectedBarcodes;
-
-// ===== BARCODE PRINTING FUNCTIONALITY =====
-
-function printBarcode(productId) {
-    const product = products.find(p => p.id === productId);
-    if (!product) {
-        alert(t('productNotFound'));
-        return;
-    }
-
-    // Generate barcode if product doesn't have one
-    if (!product.barcode || product.barcode === '') {
-        product.barcode = generateProductBarcode(product);
-        saveToStorage('products', products);
-
-        // Refresh inventory display
-        if (currentView === 'inventory') {
-            loadInventoryView();
-        }
-
-        alert(t('barcodeGenerated'));
-    }
-
-    // Create barcode print window
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>${t('printBarcode')} - ${getProductName(product)}</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    margin: 20px;
-                    text-align: center;
-                }
-                .barcode-container {
-                    border: 2px solid #000;
-                    padding: 20px;
-                    margin: 20px auto;
-                    width: 300px;
-                    background: white;
-                }
-                .product-name {
-                    font-size: 16px;
-                    font-weight: bold;
-                    margin-bottom: 10px;
-                    color: #333;
-                }
-                .barcode-display {
-                    font-family: 'Courier New', monospace;
-                    font-size: 24px;
-                    letter-spacing: 2px;
-                    margin: 15px 0;
-                    padding: 10px;
-                    border: 1px solid #ccc;
-                    background: #f9f9f9;
-                }
-                .barcode-visual {
-                    margin: 15px 0;
-                    height: 60px;
-                    border: 1px solid #000;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background: white;
-                }
-                .product-info {
-                    font-size: 12px;
-                    color: #666;
-                    margin-top: 10px;
-                }
-                .price {
-                    font-size: 14px;
-                    font-weight: bold;
-                    color: #2c5aa0;
-                    margin: 5px 0;
-                }
-                @media print {
-                    body { margin: 0; }
-                    .barcode-container {
-                        border: 2px solid #000;
-                        page-break-inside: avoid;
-                    }
-                }
-            </style>
-        </head>
-        <body>
-            <div class="barcode-container">
-                <div class="product-name">${getProductName(product)}</div>
-                <div class="barcode-visual">${createBarcodeSVG(product.barcode, 250, 60)}</div>
-                <div class="barcode-display">${product.barcode}</div>
-                <div class="price">${formatCurrency(product.price)}</div>
-                <div class="product-info">
-                    ${t('category')}: ${t(product.category)}<br>
-                    ${t('stock')}: ${product.stock}<br>
-                    ${new Date().toLocaleDateString()}
-                </div>
-            </div>
-            <script>
-                window.onload = function() {
-                    window.print();
-                    setTimeout(function() {
-                        window.close();
-                    }, 1000);
-                };
-            </script>
-        </body>
-        </html>
-    `);
-    printWindow.document.close();
-}
-
-function generateProductBarcode(product) {
-    // Generate a unique barcode based on product ID and timestamp
-    const timestamp = Date.now().toString().slice(-6); // Last 6 digits of timestamp
-    const productIdPadded = product.id.toString().padStart(4, '0'); // Pad product ID to 4 digits
-    const categoryCode = getCategoryCode(product.category);
-
-    // Format: CategoryCode + ProductID + Timestamp (13 digits total - EAN-13 format)
-    const barcode = categoryCode + productIdPadded + timestamp;
-
-    return barcode;
-}
-
-// Generate visual barcode pattern (EAN-13 style)
-function generateBarcodePattern(barcodeNumber) {
-    // EAN-13 barcode patterns for left side (odd positions)
-    const leftPatterns = {
-        '0': '0001101',
-        '1': '0011001',
-        '2': '0010011',
-        '3': '0111101',
-        '4': '0100011',
-        '5': '0110001',
-        '6': '0101111',
-        '7': '0111011',
-        '8': '0110111',
-        '9': '0001011'
-    };
-
-    // EAN-13 barcode patterns for right side (even positions)
-    const rightPatterns = {
-        '0': '1110010',
-        '1': '1100110',
-        '2': '1101100',
-        '3': '1000010',
-        '4': '1011100',
-        '5': '1001110',
-        '6': '1010000',
-        '7': '1000100',
-        '8': '1001000',
-        '9': '1110100'
-    };
-
-    // Ensure we have at least 12 digits
-    const paddedNumber = barcodeNumber.padStart(12, '0').slice(0, 12);
-
-    let barcodePattern = '101'; // Start guard
-
-    // Left side (first 6 digits)
-    for (let i = 0; i < 6; i++) {
-        const digit = paddedNumber[i];
-        barcodePattern += leftPatterns[digit] || leftPatterns['0'];
-    }
-
-    barcodePattern += '01010'; // Center guard
-
-    // Right side (last 6 digits)
-    for (let i = 6; i < 12; i++) {
-        const digit = paddedNumber[i];
-        barcodePattern += rightPatterns[digit] || rightPatterns['0'];
-    }
-
-    barcodePattern += '101'; // End guard
-
-    return barcodePattern;
-}
-
-// Create SVG barcode with proper scaling and appearance
-function createBarcodeSVG(barcodeNumber, width = 200, height = 60) {
-    const pattern = generateBarcodePattern(barcodeNumber);
-    const barWidth = Math.max(1, width / pattern.length); // Minimum 1px bar width
-    const actualWidth = barWidth * pattern.length;
-
-    let svg = `<svg width="${actualWidth}" height="${height}" xmlns="http://www.w3.org/2000/svg" style="background: white;">`;
-    svg += `<rect width="${actualWidth}" height="${height}" fill="white"/>`;
-
-    let x = 0;
-    for (let i = 0; i < pattern.length; i++) {
-        if (pattern[i] === '1') {
-            svg += `<rect x="${x}" y="0" width="${barWidth}" height="${height * 0.8}" fill="black"/>`;
-        }
-        x += barWidth;
-    }
-
-    // Add the barcode number below the bars
-    const fontSize = Math.min(height * 0.15, 12);
-    const textY = height * 0.95;
-    svg += `<text x="${actualWidth / 2}" y="${textY}" text-anchor="middle" font-family="monospace" font-size="${fontSize}" fill="black">${barcodeNumber}</text>`;
-
-    svg += '</svg>';
-    return svg;
-}
-
-function getCategoryCode(category) {
-    // Map categories to 3-digit codes
-    const categoryCodes = {
-        'tools': '200',
-        'hardware': '201',
-        'construction': '202',
-        'electrical': '203',
-        'plumbing': '204',
-        'food': '100',
-        'drinks': '101',
-        'snacks': '102'
-    };
-
-    return categoryCodes[category.toLowerCase()] || '999';
-}
-
-// Enhanced barcode printing with multiple labels
-function printMultipleBarcodes(productId, quantity = 1) {
-    const product = products.find(p => p.id === productId);
-    if (!product) {
-        alert(t('productNotFound'));
-        return;
-    }
-
-    // Generate barcode if needed
-    if (!product.barcode || product.barcode === '') {
-        product.barcode = generateProductBarcode(product);
-        saveToStorage('products', products);
-    }
-
-    const printWindow = window.open('', '_blank');
-    let barcodeLabels = '';
-
-    // Generate multiple barcode labels
-    for (let i = 0; i < quantity; i++) {
-        barcodeLabels += `
-            <div class="barcode-label">
-                <div class="product-name">${getProductName(product)}</div>
-                <div class="barcode-visual">${createBarcodeSVG(product.barcode, 180, 30)}</div>
-                <div class="barcode-display">${product.barcode}</div>
-                <div class="price">${formatCurrency(product.price)}</div>
-            </div>
-        `;
-    }
-
-    printWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>${t('printBarcode')} - ${getProductName(product)} (${quantity}x)</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    margin: 10px;
-                }
-                .barcode-label {
-                    border: 1px solid #000;
-                    padding: 10px;
-                    margin: 5px;
-                    width: 200px;
-                    height: 120px;
-                    display: inline-block;
-                    text-align: center;
-                    vertical-align: top;
-                    background: white;
-                    page-break-inside: avoid;
-                }
-                .product-name {
-                    font-size: 10px;
-                    font-weight: bold;
-                    margin-bottom: 5px;
-                    height: 20px;
-                    overflow: hidden;
-                }
-                .barcode-visual {
-                    height: 30px;
-                    margin: 5px 0;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background: white;
-                }
-                .barcode-visual svg {
-                    max-width: 100%;
-                    height: 100%;
-                }
-                .barcode-display {
-                    font-family: 'Courier New', monospace;
-                    font-size: 8px;
-                    margin: 5px 0;
-                }
-                .price {
-                    font-size: 12px;
-                    font-weight: bold;
-                    color: #2c5aa0;
-                }
-                @media print {
-                    body { margin: 0; }
-                }
-            </style>
-        </head>
-        <body>
-            ${barcodeLabels}
-            <script>
-                window.onload = function() {
-                    window.print();
-                    setTimeout(function() {
-                        window.close();
-                    }, 1000);
-                };
-            </script>
-        </body>
-        </html>
-    `);
-    printWindow.document.close();
-}
-
-// Show bulk barcode printing modal
-function showBulkBarcodeModal() {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.style.display = 'block';
-
-    const productsList = products.map(product => `
-        <div class="product-checkbox">
-            <label>
-                <input type="checkbox" value="${product.id}" class="barcode-product-checkbox">
-                <span class="product-info">
-                    <strong>${getProductName(product)}</strong><br>
-                    <small>${t('category')}: ${t(product.category)} | ${t('price')}: ${formatCurrency(product.price)}</small><br>
-                    <small>${t('barcode')}: ${product.barcode || t('noBarcodeFound')}</small>
-                </span>
-            </label>
-            <input type="number" min="1" max="50" value="1" class="quantity-input" data-product-id="${product.id}">
-        </div>
-    `).join('');
-
-    modal.innerHTML = `
-        <div class="modal-content bulk-barcode-modal">
-            <h2 data-translate="bulkBarcodePrint">${t('bulkBarcodePrint')}</h2>
-            <p data-translate="selectProductsForBarcode">${t('selectProductsForBarcode')}</p>
-
-            <div class="bulk-actions">
-                <button type="button" class="btn btn-secondary" onclick="selectAllProducts(true)">${t('selectAll')}</button>
-                <button type="button" class="btn btn-secondary" onclick="selectAllProducts(false)">${t('deselectAll')}</button>
-                <button type="button" class="btn btn-info" onclick="selectProductsWithoutBarcode()">${t('selectWithoutBarcode')}</button>
-            </div>
-
-            <div class="products-list">
-                ${productsList}
-            </div>
-
-            <div class="modal-actions">
-                <button type="button" class="btn btn-secondary" onclick="closeModal()" data-translate="cancel">${t('cancel')}</button>
-                <button type="button" class="btn btn-primary" onclick="printSelectedBarcodes()" data-translate="printSelectedBarcodes">${t('printSelectedBarcodes')}</button>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
-}
-
-function selectAllProducts(select) {
-    const checkboxes = document.querySelectorAll('.barcode-product-checkbox');
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = select;
-    });
-}
-
-function selectProductsWithoutBarcode() {
-    const checkboxes = document.querySelectorAll('.barcode-product-checkbox');
-    checkboxes.forEach(checkbox => {
-        const productId = parseInt(checkbox.value);
-        const product = products.find(p => p.id === productId);
-        checkbox.checked = !product.barcode || product.barcode === '';
-    });
-}
-
-function printSelectedBarcodes() {
-    const selectedProducts = [];
-    const checkboxes = document.querySelectorAll('.barcode-product-checkbox:checked');
-
-    if (checkboxes.length === 0) {
-        alert(t('selectAtLeastOneProduct'));
-        return;
-    }
-
-    checkboxes.forEach(checkbox => {
-        const productId = parseInt(checkbox.value);
-        const quantityInput = document.querySelector(`.quantity-input[data-product-id="${productId}"]`);
-        const quantity = parseInt(quantityInput.value) || 1;
-
-        selectedProducts.push({
-            productId: productId,
-            quantity: quantity
-        });
-    });
-
-    // Generate barcodes for products that don't have them
-    selectedProducts.forEach(item => {
-        const product = products.find(p => p.id === item.productId);
-        if (product && (!product.barcode || product.barcode === '')) {
-            product.barcode = generateProductBarcode(product);
-        }
-    });
-
-    // Save updated products
-    saveToStorage('products', products);
-
-    // Create bulk print window
-    printBulkBarcodes(selectedProducts);
-
-    // Close modal
-    closeModal();
-
-    // Refresh inventory view
-    if (currentView === 'inventory') {
-        loadInventoryView();
-    }
-}
-
-function printBulkBarcodes(selectedProducts) {
-    const printWindow = window.open('', '_blank');
-    let barcodeLabels = '';
-
-    selectedProducts.forEach(item => {
-        const product = products.find(p => p.id === item.productId);
-        if (product) {
-            for (let i = 0; i < item.quantity; i++) {
-                barcodeLabels += `
-                    <div class="barcode-label">
-                        <div class="product-name">${getProductName(product)}</div>
-                        <div class="barcode-visual">${createBarcodeSVG(product.barcode, 160, 25)}</div>
-                        <div class="barcode-display">${product.barcode}</div>
-                        <div class="price">${formatCurrency(product.price)}</div>
-                        <div class="category">${t(product.category)}</div>
-                    </div>
-                `;
-            }
-        }
-    });
-
-    printWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>${t('bulkBarcodePrint')} - ${selectedProducts.length} ${t('products')}</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    margin: 10px;
-                }
-                .barcode-label {
-                    border: 1px solid #000;
-                    padding: 8px;
-                    margin: 3px;
-                    width: 180px;
-                    height: 110px;
-                    display: inline-block;
-                    text-align: center;
-                    vertical-align: top;
-                    background: white;
-                    page-break-inside: avoid;
-                }
-                .product-name {
-                    font-size: 9px;
-                    font-weight: bold;
-                    margin-bottom: 3px;
-                    height: 18px;
-                    overflow: hidden;
-                    line-height: 9px;
-                }
-                .barcode-visual {
-                    height: 25px;
-                    margin: 3px 0;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background: white;
-                }
-                .barcode-visual svg {
-                    max-width: 100%;
-                    height: 100%;
-                }
-                .barcode-display {
-                    font-family: 'Courier New', monospace;
-                    font-size: 7px;
-                    margin: 3px 0;
-                    letter-spacing: 1px;
-                }
-                .price {
-                    font-size: 11px;
-                    font-weight: bold;
-                    color: #2c5aa0;
-                    margin: 2px 0;
-                }
-                .category {
-                    font-size: 7px;
-                    color: #666;
-                    margin-top: 2px;
-                }
-                @media print {
-                    body { margin: 0; }
-                    .barcode-label {
-                        margin: 2px;
-                        page-break-inside: avoid;
-                    }
-                }
-            </style>
-        </head>
-        <body>
-            <h3 style="text-align: center; margin-bottom: 20px;">${t('bulkBarcodePrint')} - ${new Date().toLocaleDateString()}</h3>
-            ${barcodeLabels}
-            <script>
-                window.onload = function() {
-                    window.print();
-                    setTimeout(function() {
-                        window.close();
-                    }, 1000);
-                };
-            </script>
-        </body>
-        </html>
-    `);
-    printWindow.document.close();
-}
