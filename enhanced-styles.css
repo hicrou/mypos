@@ -240,7 +240,7 @@ body {
 
 /* ===== TOP NAVIGATION ===== */
 .top-nav {
-    background: white;
+    background: var(--light-color);
     padding: 15px 30px;
     box-shadow: var(--shadow);
     display: flex;
